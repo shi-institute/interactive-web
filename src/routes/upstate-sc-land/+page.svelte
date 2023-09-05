@@ -58,5 +58,7 @@
   .sidebar {
     padding: 20px;
     overflow: auto;
+    box-shadow: -1px 1px 5px 0px rgb(0 0 0 / 15%);
+    z-index: 400;
   }
 </style>
