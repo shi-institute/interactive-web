@@ -33,8 +33,6 @@
   </div>
 </div>
 
-{aspectRatio}
-
 <style>
   .wrapper {
     display: flex;
@@ -46,6 +44,8 @@
     flex-grow: 1;
     flex-shrink: 1;
     display: grid;
+    overflow: auto;
+    height: 0;
   }
   .page-content {
     grid-template-columns: 1fr 450px;
@@ -53,5 +53,10 @@
   .page-content.vertical {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
+  }
+
+  .sidebar {
+    padding: 20px;
+    overflow: auto;
   }
 </style>
