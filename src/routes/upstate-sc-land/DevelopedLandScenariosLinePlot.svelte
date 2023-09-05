@@ -3,6 +3,8 @@
   import { html } from 'htl';
   import { getLandcoverStats } from './getLandcoverStats';
 
+  export let width = 640;
+  export let height: number | undefined = undefined;
   export let showYAxisGap = false;
 
   let landcoverStats: Awaited<ReturnType<typeof getLandcoverStats>> = [];
@@ -13,6 +15,8 @@
   const colors = ['#1a7f45', '#eb2a2c', '#39539f', '#f38236'];
 
   $: plotOptions = {
+    width,
+    height,
     title: 'Developed land projections for each IPCC scenario',
     subtitle: 'Upstate South Carolina, 2006-2100',
     caption: html`

@@ -12,6 +12,8 @@
   let docHeight = 560;
   let docWidth = 1000;
   $: aspectRatio = docWidth / docHeight;
+
+  let sidebarWidth = 450;
 </script>
 
 <svelte:window bind:innerHeight={docHeight} bind:innerWidth={docWidth} />
@@ -25,7 +27,9 @@
   <div class="page-content" class:vertical={aspectRatio < 1}>
     <Map />
 
-    <DevelopedLandScenariosLinePlot />
+    <div class="sidebar" bind:clientWidth={sidebarWidth}>
+      <DevelopedLandScenariosLinePlot width={sidebarWidth} />
+    </div>
   </div>
 </div>
 
