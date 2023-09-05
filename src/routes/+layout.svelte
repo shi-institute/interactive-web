@@ -31,6 +31,8 @@
     align-items: center;
     padding: 0 10px 0 0;
     font-size: 13px;
+    flex-grow: 0;
+    flex-shrink: 0;
   }
 
   ul {
@@ -57,5 +59,7 @@
     background-color: rgba(255, 255, 255, 0.26);
   }
 
-
+  main {
+    flex-grow: 1;
+  }
 </style>
