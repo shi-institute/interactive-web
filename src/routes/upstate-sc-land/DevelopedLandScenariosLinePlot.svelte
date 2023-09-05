@@ -5,7 +5,8 @@
 
   export let width = 640;
   export let height: number | undefined = undefined;
-  export let showYAxisGap = false;
+
+  let showYAxisGap = false;
 
   let landcoverStats: Awaited<ReturnType<typeof getLandcoverStats>> = [];
   $: getLandcoverStats().then((data) => {
@@ -68,3 +69,6 @@
 </script>
 
 <div bind:this={div} role="img" />
+
+<input id="showYAxisGap" type="checkbox" bind:checked={showYAxisGap} />
+<label for="showYAxisGap">Show gap between minimum value and y=0 on the y-axis</label>
