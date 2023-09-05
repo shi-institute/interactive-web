@@ -1,15 +1,19 @@
+<script lang="ts">
+  import 'leaflet/dist/leaflet.css';
+</script>
+
 <header>
   <nav>
     <ul>
-      <a href="https://www.furman.edu/shi-institute/sustainability-research/">Shi Applied Research</a>
+      <a href="https://www.furman.edu/shi-institute/sustainability-research/">
+        Shi Applied Research
+      </a>
       <a href="/">All Visualizations</a>
       <a href="/">Sitemap</a>
     </ul>
   </nav>
-  <div class="title">
-    
-  </div>
-  <div class="meta"></div>
+  <div class="title" />
+  <div class="meta" />
 </header>
 
 <main>
