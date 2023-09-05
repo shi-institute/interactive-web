@@ -10,6 +10,6 @@
 	"semi": true,
 	"bracketSpacing": true,
 	"bracketSameLine": false,
-	"arrowParens": true,
+	"arrowParens": "always",
 	"embeddedLanguageFormatting": "auto"
 }
