@@ -9,7 +9,7 @@
         Shi Applied Research
       </a>
       <a href="/">All Visualizations</a>
-      <a href="/">Sitemap</a>
+      <a href="/sitemap">Sitemap</a>
     </ul>
   </nav>
   <div class="title" />
