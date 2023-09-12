@@ -61,6 +61,11 @@
     display: flex;
     flex-direction: column;
   }
+  @media (prefers-color-scheme: dark) {
+    article.card {
+      border-color: #3d3d3d;
+    }
+  }
 
   .card img {
     aspect-ratio: 2.4;

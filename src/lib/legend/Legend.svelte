@@ -19,4 +19,9 @@
     border-radius: 3px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
   }
+  @media (prefers-color-scheme: dark) {
+    .legend {
+      background-color: #212121;
+    }
+  }
 </style>

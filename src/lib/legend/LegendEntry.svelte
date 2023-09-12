@@ -28,15 +28,28 @@
   }
 
   div.rect {
+    position: relative;
     display: inline-block;
-    border: 2px solid var(--outline);
-    background: var(--fill);
     width: 16px;
     height: 10px;
     margin-top: 1px;
+    margin-right: 2px;
+  }
+
+  div.rect::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -2px;
+    left: -2px;
+    border: 2px solid var(--outline);
+    background: var(--fill);
+    z-index: 1;
   }
 
   div.square {
+    position: relative;
     display: inline-block;
     border: 2px solid var(--outline);
     background: var(--fill);
@@ -44,5 +57,15 @@
     height: 10px;
     margin-top: 1px;
     margin-right: 6px;
+  }
+
+  div.rect::after {
+    content: '';
+    background: white;
+    position: absolute;
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
+    left: -3px;
+    top: -3px;
   }
 </style>

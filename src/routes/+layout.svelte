@@ -62,4 +62,16 @@
   main {
     flex-grow: 1;
   }
+  @media (prefers-color-scheme: dark) {
+    main {
+      background-color: #212121;
+      color: #e0e0e0;
+    }
+    :global(a) {
+      color: rgb(160, 178, 238);
+    }
+    :global(a:visited) {
+      color: rgb(190, 160, 238);
+    }
+  }
 </style>

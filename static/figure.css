@@ -18,6 +18,16 @@ figure > h6 {
   margin-top: 0;
   margin-bottom: 0.25rem;
 }
+@media (prefers-color-scheme: dark) {
+  figure > h1,
+  figure > h2,
+  figure > h3,
+  figure > h4,
+  figure > h5,
+  figure > h6 {
+    color: #ddd;
+  }
+}
 
 figure > h2 {
   font-size: 20px;
@@ -31,4 +41,14 @@ figure > h3 {
 figcaption {
   font: small var(--sans-serif);
   color: var(--syntax-unknown-variable);
+}
+
+@media (prefers-color-scheme: dark) {
+  svg[class^='plot-'] {
+    background-color: #212121;
+    color: #e0e0e0;
+  }
+  g[aria-label='crosshair text'] {
+    stroke: #212121;
+  }
 }

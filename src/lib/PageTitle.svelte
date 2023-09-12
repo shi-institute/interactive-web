@@ -9,6 +9,7 @@
     color: #e0e0e0;
     padding: 10px;
     margin: 0;
+    border-bottom: 1px solid #3d3d3d;
   }
 
   h1 {
