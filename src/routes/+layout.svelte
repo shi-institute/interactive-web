@@ -22,7 +22,7 @@
 
 <style>
   header {
-    --height: 30px;
+    --height: var(--header-height);
     background-color: black;
     color: #e0e0e0;
     height: var(--height);
