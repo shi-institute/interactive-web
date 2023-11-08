@@ -12,10 +12,12 @@ export interface CDRZ {
   ownership?: Ownership;
   /** Median and aggregate income for this tract */
   income?: Income;
+  zillow?: Zillow;
 }
 
 export interface Place {
   name: string;
+  type?: 'city' | 'msa' | 'place';
   coordinates?: {
     longitude: number;
     latitude: number;
@@ -64,4 +66,43 @@ export interface Ownership {
 export interface Income {
   median: number;
   aggregate: number;
+}
+
+export interface Zillow {
+  /** total population for the census tract  */
+  totalPopulation: number;
+  /** The zip code that contains the centroid for the census tract. Some zip codes contain several CDZRs. */
+  zipCode: number;
+  zhvi: ZillowHomeValueIndex[];
+}
+
+type ISODate = string;
+
+export interface ZillowHomeValueIndex {
+  reportedAt: ISODate;
+  /** the ZHVI for the state in which the CDZR resides */
+  state: number;
+  /** the ZHVI for the county in which the CDZR resides */
+  county: number;
+  /** the ZHVI for the zip code in which the CDZR resides */
+  zip: number;
+  /** the ZHVI for the MSA (Metropolitan Statistical Area) in which the CDZR resides */
+  msa: number;
+  /** the ZHVI for the city in which the CDZR resides */
+  city: number;
+  /**
+   * Monthly percent rate of increase.
+   *
+   * Rate of increase was calculated by fitting a line of best fit (linear)
+   * to monthly zhvi that was graphed from 1/31/2010 - 9/30/2023. The equation
+   * for the line of best fit was used to calculate the zhvi for 1/31/10 and
+   * 9/30/23 and the percent difference was calculated for those values
+   */
+  increaseRates: {
+    startedAt: ISODate;
+    endedAt: ISODate;
+    state: number;
+    county: number;
+    zip: number;
+  };
 }

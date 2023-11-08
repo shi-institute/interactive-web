@@ -1,7 +1,12 @@
 <div class="wrapper">
   <div class="number">
-    <span class="prefix"><slot name="prefix" /></span>
+    {#if $$slots.prefix}
+      <span class="prefix"><slot name="prefix" /></span>
+    {/if}
     <span><slot /></span>
+    {#if $$slots.suffix}
+      <span class="suffix"><slot name="suffix" /></span>
+    {/if}
   </div>
   <div class="units"><slot name="units" /></div>
   <div class="caption"><slot name="caption" /></div>
@@ -21,11 +26,19 @@
     flex-direction: row;
   }
 
-  .prefix {
+  .prefix,
+  .suffix {
     font-size: 18px;
     line-height: 18px;
-    margin-right: 2px;
     margin-top: 1px;
+  }
+
+  .prefix {
+    margin-right: 2px;
+  }
+
+  .suffix {
+    margin-left: 2px;
   }
 
   .units {
