@@ -27,7 +27,7 @@
 
   <div class="top-grid">
     <section id="mapSection">
-      <CdrzMap />
+      <CdrzMap tract="{data.cdrz.tract}" />
     </section>
     <section>
       <SectionHeading noTopMargin>Places within this tract</SectionHeading>
