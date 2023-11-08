@@ -19,6 +19,8 @@
   </svelte:fragment>
 </PageTitle>
 
+<a href="/cdrz-info-sheet" class="back">← Back to all</a>
+
 <article>
   <div class="top-grid">
     <section id="mapSection">
@@ -197,6 +199,16 @@
     .warning {
       background-color: rgb(255 255 255 / 16%);
       color: yellow;
+    }
+  }
+
+  .back {
+    display: block;
+    margin: 16px 20px 0;
+  }
+  @media print {
+    .back {
+      display: none;
     }
   }
 </style>
