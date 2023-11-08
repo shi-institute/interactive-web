@@ -1,24 +1,14 @@
+import { error } from '@sveltejs/kit';
 import type { CDRZ } from '../CDRZ';
+import scCDRZs from '../sc-cdrzs.json';
 import type { PageLoad } from './$types';
 
-export const load = (() => {
+export const load = (({ params }) => {
+  const matchingCDRZ = scCDRZs.find((cdrz) => cdrz.tract === params.tract);
+
+  if (!matchingCDRZ) throw error(404, 'No match found');
+
   return {
-    cdrz: {
-      tract: 'test-tract-number',
-      places: [
-        { name: 'Something', coordinates: { longitude: 0, latitude: 0 } },
-        { name: 'TownCityVille' },
-        { name: 'FloodsALotLand' },
-        { name: 'OhNo' },
-      ],
-      urban: 0.87,
-      rural: 0.13,
-      ownership: {
-        total: {
-          renters: 214,
-          owners: 102,
-        },
-      },
-    } satisfies CDRZ,
+    cdrz: matchingCDRZ as unknown as CDRZ,
   };
 }) satisfies PageLoad;

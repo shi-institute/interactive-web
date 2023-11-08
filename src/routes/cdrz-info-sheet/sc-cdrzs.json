@@ -1,0 +1,362 @@
+[
+  {
+    "tract": "003104",
+    "places": [
+      {
+        "name": "North Charleston",
+        "type": "city"
+      },
+      {
+        "name": "Charleston-North Charleston, SC",
+        "type": "msa"
+      }
+    ],
+    "urban": 0.5,
+    "rural": 0.5,
+    "zillow": {
+      "totalPopulation": 5741,
+      "zipCode": 29406,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 547907.542933347,
+          "zip": 272837.863608396,
+          "msa": 418022.871524288,
+          "city": 292171.829884807,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 194.55440904347887,
+            "zip": 284.9804029922533
+          }
+        }
+      ]
+    }
+  },
+  {
+    "tract": "003115",
+    "places": [
+      {
+        "name": "North Charleston",
+        "type": "city"
+      },
+      {
+        "name": "Charleston-North Charleston, SC",
+        "type": "msa"
+      }
+    ],
+    "urban": 0.5,
+    "rural": 0.5,
+    "zillow": {
+      "totalPopulation": 7372,
+      "zipCode": 29406,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 547907.542933347,
+          "zip": 272837.863608396,
+          "msa": 418022.871524288,
+          "city": 292171.829884807,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 194.55440904347887,
+            "zip": 284.9804029922533
+          }
+        }
+      ]
+    }
+  },
+  {
+    "tract": "003400",
+    "places": [
+      {
+        "name": "North Charleston",
+        "type": "city"
+      },
+      {
+        "name": "Charleston-North Charleston, SC",
+        "type": "msa"
+      }
+    ],
+    "urban": 0.5,
+    "rural": 0.5,
+    "zillow": {
+      "totalPopulation": 4870,
+      "zipCode": 29406,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 547907.542933347,
+          "zip": 272837.863608396,
+          "msa": 418022.871524288,
+          "city": 292171.829884807,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 194.55440904347887,
+            "zip": 284.9804029922533
+          }
+        }
+      ]
+    }
+  },
+  {
+    "tract": "003111",
+    "places": [
+      {
+        "name": "North Charleston",
+        "type": "city"
+      },
+      {
+        "name": "Charleston-North Charleston, SC",
+        "type": "msa"
+      }
+    ],
+    "urban": 0.5,
+    "rural": 0.5,
+    "zillow": {
+      "totalPopulation": 5102,
+      "zipCode": 29418,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 547907.542933347,
+          "zip": 292637.645548787,
+          "msa": 418022.871524288,
+          "city": 292171.829884807,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 194.55440904347887,
+            "zip": 187.31604479135333
+          }
+        }
+      ]
+    }
+  },
+  {
+    "tract": "010818",
+    "places": [
+      {
+        "name": "North Charleston",
+        "type": "city"
+      },
+      {
+        "name": "Charleston-North Charleston, SC",
+        "type": "msa"
+      }
+    ],
+    "urban": 0.5,
+    "rural": 0.5,
+    "zillow": {
+      "totalPopulation": 9316,
+      "zipCode": 29420,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 344452.675831575,
+          "zip": 313327.543448441,
+          "msa": 418022.871524288,
+          "city": 292171.829884807,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 144.16175191266964,
+            "zip": 153.25838634100546
+          }
+        }
+      ]
+    }
+  },
+  {
+    "tract": "010603",
+    "places": [
+      {
+        "name": "Summerville",
+        "type": "city"
+      },
+      {
+        "name": "Charleston-North Charleston, SC",
+        "type": "msa"
+      }
+    ],
+    "urban": 0.5,
+    "rural": 0.5,
+    "zillow": {
+      "totalPopulation": 8338,
+      "zipCode": 29483,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 344452.675831575,
+          "zip": 358452.480165908,
+          "msa": 418022.871524288,
+          "city": 369778.747344234,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 144.16175191266964,
+            "zip": 140.89045112785342
+          }
+        }
+      ]
+    }
+  },
+  {
+    "tract": "010700",
+    "places": [
+      {
+        "name": "Summerville",
+        "type": "city"
+      },
+      {
+        "name": "Charleston-North Charleston, SC",
+        "type": "msa"
+      }
+    ],
+    "urban": 0.5,
+    "rural": 0.5,
+    "zillow": {
+      "totalPopulation": 5738,
+      "zipCode": 29483,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 344452.675831575,
+          "zip": 358452.480165908,
+          "msa": 418022.871524288,
+          "city": 369778.747344234,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 144.16175191266964,
+            "zip": 140.89045112785342
+          }
+        }
+      ]
+    }
+  },
+  {
+    "tract": "020718",
+    "places": [
+      {
+        "name": "Summerville / Goose Creek",
+        "type": "city"
+      },
+      {
+        "name": "Charleston-North Charleston, SC",
+        "type": "msa"
+      }
+    ],
+    "urban": 0.5,
+    "rural": 0.5,
+    "zillow": {
+      "totalPopulation": 6953,
+      "zipCode": 29486,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 357759.675588987,
+          "zip": 401865.715874112,
+          "msa": 418022.871524288,
+          "city": 369778.747344234,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 158.65002772339855,
+            "zip": 142.30369095847334
+          }
+        }
+      ]
+    }
+  },
+  {
+    "tract": "050500",
+    "places": [
+      {
+        "name": "Myrtle Beach",
+        "type": "city"
+      },
+      {
+        "name": "Myrtle Beach-Conway-North Myrtle Beach, SC-NC",
+        "type": "msa"
+      }
+    ],
+    "urban": 0.5,
+    "rural": 0.5,
+    "zillow": {
+      "totalPopulation": 4619,
+      "zipCode": 29577,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 312218.644251774,
+          "zip": 262792.410961369,
+          "msa": 336858.051879127,
+          "city": 302107.467019359,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 142.80091059384387,
+            "zip": 134.8011048306999
+          }
+        }
+      ]
+    }
+  },
+  {
+    "tract": "002107",
+    "places": [
+      {
+        "name": "Bluffton",
+        "type": "city"
+      },
+      {
+        "name": "Hilton Head Island-Bluffton, SC",
+        "type": "msa"
+      }
+    ],
+    "urban": 0.5,
+    "rural": 0.5,
+    "zillow": {
+      "totalPopulation": 10963,
+      "zipCode": 29910,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 527579.361276137,
+          "zip": 512151.055955395,
+          "msa": 504429.082125449,
+          "city": 490156.425478946,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 113.02300147482305,
+            "zip": 152.38383538290873
+          }
+        }
+      ]
+    }
+  }
+]
