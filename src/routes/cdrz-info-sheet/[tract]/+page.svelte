@@ -1,6 +1,7 @@
 <script lang="ts">
   import PageTitle from '$lib/PageTitle.svelte';
   import { formatISODate } from '$utils/formatISODate';
+  import { ToggleSwitch } from 'fluent-svelte';
   import BoldNumber from './BoldNumber.svelte';
   import CdrzMap from './CdrzMap.svelte';
   import RentersOwnerPie from './RentersOwnerPie.svelte';
@@ -11,6 +12,8 @@
   import UrbanRuralPie from './UrbanRuralPie.svelte';
 
   export let data;
+
+  let showMore = false;
 </script>
 
 <PageTitle>
@@ -23,10 +26,11 @@
 <a href="/cdrz-info-sheet" class="back">← Back to all</a>
 
 <article>
+  <ToggleSwitch bind:checked="{showMore}">Show more details</ToggleSwitch>
   <div class="note">All numbers are based on 2020 data unless otherwise specified.</div>
 
   <div class="top-grid">
-    <section id="mapSection">
+    <section id="mapSection" style="min-height: 250px;">
       <CdrzMap tract="{data.cdrz.tract}" />
     </section>
     <section>
@@ -36,11 +40,14 @@
           <li>{place.name}</li>
         {/each}
       </ul>
-      <UrbanRuralPie
-        size="{100}"
-        urbanFraction="{data.cdrz.urban}"
-        ruralFraction="{data.cdrz.rural}"
-      />
+
+      {#if showMore}
+        <UrbanRuralPie
+          size="{100}"
+          urbanFraction="{data.cdrz.urban}"
+          ruralFraction="{data.cdrz.rural}"
+        />
+      {/if}
     </section>
   </div>
   <section>
@@ -54,39 +61,45 @@
         </BoldNumber>
       </SubSection>
 
-      <SubSection>
-        <SubHeading slot="heading">Race</SubHeading>
-        placeholder
-      </SubSection>
+      {#if showMore}
+        <SubSection>
+          <SubHeading slot="heading">Race</SubHeading>
+          placeholder
+        </SubSection>
 
-      <SubSection>
-        <SubHeading slot="heading">Income</SubHeading>
-        <BoldNumber>
-          00
-          <svelte:fragment slot="prefix">$</svelte:fragment>
-          <svelte:fragment slot="units">thousand</svelte:fragment>
-          <svelte:fragment slot="caption">Median</svelte:fragment>
-        </BoldNumber>
-      </SubSection>
+        <SubSection>
+          <SubHeading slot="heading">Income</SubHeading>
+          <BoldNumber>
+            00
+            <svelte:fragment slot="prefix">$</svelte:fragment>
+            <svelte:fragment slot="units">thousand</svelte:fragment>
+            <svelte:fragment slot="caption">Median</svelte:fragment>
+          </BoldNumber>
+        </SubSection>
 
-      <SubSection>
-        <SubHeading slot="heading">Ethnicity</SubHeading>
-        placeholder
-      </SubSection>
+        <SubSection>
+          <SubHeading slot="heading">Ethnicity</SubHeading>
+          placeholder
+        </SubSection>
 
-      <SubSection>
-        <SubHeading slot="heading">Renters &amp; owners</SubHeading>
-        <RentersOwnerPie
-          size="{100}"
-          renters="{data.cdrz.ownership?.total?.renters ?? 0.5}"
-          owners="{data.cdrz.ownership?.total?.owners ?? 0.5}"
-        />
-      </SubSection>
+        <SubSection>
+          <SubHeading slot="heading">Renters &amp; owners</SubHeading>
+          <RentersOwnerPie
+            size="{100}"
+            renters="{data.cdrz.ownership?.total?.renters ?? 0.5}"
+            owners="{data.cdrz.ownership?.total?.owners ?? 0.5}"
+          />
+        </SubSection>
+      {/if}
     </div>
   </section>
-  <section>
-    <SectionHeading>Voting</SectionHeading>
-  </section>
+
+  {#if showMore}
+    <section>
+      <SectionHeading>Voting</SectionHeading>
+    </section>
+  {/if}
+
   <section>
     <SectionHeading>Housing</SectionHeading>
 
@@ -114,18 +127,20 @@
               <svelte:fragment slot="units">thousand</svelte:fragment>
               <svelte:fragment slot="caption">Zip</svelte:fragment>
             </BoldNumber>
-            <BoldNumber>
-              {Math.round((data.cdrz.zillow?.zhvi[0]?.msa || 0) / 1000)}
-              <svelte:fragment slot="prefix">$</svelte:fragment>
-              <svelte:fragment slot="units">thousand</svelte:fragment>
-              <svelte:fragment slot="caption">MSA</svelte:fragment>
-            </BoldNumber>
-            <BoldNumber>
-              {Math.round((data.cdrz.zillow?.zhvi[0]?.city || 0) / 1000)}
-              <svelte:fragment slot="prefix">$</svelte:fragment>
-              <svelte:fragment slot="units">thousand</svelte:fragment>
-              <svelte:fragment slot="caption">City</svelte:fragment>
-            </BoldNumber>
+            {#if showMore}
+              <BoldNumber>
+                {Math.round((data.cdrz.zillow?.zhvi[0]?.msa || 0) / 1000)}
+                <svelte:fragment slot="prefix">$</svelte:fragment>
+                <svelte:fragment slot="units">thousand</svelte:fragment>
+                <svelte:fragment slot="caption">MSA</svelte:fragment>
+              </BoldNumber>
+              <BoldNumber>
+                {Math.round((data.cdrz.zillow?.zhvi[0]?.city || 0) / 1000)}
+                <svelte:fragment slot="prefix">$</svelte:fragment>
+                <svelte:fragment slot="units">thousand</svelte:fragment>
+                <svelte:fragment slot="caption">City</svelte:fragment>
+              </BoldNumber>
+            {/if}
           </div>
         </SubSection>
 
@@ -186,7 +201,7 @@
               rating="{data.cdrz.risks.compositeExpectedAnnualLoss.rating}"
               score="{data.cdrz.risks.compositeExpectedAnnualLoss.score}"
             />
-            <h4>Expected annual loss</h4>
+            <h4>Social vulnerability</h4>
             <RiskRating
               rating="{data.cdrz.risks.socialVulnerability.rating}"
               score="{data.cdrz.risks.socialVulnerability.score}"
@@ -203,8 +218,10 @@
           <SubHeading slot="heading">Hazards</SubHeading>
           <div class="ratings">
             {#each Object.entries(data.cdrz.risks.natural) as [key, value]}
-              <h4>{key}</h4>
-              <RiskRating rating="{value.rating}" score="{value.score}" />
+              {#if showMore || (value.rating !== 'Not Applicable' && value.rating !== 'Insufficient Data')}
+                <h4>{key}</h4>
+                <RiskRating rating="{value.rating}" score="{value.score}" />
+              {/if}
             {/each}
           </div>
         </SubSection>
