@@ -20,7 +20,7 @@
       fill="transparent"
       stroke="tomato"
       stroke-width="10"
-      stroke-dasharray="calc(35 * {rentersFraction}) 31.4"
+      stroke-dasharray="calc(31.4 * {rentersFraction}) 31.4"
       transform="rotate(-90) translate(-20)"
     ></circle>
   </svg>

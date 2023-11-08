@@ -16,7 +16,7 @@
       fill="transparent"
       stroke="tomato"
       stroke-width="10"
-      stroke-dasharray="calc(35 * {urbanFraction}) 31.4"
+      stroke-dasharray="calc(31.4 * {urbanFraction}) 31.4"
       transform="rotate(-90) translate(-20)"
     ></circle>
   </svg>
