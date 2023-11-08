@@ -33,6 +33,98 @@
           }
         }
       ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": "99.720544165913523"
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": "99.450407497005415"
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": "99.470001220703125"
+      },
+      "communityResilience": {
+        "rating": "Very High",
+        "score": "89.150001525878906"
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Very Low",
+          "score": 70.26374442793461
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 98.68708457617963
+        },
+        "Hail": {
+          "rating": "Relatively Low",
+          "score": 67.8301454250479
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 60.42346806961505
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.4797308637078
+        },
+        "Ice Storm": {
+          "rating": "Relatively Low",
+          "score": 50.7342359540662
+        },
+        "Landslide": {
+          "rating": "Very Low",
+          "score": 40.74126451004655
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 96.45068937842144
+        },
+        "Riverine Flooding": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 46.78642386052363
+        },
+        "Tornado": {
+          "rating": "Relatively Low",
+          "score": 42.0345399184115
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 77.38218401055974
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 68.36320078915847
+        }
+      }
     }
   },
   {
@@ -69,6 +161,98 @@
           }
         }
       ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": "99.705084907006608"
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": "99.504427272940788"
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": "92.989997863769531"
+      },
+      "communityResilience": {
+        "rating": "Very High",
+        "score": "89.150001525878906"
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Very Low",
+          "score": 71.75493525790702
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 98.73993000915988
+        },
+        "Hail": {
+          "rating": "Relatively Low",
+          "score": 71.48516946661807
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 65.39446179862367
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.54686236516486
+        },
+        "Ice Storm": {
+          "rating": "Relatively Low",
+          "score": 57.1029986196364
+        },
+        "Landslide": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 98.2499011751177
+        },
+        "Riverine Flooding": {
+          "rating": "Very Low",
+          "score": 28.387392254033866
+        },
+        "Strong Wind": {
+          "rating": "Relatively Moderate",
+          "score": 54.697217291120495
+        },
+        "Tornado": {
+          "rating": "Relatively Low",
+          "score": 47.32603660902176
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 64.72714732498544
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 73.09815158418864
+        }
+      }
     }
   },
   {
@@ -105,6 +289,98 @@
           }
         }
       ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": "99.715787470865251"
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": "99.452756182915664"
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": "98.940002441406250"
+      },
+      "communityResilience": {
+        "rating": "Very High",
+        "score": "89.150001525878906"
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Relatively Low",
+          "score": 88.41010401188707
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 98.05998543814735
+        },
+        "Hail": {
+          "rating": "Relatively Low",
+          "score": 65.93033234972549
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 57.24217300420415
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.6078910028531
+        },
+        "Ice Storm": {
+          "rating": "Relatively Low",
+          "score": 47.534435666245706
+        },
+        "Landslide": {
+          "rating": "Relatively Low",
+          "score": 51.76948912851335
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 94.92219786538254
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Low",
+          "score": 65.72562651196655
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 43.89790855973948
+        },
+        "Tornado": {
+          "rating": "Relatively Low",
+          "score": 40.66140769565371
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 63.03735150369234
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 65.37802099725204
+        }
+      }
     }
   },
   {
@@ -141,6 +417,98 @@
           }
         }
       ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": "99.727679208485938"
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": "99.761608380111326"
+      },
+      "socialVulnerability": {
+        "rating": "Relatively Moderate",
+        "score": "58.419998168945312"
+      },
+      "communityResilience": {
+        "rating": "Very High",
+        "score": "89.150001525878906"
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Very Low",
+          "score": 73.80067926130334
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 99.3071376564812
+        },
+        "Hail": {
+          "rating": "Relatively Low",
+          "score": 66.49580889009064
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 58.60206214622919
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.83217124635735
+        },
+        "Ice Storm": {
+          "rating": "Relatively Low",
+          "score": 49.14388087755881
+        },
+        "Landslide": {
+          "rating": "Relatively Low",
+          "score": 53.439396617759705
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 95.1545860734778
+        },
+        "Riverine Flooding": {
+          "rating": "Very Low",
+          "score": 26.313502595297933
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 45.004173475505816
+        },
+        "Tornado": {
+          "rating": "Relatively Low",
+          "score": 42.866883765768094
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 55.84174663765117
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 66.53005143622144
+        }
+      }
     }
   },
   {
@@ -177,6 +545,98 @@
           }
         }
       ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": "99.853731627265375"
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": "99.747516264649931"
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": "86.819999694824219"
+      },
+      "communityResilience": {
+        "rating": "Relatively Moderate",
+        "score": "48.229999542236328"
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Very Low",
+          "score": 72.11844618976862
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "Very Low",
+          "score": 69.27851776960064
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 99.25429222350095
+        },
+        "Hail": {
+          "rating": "Relatively Moderate",
+          "score": 73.51900400888773
+        },
+        "Heat Wave": {
+          "rating": "Relatively High",
+          "score": 81.07311459238556
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.8169140869353
+        },
+        "Ice Storm": {
+          "rating": "Relatively High",
+          "score": 92.7384064142853
+        },
+        "Landslide": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Lightning": {
+          "rating": "Relatively Moderate",
+          "score": 71.89300559408728
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Low",
+          "score": 50.52962867275759
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 31.089453451052773
+        },
+        "Tornado": {
+          "rating": "Relatively Moderate",
+          "score": 65.20497055054608
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 81.61559226094919
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 80.3544167038542
+        }
+      }
     }
   },
   {
@@ -213,6 +673,98 @@
           }
         }
       ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": "99.707463254530751"
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": "99.728726777368053"
+      },
+      "socialVulnerability": {
+        "rating": "Relatively High",
+        "score": "60.290000915527344"
+      },
+      "communityResilience": {
+        "rating": "Relatively Moderate",
+        "score": "48.229999542236328"
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "Very Low",
+          "score": 78.7693537578914
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 98.83035441670386
+        },
+        "Hail": {
+          "rating": "Relatively Moderate",
+          "score": 78.03458694348761
+        },
+        "Heat Wave": {
+          "rating": "Relatively High",
+          "score": 79.00861967729055
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.82301695070412
+        },
+        "Ice Storm": {
+          "rating": "Relatively High",
+          "score": 95.41983611853504
+        },
+        "Landslide": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Lightning": {
+          "rating": "Relatively Moderate",
+          "score": 65.61852397551539
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Moderate",
+          "score": 83.3525142682669
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 47.48239498712689
+        },
+        "Tornado": {
+          "rating": "Relatively High",
+          "score": 79.97084445280446
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Moderate",
+          "score": 91.11341015304484
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 78.60347135777532
+        }
+      }
     }
   },
   {
@@ -249,6 +801,98 @@
           }
         }
       ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": "99.730057556010081"
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": "99.522042417267542"
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": "90.449996948242188"
+      },
+      "communityResilience": {
+        "rating": "Relatively Moderate",
+        "score": "48.229999542236328"
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "Very Low",
+          "score": 72.22463878863404
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 98.80804190055665
+        },
+        "Hail": {
+          "rating": "Relatively Moderate",
+          "score": 73.91754152902035
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 71.74178547102896
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.48430801153442
+        },
+        "Ice Storm": {
+          "rating": "Relatively High",
+          "score": 92.96601956004582
+        },
+        "Landslide": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Lightning": {
+          "rating": "Relatively Moderate",
+          "score": 51.478779602544286
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Moderate",
+          "score": 89.42504168917492
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 40.793077908794864
+        },
+        "Tornado": {
+          "rating": "Relatively Moderate",
+          "score": 70.65282561926148
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 83.33987371124826
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 71.48695304976866
+        }
+      }
     }
   },
   {
@@ -285,6 +929,98 @@
           }
         }
       ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": "99.719354992151452"
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": "99.518519388402197"
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": "90.220001220703125"
+      },
+      "communityResilience": {
+        "rating": "Relatively Moderate",
+        "score": "56.470001220703125"
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Very Low",
+          "score": 72.35194226278921
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "Very Low",
+          "score": 72.60201502451183
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 99.05935129295159
+        },
+        "Hail": {
+          "rating": "Relatively Moderate",
+          "score": 75.01087454885318
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 69.68081358479931
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.37140503181118
+        },
+        "Ice Storm": {
+          "rating": "Relatively Low",
+          "score": 65.54377514758143
+        },
+        "Landslide": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 95.52592805548568
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Low",
+          "score": 42.588721610259064
+        },
+        "Strong Wind": {
+          "rating": "Relatively High",
+          "score": 81.95765391895227
+        },
+        "Tornado": {
+          "rating": "Relatively Moderate",
+          "score": 68.41913450347398
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Moderate",
+          "score": 86.45309359875377
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 74.91016276393357
+        }
+      }
     }
   },
   {
@@ -321,6 +1057,98 @@
           }
         }
       ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": "99.731246729772153"
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": "99.553749677055691"
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": "87.180000305175781"
+      },
+      "communityResilience": {
+        "rating": "Relatively Moderate",
+        "score": "49.610000610351562"
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Relatively Low",
+          "score": 86.2555720653789
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Earthquake": {
+          "rating": "Relatively Moderate",
+          "score": 81.68964464382178
+        },
+        "Hail": {
+          "rating": "Relatively Low",
+          "score": 55.524858630864905
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 54.3474176198417
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.90540561158323
+        },
+        "Ice Storm": {
+          "rating": "Relatively Moderate",
+          "score": 75.69678992040882
+        },
+        "Landslide": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Lightning": {
+          "rating": "Relatively High",
+          "score": 84.16046765132185
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Low",
+          "score": 62.66176574206731
+        },
+        "Strong Wind": {
+          "rating": "Relatively Moderate",
+          "score": 63.87768777700708
+        },
+        "Tornado": {
+          "rating": "Relatively High",
+          "score": 81.97999083011015
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 57.82407572568465
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 81.5134932005543
+        }
+      }
     }
   },
   {
@@ -357,6 +1185,98 @@
           }
         }
       ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": "99.834704847072260"
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": "99.779223524438081"
+      },
+      "socialVulnerability": {
+        "rating": "Relatively High",
+        "score": "75.309997558593750"
+      },
+      "communityResilience": {
+        "rating": "Relatively Moderate",
+        "score": "51.979999542236328"
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Relatively Low",
+          "score": 84.46720441519847
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Earthquake": {
+          "rating": "Relatively Moderate",
+          "score": 87.66587594241022
+        },
+        "Hail": {
+          "rating": "Relatively Moderate",
+          "score": 80.42228518357413
+        },
+        "Heat Wave": {
+          "rating": "Relatively High",
+          "score": 81.11891396763511
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.97711426086691
+        },
+        "Ice Storm": {
+          "rating": "Relatively High",
+          "score": 92.02913448265735
+        },
+        "Landslide": {
+          "rating": "Relatively Low",
+          "score": 59.94578987684874
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 99.7484457541237
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Low",
+          "score": 51.75094534607887
+        },
+        "Strong Wind": {
+          "rating": "Relatively High",
+          "score": 88.09089947214352
+        },
+        "Tornado": {
+          "rating": "Relatively High",
+          "score": 79.5429162600957
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Moderate",
+          "score": 92.1158717134601
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 60.712356436573735
+        }
+      }
     }
   }
 ]

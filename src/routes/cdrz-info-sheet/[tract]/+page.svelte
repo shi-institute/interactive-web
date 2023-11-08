@@ -4,6 +4,7 @@
   import BoldNumber from './BoldNumber.svelte';
   import CdrzMap from './CdrzMap.svelte';
   import RentersOwnerPie from './RentersOwnerPie.svelte';
+  import RiskRating from './RiskRating.svelte';
   import SectionHeading from './SectionHeading.svelte';
   import SubHeading from './SubHeading.svelte';
   import SubSection from './SubSection.svelte';
@@ -155,6 +156,59 @@
       {/if}
     </div>
   </section>
+
+  {#if data.cdrz.risks}
+    <section>
+      <SectionHeading>Hazard risk index</SectionHeading>
+      <div>
+        From the National Risk Index.
+        <a
+          href="https://hazards.fema.gov/nri/report/viewer?dataLOD=Census%20tracts&dataIDs=T45013{data
+            .cdrz.tract}#SectionRiskIndex"
+        >
+          View the whole report.
+        </a>
+      </div>
+
+      <div class="columns">
+        <SubSection>
+          <SubHeading slot="heading">Composite ratings</SubHeading>
+          <div class="ratings">
+            <h4>Composite NRI</h4>
+            <RiskRating
+              rating="{data.cdrz.risks.compositeNRI.rating}"
+              score="{data.cdrz.risks.compositeNRI.score}"
+            />
+            <h4>Expected annual loss</h4>
+            <RiskRating
+              rating="{data.cdrz.risks.compositeExpectedAnnualLoss.rating}"
+              score="{data.cdrz.risks.compositeExpectedAnnualLoss.score}"
+            />
+            <h4>Expected annual loss</h4>
+            <RiskRating
+              rating="{data.cdrz.risks.socialVulnerability.rating}"
+              score="{data.cdrz.risks.socialVulnerability.score}"
+            />
+            <h4>Community resilience</h4>
+            <RiskRating
+              rating="{data.cdrz.risks.communityResilience.rating}"
+              score="{data.cdrz.risks.communityResilience.score}"
+            />
+          </div>
+        </SubSection>
+
+        <SubSection>
+          <SubHeading slot="heading">Hazards</SubHeading>
+          <div class="ratings">
+            {#each Object.entries(data.cdrz.risks.natural) as [key, value]}
+              <h4>{key}</h4>
+              <RiskRating rating="{value.rating}" score="{value.score}" />
+            {/each}
+          </div>
+        </SubSection>
+      </div>
+    </section>
+  {/if}
 </article>
 
 <style>
@@ -181,6 +235,19 @@
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     padding: 20px 0;
+  }
+
+  section .columns {
+    --gap: 20px;
+    columns: 2;
+    column-gap: var(--gap);
+    padding: var(--gap) 0;
+  }
+  section .columns > :global(*) {
+    padding-top: var(--gap);
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   div.zhvi {
@@ -210,5 +277,18 @@
     .back {
       display: none;
     }
+  }
+
+  .ratings {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 20px;
+    row-gap: 3px;
+    margin-top: 6px;
+  }
+
+  .ratings h4 {
+    margin: 0;
+    font-weight: 400;
   }
 </style>

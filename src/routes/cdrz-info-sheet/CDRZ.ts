@@ -13,6 +13,7 @@ export interface CDRZ {
   /** Median and aggregate income for this tract */
   income?: Income;
   zillow?: Zillow;
+  risks?: Risks;
 }
 
 export interface Place {
@@ -106,3 +107,36 @@ export interface ZillowHomeValueIndex {
     zip: number;
   };
 }
+
+export interface Risks {
+  compositeNRI: Risk;
+  compositeExpectedAnnualLoss: Risk;
+  socialVulnerability: Risk;
+  communityResilience: Risk;
+  natural: Record<NaturalRisk, Risk>;
+}
+
+export interface Risk {
+  rating: string;
+  score: number | string | null;
+}
+
+type NaturalRisk =
+  | 'Avalanche'
+  | 'Coastal Flooding'
+  | 'Cold Wave'
+  | 'Drought'
+  | 'Earthquake'
+  | 'Hail'
+  | 'Heat Wave'
+  | 'Hurricane'
+  | 'Ice Storm'
+  | 'Landslide'
+  | 'Lightning'
+  | 'Riverine Flooding'
+  | 'Strong Wind'
+  | 'Tornado'
+  | 'Tsunami'
+  | 'Volcanic Activity'
+  | 'Wildfire'
+  | 'Winter Weather';
