@@ -23,6 +23,8 @@
 <a href="/cdrz-info-sheet" class="back">← Back to all</a>
 
 <article>
+  <div class="note">All numbers are based on 2020 data unless otherwise specified.</div>
+
   <div class="top-grid">
     <section id="mapSection">
       <CdrzMap />
@@ -290,5 +292,11 @@
   .ratings h4 {
     margin: 0;
     font-weight: 400;
+  }
+
+  .note {
+    font-size: 14px;
+    font-style: italic;
+    margin-bottom: 20px;
   }
 </style>
