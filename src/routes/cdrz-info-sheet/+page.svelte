@@ -4,6 +4,10 @@
   export let data;
 </script>
 
+<svelte:head>
+  <title>CDRZ Info Sheets</title>
+</svelte:head>
+
 <PageTitle>
   Climate Disaster Resilience Zone (CDRZ) info sheets
   <svelte:fragment slot="caption">South Carolina</svelte:fragment>
