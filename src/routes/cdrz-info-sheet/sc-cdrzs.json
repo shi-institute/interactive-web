@@ -1,15 +1,5 @@
 [
   {
-    "places": [
-      {
-        "name": "North Charleston",
-        "type": "city"
-      },
-      {
-        "name": "Charleston-North Charleston, SC",
-        "type": "msa"
-      }
-    ],
     "zillow": {
       "totalPopulation": 5741,
       "zipCode": 29406,
@@ -135,7 +125,6 @@
       "total": 0,
       "fraction": 0
     },
-    "tract": "003104",
     "tenure": {
       "renter": {
         "total": 2003,
@@ -146,9 +135,8 @@
         "fraction": 0.3846390168970814
       },
       "totalHouseholds": 3255
-    }
-  },
-  {
+    },
+    "tract": "003104",
     "places": [
       {
         "name": "North Charleston",
@@ -157,8 +145,14 @@
       {
         "name": "Charleston-North Charleston, SC",
         "type": "msa"
+      },
+      {
+        "name": "Santee Watershed",
+        "type": "watershed"
       }
-    ],
+    ]
+  },
+  {
     "zillow": {
       "totalPopulation": 7372,
       "zipCode": 29406,
@@ -284,7 +278,6 @@
       "total": 0,
       "fraction": 0
     },
-    "tract": "003115",
     "tenure": {
       "renter": {
         "total": 1423,
@@ -295,9 +288,8 @@
         "fraction": 0.4712002972872538
       },
       "totalHouseholds": 2691
-    }
-  },
-  {
+    },
+    "tract": "003115",
     "places": [
       {
         "name": "North Charleston",
@@ -306,8 +298,14 @@
       {
         "name": "Charleston-North Charleston, SC",
         "type": "msa"
+      },
+      {
+        "name": "Santee Watershed",
+        "type": "watershed"
       }
-    ],
+    ]
+  },
+  {
     "zillow": {
       "totalPopulation": 4870,
       "zipCode": 29406,
@@ -433,7 +431,6 @@
       "total": 0,
       "fraction": 0
     },
-    "tract": "003400",
     "tenure": {
       "renter": {
         "total": 1366,
@@ -444,9 +441,8 @@
         "fraction": 0.28668407310704963
       },
       "totalHouseholds": 1915
-    }
-  },
-  {
+    },
+    "tract": "003400",
     "places": [
       {
         "name": "North Charleston",
@@ -455,8 +451,14 @@
       {
         "name": "Charleston-North Charleston, SC",
         "type": "msa"
+      },
+      {
+        "name": "Santee Watershed",
+        "type": "watershed"
       }
-    ],
+    ]
+  },
+  {
     "zillow": {
       "totalPopulation": 5102,
       "zipCode": 29418,
@@ -582,7 +584,6 @@
       "total": 0,
       "fraction": 0
     },
-    "tract": "003111",
     "tenure": {
       "renter": {
         "total": 1235,
@@ -593,9 +594,8 @@
         "fraction": 0.3916256157635468
       },
       "totalHouseholds": 2030
-    }
-  },
-  {
+    },
+    "tract": "003111",
     "places": [
       {
         "name": "North Charleston",
@@ -604,8 +604,14 @@
       {
         "name": "Charleston-North Charleston, SC",
         "type": "msa"
+      },
+      {
+        "name": "Santee Watershed",
+        "type": "watershed"
       }
-    ],
+    ]
+  },
+  {
     "zillow": {
       "totalPopulation": 9316,
       "zipCode": 29420,
@@ -731,7 +737,6 @@
       "total": 0,
       "fraction": 0
     },
-    "tract": "010818",
     "tenure": {
       "renter": {
         "total": 1437,
@@ -742,19 +747,24 @@
         "fraction": 0.5593376264949402
       },
       "totalHouseholds": 3261
-    }
-  },
-  {
+    },
+    "tract": "010818",
     "places": [
       {
-        "name": "Summerville",
+        "name": "North Charleston",
         "type": "city"
       },
       {
         "name": "Charleston-North Charleston, SC",
         "type": "msa"
+      },
+      {
+        "name": "Santee Watershed",
+        "type": "watershed"
       }
-    ],
+    ]
+  },
+  {
     "zillow": {
       "totalPopulation": 8338,
       "zipCode": 29483,
@@ -880,7 +890,6 @@
       "total": 9,
       "fraction": 0.001079395538498441
     },
-    "tract": "010603",
     "tenure": {
       "renter": {
         "total": 765,
@@ -891,9 +900,8 @@
         "fraction": 0.8424304840370752
       },
       "totalHouseholds": 4855
-    }
-  },
-  {
+    },
+    "tract": "010603",
     "places": [
       {
         "name": "Summerville",
@@ -902,8 +910,14 @@
       {
         "name": "Charleston-North Charleston, SC",
         "type": "msa"
+      },
+      {
+        "name": "Santee Watershed",
+        "type": "watershed"
       }
-    ],
+    ]
+  },
+  {
     "zillow": {
       "totalPopulation": 5738,
       "zipCode": 29483,
@@ -1029,7 +1043,6 @@
       "total": 0,
       "fraction": 0
     },
-    "tract": "010700",
     "tenure": {
       "renter": {
         "total": 3490,
@@ -1040,19 +1053,24 @@
         "fraction": 0.6453252032520326
       },
       "totalHouseholds": 9840
-    }
-  },
-  {
+    },
+    "tract": "010700",
     "places": [
       {
-        "name": "Summerville / Goose Creek",
+        "name": "Summerville",
         "type": "city"
       },
       {
         "name": "Charleston-North Charleston, SC",
         "type": "msa"
+      },
+      {
+        "name": "Santee Watershed",
+        "type": "watershed"
       }
-    ],
+    ]
+  },
+  {
     "zillow": {
       "totalPopulation": 6953,
       "zipCode": 29486,
@@ -1178,7 +1196,6 @@
       "total": 0,
       "fraction": 0
     },
-    "tract": "020718",
     "tenure": {
       "renter": {
         "total": 1535,
@@ -1189,19 +1206,24 @@
         "fraction": 0.4147922226458254
       },
       "totalHouseholds": 2623
-    }
-  },
-  {
+    },
+    "tract": "020718",
     "places": [
       {
-        "name": "Myrtle Beach",
+        "name": "Summerville / Goose Creek",
         "type": "city"
       },
       {
-        "name": "Myrtle Beach-Conway-North Myrtle Beach, SC-NC",
+        "name": "Charleston-North Charleston, SC",
         "type": "msa"
+      },
+      {
+        "name": "Santee Watershed",
+        "type": "watershed"
       }
-    ],
+    ]
+  },
+  {
     "zillow": {
       "totalPopulation": 4619,
       "zipCode": 29577,
@@ -1327,7 +1349,6 @@
       "total": 0,
       "fraction": 0
     },
-    "tract": "050500",
     "tenure": {
       "renter": {
         "total": 1130,
@@ -1338,19 +1359,24 @@
         "fraction": 0.5269987442444537
       },
       "totalHouseholds": 2389
-    }
-  },
-  {
+    },
+    "tract": "050500",
     "places": [
       {
-        "name": "Bluffton",
+        "name": "Myrtle Beach",
         "type": "city"
       },
       {
-        "name": "Hilton Head Island-Bluffton, SC",
+        "name": "Myrtle Beach-Conway-North Myrtle Beach, SC-NC",
         "type": "msa"
+      },
+      {
+        "name": "PeeDee Watershed",
+        "type": "watershed"
       }
-    ],
+    ]
+  },
+  {
     "zillow": {
       "totalPopulation": 10963,
       "zipCode": 29910,
@@ -1476,7 +1502,6 @@
       "total": 297,
       "fraction": 0.02709112469214631
     },
-    "tract": "002107",
     "tenure": {
       "renter": {
         "total": 3486,
@@ -1487,6 +1512,21 @@
         "fraction": 0.6508763144717076
       },
       "totalHouseholds": 9985
-    }
+    },
+    "tract": "002107",
+    "places": [
+      {
+        "name": "Bluffton",
+        "type": "city"
+      },
+      {
+        "name": "Hilton Head Island-Bluffton, SC",
+        "type": "msa"
+      },
+      {
+        "name": "Salkehatchie Watershed",
+        "type": "watershed"
+      }
+    ]
   }
 ]
