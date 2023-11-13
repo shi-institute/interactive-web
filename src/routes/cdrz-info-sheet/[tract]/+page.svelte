@@ -41,13 +41,11 @@
         {/each}
       </ul>
 
-      {#if showMore}
-        <UrbanRuralPie
-          size="{100}"
-          urbanFraction="{data.cdrz.urban}"
-          ruralFraction="{data.cdrz.rural}"
-        />
-      {/if}
+      <UrbanRuralPie
+        size="{100}"
+        urbanFraction="{data.cdrz.urban.fraction}"
+        ruralFraction="{data.cdrz.rural.fraction}"
+      />
     </section>
   </div>
   <section>
@@ -57,7 +55,15 @@
       <SubSection>
         <SubHeading slot="heading">Population</SubHeading>
         <BoldNumber>
-          {data.cdrz.zillow?.totalPopulation?.toLocaleString('en-US') || 'unavailable'}
+          {data.cdrz.population.total}
+        </BoldNumber>
+      </SubSection>
+
+      <SubSection>
+        <SubHeading slot="heading">Population density</SubHeading>
+        <BoldNumber>
+          {data.cdrz.population.personsPerSquareMileDensity.toFixed(0)}
+          <svelte:fragment slot="units">people per square mile</svelte:fragment>
         </BoldNumber>
       </SubSection>
 

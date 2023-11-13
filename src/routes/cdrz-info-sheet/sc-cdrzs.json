@@ -1,6 +1,5 @@
 [
   {
-    "tract": "003104",
     "places": [
       {
         "name": "North Charleston",
@@ -11,8 +10,6 @@
         "type": "msa"
       }
     ],
-    "urban": 0.5,
-    "rural": 0.5,
     "zillow": {
       "totalPopulation": 5741,
       "zipCode": 29406,
@@ -37,19 +34,19 @@
     "risks": {
       "compositeNRI": {
         "rating": "Very High",
-        "score": "99.720544165913523"
+        "score": 99.72054416591352
       },
       "compositeExpectedAnnualLoss": {
         "rating": "Very High",
-        "score": "99.450407497005415"
+        "score": 99.45040749700541
       },
       "socialVulnerability": {
         "rating": "Very High",
-        "score": "99.470001220703125"
+        "score": 99.47000122070312
       },
       "communityResilience": {
         "rating": "Very High",
-        "score": "89.150001525878906"
+        "score": 89.1500015258789
       },
       "natural": {
         "Avalanche": {
@@ -125,10 +122,22 @@
           "score": 68.36320078915847
         }
       }
+    },
+    "tract": "003104",
+    "population": {
+      "total": 5741,
+      "personsPerSquareMileDensity": 2948.291659341742
+    },
+    "urban": {
+      "total": 5741,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
     }
   },
   {
-    "tract": "003115",
     "places": [
       {
         "name": "North Charleston",
@@ -139,8 +148,6 @@
         "type": "msa"
       }
     ],
-    "urban": 0.5,
-    "rural": 0.5,
     "zillow": {
       "totalPopulation": 7372,
       "zipCode": 29406,
@@ -165,19 +172,19 @@
     "risks": {
       "compositeNRI": {
         "rating": "Very High",
-        "score": "99.705084907006608"
+        "score": 99.70508490700661
       },
       "compositeExpectedAnnualLoss": {
         "rating": "Very High",
-        "score": "99.504427272940788"
+        "score": 99.50442727294079
       },
       "socialVulnerability": {
         "rating": "Very High",
-        "score": "92.989997863769531"
+        "score": 92.98999786376953
       },
       "communityResilience": {
         "rating": "Very High",
-        "score": "89.150001525878906"
+        "score": 89.1500015258789
       },
       "natural": {
         "Avalanche": {
@@ -253,10 +260,22 @@
           "score": 73.09815158418864
         }
       }
+    },
+    "tract": "003115",
+    "population": {
+      "total": 7372,
+      "personsPerSquareMileDensity": 1627.98465614104
+    },
+    "urban": {
+      "total": 7372,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
     }
   },
   {
-    "tract": "003400",
     "places": [
       {
         "name": "North Charleston",
@@ -267,8 +286,6 @@
         "type": "msa"
       }
     ],
-    "urban": 0.5,
-    "rural": 0.5,
     "zillow": {
       "totalPopulation": 4870,
       "zipCode": 29406,
@@ -293,19 +310,19 @@
     "risks": {
       "compositeNRI": {
         "rating": "Very High",
-        "score": "99.715787470865251"
+        "score": 99.71578747086525
       },
       "compositeExpectedAnnualLoss": {
         "rating": "Very High",
-        "score": "99.452756182915664"
+        "score": 99.45275618291566
       },
       "socialVulnerability": {
         "rating": "Very High",
-        "score": "98.940002441406250"
+        "score": 98.94000244140625
       },
       "communityResilience": {
         "rating": "Very High",
-        "score": "89.150001525878906"
+        "score": 89.1500015258789
       },
       "natural": {
         "Avalanche": {
@@ -381,10 +398,22 @@
           "score": 65.37802099725204
         }
       }
+    },
+    "tract": "003400",
+    "population": {
+      "total": 4870,
+      "personsPerSquareMileDensity": 1727.930250932461
+    },
+    "urban": {
+      "total": 4870,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
     }
   },
   {
-    "tract": "003111",
     "places": [
       {
         "name": "North Charleston",
@@ -395,8 +424,6 @@
         "type": "msa"
       }
     ],
-    "urban": 0.5,
-    "rural": 0.5,
     "zillow": {
       "totalPopulation": 5102,
       "zipCode": 29418,
@@ -421,19 +448,19 @@
     "risks": {
       "compositeNRI": {
         "rating": "Very High",
-        "score": "99.727679208485938"
+        "score": 99.72767920848594
       },
       "compositeExpectedAnnualLoss": {
         "rating": "Very High",
-        "score": "99.761608380111326"
+        "score": 99.76160838011133
       },
       "socialVulnerability": {
         "rating": "Relatively Moderate",
-        "score": "58.419998168945312"
+        "score": 58.41999816894531
       },
       "communityResilience": {
         "rating": "Very High",
-        "score": "89.150001525878906"
+        "score": 89.1500015258789
       },
       "natural": {
         "Avalanche": {
@@ -509,10 +536,22 @@
           "score": 66.53005143622144
         }
       }
+    },
+    "tract": "003111",
+    "population": {
+      "total": 5102,
+      "personsPerSquareMileDensity": 930.8607368544474
+    },
+    "urban": {
+      "total": 5102,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
     }
   },
   {
-    "tract": "010818",
     "places": [
       {
         "name": "North Charleston",
@@ -523,8 +562,6 @@
         "type": "msa"
       }
     ],
-    "urban": 0.5,
-    "rural": 0.5,
     "zillow": {
       "totalPopulation": 9316,
       "zipCode": 29420,
@@ -549,19 +586,19 @@
     "risks": {
       "compositeNRI": {
         "rating": "Very High",
-        "score": "99.853731627265375"
+        "score": 99.85373162726538
       },
       "compositeExpectedAnnualLoss": {
         "rating": "Very High",
-        "score": "99.747516264649931"
+        "score": 99.74751626464993
       },
       "socialVulnerability": {
         "rating": "Very High",
-        "score": "86.819999694824219"
+        "score": 86.81999969482422
       },
       "communityResilience": {
         "rating": "Relatively Moderate",
-        "score": "48.229999542236328"
+        "score": 48.22999954223633
       },
       "natural": {
         "Avalanche": {
@@ -637,10 +674,22 @@
           "score": 80.3544167038542
         }
       }
+    },
+    "tract": "010818",
+    "population": {
+      "total": 9316,
+      "personsPerSquareMileDensity": 2791.754576504666
+    },
+    "urban": {
+      "total": 9316,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
     }
   },
   {
-    "tract": "010603",
     "places": [
       {
         "name": "Summerville",
@@ -651,8 +700,6 @@
         "type": "msa"
       }
     ],
-    "urban": 0.5,
-    "rural": 0.5,
     "zillow": {
       "totalPopulation": 8338,
       "zipCode": 29483,
@@ -677,19 +724,19 @@
     "risks": {
       "compositeNRI": {
         "rating": "Very High",
-        "score": "99.707463254530751"
+        "score": 99.70746325453075
       },
       "compositeExpectedAnnualLoss": {
         "rating": "Very High",
-        "score": "99.728726777368053"
+        "score": 99.72872677736805
       },
       "socialVulnerability": {
         "rating": "Relatively High",
-        "score": "60.290000915527344"
+        "score": 60.290000915527344
       },
       "communityResilience": {
         "rating": "Relatively Moderate",
-        "score": "48.229999542236328"
+        "score": 48.22999954223633
       },
       "natural": {
         "Avalanche": {
@@ -765,10 +812,22 @@
           "score": 78.60347135777532
         }
       }
+    },
+    "tract": "010603",
+    "population": {
+      "total": 8338,
+      "personsPerSquareMileDensity": 1266.389951769543
+    },
+    "urban": {
+      "total": 8329,
+      "fraction": 0.9989206044615015
+    },
+    "rural": {
+      "total": 9,
+      "fraction": 0.001079395538498441
     }
   },
   {
-    "tract": "010700",
     "places": [
       {
         "name": "Summerville",
@@ -779,8 +838,6 @@
         "type": "msa"
       }
     ],
-    "urban": 0.5,
-    "rural": 0.5,
     "zillow": {
       "totalPopulation": 5738,
       "zipCode": 29483,
@@ -805,19 +862,19 @@
     "risks": {
       "compositeNRI": {
         "rating": "Very High",
-        "score": "99.730057556010081"
+        "score": 99.73005755601008
       },
       "compositeExpectedAnnualLoss": {
         "rating": "Very High",
-        "score": "99.522042417267542"
+        "score": 99.52204241726754
       },
       "socialVulnerability": {
         "rating": "Very High",
-        "score": "90.449996948242188"
+        "score": 90.44999694824219
       },
       "communityResilience": {
         "rating": "Relatively Moderate",
-        "score": "48.229999542236328"
+        "score": 48.22999954223633
       },
       "natural": {
         "Avalanche": {
@@ -893,10 +950,22 @@
           "score": 71.48695304976866
         }
       }
+    },
+    "tract": "010700",
+    "population": {
+      "total": 5738,
+      "personsPerSquareMileDensity": 2112.493112942132
+    },
+    "urban": {
+      "total": 5738,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
     }
   },
   {
-    "tract": "020718",
     "places": [
       {
         "name": "Summerville / Goose Creek",
@@ -907,8 +976,6 @@
         "type": "msa"
       }
     ],
-    "urban": 0.5,
-    "rural": 0.5,
     "zillow": {
       "totalPopulation": 6953,
       "zipCode": 29486,
@@ -933,19 +1000,19 @@
     "risks": {
       "compositeNRI": {
         "rating": "Very High",
-        "score": "99.719354992151452"
+        "score": 99.71935499215145
       },
       "compositeExpectedAnnualLoss": {
         "rating": "Very High",
-        "score": "99.518519388402197"
+        "score": 99.5185193884022
       },
       "socialVulnerability": {
         "rating": "Very High",
-        "score": "90.220001220703125"
+        "score": 90.22000122070312
       },
       "communityResilience": {
         "rating": "Relatively Moderate",
-        "score": "56.470001220703125"
+        "score": 56.470001220703125
       },
       "natural": {
         "Avalanche": {
@@ -1021,10 +1088,22 @@
           "score": 74.91016276393357
         }
       }
+    },
+    "tract": "020718",
+    "population": {
+      "total": 6953,
+      "personsPerSquareMileDensity": 3182.682133356901
+    },
+    "urban": {
+      "total": 6953,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
     }
   },
   {
-    "tract": "050500",
     "places": [
       {
         "name": "Myrtle Beach",
@@ -1035,8 +1114,6 @@
         "type": "msa"
       }
     ],
-    "urban": 0.5,
-    "rural": 0.5,
     "zillow": {
       "totalPopulation": 4619,
       "zipCode": 29577,
@@ -1061,19 +1138,19 @@
     "risks": {
       "compositeNRI": {
         "rating": "Very High",
-        "score": "99.731246729772153"
+        "score": 99.73124672977215
       },
       "compositeExpectedAnnualLoss": {
         "rating": "Very High",
-        "score": "99.553749677055691"
+        "score": 99.55374967705569
       },
       "socialVulnerability": {
         "rating": "Very High",
-        "score": "87.180000305175781"
+        "score": 87.18000030517578
       },
       "communityResilience": {
         "rating": "Relatively Moderate",
-        "score": "49.610000610351562"
+        "score": 49.61000061035156
       },
       "natural": {
         "Avalanche": {
@@ -1149,10 +1226,22 @@
           "score": 81.5134932005543
         }
       }
+    },
+    "tract": "050500",
+    "population": {
+      "total": 4619,
+      "personsPerSquareMileDensity": 1613.656134142355
+    },
+    "urban": {
+      "total": 4619,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
     }
   },
   {
-    "tract": "002107",
     "places": [
       {
         "name": "Bluffton",
@@ -1163,8 +1252,6 @@
         "type": "msa"
       }
     ],
-    "urban": 0.5,
-    "rural": 0.5,
     "zillow": {
       "totalPopulation": 10963,
       "zipCode": 29910,
@@ -1189,19 +1276,19 @@
     "risks": {
       "compositeNRI": {
         "rating": "Very High",
-        "score": "99.834704847072260"
+        "score": 99.83470484707226
       },
       "compositeExpectedAnnualLoss": {
         "rating": "Very High",
-        "score": "99.779223524438081"
+        "score": 99.77922352443808
       },
       "socialVulnerability": {
         "rating": "Relatively High",
-        "score": "75.309997558593750"
+        "score": 75.30999755859375
       },
       "communityResilience": {
         "rating": "Relatively Moderate",
-        "score": "51.979999542236328"
+        "score": 51.97999954223633
       },
       "natural": {
         "Avalanche": {
@@ -1277,6 +1364,19 @@
           "score": 60.712356436573735
         }
       }
+    },
+    "tract": "002107",
+    "population": {
+      "total": 10963,
+      "personsPerSquareMileDensity": 1604.109010309744
+    },
+    "urban": {
+      "total": 10666,
+      "fraction": 0.9729088753078536
+    },
+    "rural": {
+      "total": 297,
+      "fraction": 0.02709112469214631
     }
   }
 ]

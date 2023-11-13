@@ -2,10 +2,9 @@ export interface CDRZ {
   /** The name/number of the census tract */
   tract: string;
   places: Place[];
-  /** The fraction of land in this tract that is urban */
-  urban: number;
-  /** The fraction of land in this tract that is rural */
-  rural: number;
+  urban: UrbanRural;
+  rural: UrbanRural;
+  population: Population;
   /** Race and ethnicity data for this tract */
   demographics?: Demographics;
   /** The totals and fractions of housholds: renters vs ownsers */
@@ -140,3 +139,20 @@ type NaturalRisk =
   | 'Volcanic Activity'
   | 'Wildfire'
   | 'Winter Weather';
+
+export interface UrbanRural {
+  /** the number of people */
+  total: number;
+  /** the fraction of the population */
+  fraction: number;
+}
+
+export interface Population {
+  total: number;
+  /**
+   * the area of the census tract in square miles
+   *
+   * *calculated in ArcGIS Pro*
+   */
+  personsPerSquareMileDensity: number;
+}
