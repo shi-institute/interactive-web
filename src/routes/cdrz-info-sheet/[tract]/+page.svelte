@@ -87,16 +87,16 @@
           <SubHeading slot="heading">Ethnicity</SubHeading>
           placeholder
         </SubSection>
-
-        <SubSection>
-          <SubHeading slot="heading">Renters &amp; owners</SubHeading>
-          <RentersOwnerPie
-            size="{100}"
-            renters="{data.cdrz.ownership?.total?.renters ?? 0.5}"
-            owners="{data.cdrz.ownership?.total?.owners ?? 0.5}"
-          />
-        </SubSection>
       {/if}
+
+      <SubSection>
+        <SubHeading slot="heading">Renters &amp; owners</SubHeading>
+        <RentersOwnerPie
+          size="{100}"
+          renters="{data.cdrz.tenure.renter.fraction}"
+          owners="{data.cdrz.tenure.owner.fraction}"
+        />
+      </SubSection>
     </div>
   </section>
 

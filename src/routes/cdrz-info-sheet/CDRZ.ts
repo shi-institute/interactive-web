@@ -8,7 +8,7 @@ export interface CDRZ {
   /** Race and ethnicity data for this tract */
   demographics?: Demographics;
   /** The totals and fractions of housholds: renters vs ownsers */
-  ownership?: Ownership;
+  tenure: Tenure;
   /** Median and aggregate income for this tract */
   income?: Income;
   zillow?: Zillow;
@@ -52,15 +52,10 @@ export interface Race {
   };
 }
 
-export interface Ownership {
-  total?: {
-    renters: number;
-    owners: number;
-  };
-  fraction?: {
-    renters: number;
-    owners: number;
-  };
+export interface Tenure {
+  renter: { total: number; fraction: number };
+  owner: { total: number; fraction: number };
+  totalHouseholds: number;
 }
 
 export interface Income {

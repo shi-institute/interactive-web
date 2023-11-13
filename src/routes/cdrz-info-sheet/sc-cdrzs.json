@@ -123,7 +123,6 @@
         }
       }
     },
-    "tract": "003104",
     "population": {
       "total": 5741,
       "personsPerSquareMileDensity": 2948.291659341742
@@ -135,6 +134,18 @@
     "rural": {
       "total": 0,
       "fraction": 0
+    },
+    "tract": "003104",
+    "tenure": {
+      "renter": {
+        "total": 2003,
+        "fraction": 0.6153609831029185
+      },
+      "owner": {
+        "total": 1252,
+        "fraction": 0.3846390168970814
+      },
+      "totalHouseholds": 3255
     }
   },
   {
@@ -261,7 +272,6 @@
         }
       }
     },
-    "tract": "003115",
     "population": {
       "total": 7372,
       "personsPerSquareMileDensity": 1627.98465614104
@@ -273,6 +283,18 @@
     "rural": {
       "total": 0,
       "fraction": 0
+    },
+    "tract": "003115",
+    "tenure": {
+      "renter": {
+        "total": 1423,
+        "fraction": 0.5287997027127462
+      },
+      "owner": {
+        "total": 1268,
+        "fraction": 0.4712002972872538
+      },
+      "totalHouseholds": 2691
     }
   },
   {
@@ -399,7 +421,6 @@
         }
       }
     },
-    "tract": "003400",
     "population": {
       "total": 4870,
       "personsPerSquareMileDensity": 1727.930250932461
@@ -411,6 +432,18 @@
     "rural": {
       "total": 0,
       "fraction": 0
+    },
+    "tract": "003400",
+    "tenure": {
+      "renter": {
+        "total": 1366,
+        "fraction": 0.7133159268929504
+      },
+      "owner": {
+        "total": 549,
+        "fraction": 0.28668407310704963
+      },
+      "totalHouseholds": 1915
     }
   },
   {
@@ -537,7 +570,6 @@
         }
       }
     },
-    "tract": "003111",
     "population": {
       "total": 5102,
       "personsPerSquareMileDensity": 930.8607368544474
@@ -549,6 +581,18 @@
     "rural": {
       "total": 0,
       "fraction": 0
+    },
+    "tract": "003111",
+    "tenure": {
+      "renter": {
+        "total": 1235,
+        "fraction": 0.6083743842364532
+      },
+      "owner": {
+        "total": 795,
+        "fraction": 0.3916256157635468
+      },
+      "totalHouseholds": 2030
     }
   },
   {
@@ -675,7 +719,6 @@
         }
       }
     },
-    "tract": "010818",
     "population": {
       "total": 9316,
       "personsPerSquareMileDensity": 2791.754576504666
@@ -687,6 +730,18 @@
     "rural": {
       "total": 0,
       "fraction": 0
+    },
+    "tract": "010818",
+    "tenure": {
+      "renter": {
+        "total": 1437,
+        "fraction": 0.4406623735050598
+      },
+      "owner": {
+        "total": 1824,
+        "fraction": 0.5593376264949402
+      },
+      "totalHouseholds": 3261
     }
   },
   {
@@ -813,7 +868,6 @@
         }
       }
     },
-    "tract": "010603",
     "population": {
       "total": 8338,
       "personsPerSquareMileDensity": 1266.389951769543
@@ -825,6 +879,18 @@
     "rural": {
       "total": 9,
       "fraction": 0.001079395538498441
+    },
+    "tract": "010603",
+    "tenure": {
+      "renter": {
+        "total": 765,
+        "fraction": 0.15756951596292482
+      },
+      "owner": {
+        "total": 4090,
+        "fraction": 0.8424304840370752
+      },
+      "totalHouseholds": 4855
     }
   },
   {
@@ -951,7 +1017,6 @@
         }
       }
     },
-    "tract": "010700",
     "population": {
       "total": 5738,
       "personsPerSquareMileDensity": 2112.493112942132
@@ -963,6 +1028,18 @@
     "rural": {
       "total": 0,
       "fraction": 0
+    },
+    "tract": "010700",
+    "tenure": {
+      "renter": {
+        "total": 3490,
+        "fraction": 0.3546747967479675
+      },
+      "owner": {
+        "total": 6350,
+        "fraction": 0.6453252032520326
+      },
+      "totalHouseholds": 9840
     }
   },
   {
@@ -1089,7 +1166,6 @@
         }
       }
     },
-    "tract": "020718",
     "population": {
       "total": 6953,
       "personsPerSquareMileDensity": 3182.682133356901
@@ -1101,6 +1177,18 @@
     "rural": {
       "total": 0,
       "fraction": 0
+    },
+    "tract": "020718",
+    "tenure": {
+      "renter": {
+        "total": 1535,
+        "fraction": 0.5852077773541746
+      },
+      "owner": {
+        "total": 1088,
+        "fraction": 0.4147922226458254
+      },
+      "totalHouseholds": 2623
     }
   },
   {
@@ -1227,7 +1315,6 @@
         }
       }
     },
-    "tract": "050500",
     "population": {
       "total": 4619,
       "personsPerSquareMileDensity": 1613.656134142355
@@ -1239,6 +1326,18 @@
     "rural": {
       "total": 0,
       "fraction": 0
+    },
+    "tract": "050500",
+    "tenure": {
+      "renter": {
+        "total": 1130,
+        "fraction": 0.47300125575554625
+      },
+      "owner": {
+        "total": 1259,
+        "fraction": 0.5269987442444537
+      },
+      "totalHouseholds": 2389
     }
   },
   {
@@ -1365,7 +1464,6 @@
         }
       }
     },
-    "tract": "002107",
     "population": {
       "total": 10963,
       "personsPerSquareMileDensity": 1604.109010309744
@@ -1377,6 +1475,18 @@
     "rural": {
       "total": 297,
       "fraction": 0.02709112469214631
+    },
+    "tract": "002107",
+    "tenure": {
+      "renter": {
+        "total": 3486,
+        "fraction": 0.3491236855282924
+      },
+      "owner": {
+        "total": 6499,
+        "fraction": 0.6508763144717076
+      },
+      "totalHouseholds": 9985
     }
   }
 ]
