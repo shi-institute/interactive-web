@@ -4,6 +4,8 @@
   import { ToggleSwitch } from 'fluent-svelte';
   import BoldNumber from './BoldNumber.svelte';
   import CdrzMap from './CdrzMap.svelte';
+  import EthnicityBarChart from './EthnicityBarChart.svelte';
+  import RaceBarChart from './RaceBarChart.svelte';
   import RentersOwnerPie from './RentersOwnerPie.svelte';
   import RiskRating from './RiskRating.svelte';
   import SectionHeading from './SectionHeading.svelte';
@@ -67,12 +69,17 @@
         </BoldNumber>
       </SubSection>
 
-      {#if showMore}
-        <SubSection>
-          <SubHeading slot="heading">Race</SubHeading>
-          placeholder
-        </SubSection>
+      <SubSection style="grid-column: 1 / 3">
+        <SubHeading slot="heading">Race</SubHeading>
+        <RaceBarChart data="{data.cdrz}" />
+      </SubSection>
 
+      <SubSection style="grid-column: 1 / 3">
+        <SubHeading slot="heading">Ethnicity</SubHeading>
+        <EthnicityBarChart data="{data.cdrz}" />
+      </SubSection>
+
+      {#if showMore}
         <SubSection>
           <SubHeading slot="heading">Income</SubHeading>
           <BoldNumber>
@@ -81,11 +88,6 @@
             <svelte:fragment slot="units">thousand</svelte:fragment>
             <svelte:fragment slot="caption">Median</svelte:fragment>
           </BoldNumber>
-        </SubSection>
-
-        <SubSection>
-          <SubHeading slot="heading">Ethnicity</SubHeading>
-          placeholder
         </SubSection>
       {/if}
 

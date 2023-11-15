@@ -6,7 +6,8 @@ export interface CDRZ {
   rural: UrbanRural;
   population: Population;
   /** Race and ethnicity data for this tract */
-  demographics?: Demographics;
+  race: Race;
+  ethnicity: Ethnicity;
   /** The totals and fractions of housholds: renters vs ownsers */
   tenure: Tenure;
   /** Median and aggregate income for this tract */
@@ -24,32 +25,22 @@ export interface Place {
   };
 }
 
-export interface Demographics {
-  race?: Race;
-  ethnicity?: {
-    hispanicOrLatino: Race;
-    notHispanicOrLatino: Race;
-  };
-}
-
 export interface Race {
   /** total population count */
   total: number;
-  /** population counts for indiviudals of a single race  */
-  alone: {
-    white: number;
-    black: number;
-    americanIndianOrAlaskaNative: number;
-    asian: number;
-    pacificIslander: number;
-    other: number;
-    /** sum of all singular races, including other */
-    total: number;
-  };
-  /** population counts for indiviudals of a single race  */
-  twoOrMore: {
-    total: number;
-  };
+  white: Ethnicity;
+  black: Ethnicity;
+  americanIndianOrAlaskaNative: Ethnicity;
+  asian: Ethnicity;
+  pacificIslander: Ethnicity;
+  other: Ethnicity;
+  twoOrMore: Ethnicity;
+}
+
+export interface Ethnicity {
+  total: number;
+  hispanicOrLatino: number;
+  notHispanicOrLatino: number;
 }
 
 export interface Tenure {

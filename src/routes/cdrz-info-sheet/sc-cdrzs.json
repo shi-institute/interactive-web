@@ -1,22 +1,22 @@
 [
   {
     "zillow": {
-      "totalPopulation": 5741,
-      "zipCode": 29406,
+      "totalPopulation": 10963,
+      "zipCode": 29910,
       "zhvi": [
         {
           "reportedAt": "2023-08-31T00:00:00.000Z",
           "state": 287481.125660748,
-          "county": 547907.542933347,
-          "zip": 272837.863608396,
-          "msa": 418022.871524288,
-          "city": 292171.829884807,
+          "county": 527579.361276137,
+          "zip": 512151.055955395,
+          "msa": 504429.082125449,
+          "city": 490156.425478946,
           "increaseRates": {
             "startedAt": "2010-01-31T00:00:00.000Z",
             "endedAt": "2023-09-30T00:00:00.000Z",
             "state": 130.17873204817414,
-            "county": 194.55440904347887,
-            "zip": 284.9804029922533
+            "county": 113.02300147482305,
+            "zip": 152.38383538290873
           }
         }
       ]
@@ -24,784 +24,19 @@
     "risks": {
       "compositeNRI": {
         "rating": "Very High",
-        "score": 99.72054416591352
+        "score": 99.83470484707226
       },
       "compositeExpectedAnnualLoss": {
         "rating": "Very High",
-        "score": 99.45040749700541
-      },
-      "socialVulnerability": {
-        "rating": "Very High",
-        "score": 99.47000122070312
-      },
-      "communityResilience": {
-        "rating": "Very High",
-        "score": 89.1500015258789
-      },
-      "natural": {
-        "Avalanche": {
-          "rating": "Not Applicable",
-          "score": null
-        },
-        "Coastal Flooding": {
-          "rating": "Very Low",
-          "score": 70.26374442793461
-        },
-        "Cold Wave": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Drought": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Earthquake": {
-          "rating": "Very High",
-          "score": 98.68708457617963
-        },
-        "Hail": {
-          "rating": "Relatively Low",
-          "score": 67.8301454250479
-        },
-        "Heat Wave": {
-          "rating": "Relatively Moderate",
-          "score": 60.42346806961505
-        },
-        "Hurricane": {
-          "rating": "Very High",
-          "score": 99.4797308637078
-        },
-        "Ice Storm": {
-          "rating": "Relatively Low",
-          "score": 50.7342359540662
-        },
-        "Landslide": {
-          "rating": "Very Low",
-          "score": 40.74126451004655
-        },
-        "Lightning": {
-          "rating": "Very High",
-          "score": 96.45068937842144
-        },
-        "Riverine Flooding": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Strong Wind": {
-          "rating": "Relatively Low",
-          "score": 46.78642386052363
-        },
-        "Tornado": {
-          "rating": "Relatively Low",
-          "score": 42.0345399184115
-        },
-        "Tsunami": {
-          "rating": "Insufficient Data",
-          "score": null
-        },
-        "Volcanic Activity": {
-          "rating": "Not Applicable",
-          "score": null
-        },
-        "Wildfire": {
-          "rating": "Relatively Low",
-          "score": 77.38218401055974
-        },
-        "Winter Weather": {
-          "rating": "Relatively Moderate",
-          "score": 68.36320078915847
-        }
-      }
-    },
-    "population": {
-      "total": 5741,
-      "personsPerSquareMileDensity": 2948.291659341742
-    },
-    "urban": {
-      "total": 5741,
-      "fraction": 1
-    },
-    "rural": {
-      "total": 0,
-      "fraction": 0
-    },
-    "tenure": {
-      "renter": {
-        "total": 2003,
-        "fraction": 0.6153609831029185
-      },
-      "owner": {
-        "total": 1252,
-        "fraction": 0.3846390168970814
-      },
-      "totalHouseholds": 3255
-    },
-    "tract": "003104",
-    "places": [
-      {
-        "name": "North Charleston",
-        "type": "city"
-      },
-      {
-        "name": "Charleston-North Charleston, SC",
-        "type": "msa"
-      },
-      {
-        "name": "Santee Watershed",
-        "type": "watershed"
-      }
-    ]
-  },
-  {
-    "zillow": {
-      "totalPopulation": 7372,
-      "zipCode": 29406,
-      "zhvi": [
-        {
-          "reportedAt": "2023-08-31T00:00:00.000Z",
-          "state": 287481.125660748,
-          "county": 547907.542933347,
-          "zip": 272837.863608396,
-          "msa": 418022.871524288,
-          "city": 292171.829884807,
-          "increaseRates": {
-            "startedAt": "2010-01-31T00:00:00.000Z",
-            "endedAt": "2023-09-30T00:00:00.000Z",
-            "state": 130.17873204817414,
-            "county": 194.55440904347887,
-            "zip": 284.9804029922533
-          }
-        }
-      ]
-    },
-    "risks": {
-      "compositeNRI": {
-        "rating": "Very High",
-        "score": 99.70508490700661
-      },
-      "compositeExpectedAnnualLoss": {
-        "rating": "Very High",
-        "score": 99.50442727294079
-      },
-      "socialVulnerability": {
-        "rating": "Very High",
-        "score": 92.98999786376953
-      },
-      "communityResilience": {
-        "rating": "Very High",
-        "score": 89.1500015258789
-      },
-      "natural": {
-        "Avalanche": {
-          "rating": "Not Applicable",
-          "score": null
-        },
-        "Coastal Flooding": {
-          "rating": "Very Low",
-          "score": 71.75493525790702
-        },
-        "Cold Wave": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Drought": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Earthquake": {
-          "rating": "Very High",
-          "score": 98.73993000915988
-        },
-        "Hail": {
-          "rating": "Relatively Low",
-          "score": 71.48516946661807
-        },
-        "Heat Wave": {
-          "rating": "Relatively Moderate",
-          "score": 65.39446179862367
-        },
-        "Hurricane": {
-          "rating": "Very High",
-          "score": 99.54686236516486
-        },
-        "Ice Storm": {
-          "rating": "Relatively Low",
-          "score": 57.1029986196364
-        },
-        "Landslide": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Lightning": {
-          "rating": "Very High",
-          "score": 98.2499011751177
-        },
-        "Riverine Flooding": {
-          "rating": "Very Low",
-          "score": 28.387392254033866
-        },
-        "Strong Wind": {
-          "rating": "Relatively Moderate",
-          "score": 54.697217291120495
-        },
-        "Tornado": {
-          "rating": "Relatively Low",
-          "score": 47.32603660902176
-        },
-        "Tsunami": {
-          "rating": "Insufficient Data",
-          "score": null
-        },
-        "Volcanic Activity": {
-          "rating": "Not Applicable",
-          "score": null
-        },
-        "Wildfire": {
-          "rating": "Relatively Low",
-          "score": 64.72714732498544
-        },
-        "Winter Weather": {
-          "rating": "Relatively Moderate",
-          "score": 73.09815158418864
-        }
-      }
-    },
-    "population": {
-      "total": 7372,
-      "personsPerSquareMileDensity": 1627.98465614104
-    },
-    "urban": {
-      "total": 7372,
-      "fraction": 1
-    },
-    "rural": {
-      "total": 0,
-      "fraction": 0
-    },
-    "tenure": {
-      "renter": {
-        "total": 1423,
-        "fraction": 0.5287997027127462
-      },
-      "owner": {
-        "total": 1268,
-        "fraction": 0.4712002972872538
-      },
-      "totalHouseholds": 2691
-    },
-    "tract": "003115",
-    "places": [
-      {
-        "name": "North Charleston",
-        "type": "city"
-      },
-      {
-        "name": "Charleston-North Charleston, SC",
-        "type": "msa"
-      },
-      {
-        "name": "Santee Watershed",
-        "type": "watershed"
-      }
-    ]
-  },
-  {
-    "zillow": {
-      "totalPopulation": 4870,
-      "zipCode": 29406,
-      "zhvi": [
-        {
-          "reportedAt": "2023-08-31T00:00:00.000Z",
-          "state": 287481.125660748,
-          "county": 547907.542933347,
-          "zip": 272837.863608396,
-          "msa": 418022.871524288,
-          "city": 292171.829884807,
-          "increaseRates": {
-            "startedAt": "2010-01-31T00:00:00.000Z",
-            "endedAt": "2023-09-30T00:00:00.000Z",
-            "state": 130.17873204817414,
-            "county": 194.55440904347887,
-            "zip": 284.9804029922533
-          }
-        }
-      ]
-    },
-    "risks": {
-      "compositeNRI": {
-        "rating": "Very High",
-        "score": 99.71578747086525
-      },
-      "compositeExpectedAnnualLoss": {
-        "rating": "Very High",
-        "score": 99.45275618291566
-      },
-      "socialVulnerability": {
-        "rating": "Very High",
-        "score": 98.94000244140625
-      },
-      "communityResilience": {
-        "rating": "Very High",
-        "score": 89.1500015258789
-      },
-      "natural": {
-        "Avalanche": {
-          "rating": "Not Applicable",
-          "score": null
-        },
-        "Coastal Flooding": {
-          "rating": "Relatively Low",
-          "score": 88.41010401188707
-        },
-        "Cold Wave": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Drought": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Earthquake": {
-          "rating": "Very High",
-          "score": 98.05998543814735
-        },
-        "Hail": {
-          "rating": "Relatively Low",
-          "score": 65.93033234972549
-        },
-        "Heat Wave": {
-          "rating": "Relatively Moderate",
-          "score": 57.24217300420415
-        },
-        "Hurricane": {
-          "rating": "Very High",
-          "score": 99.6078910028531
-        },
-        "Ice Storm": {
-          "rating": "Relatively Low",
-          "score": 47.534435666245706
-        },
-        "Landslide": {
-          "rating": "Relatively Low",
-          "score": 51.76948912851335
-        },
-        "Lightning": {
-          "rating": "Very High",
-          "score": 94.92219786538254
-        },
-        "Riverine Flooding": {
-          "rating": "Relatively Low",
-          "score": 65.72562651196655
-        },
-        "Strong Wind": {
-          "rating": "Relatively Low",
-          "score": 43.89790855973948
-        },
-        "Tornado": {
-          "rating": "Relatively Low",
-          "score": 40.66140769565371
-        },
-        "Tsunami": {
-          "rating": "Insufficient Data",
-          "score": null
-        },
-        "Volcanic Activity": {
-          "rating": "Not Applicable",
-          "score": null
-        },
-        "Wildfire": {
-          "rating": "Relatively Low",
-          "score": 63.03735150369234
-        },
-        "Winter Weather": {
-          "rating": "Relatively Moderate",
-          "score": 65.37802099725204
-        }
-      }
-    },
-    "population": {
-      "total": 4870,
-      "personsPerSquareMileDensity": 1727.930250932461
-    },
-    "urban": {
-      "total": 4870,
-      "fraction": 1
-    },
-    "rural": {
-      "total": 0,
-      "fraction": 0
-    },
-    "tenure": {
-      "renter": {
-        "total": 1366,
-        "fraction": 0.7133159268929504
-      },
-      "owner": {
-        "total": 549,
-        "fraction": 0.28668407310704963
-      },
-      "totalHouseholds": 1915
-    },
-    "tract": "003400",
-    "places": [
-      {
-        "name": "North Charleston",
-        "type": "city"
-      },
-      {
-        "name": "Charleston-North Charleston, SC",
-        "type": "msa"
-      },
-      {
-        "name": "Santee Watershed",
-        "type": "watershed"
-      }
-    ]
-  },
-  {
-    "zillow": {
-      "totalPopulation": 5102,
-      "zipCode": 29418,
-      "zhvi": [
-        {
-          "reportedAt": "2023-08-31T00:00:00.000Z",
-          "state": 287481.125660748,
-          "county": 547907.542933347,
-          "zip": 292637.645548787,
-          "msa": 418022.871524288,
-          "city": 292171.829884807,
-          "increaseRates": {
-            "startedAt": "2010-01-31T00:00:00.000Z",
-            "endedAt": "2023-09-30T00:00:00.000Z",
-            "state": 130.17873204817414,
-            "county": 194.55440904347887,
-            "zip": 187.31604479135333
-          }
-        }
-      ]
-    },
-    "risks": {
-      "compositeNRI": {
-        "rating": "Very High",
-        "score": 99.72767920848594
-      },
-      "compositeExpectedAnnualLoss": {
-        "rating": "Very High",
-        "score": 99.76160838011133
-      },
-      "socialVulnerability": {
-        "rating": "Relatively Moderate",
-        "score": 58.41999816894531
-      },
-      "communityResilience": {
-        "rating": "Very High",
-        "score": 89.1500015258789
-      },
-      "natural": {
-        "Avalanche": {
-          "rating": "Not Applicable",
-          "score": null
-        },
-        "Coastal Flooding": {
-          "rating": "Very Low",
-          "score": 73.80067926130334
-        },
-        "Cold Wave": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Drought": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Earthquake": {
-          "rating": "Very High",
-          "score": 99.3071376564812
-        },
-        "Hail": {
-          "rating": "Relatively Low",
-          "score": 66.49580889009064
-        },
-        "Heat Wave": {
-          "rating": "Relatively Moderate",
-          "score": 58.60206214622919
-        },
-        "Hurricane": {
-          "rating": "Very High",
-          "score": 99.83217124635735
-        },
-        "Ice Storm": {
-          "rating": "Relatively Low",
-          "score": 49.14388087755881
-        },
-        "Landslide": {
-          "rating": "Relatively Low",
-          "score": 53.439396617759705
-        },
-        "Lightning": {
-          "rating": "Very High",
-          "score": 95.1545860734778
-        },
-        "Riverine Flooding": {
-          "rating": "Very Low",
-          "score": 26.313502595297933
-        },
-        "Strong Wind": {
-          "rating": "Relatively Low",
-          "score": 45.004173475505816
-        },
-        "Tornado": {
-          "rating": "Relatively Low",
-          "score": 42.866883765768094
-        },
-        "Tsunami": {
-          "rating": "Insufficient Data",
-          "score": null
-        },
-        "Volcanic Activity": {
-          "rating": "Not Applicable",
-          "score": null
-        },
-        "Wildfire": {
-          "rating": "Relatively Low",
-          "score": 55.84174663765117
-        },
-        "Winter Weather": {
-          "rating": "Relatively Moderate",
-          "score": 66.53005143622144
-        }
-      }
-    },
-    "population": {
-      "total": 5102,
-      "personsPerSquareMileDensity": 930.8607368544474
-    },
-    "urban": {
-      "total": 5102,
-      "fraction": 1
-    },
-    "rural": {
-      "total": 0,
-      "fraction": 0
-    },
-    "tenure": {
-      "renter": {
-        "total": 1235,
-        "fraction": 0.6083743842364532
-      },
-      "owner": {
-        "total": 795,
-        "fraction": 0.3916256157635468
-      },
-      "totalHouseholds": 2030
-    },
-    "tract": "003111",
-    "places": [
-      {
-        "name": "North Charleston",
-        "type": "city"
-      },
-      {
-        "name": "Charleston-North Charleston, SC",
-        "type": "msa"
-      },
-      {
-        "name": "Santee Watershed",
-        "type": "watershed"
-      }
-    ]
-  },
-  {
-    "zillow": {
-      "totalPopulation": 9316,
-      "zipCode": 29420,
-      "zhvi": [
-        {
-          "reportedAt": "2023-08-31T00:00:00.000Z",
-          "state": 287481.125660748,
-          "county": 344452.675831575,
-          "zip": 313327.543448441,
-          "msa": 418022.871524288,
-          "city": 292171.829884807,
-          "increaseRates": {
-            "startedAt": "2010-01-31T00:00:00.000Z",
-            "endedAt": "2023-09-30T00:00:00.000Z",
-            "state": 130.17873204817414,
-            "county": 144.16175191266964,
-            "zip": 153.25838634100546
-          }
-        }
-      ]
-    },
-    "risks": {
-      "compositeNRI": {
-        "rating": "Very High",
-        "score": 99.85373162726538
-      },
-      "compositeExpectedAnnualLoss": {
-        "rating": "Very High",
-        "score": 99.74751626464993
-      },
-      "socialVulnerability": {
-        "rating": "Very High",
-        "score": 86.81999969482422
-      },
-      "communityResilience": {
-        "rating": "Relatively Moderate",
-        "score": 48.22999954223633
-      },
-      "natural": {
-        "Avalanche": {
-          "rating": "Not Applicable",
-          "score": null
-        },
-        "Coastal Flooding": {
-          "rating": "Very Low",
-          "score": 72.11844618976862
-        },
-        "Cold Wave": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Drought": {
-          "rating": "Very Low",
-          "score": 69.27851776960064
-        },
-        "Earthquake": {
-          "rating": "Very High",
-          "score": 99.25429222350095
-        },
-        "Hail": {
-          "rating": "Relatively Moderate",
-          "score": 73.51900400888773
-        },
-        "Heat Wave": {
-          "rating": "Relatively High",
-          "score": 81.07311459238556
-        },
-        "Hurricane": {
-          "rating": "Very High",
-          "score": 99.8169140869353
-        },
-        "Ice Storm": {
-          "rating": "Relatively High",
-          "score": 92.7384064142853
-        },
-        "Landslide": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Lightning": {
-          "rating": "Relatively Moderate",
-          "score": 71.89300559408728
-        },
-        "Riverine Flooding": {
-          "rating": "Relatively Low",
-          "score": 50.52962867275759
-        },
-        "Strong Wind": {
-          "rating": "Relatively Low",
-          "score": 31.089453451052773
-        },
-        "Tornado": {
-          "rating": "Relatively Moderate",
-          "score": 65.20497055054608
-        },
-        "Tsunami": {
-          "rating": "Insufficient Data",
-          "score": null
-        },
-        "Volcanic Activity": {
-          "rating": "Not Applicable",
-          "score": null
-        },
-        "Wildfire": {
-          "rating": "Relatively Low",
-          "score": 81.61559226094919
-        },
-        "Winter Weather": {
-          "rating": "Relatively Moderate",
-          "score": 80.3544167038542
-        }
-      }
-    },
-    "population": {
-      "total": 9316,
-      "personsPerSquareMileDensity": 2791.754576504666
-    },
-    "urban": {
-      "total": 9316,
-      "fraction": 1
-    },
-    "rural": {
-      "total": 0,
-      "fraction": 0
-    },
-    "tenure": {
-      "renter": {
-        "total": 1437,
-        "fraction": 0.4406623735050598
-      },
-      "owner": {
-        "total": 1824,
-        "fraction": 0.5593376264949402
-      },
-      "totalHouseholds": 3261
-    },
-    "tract": "010818",
-    "places": [
-      {
-        "name": "North Charleston",
-        "type": "city"
-      },
-      {
-        "name": "Charleston-North Charleston, SC",
-        "type": "msa"
-      },
-      {
-        "name": "Santee Watershed",
-        "type": "watershed"
-      }
-    ]
-  },
-  {
-    "zillow": {
-      "totalPopulation": 8338,
-      "zipCode": 29483,
-      "zhvi": [
-        {
-          "reportedAt": "2023-08-31T00:00:00.000Z",
-          "state": 287481.125660748,
-          "county": 344452.675831575,
-          "zip": 358452.480165908,
-          "msa": 418022.871524288,
-          "city": 369778.747344234,
-          "increaseRates": {
-            "startedAt": "2010-01-31T00:00:00.000Z",
-            "endedAt": "2023-09-30T00:00:00.000Z",
-            "state": 130.17873204817414,
-            "county": 144.16175191266964,
-            "zip": 140.89045112785342
-          }
-        }
-      ]
-    },
-    "risks": {
-      "compositeNRI": {
-        "rating": "Very High",
-        "score": 99.70746325453075
-      },
-      "compositeExpectedAnnualLoss": {
-        "rating": "Very High",
-        "score": 99.72872677736805
+        "score": 99.77922352443808
       },
       "socialVulnerability": {
         "rating": "Relatively High",
-        "score": 60.290000915527344
+        "score": 75.30999755859375
       },
       "communityResilience": {
         "rating": "Relatively Moderate",
-        "score": 48.22999954223633
+        "score": 51.97999954223633
       },
       "natural": {
         "Avalanche": {
@@ -809,56 +44,56 @@
           "score": null
         },
         "Coastal Flooding": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
+          "rating": "Relatively Low",
+          "score": 84.46720441519847
         },
         "Cold Wave": {
           "rating": "No Expected Annual Losses",
           "score": 0
         },
         "Drought": {
-          "rating": "Very Low",
-          "score": 78.7693537578914
-        },
-        "Earthquake": {
-          "rating": "Very High",
-          "score": 98.83035441670386
-        },
-        "Hail": {
-          "rating": "Relatively Moderate",
-          "score": 78.03458694348761
-        },
-        "Heat Wave": {
-          "rating": "Relatively High",
-          "score": 79.00861967729055
-        },
-        "Hurricane": {
-          "rating": "Very High",
-          "score": 99.82301695070412
-        },
-        "Ice Storm": {
-          "rating": "Relatively High",
-          "score": 95.41983611853504
-        },
-        "Landslide": {
           "rating": "No Expected Annual Losses",
           "score": 0
         },
-        "Lightning": {
+        "Earthquake": {
           "rating": "Relatively Moderate",
-          "score": 65.61852397551539
+          "score": 87.66587594241022
+        },
+        "Hail": {
+          "rating": "Relatively Moderate",
+          "score": 80.42228518357413
+        },
+        "Heat Wave": {
+          "rating": "Relatively High",
+          "score": 81.11891396763511
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.97711426086691
+        },
+        "Ice Storm": {
+          "rating": "Relatively High",
+          "score": 92.02913448265735
+        },
+        "Landslide": {
+          "rating": "Relatively Low",
+          "score": 59.94578987684874
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 99.7484457541237
         },
         "Riverine Flooding": {
-          "rating": "Relatively Moderate",
-          "score": 83.3525142682669
+          "rating": "Relatively Low",
+          "score": 51.75094534607887
         },
         "Strong Wind": {
-          "rating": "Relatively Low",
-          "score": 47.48239498712689
+          "rating": "Relatively High",
+          "score": 88.09089947214352
         },
         "Tornado": {
           "rating": "Relatively High",
-          "score": 79.97084445280446
+          "score": 79.5429162600957
         },
         "Tsunami": {
           "rating": "Insufficient Data",
@@ -870,205 +105,95 @@
         },
         "Wildfire": {
           "rating": "Relatively Moderate",
-          "score": 91.11341015304484
+          "score": 92.1158717134601
         },
         "Winter Weather": {
           "rating": "Relatively Moderate",
-          "score": 78.60347135777532
+          "score": 60.712356436573735
         }
       }
     },
     "population": {
-      "total": 8338,
-      "personsPerSquareMileDensity": 1266.389951769543
+      "total": 10963,
+      "personsPerSquareMileDensity": 1604.109010309744
     },
     "urban": {
-      "total": 8329,
-      "fraction": 0.9989206044615015
+      "total": 10666,
+      "fraction": 0.9729088753078536
     },
     "rural": {
-      "total": 9,
-      "fraction": 0.001079395538498441
+      "total": 297,
+      "fraction": 0.02709112469214631
     },
     "tenure": {
       "renter": {
-        "total": 765,
-        "fraction": 0.15756951596292482
+        "total": 3486,
+        "fraction": 0.3491236855282924
       },
       "owner": {
-        "total": 4090,
-        "fraction": 0.8424304840370752
+        "total": 6499,
+        "fraction": 0.6508763144717076
       },
-      "totalHouseholds": 4855
+      "totalHouseholds": 9985
     },
-    "tract": "010603",
     "places": [
       {
-        "name": "Summerville",
-        "type": "city"
+        "name": "Bluffton",
+        "type": "town"
       },
       {
-        "name": "Charleston-North Charleston, SC",
+        "name": "Hilton Head Island-Bluffton, SC",
         "type": "msa"
       },
       {
-        "name": "Santee Watershed",
+        "name": "Salkehatchie Watershed",
         "type": "watershed"
       }
-    ]
-  },
-  {
-    "zillow": {
-      "totalPopulation": 5738,
-      "zipCode": 29483,
-      "zhvi": [
-        {
-          "reportedAt": "2023-08-31T00:00:00.000Z",
-          "state": 287481.125660748,
-          "county": 344452.675831575,
-          "zip": 358452.480165908,
-          "msa": 418022.871524288,
-          "city": 369778.747344234,
-          "increaseRates": {
-            "startedAt": "2010-01-31T00:00:00.000Z",
-            "endedAt": "2023-09-30T00:00:00.000Z",
-            "state": 130.17873204817414,
-            "county": 144.16175191266964,
-            "zip": 140.89045112785342
-          }
-        }
-      ]
-    },
-    "risks": {
-      "compositeNRI": {
-        "rating": "Very High",
-        "score": 99.73005755601008
+    ],
+    "tract": "002107",
+    "race": {
+      "total": 25437,
+      "white": {
+        "total": 15979,
+        "hispanicOrLatino": 819,
+        "notHispanicOrLatino": 15160
       },
-      "compositeExpectedAnnualLoss": {
-        "rating": "Very High",
-        "score": 99.52204241726754
+      "black": {
+        "total": 3774,
+        "hispanicOrLatino": 69,
+        "notHispanicOrLatino": 3705
       },
-      "socialVulnerability": {
-        "rating": "Very High",
-        "score": 90.44999694824219
+      "americanIndianAlaskanNative": {
+        "total": 164,
+        "hispanicOrLatino": 111,
+        "notHispanicOrLatino": 53
       },
-      "communityResilience": {
-        "rating": "Relatively Moderate",
-        "score": 48.22999954223633
+      "asian": {
+        "total": 220,
+        "hispanicOrLatino": 6,
+        "notHispanicOrLatino": 214
       },
-      "natural": {
-        "Avalanche": {
-          "rating": "Not Applicable",
-          "score": null
-        },
-        "Coastal Flooding": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Cold Wave": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Drought": {
-          "rating": "Very Low",
-          "score": 72.22463878863404
-        },
-        "Earthquake": {
-          "rating": "Very High",
-          "score": 98.80804190055665
-        },
-        "Hail": {
-          "rating": "Relatively Moderate",
-          "score": 73.91754152902035
-        },
-        "Heat Wave": {
-          "rating": "Relatively Moderate",
-          "score": 71.74178547102896
-        },
-        "Hurricane": {
-          "rating": "Very High",
-          "score": 99.48430801153442
-        },
-        "Ice Storm": {
-          "rating": "Relatively High",
-          "score": 92.96601956004582
-        },
-        "Landslide": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Lightning": {
-          "rating": "Relatively Moderate",
-          "score": 51.478779602544286
-        },
-        "Riverine Flooding": {
-          "rating": "Relatively Moderate",
-          "score": 89.42504168917492
-        },
-        "Strong Wind": {
-          "rating": "Relatively Low",
-          "score": 40.793077908794864
-        },
-        "Tornado": {
-          "rating": "Relatively Moderate",
-          "score": 70.65282561926148
-        },
-        "Tsunami": {
-          "rating": "Insufficient Data",
-          "score": null
-        },
-        "Volcanic Activity": {
-          "rating": "Not Applicable",
-          "score": null
-        },
-        "Wildfire": {
-          "rating": "Relatively Low",
-          "score": 83.33987371124826
-        },
-        "Winter Weather": {
-          "rating": "Relatively Moderate",
-          "score": 71.48695304976866
-        }
+      "pacificIslander": {
+        "total": 12,
+        "hispanicOrLatino": 2,
+        "notHispanicOrLatino": 10
+      },
+      "other": {
+        "total": 3030,
+        "hispanicOrLatino": 2937,
+        "notHispanicOrLatino": 93
+      },
+      "twoOrMore": {
+        "total": 2258,
+        "hispanicOrLatino": 1379,
+        "notHispanicOrLatino": 879
       }
     },
-    "population": {
-      "total": 5738,
-      "personsPerSquareMileDensity": 2112.493112942132
-    },
-    "urban": {
-      "total": 5738,
-      "fraction": 1
-    },
-    "rural": {
-      "total": 0,
-      "fraction": 0
-    },
-    "tenure": {
-      "renter": {
-        "total": 3490,
-        "fraction": 0.3546747967479675
-      },
-      "owner": {
-        "total": 6350,
-        "fraction": 0.6453252032520326
-      },
-      "totalHouseholds": 9840
-    },
-    "tract": "010700",
-    "places": [
-      {
-        "name": "Summerville",
-        "type": "city"
-      },
-      {
-        "name": "Charleston-North Charleston, SC",
-        "type": "msa"
-      },
-      {
-        "name": "Santee Watershed",
-        "type": "watershed"
-      }
-    ]
+    "ethnicity": {
+      "total": 25437,
+      "hispanicOrLatino": 5323,
+      "notHispanicOrLatino": 20114
+    }
   },
   {
     "zillow": {
@@ -1207,10 +332,9 @@
       },
       "totalHouseholds": 2623
     },
-    "tract": "020718",
     "places": [
       {
-        "name": "Summerville / Goose Creek",
+        "name": "Goose Creek",
         "type": "city"
       },
       {
@@ -1221,7 +345,1423 @@
         "name": "Santee Watershed",
         "type": "watershed"
       }
-    ]
+    ],
+    "tract": "020718",
+    "race": {
+      "total": 6953,
+      "white": {
+        "total": 3220,
+        "hispanicOrLatino": 146,
+        "notHispanicOrLatino": 3074
+      },
+      "black": {
+        "total": 2182,
+        "hispanicOrLatino": 35,
+        "notHispanicOrLatino": 2147
+      },
+      "americanIndianAlaskanNative": {
+        "total": 41,
+        "hispanicOrLatino": 9,
+        "notHispanicOrLatino": 32
+      },
+      "asian": {
+        "total": 69,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 69
+      },
+      "pacificIslander": {
+        "total": 5,
+        "hispanicOrLatino": 5,
+        "notHispanicOrLatino": 0
+      },
+      "other": {
+        "total": 699,
+        "hispanicOrLatino": 629,
+        "notHispanicOrLatino": 70
+      },
+      "twoOrMore": {
+        "total": 737,
+        "hispanicOrLatino": 276,
+        "notHispanicOrLatino": 461
+      }
+    },
+    "ethnicity": {
+      "total": 6953,
+      "hispanicOrLatino": 1100,
+      "notHispanicOrLatino": 5853
+    }
+  },
+  {
+    "zillow": {
+      "totalPopulation": 5741,
+      "zipCode": 29406,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 547907.542933347,
+          "zip": 272837.863608396,
+          "msa": 418022.871524288,
+          "city": 292171.829884807,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 194.55440904347887,
+            "zip": 284.9804029922533
+          }
+        }
+      ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.72054416591352
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.45040749700541
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": 99.47000122070312
+      },
+      "communityResilience": {
+        "rating": "Very High",
+        "score": 89.1500015258789
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Very Low",
+          "score": 70.26374442793461
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 98.68708457617963
+        },
+        "Hail": {
+          "rating": "Relatively Low",
+          "score": 67.8301454250479
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 60.42346806961505
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.4797308637078
+        },
+        "Ice Storm": {
+          "rating": "Relatively Low",
+          "score": 50.7342359540662
+        },
+        "Landslide": {
+          "rating": "Very Low",
+          "score": 40.74126451004655
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 96.45068937842144
+        },
+        "Riverine Flooding": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 46.78642386052363
+        },
+        "Tornado": {
+          "rating": "Relatively Low",
+          "score": 42.0345399184115
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 77.38218401055974
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 68.36320078915847
+        }
+      }
+    },
+    "population": {
+      "total": 5741,
+      "personsPerSquareMileDensity": 2948.291659341742
+    },
+    "urban": {
+      "total": 5741,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
+    },
+    "tenure": {
+      "renter": {
+        "total": 2003,
+        "fraction": 0.6153609831029185
+      },
+      "owner": {
+        "total": 1252,
+        "fraction": 0.3846390168970814
+      },
+      "totalHouseholds": 3255
+    },
+    "places": [
+      {
+        "name": "Hanahan",
+        "type": "city"
+      },
+      {
+        "name": "Charleston-North Charleston, SC",
+        "type": "msa"
+      },
+      {
+        "name": "Santee Watershed",
+        "type": "watershed"
+      }
+    ],
+    "tract": "003104",
+    "race": {
+      "total": 8338,
+      "white": {
+        "total": 3748,
+        "hispanicOrLatino": 230,
+        "notHispanicOrLatino": 3518
+      },
+      "black": {
+        "total": 1638,
+        "hispanicOrLatino": 22,
+        "notHispanicOrLatino": 1616
+      },
+      "americanIndianAlaskanNative": {
+        "total": 133,
+        "hispanicOrLatino": 119,
+        "notHispanicOrLatino": 14
+      },
+      "asian": {
+        "total": 135,
+        "hispanicOrLatino": 7,
+        "notHispanicOrLatino": 128
+      },
+      "pacificIslander": {
+        "total": 7,
+        "hispanicOrLatino": 4,
+        "notHispanicOrLatino": 3
+      },
+      "other": {
+        "total": 2065,
+        "hispanicOrLatino": 2044,
+        "notHispanicOrLatino": 21
+      },
+      "twoOrMore": {
+        "total": 612,
+        "hispanicOrLatino": 393,
+        "notHispanicOrLatino": 219
+      }
+    },
+    "ethnicity": {
+      "total": 8338,
+      "hispanicOrLatino": 2819,
+      "notHispanicOrLatino": 5519
+    }
+  },
+  {
+    "zillow": {
+      "totalPopulation": 5102,
+      "zipCode": 29418,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 547907.542933347,
+          "zip": 292637.645548787,
+          "msa": 418022.871524288,
+          "city": 292171.829884807,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 194.55440904347887,
+            "zip": 187.31604479135333
+          }
+        }
+      ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.72767920848594
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.76160838011133
+      },
+      "socialVulnerability": {
+        "rating": "Relatively Moderate",
+        "score": 58.41999816894531
+      },
+      "communityResilience": {
+        "rating": "Very High",
+        "score": 89.1500015258789
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Very Low",
+          "score": 73.80067926130334
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 99.3071376564812
+        },
+        "Hail": {
+          "rating": "Relatively Low",
+          "score": 66.49580889009064
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 58.60206214622919
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.83217124635735
+        },
+        "Ice Storm": {
+          "rating": "Relatively Low",
+          "score": 49.14388087755881
+        },
+        "Landslide": {
+          "rating": "Relatively Low",
+          "score": 53.439396617759705
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 95.1545860734778
+        },
+        "Riverine Flooding": {
+          "rating": "Very Low",
+          "score": 26.313502595297933
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 45.004173475505816
+        },
+        "Tornado": {
+          "rating": "Relatively Low",
+          "score": 42.866883765768094
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 55.84174663765117
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 66.53005143622144
+        }
+      }
+    },
+    "population": {
+      "total": 5102,
+      "personsPerSquareMileDensity": 930.8607368544474
+    },
+    "urban": {
+      "total": 5102,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
+    },
+    "tenure": {
+      "renter": {
+        "total": 1235,
+        "fraction": 0.6083743842364532
+      },
+      "owner": {
+        "total": 795,
+        "fraction": 0.3916256157635468
+      },
+      "totalHouseholds": 2030
+    },
+    "places": [
+      {
+        "name": "North Charleston",
+        "type": "city"
+      },
+      {
+        "name": "Charleston-North Charleston, SC",
+        "type": "msa"
+      },
+      {
+        "name": "Santee Watershed",
+        "type": "watershed"
+      }
+    ],
+    "tract": "003111",
+    "race": {
+      "total": 5102,
+      "white": {
+        "total": 999,
+        "hispanicOrLatino": 50,
+        "notHispanicOrLatino": 949
+      },
+      "black": {
+        "total": 3091,
+        "hispanicOrLatino": 15,
+        "notHispanicOrLatino": 3076
+      },
+      "americanIndianAlaskanNative": {
+        "total": 19,
+        "hispanicOrLatino": 6,
+        "notHispanicOrLatino": 13
+      },
+      "asian": {
+        "total": 127,
+        "hispanicOrLatino": 1,
+        "notHispanicOrLatino": 126
+      },
+      "pacificIslander": {
+        "total": 0,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 0
+      },
+      "other": {
+        "total": 583,
+        "hispanicOrLatino": 562,
+        "notHispanicOrLatino": 21
+      },
+      "twoOrMore": {
+        "total": 283,
+        "hispanicOrLatino": 111,
+        "notHispanicOrLatino": 172
+      }
+    },
+    "ethnicity": {
+      "total": 5102,
+      "hispanicOrLatino": 745,
+      "notHispanicOrLatino": 4357
+    }
+  },
+  {
+    "zillow": {
+      "totalPopulation": 7372,
+      "zipCode": 29406,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 547907.542933347,
+          "zip": 272837.863608396,
+          "msa": 418022.871524288,
+          "city": 292171.829884807,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 194.55440904347887,
+            "zip": 284.9804029922533
+          }
+        }
+      ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.70508490700661
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.50442727294079
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": 92.98999786376953
+      },
+      "communityResilience": {
+        "rating": "Very High",
+        "score": 89.1500015258789
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Very Low",
+          "score": 71.75493525790702
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 98.73993000915988
+        },
+        "Hail": {
+          "rating": "Relatively Low",
+          "score": 71.48516946661807
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 65.39446179862367
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.54686236516486
+        },
+        "Ice Storm": {
+          "rating": "Relatively Low",
+          "score": 57.1029986196364
+        },
+        "Landslide": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 98.2499011751177
+        },
+        "Riverine Flooding": {
+          "rating": "Very Low",
+          "score": 28.387392254033866
+        },
+        "Strong Wind": {
+          "rating": "Relatively Moderate",
+          "score": 54.697217291120495
+        },
+        "Tornado": {
+          "rating": "Relatively Low",
+          "score": 47.32603660902176
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 64.72714732498544
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 73.09815158418864
+        }
+      }
+    },
+    "population": {
+      "total": 7372,
+      "personsPerSquareMileDensity": 1627.98465614104
+    },
+    "urban": {
+      "total": 7372,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
+    },
+    "tenure": {
+      "renter": {
+        "total": 1423,
+        "fraction": 0.5287997027127462
+      },
+      "owner": {
+        "total": 1268,
+        "fraction": 0.4712002972872538
+      },
+      "totalHouseholds": 2691
+    },
+    "places": [
+      {
+        "name": "Goose Creek",
+        "type": "city"
+      },
+      {
+        "name": "Charleston-North Charleston, SC",
+        "type": "msa"
+      },
+      {
+        "name": "Santee Watershed",
+        "type": "watershed"
+      }
+    ],
+    "tract": "003115",
+    "race": {
+      "total": 7372,
+      "white": {
+        "total": 3621,
+        "hispanicOrLatino": 182,
+        "notHispanicOrLatino": 3439
+      },
+      "black": {
+        "total": 2616,
+        "hispanicOrLatino": 35,
+        "notHispanicOrLatino": 2581
+      },
+      "americanIndianAlaskanNative": {
+        "total": 48,
+        "hispanicOrLatino": 14,
+        "notHispanicOrLatino": 34
+      },
+      "asian": {
+        "total": 135,
+        "hispanicOrLatino": 7,
+        "notHispanicOrLatino": 128
+      },
+      "pacificIslander": {
+        "total": 3,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 3
+      },
+      "other": {
+        "total": 377,
+        "hispanicOrLatino": 311,
+        "notHispanicOrLatino": 66
+      },
+      "twoOrMore": {
+        "total": 572,
+        "hispanicOrLatino": 218,
+        "notHispanicOrLatino": 354
+      }
+    },
+    "ethnicity": {
+      "total": 7372,
+      "hispanicOrLatino": 767,
+      "notHispanicOrLatino": 6605
+    }
+  },
+  {
+    "zillow": {
+      "totalPopulation": 4870,
+      "zipCode": 29406,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 547907.542933347,
+          "zip": 272837.863608396,
+          "msa": 418022.871524288,
+          "city": 292171.829884807,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 194.55440904347887,
+            "zip": 284.9804029922533
+          }
+        }
+      ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.71578747086525
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.45275618291566
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": 98.94000244140625
+      },
+      "communityResilience": {
+        "rating": "Very High",
+        "score": 89.1500015258789
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Relatively Low",
+          "score": 88.41010401188707
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 98.05998543814735
+        },
+        "Hail": {
+          "rating": "Relatively Low",
+          "score": 65.93033234972549
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 57.24217300420415
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.6078910028531
+        },
+        "Ice Storm": {
+          "rating": "Relatively Low",
+          "score": 47.534435666245706
+        },
+        "Landslide": {
+          "rating": "Relatively Low",
+          "score": 51.76948912851335
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 94.92219786538254
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Low",
+          "score": 65.72562651196655
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 43.89790855973948
+        },
+        "Tornado": {
+          "rating": "Relatively Low",
+          "score": 40.66140769565371
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 63.03735150369234
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 65.37802099725204
+        }
+      }
+    },
+    "population": {
+      "total": 4870,
+      "personsPerSquareMileDensity": 1727.930250932461
+    },
+    "urban": {
+      "total": 4870,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
+    },
+    "tenure": {
+      "renter": {
+        "total": 1366,
+        "fraction": 0.7133159268929504
+      },
+      "owner": {
+        "total": 549,
+        "fraction": 0.28668407310704963
+      },
+      "totalHouseholds": 1915
+    },
+    "places": [
+      {
+        "name": "Hanahan",
+        "type": "city"
+      },
+      {
+        "name": "Charleston-North Charleston, SC",
+        "type": "msa"
+      },
+      {
+        "name": "Santee Watershed",
+        "type": "watershed"
+      }
+    ],
+    "tract": "003400",
+    "race": {
+      "total": 4870,
+      "white": {
+        "total": 1418,
+        "hispanicOrLatino": 116,
+        "notHispanicOrLatino": 1302
+      },
+      "black": {
+        "total": 1974,
+        "hispanicOrLatino": 20,
+        "notHispanicOrLatino": 1954
+      },
+      "americanIndianAlaskanNative": {
+        "total": 68,
+        "hispanicOrLatino": 51,
+        "notHispanicOrLatino": 17
+      },
+      "asian": {
+        "total": 69,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 69
+      },
+      "pacificIslander": {
+        "total": 0,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 0
+      },
+      "other": {
+        "total": 891,
+        "hispanicOrLatino": 870,
+        "notHispanicOrLatino": 21
+      },
+      "twoOrMore": {
+        "total": 450,
+        "hispanicOrLatino": 313,
+        "notHispanicOrLatino": 137
+      }
+    },
+    "ethnicity": {
+      "total": 4870,
+      "hispanicOrLatino": 1370,
+      "notHispanicOrLatino": 3500
+    }
+  },
+  {
+    "zillow": {
+      "totalPopulation": 8338,
+      "zipCode": 29483,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 344452.675831575,
+          "zip": 358452.480165908,
+          "msa": 418022.871524288,
+          "city": 369778.747344234,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 144.16175191266964,
+            "zip": 140.89045112785342
+          }
+        }
+      ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.70746325453075
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.72872677736805
+      },
+      "socialVulnerability": {
+        "rating": "Relatively High",
+        "score": 60.290000915527344
+      },
+      "communityResilience": {
+        "rating": "Relatively Moderate",
+        "score": 48.22999954223633
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "Very Low",
+          "score": 78.7693537578914
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 98.83035441670386
+        },
+        "Hail": {
+          "rating": "Relatively Moderate",
+          "score": 78.03458694348761
+        },
+        "Heat Wave": {
+          "rating": "Relatively High",
+          "score": 79.00861967729055
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.82301695070412
+        },
+        "Ice Storm": {
+          "rating": "Relatively High",
+          "score": 95.41983611853504
+        },
+        "Landslide": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Lightning": {
+          "rating": "Relatively Moderate",
+          "score": 65.61852397551539
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Moderate",
+          "score": 83.3525142682669
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 47.48239498712689
+        },
+        "Tornado": {
+          "rating": "Relatively High",
+          "score": 79.97084445280446
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Moderate",
+          "score": 91.11341015304484
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 78.60347135777532
+        }
+      }
+    },
+    "population": {
+      "total": 8338,
+      "personsPerSquareMileDensity": 1266.389951769543
+    },
+    "urban": {
+      "total": 8329,
+      "fraction": 0.9989206044615015
+    },
+    "rural": {
+      "total": 9,
+      "fraction": 0.001079395538498441
+    },
+    "tenure": {
+      "renter": {
+        "total": 765,
+        "fraction": 0.15756951596292482
+      },
+      "owner": {
+        "total": 4090,
+        "fraction": 0.8424304840370752
+      },
+      "totalHouseholds": 4855
+    },
+    "places": [
+      {
+        "name": "Summerville",
+        "type": "town"
+      },
+      {
+        "name": "Charleston-North Charleston, SC",
+        "type": "msa"
+      },
+      {
+        "name": "Santee Watershed",
+        "type": "watershed"
+      }
+    ],
+    "tract": "010603",
+    "race": {
+      "total": 13454,
+      "white": {
+        "total": 9361,
+        "hispanicOrLatino": 175,
+        "notHispanicOrLatino": 9186
+      },
+      "black": {
+        "total": 2268,
+        "hispanicOrLatino": 11,
+        "notHispanicOrLatino": 2257
+      },
+      "americanIndianAlaskanNative": {
+        "total": 93,
+        "hispanicOrLatino": 17,
+        "notHispanicOrLatino": 76
+      },
+      "asian": {
+        "total": 109,
+        "hispanicOrLatino": 1,
+        "notHispanicOrLatino": 108
+      },
+      "pacificIslander": {
+        "total": 14,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 14
+      },
+      "other": {
+        "total": 608,
+        "hispanicOrLatino": 559,
+        "notHispanicOrLatino": 49
+      },
+      "twoOrMore": {
+        "total": 1001,
+        "hispanicOrLatino": 412,
+        "notHispanicOrLatino": 589
+      }
+    },
+    "ethnicity": {
+      "total": 13454,
+      "hispanicOrLatino": 1175,
+      "notHispanicOrLatino": 12279
+    }
+  },
+  {
+    "zillow": {
+      "totalPopulation": 5738,
+      "zipCode": 29483,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 344452.675831575,
+          "zip": 358452.480165908,
+          "msa": 418022.871524288,
+          "city": 369778.747344234,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 144.16175191266964,
+            "zip": 140.89045112785342
+          }
+        }
+      ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.73005755601008
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.52204241726754
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": 90.44999694824219
+      },
+      "communityResilience": {
+        "rating": "Relatively Moderate",
+        "score": 48.22999954223633
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "Very Low",
+          "score": 72.22463878863404
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 98.80804190055665
+        },
+        "Hail": {
+          "rating": "Relatively Moderate",
+          "score": 73.91754152902035
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 71.74178547102896
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.48430801153442
+        },
+        "Ice Storm": {
+          "rating": "Relatively High",
+          "score": 92.96601956004582
+        },
+        "Landslide": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Lightning": {
+          "rating": "Relatively Moderate",
+          "score": 51.478779602544286
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Moderate",
+          "score": 89.42504168917492
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 40.793077908794864
+        },
+        "Tornado": {
+          "rating": "Relatively Moderate",
+          "score": 70.65282561926148
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 83.33987371124826
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 71.48695304976866
+        }
+      }
+    },
+    "population": {
+      "total": 5738,
+      "personsPerSquareMileDensity": 2112.493112942132
+    },
+    "urban": {
+      "total": 5738,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
+    },
+    "tenure": {
+      "renter": {
+        "total": 3490,
+        "fraction": 0.3546747967479675
+      },
+      "owner": {
+        "total": 6350,
+        "fraction": 0.6453252032520326
+      },
+      "totalHouseholds": 9840
+    },
+    "places": [
+      {
+        "name": "Summerville",
+        "type": "town"
+      },
+      {
+        "name": "Charleston-North Charleston, SC",
+        "type": "msa"
+      },
+      {
+        "name": "Santee Watershed",
+        "type": "watershed"
+      }
+    ],
+    "tract": "010700",
+    "race": {
+      "total": 23497,
+      "white": {
+        "total": 12796,
+        "hispanicOrLatino": 208,
+        "notHispanicOrLatino": 12588
+      },
+      "black": {
+        "total": 8861,
+        "hispanicOrLatino": 46,
+        "notHispanicOrLatino": 8815
+      },
+      "americanIndianAlaskanNative": {
+        "total": 82,
+        "hispanicOrLatino": 10,
+        "notHispanicOrLatino": 72
+      },
+      "asian": {
+        "total": 119,
+        "hispanicOrLatino": 6,
+        "notHispanicOrLatino": 113
+      },
+      "pacificIslander": {
+        "total": 12,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 12
+      },
+      "other": {
+        "total": 452,
+        "hispanicOrLatino": 381,
+        "notHispanicOrLatino": 71
+      },
+      "twoOrMore": {
+        "total": 1175,
+        "hispanicOrLatino": 283,
+        "notHispanicOrLatino": 892
+      }
+    },
+    "ethnicity": {
+      "total": 23497,
+      "hispanicOrLatino": 934,
+      "notHispanicOrLatino": 22563
+    }
+  },
+  {
+    "zillow": {
+      "totalPopulation": 9316,
+      "zipCode": 29420,
+      "zhvi": [
+        {
+          "reportedAt": "2023-08-31T00:00:00.000Z",
+          "state": 287481.125660748,
+          "county": 344452.675831575,
+          "zip": 313327.543448441,
+          "msa": 418022.871524288,
+          "city": 292171.829884807,
+          "increaseRates": {
+            "startedAt": "2010-01-31T00:00:00.000Z",
+            "endedAt": "2023-09-30T00:00:00.000Z",
+            "state": 130.17873204817414,
+            "county": 144.16175191266964,
+            "zip": 153.25838634100546
+          }
+        }
+      ]
+    },
+    "risks": {
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.85373162726538
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.74751626464993
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": 86.81999969482422
+      },
+      "communityResilience": {
+        "rating": "Relatively Moderate",
+        "score": 48.22999954223633
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Very Low",
+          "score": 72.11844618976862
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "Very Low",
+          "score": 69.27851776960064
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 99.25429222350095
+        },
+        "Hail": {
+          "rating": "Relatively Moderate",
+          "score": 73.51900400888773
+        },
+        "Heat Wave": {
+          "rating": "Relatively High",
+          "score": 81.07311459238556
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.8169140869353
+        },
+        "Ice Storm": {
+          "rating": "Relatively High",
+          "score": 92.7384064142853
+        },
+        "Landslide": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Lightning": {
+          "rating": "Relatively Moderate",
+          "score": 71.89300559408728
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Low",
+          "score": 50.52962867275759
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 31.089453451052773
+        },
+        "Tornado": {
+          "rating": "Relatively Moderate",
+          "score": 65.20497055054608
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 81.61559226094919
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 80.3544167038542
+        }
+      }
+    },
+    "population": {
+      "total": 9316,
+      "personsPerSquareMileDensity": 2791.754576504666
+    },
+    "urban": {
+      "total": 9316,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
+    },
+    "tenure": {
+      "renter": {
+        "total": 1437,
+        "fraction": 0.4406623735050598
+      },
+      "owner": {
+        "total": 1824,
+        "fraction": 0.5593376264949402
+      },
+      "totalHouseholds": 3261
+    },
+    "places": [
+      {
+        "name": "North Charleston",
+        "type": "city"
+      },
+      {
+        "name": "Charleston-North Charleston, SC",
+        "type": "msa"
+      },
+      {
+        "name": "Santee Watershed",
+        "type": "watershed"
+      }
+    ],
+    "tract": "010818",
+    "race": {
+      "total": 9316,
+      "white": {
+        "total": 3017,
+        "hispanicOrLatino": 236,
+        "notHispanicOrLatino": 2781
+      },
+      "black": {
+        "total": 4072,
+        "hispanicOrLatino": 47,
+        "notHispanicOrLatino": 4025
+      },
+      "americanIndianAlaskanNative": {
+        "total": 62,
+        "hispanicOrLatino": 30,
+        "notHispanicOrLatino": 32
+      },
+      "asian": {
+        "total": 323,
+        "hispanicOrLatino": 2,
+        "notHispanicOrLatino": 321
+      },
+      "pacificIslander": {
+        "total": 30,
+        "hispanicOrLatino": 1,
+        "notHispanicOrLatino": 29
+      },
+      "other": {
+        "total": 1063,
+        "hispanicOrLatino": 997,
+        "notHispanicOrLatino": 66
+      },
+      "twoOrMore": {
+        "total": 749,
+        "hispanicOrLatino": 341,
+        "notHispanicOrLatino": 408
+      }
+    },
+    "ethnicity": {
+      "total": 9316,
+      "hispanicOrLatino": 1654,
+      "notHispanicOrLatino": 7662
+    }
   },
   {
     "zillow": {
@@ -1360,7 +1900,6 @@
       },
       "totalHouseholds": 2389
     },
-    "tract": "050500",
     "places": [
       {
         "name": "Myrtle Beach",
@@ -1374,159 +1913,50 @@
         "name": "PeeDee Watershed",
         "type": "watershed"
       }
-    ]
-  },
-  {
-    "zillow": {
-      "totalPopulation": 10963,
-      "zipCode": 29910,
-      "zhvi": [
-        {
-          "reportedAt": "2023-08-31T00:00:00.000Z",
-          "state": 287481.125660748,
-          "county": 527579.361276137,
-          "zip": 512151.055955395,
-          "msa": 504429.082125449,
-          "city": 490156.425478946,
-          "increaseRates": {
-            "startedAt": "2010-01-31T00:00:00.000Z",
-            "endedAt": "2023-09-30T00:00:00.000Z",
-            "state": 130.17873204817414,
-            "county": 113.02300147482305,
-            "zip": 152.38383538290873
-          }
-        }
-      ]
-    },
-    "risks": {
-      "compositeNRI": {
-        "rating": "Very High",
-        "score": 99.83470484707226
+    ],
+    "tract": "050500",
+    "race": {
+      "total": 4619,
+      "white": {
+        "total": 3651,
+        "hispanicOrLatino": 50,
+        "notHispanicOrLatino": 3601
       },
-      "compositeExpectedAnnualLoss": {
-        "rating": "Very High",
-        "score": 99.77922352443808
+      "black": {
+        "total": 359,
+        "hispanicOrLatino": 11,
+        "notHispanicOrLatino": 348
       },
-      "socialVulnerability": {
-        "rating": "Relatively High",
-        "score": 75.30999755859375
+      "americanIndianAlaskanNative": {
+        "total": 19,
+        "hispanicOrLatino": 2,
+        "notHispanicOrLatino": 17
       },
-      "communityResilience": {
-        "rating": "Relatively Moderate",
-        "score": 51.97999954223633
+      "asian": {
+        "total": 73,
+        "hispanicOrLatino": 3,
+        "notHispanicOrLatino": 70
       },
-      "natural": {
-        "Avalanche": {
-          "rating": "Not Applicable",
-          "score": null
-        },
-        "Coastal Flooding": {
-          "rating": "Relatively Low",
-          "score": 84.46720441519847
-        },
-        "Cold Wave": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Drought": {
-          "rating": "No Expected Annual Losses",
-          "score": 0
-        },
-        "Earthquake": {
-          "rating": "Relatively Moderate",
-          "score": 87.66587594241022
-        },
-        "Hail": {
-          "rating": "Relatively Moderate",
-          "score": 80.42228518357413
-        },
-        "Heat Wave": {
-          "rating": "Relatively High",
-          "score": 81.11891396763511
-        },
-        "Hurricane": {
-          "rating": "Very High",
-          "score": 99.97711426086691
-        },
-        "Ice Storm": {
-          "rating": "Relatively High",
-          "score": 92.02913448265735
-        },
-        "Landslide": {
-          "rating": "Relatively Low",
-          "score": 59.94578987684874
-        },
-        "Lightning": {
-          "rating": "Very High",
-          "score": 99.7484457541237
-        },
-        "Riverine Flooding": {
-          "rating": "Relatively Low",
-          "score": 51.75094534607887
-        },
-        "Strong Wind": {
-          "rating": "Relatively High",
-          "score": 88.09089947214352
-        },
-        "Tornado": {
-          "rating": "Relatively High",
-          "score": 79.5429162600957
-        },
-        "Tsunami": {
-          "rating": "Insufficient Data",
-          "score": null
-        },
-        "Volcanic Activity": {
-          "rating": "Not Applicable",
-          "score": null
-        },
-        "Wildfire": {
-          "rating": "Relatively Moderate",
-          "score": 92.1158717134601
-        },
-        "Winter Weather": {
-          "rating": "Relatively Moderate",
-          "score": 60.712356436573735
-        }
+      "pacificIslander": {
+        "total": 3,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 3
+      },
+      "other": {
+        "total": 151,
+        "hispanicOrLatino": 134,
+        "notHispanicOrLatino": 17
+      },
+      "twoOrMore": {
+        "total": 363,
+        "hispanicOrLatino": 141,
+        "notHispanicOrLatino": 222
       }
     },
-    "population": {
-      "total": 10963,
-      "personsPerSquareMileDensity": 1604.109010309744
-    },
-    "urban": {
-      "total": 10666,
-      "fraction": 0.9729088753078536
-    },
-    "rural": {
-      "total": 297,
-      "fraction": 0.02709112469214631
-    },
-    "tenure": {
-      "renter": {
-        "total": 3486,
-        "fraction": 0.3491236855282924
-      },
-      "owner": {
-        "total": 6499,
-        "fraction": 0.6508763144717076
-      },
-      "totalHouseholds": 9985
-    },
-    "tract": "002107",
-    "places": [
-      {
-        "name": "Bluffton",
-        "type": "city"
-      },
-      {
-        "name": "Hilton Head Island-Bluffton, SC",
-        "type": "msa"
-      },
-      {
-        "name": "Salkehatchie Watershed",
-        "type": "watershed"
-      }
-    ]
+    "ethnicity": {
+      "total": 4619,
+      "hispanicOrLatino": 341,
+      "notHispanicOrLatino": 4278
+    }
   }
 ]

@@ -1,4 +1,8 @@
-<div>
+<script lang="ts">
+  export let style = '';
+</script>
+
+<div style="{style}">
   <slot name="heading" />
   <div class="indent">
     <slot />
