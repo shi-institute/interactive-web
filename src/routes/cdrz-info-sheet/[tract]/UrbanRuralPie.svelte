@@ -24,11 +24,11 @@
   <div class="swatches">
     <div class="swatch">
       <div class="swatch-cube" style="color: tomato;"></div>
-      <div class="swatch-label">Urban ({urbanFraction * 100}%)</div>
+      <div class="swatch-label">Urban ({(urbanFraction * 100).toFixed(1)}%)</div>
     </div>
     <div class="swatch">
       <div class="swatch-cube" style="color: olive;"></div>
-      <div class="swatch-label">Rural ({ruralFraction * 100}%)</div>
+      <div class="swatch-label">Rural ({(ruralFraction * 100).toFixed(1)}%)</div>
     </div>
   </div>
 </div>
