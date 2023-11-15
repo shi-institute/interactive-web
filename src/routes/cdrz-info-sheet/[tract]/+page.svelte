@@ -4,6 +4,7 @@
   import { ToggleSwitch } from 'fluent-svelte';
   import BoldNumber from './BoldNumber.svelte';
   import CdrzMap from './CdrzMap.svelte';
+  import ElectionsTurnoutBarChart from './ElectionsTurnoutBarChart.svelte';
   import EthnicityBarChart from './EthnicityBarChart.svelte';
   import RaceBarChart from './RaceBarChart.svelte';
   import RentersOwnerPie from './RentersOwnerPie.svelte';
@@ -102,9 +103,30 @@
     </div>
   </section>
 
-  {#if showMore}
+  {#if data.cdrz.elections[0]}
+    {@const election = data.cdrz.elections[0]}
     <section>
       <SectionHeading>Voting</SectionHeading>
+      <div>
+        From the South Carolina Election Commission
+        <!-- prettier-ignore -->
+        <span>(<a href="https://scvotes.gov/">https://scvotes.gov/</a>).</span>
+        {#if showMore}
+          <i>
+            Election precincts do not align with Census tracts. Preicincts were associated with a
+            tract if the precinct centroid was contained by the tract. No tract contained more than
+            one precinct centroid.
+          </i>
+        {/if}
+      </div>
+
+      <p>Precinct: {election.precinct}</p>
+
+      <SubSection>
+        <SubHeading slot="heading">Turnout</SubHeading>
+        <div>{election.name || formatISODate(election.date)}</div>
+        <ElectionsTurnoutBarChart data="{data.cdrz}" />
+      </SubSection>
     </section>
   {/if}
 

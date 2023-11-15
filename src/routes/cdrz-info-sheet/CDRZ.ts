@@ -14,6 +14,7 @@ export interface CDRZ {
   income?: Income;
   zillow?: Zillow;
   risks?: Risks;
+  elections: Election[];
 }
 
 export interface Place {
@@ -141,4 +142,33 @@ export interface Population {
    * *calculated in ArcGIS Pro*
    */
   personsPerSquareMileDensity: number;
+}
+
+export interface Election {
+  /** precinct name */
+  precinct: string;
+  /**  date of the election */
+  date: ISODate;
+  /** election name (optional) */
+  name?: string;
+  turnout: {
+    precinct: ElectionTurnout;
+    state: Omit<ElectionTurnout, 'democratic' | 'republican'>;
+    county: ElectionTurnout;
+  };
+}
+
+export interface ElectionTurnout {
+  /** percentage of registered voters who voted in the election */
+  all: number;
+  /** percentage of people who voted straight party democratic
+   * (of those who voted straight party ticket) */
+  democratic: number;
+  /** percentage of people who voted straight party republican
+   * (of those who voted straight party ticket) */
+  republican: number;
+  /** percentage of voters in who voted for the Democratic presidential ticket */
+  democraticPresident: number;
+  /** percentage of voters in who voted for the Republican presidential ticket */
+  republicanPresident: number;
 }

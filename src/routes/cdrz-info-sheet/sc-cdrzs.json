@@ -150,7 +150,6 @@
         "type": "watershed"
       }
     ],
-    "tract": "T45013002107",
     "race": {
       "total": 10963,
       "white": {
@@ -193,7 +192,36 @@
       "total": 10963,
       "hispanicOrLatino": 3736,
       "notHispanicOrLatino": 7227
-    }
+    },
+    "tract": "T45013002107",
+    "elections": [
+      {
+        "precinct": "Bluffton 1A",
+        "date": "2020-11-03T00:00:00.000Z",
+        "name": "2020 General Election (SC)",
+        "turnout": {
+          "precinct": {
+            "all": 0.6715,
+            "democratic": 0.4293,
+            "republican": 0.568,
+            "democraticPresident": 0.4722,
+            "republicanPresident": 0.504
+          },
+          "state": {
+            "all": 0.721,
+            "democraticPresident": 0.4343,
+            "republicanPresident": 0.5511
+          },
+          "county": {
+            "all": 0.7109,
+            "democratic": 0.3755,
+            "republican": 0.6202,
+            "democraticPresident": 0.4438,
+            "republicanPresident": 0.5437
+          }
+        }
+      }
+    ]
   },
   {
     "zillow": {
@@ -346,7 +374,6 @@
         "type": "watershed"
       }
     ],
-    "tract": "T45015020718",
     "race": {
       "total": 6953,
       "white": {
@@ -389,7 +416,36 @@
       "total": 6953,
       "hispanicOrLatino": 1100,
       "notHispanicOrLatino": 5853
-    }
+    },
+    "tract": "T45015020718",
+    "elections": [
+      {
+        "precinct": "Stratford 1",
+        "date": "2020-11-03T00:00:00.000Z",
+        "name": "2020 General Election (SC)",
+        "turnout": {
+          "precinct": {
+            "all": 0.5079,
+            "democratic": 0.4385,
+            "republican": 0.553,
+            "democraticPresident": 0.4459,
+            "republicanPresident": 0.542
+          },
+          "state": {
+            "all": 0.721,
+            "democraticPresident": 0.4343,
+            "republicanPresident": 0.5511
+          },
+          "county": {
+            "all": 0.7254,
+            "democratic": 0.4027,
+            "republican": 0.5896,
+            "democraticPresident": 0.4329,
+            "republicanPresident": 0.5495
+          }
+        }
+      }
+    ]
   },
   {
     "zillow": {
@@ -542,7 +598,6 @@
         "type": "watershed"
       }
     ],
-    "tract": "T45019003104",
     "race": {
       "total": 5741,
       "white": {
@@ -585,7 +640,36 @@
       "total": 5741,
       "hispanicOrLatino": 2636,
       "notHispanicOrLatino": 3105
-    }
+    },
+    "tract": "T45019003104",
+    "elections": [
+      {
+        "precinct": "North Charleston 28",
+        "date": "2020-11-03T00:00:00.000Z",
+        "name": "2020 General Election (SC)",
+        "turnout": {
+          "precinct": {
+            "all": 0.475,
+            "democratic": 0.8125,
+            "republican": 0.1844,
+            "democraticPresident": 0.8009,
+            "republicanPresident": 0.1818
+          },
+          "state": {
+            "all": 0.721,
+            "democraticPresident": 0.4343,
+            "republicanPresident": 0.5511
+          },
+          "county": {
+            "all": 0.7087,
+            "democratic": 0.5091,
+            "republican": 0.4841,
+            "democraticPresident": 0.5551,
+            "republicanPresident": 0.4263
+          }
+        }
+      }
+    ]
   },
   {
     "zillow": {
@@ -738,7 +822,6 @@
         "type": "watershed"
       }
     ],
-    "tract": "T45019003111",
     "race": {
       "total": 5102,
       "white": {
@@ -781,7 +864,36 @@
       "total": 5102,
       "hispanicOrLatino": 745,
       "notHispanicOrLatino": 4357
-    }
+    },
+    "tract": "T45019003111",
+    "elections": [
+      {
+        "precinct": "North Charleston 18",
+        "date": "2020-11-03T00:00:00.000Z",
+        "name": "2020 General Election (SC)",
+        "turnout": {
+          "precinct": {
+            "all": 0.5957,
+            "democratic": 0.7994,
+            "republican": 0.1964,
+            "democraticPresident": 0.7797,
+            "republicanPresident": 0.2086
+          },
+          "state": {
+            "all": 0.721,
+            "democraticPresident": 0.4343,
+            "republicanPresident": 0.5511
+          },
+          "county": {
+            "all": 0.7087,
+            "democratic": 0.5091,
+            "republican": 0.4841,
+            "democraticPresident": 0.5551,
+            "republicanPresident": 0.4263
+          }
+        }
+      }
+    ]
   },
   {
     "zillow": {
@@ -934,7 +1046,6 @@
         "type": "watershed"
       }
     ],
-    "tract": "T45019003115",
     "race": {
       "total": 7372,
       "white": {
@@ -977,7 +1088,36 @@
       "total": 7372,
       "hispanicOrLatino": 767,
       "notHispanicOrLatino": 6605
-    }
+    },
+    "tract": "T45019003115",
+    "elections": [
+      {
+        "precinct": "Deer Park 1B",
+        "date": "2020-11-03T00:00:00.000Z",
+        "name": "2020 General Election (SC)",
+        "turnout": {
+          "precinct": {
+            "all": 0.5806,
+            "democratic": 0.5493,
+            "republican": 0.44,
+            "democraticPresident": 0.569,
+            "republicanPresident": 0.4105
+          },
+          "state": {
+            "all": 0.721,
+            "democraticPresident": 0.4343,
+            "republicanPresident": 0.5511
+          },
+          "county": {
+            "all": 0.7087,
+            "democratic": 0.5091,
+            "republican": 0.4841,
+            "democraticPresident": 0.5551,
+            "republicanPresident": 0.4263
+          }
+        }
+      }
+    ]
   },
   {
     "zillow": {
@@ -1130,7 +1270,6 @@
         "type": "watershed"
       }
     ],
-    "tract": "T45019003400",
     "race": {
       "total": 4870,
       "white": {
@@ -1173,7 +1312,36 @@
       "total": 4870,
       "hispanicOrLatino": 1370,
       "notHispanicOrLatino": 3500
-    }
+    },
+    "tract": "T45019003400",
+    "elections": [
+      {
+        "precinct": "North Charleston 9",
+        "date": "2020-11-03T00:00:00.000Z",
+        "name": "2020 General Election (SC)",
+        "turnout": {
+          "precinct": {
+            "all": 0.6582,
+            "democratic": 0.6303,
+            "republican": 0.3623,
+            "democraticPresident": 0.6821,
+            "republicanPresident": 0.2917
+          },
+          "state": {
+            "all": 0.721,
+            "democraticPresident": 0.4343,
+            "republicanPresident": 0.5511
+          },
+          "county": {
+            "all": 0.7087,
+            "democratic": 0.5091,
+            "republican": 0.4841,
+            "democraticPresident": 0.5551,
+            "republicanPresident": 0.4263
+          }
+        }
+      }
+    ]
   },
   {
     "zillow": {
@@ -1326,7 +1494,6 @@
         "type": "watershed"
       }
     ],
-    "tract": "T45035010603",
     "race": {
       "total": 8338,
       "white": {
@@ -1369,7 +1536,36 @@
       "total": 8338,
       "hispanicOrLatino": 936,
       "notHispanicOrLatino": 7402
-    }
+    },
+    "tract": "T45035010603",
+    "elections": [
+      {
+        "precinct": "Clemson 3",
+        "date": "2020-11-03T00:00:00.000Z",
+        "name": "2020 General Election (SC)",
+        "turnout": {
+          "precinct": {
+            "all": 0.5712,
+            "democratic": 0.4077,
+            "republican": 0.5805,
+            "democraticPresident": 0.4128,
+            "republicanPresident": 0.572
+          },
+          "state": {
+            "all": 0.721,
+            "democraticPresident": 0.4343,
+            "republicanPresident": 0.5511
+          },
+          "county": {
+            "all": 0.6866,
+            "democratic": 0.4157,
+            "republican": 0.5752,
+            "democraticPresident": 0.4377,
+            "republicanPresident": 0.5424
+          }
+        }
+      }
+    ]
   },
   {
     "zillow": {
@@ -1522,7 +1718,6 @@
         "type": "watershed"
       }
     ],
-    "tract": "T45035010700",
     "race": {
       "total": 5738,
       "white": {
@@ -1565,7 +1760,36 @@
       "total": 5738,
       "hispanicOrLatino": 293,
       "notHispanicOrLatino": 5445
-    }
+    },
+    "tract": "T45035010700",
+    "elections": [
+      {
+        "precinct": "Carolina",
+        "date": "2020-11-03T00:00:00.000Z",
+        "name": "2020 General Election (SC)",
+        "turnout": {
+          "precinct": {
+            "all": 0.5994,
+            "democratic": 0.5385,
+            "republican": 0.4579,
+            "democraticPresident": 0.5591,
+            "republicanPresident": 0.4259
+          },
+          "state": {
+            "all": 0.721,
+            "democraticPresident": 0.4343,
+            "republicanPresident": 0.5511
+          },
+          "county": {
+            "all": 0.6866,
+            "democratic": 0.4157,
+            "republican": 0.5752,
+            "democraticPresident": 0.4377,
+            "republicanPresident": 0.5424
+          }
+        }
+      }
+    ]
   },
   {
     "zillow": {
@@ -1718,7 +1942,6 @@
         "type": "watershed"
       }
     ],
-    "tract": "T45035010818",
     "race": {
       "total": 9316,
       "white": {
@@ -1761,7 +1984,36 @@
       "total": 9316,
       "hispanicOrLatino": 1654,
       "notHispanicOrLatino": 7662
-    }
+    },
+    "tract": "T45035010818",
+    "elections": [
+      {
+        "precinct": "Lincoln",
+        "date": "2020-11-03T00:00:00.000Z",
+        "name": "2020 General Election (SC)",
+        "turnout": {
+          "precinct": {
+            "all": 0.5023,
+            "democratic": 0.7116,
+            "republican": 0.2868,
+            "democraticPresident": 0.6729,
+            "republicanPresident": 0.3157
+          },
+          "state": {
+            "all": 0.721,
+            "democraticPresident": 0.4343,
+            "republicanPresident": 0.5511
+          },
+          "county": {
+            "all": 0.6866,
+            "democratic": 0.4157,
+            "republican": 0.5752,
+            "democraticPresident": 0.4377,
+            "republicanPresident": 0.5424
+          }
+        }
+      }
+    ]
   },
   {
     "zillow": {
@@ -1914,7 +2166,6 @@
         "type": "watershed"
       }
     ],
-    "tract": "T45051050500",
     "race": {
       "total": 4619,
       "white": {
@@ -1957,6 +2208,35 @@
       "total": 4619,
       "hispanicOrLatino": 341,
       "notHispanicOrLatino": 4278
-    }
+    },
+    "tract": "T45051050500",
+    "elections": [
+      {
+        "precinct": "MYRTLEWOOD #1",
+        "date": "2020-11-03T00:00:00.000Z",
+        "name": "2020 General Election (SC)",
+        "turnout": {
+          "precinct": {
+            "all": 0.4983,
+            "democratic": 0.3214,
+            "republican": 0.6721,
+            "democraticPresident": 0.3867,
+            "republicanPresident": 0.6032
+          },
+          "state": {
+            "all": 0.721,
+            "democraticPresident": 0.4343,
+            "republicanPresident": 0.5511
+          },
+          "county": {
+            "all": 0.7104,
+            "democratic": 0.2756,
+            "republican": 0.7196,
+            "democraticPresident": 0.3292,
+            "republicanPresident": 0.6611
+          }
+        }
+      }
+    ]
   }
 ]
