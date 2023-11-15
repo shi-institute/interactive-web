@@ -127,14 +127,14 @@
     },
     "tenure": {
       "renter": {
-        "total": 3486,
-        "fraction": 0.3491236855282924
+        "total": 1697,
+        "fraction": 0.4270256668344238
       },
       "owner": {
-        "total": 6499,
-        "fraction": 0.6508763144717076
+        "total": 2277,
+        "fraction": 0.5729743331655762
       },
-      "totalHouseholds": 9985
+      "totalHouseholds": 3974
     },
     "places": [
       {
@@ -150,49 +150,49 @@
         "type": "watershed"
       }
     ],
-    "tract": "002107",
+    "tract": "T45013002107",
     "race": {
-      "total": 25437,
+      "total": 10963,
       "white": {
-        "total": 15979,
-        "hispanicOrLatino": 819,
-        "notHispanicOrLatino": 15160
+        "total": 6048,
+        "hispanicOrLatino": 537,
+        "notHispanicOrLatino": 5511
       },
       "black": {
-        "total": 3774,
-        "hispanicOrLatino": 69,
-        "notHispanicOrLatino": 3705
+        "total": 1266,
+        "hispanicOrLatino": 43,
+        "notHispanicOrLatino": 1223
       },
       "americanIndianAlaskanNative": {
-        "total": 164,
-        "hispanicOrLatino": 111,
-        "notHispanicOrLatino": 53
+        "total": 105,
+        "hispanicOrLatino": 80,
+        "notHispanicOrLatino": 25
       },
       "asian": {
-        "total": 220,
-        "hispanicOrLatino": 6,
-        "notHispanicOrLatino": 214
+        "total": 122,
+        "hispanicOrLatino": 4,
+        "notHispanicOrLatino": 118
       },
       "pacificIslander": {
-        "total": 12,
-        "hispanicOrLatino": 2,
-        "notHispanicOrLatino": 10
+        "total": 3,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 3
       },
       "other": {
-        "total": 3030,
-        "hispanicOrLatino": 2937,
-        "notHispanicOrLatino": 93
+        "total": 2059,
+        "hispanicOrLatino": 2024,
+        "notHispanicOrLatino": 35
       },
       "twoOrMore": {
-        "total": 2258,
-        "hispanicOrLatino": 1379,
-        "notHispanicOrLatino": 879
+        "total": 1360,
+        "hispanicOrLatino": 1048,
+        "notHispanicOrLatino": 312
       }
     },
     "ethnicity": {
-      "total": 25437,
-      "hispanicOrLatino": 5323,
-      "notHispanicOrLatino": 20114
+      "total": 10963,
+      "hispanicOrLatino": 3736,
+      "notHispanicOrLatino": 7227
     }
   },
   {
@@ -346,7 +346,7 @@
         "type": "watershed"
       }
     ],
-    "tract": "020718",
+    "tract": "T45015020718",
     "race": {
       "total": 6953,
       "white": {
@@ -519,14 +519,14 @@
     },
     "tenure": {
       "renter": {
-        "total": 2003,
-        "fraction": 0.6153609831029185
+        "total": 1892,
+        "fraction": 0.818693206404154
       },
       "owner": {
-        "total": 1252,
-        "fraction": 0.3846390168970814
+        "total": 419,
+        "fraction": 0.18130679359584595
       },
-      "totalHouseholds": 3255
+      "totalHouseholds": 2311
     },
     "places": [
       {
@@ -542,49 +542,49 @@
         "type": "watershed"
       }
     ],
-    "tract": "003104",
+    "tract": "T45019003104",
     "race": {
-      "total": 8338,
+      "total": 5741,
       "white": {
-        "total": 3748,
-        "hispanicOrLatino": 230,
-        "notHispanicOrLatino": 3518
+        "total": 1548,
+        "hispanicOrLatino": 195,
+        "notHispanicOrLatino": 1353
       },
       "black": {
-        "total": 1638,
-        "hispanicOrLatino": 22,
-        "notHispanicOrLatino": 1616
+        "total": 1499,
+        "hispanicOrLatino": 21,
+        "notHispanicOrLatino": 1478
       },
       "americanIndianAlaskanNative": {
-        "total": 133,
-        "hispanicOrLatino": 119,
-        "notHispanicOrLatino": 14
+        "total": 123,
+        "hispanicOrLatino": 113,
+        "notHispanicOrLatino": 10
       },
       "asian": {
-        "total": 135,
-        "hispanicOrLatino": 7,
-        "notHispanicOrLatino": 128
+        "total": 113,
+        "hispanicOrLatino": 4,
+        "notHispanicOrLatino": 109
       },
       "pacificIslander": {
-        "total": 7,
+        "total": 6,
         "hispanicOrLatino": 4,
-        "notHispanicOrLatino": 3
+        "notHispanicOrLatino": 2
       },
       "other": {
-        "total": 2065,
-        "hispanicOrLatino": 2044,
-        "notHispanicOrLatino": 21
+        "total": 1986,
+        "hispanicOrLatino": 1971,
+        "notHispanicOrLatino": 15
       },
       "twoOrMore": {
-        "total": 612,
-        "hispanicOrLatino": 393,
-        "notHispanicOrLatino": 219
+        "total": 466,
+        "hispanicOrLatino": 328,
+        "notHispanicOrLatino": 138
       }
     },
     "ethnicity": {
-      "total": 8338,
-      "hispanicOrLatino": 2819,
-      "notHispanicOrLatino": 5519
+      "total": 5741,
+      "hispanicOrLatino": 2636,
+      "notHispanicOrLatino": 3105
     }
   },
   {
@@ -738,7 +738,7 @@
         "type": "watershed"
       }
     ],
-    "tract": "003111",
+    "tract": "T45019003111",
     "race": {
       "total": 5102,
       "white": {
@@ -934,7 +934,7 @@
         "type": "watershed"
       }
     ],
-    "tract": "003115",
+    "tract": "T45019003115",
     "race": {
       "total": 7372,
       "white": {
@@ -1130,7 +1130,7 @@
         "type": "watershed"
       }
     ],
-    "tract": "003400",
+    "tract": "T45019003400",
     "race": {
       "total": 4870,
       "white": {
@@ -1303,14 +1303,14 @@
     },
     "tenure": {
       "renter": {
-        "total": 765,
-        "fraction": 0.15756951596292482
+        "total": 362,
+        "fraction": 0.12750968650933428
       },
       "owner": {
-        "total": 4090,
-        "fraction": 0.8424304840370752
+        "total": 2477,
+        "fraction": 0.8724903134906657
       },
-      "totalHouseholds": 4855
+      "totalHouseholds": 2839
     },
     "places": [
       {
@@ -1326,49 +1326,49 @@
         "type": "watershed"
       }
     ],
-    "tract": "010603",
+    "tract": "T45035010603",
     "race": {
-      "total": 13454,
+      "total": 8338,
       "white": {
-        "total": 9361,
-        "hispanicOrLatino": 175,
-        "notHispanicOrLatino": 9186
+        "total": 5847,
+        "hispanicOrLatino": 147,
+        "notHispanicOrLatino": 5700
       },
       "black": {
-        "total": 2268,
-        "hispanicOrLatino": 11,
-        "notHispanicOrLatino": 2257
+        "total": 1141,
+        "hispanicOrLatino": 8,
+        "notHispanicOrLatino": 1133
       },
       "americanIndianAlaskanNative": {
-        "total": 93,
-        "hispanicOrLatino": 17,
-        "notHispanicOrLatino": 76
+        "total": 65,
+        "hispanicOrLatino": 15,
+        "notHispanicOrLatino": 50
       },
       "asian": {
-        "total": 109,
+        "total": 87,
         "hispanicOrLatino": 1,
-        "notHispanicOrLatino": 108
+        "notHispanicOrLatino": 86
       },
       "pacificIslander": {
-        "total": 14,
+        "total": 6,
         "hispanicOrLatino": 0,
-        "notHispanicOrLatino": 14
+        "notHispanicOrLatino": 6
       },
       "other": {
-        "total": 608,
-        "hispanicOrLatino": 559,
-        "notHispanicOrLatino": 49
+        "total": 444,
+        "hispanicOrLatino": 409,
+        "notHispanicOrLatino": 35
       },
       "twoOrMore": {
-        "total": 1001,
-        "hispanicOrLatino": 412,
-        "notHispanicOrLatino": 589
+        "total": 748,
+        "hispanicOrLatino": 356,
+        "notHispanicOrLatino": 392
       }
     },
     "ethnicity": {
-      "total": 13454,
-      "hispanicOrLatino": 1175,
-      "notHispanicOrLatino": 12279
+      "total": 8338,
+      "hispanicOrLatino": 936,
+      "notHispanicOrLatino": 7402
     }
   },
   {
@@ -1499,14 +1499,14 @@
     },
     "tenure": {
       "renter": {
-        "total": 3490,
-        "fraction": 0.3546747967479675
+        "total": 1040,
+        "fraction": 0.4412388629613916
       },
       "owner": {
-        "total": 6350,
-        "fraction": 0.6453252032520326
+        "total": 1317,
+        "fraction": 0.5587611370386084
       },
-      "totalHouseholds": 9840
+      "totalHouseholds": 2357
     },
     "places": [
       {
@@ -1522,49 +1522,49 @@
         "type": "watershed"
       }
     ],
-    "tract": "010700",
+    "tract": "T45035010700",
     "race": {
-      "total": 23497,
+      "total": 5738,
       "white": {
-        "total": 12796,
-        "hispanicOrLatino": 208,
-        "notHispanicOrLatino": 12588
+        "total": 3029,
+        "hispanicOrLatino": 67,
+        "notHispanicOrLatino": 2962
       },
       "black": {
-        "total": 8861,
-        "hispanicOrLatino": 46,
-        "notHispanicOrLatino": 8815
+        "total": 2055,
+        "hispanicOrLatino": 16,
+        "notHispanicOrLatino": 2039
       },
       "americanIndianAlaskanNative": {
-        "total": 82,
-        "hispanicOrLatino": 10,
-        "notHispanicOrLatino": 72
+        "total": 31,
+        "hispanicOrLatino": 4,
+        "notHispanicOrLatino": 27
       },
       "asian": {
-        "total": 119,
-        "hispanicOrLatino": 6,
-        "notHispanicOrLatino": 113
+        "total": 52,
+        "hispanicOrLatino": 5,
+        "notHispanicOrLatino": 47
       },
       "pacificIslander": {
-        "total": 12,
+        "total": 11,
         "hispanicOrLatino": 0,
-        "notHispanicOrLatino": 12
+        "notHispanicOrLatino": 11
       },
       "other": {
-        "total": 452,
-        "hispanicOrLatino": 381,
-        "notHispanicOrLatino": 71
+        "total": 139,
+        "hispanicOrLatino": 118,
+        "notHispanicOrLatino": 21
       },
       "twoOrMore": {
-        "total": 1175,
-        "hispanicOrLatino": 283,
-        "notHispanicOrLatino": 892
+        "total": 421,
+        "hispanicOrLatino": 83,
+        "notHispanicOrLatino": 338
       }
     },
     "ethnicity": {
-      "total": 23497,
-      "hispanicOrLatino": 934,
-      "notHispanicOrLatino": 22563
+      "total": 5738,
+      "hispanicOrLatino": 293,
+      "notHispanicOrLatino": 5445
     }
   },
   {
@@ -1718,7 +1718,7 @@
         "type": "watershed"
       }
     ],
-    "tract": "010818",
+    "tract": "T45035010818",
     "race": {
       "total": 9316,
       "white": {
@@ -1914,7 +1914,7 @@
         "type": "watershed"
       }
     ],
-    "tract": "050500",
+    "tract": "T45051050500",
     "race": {
       "total": 4619,
       "white": {

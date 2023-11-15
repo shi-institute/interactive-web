@@ -188,7 +188,7 @@
       <div>
         From the National Risk Index.
         <a
-          href="https://hazards.fema.gov/nri/report/viewer?dataLOD=Census%20tracts&dataIDs=T45013{data
+          href="https://hazards.fema.gov/nri/report/viewer?dataLOD=Census%20tracts&dataIDs={data
             .cdrz.tract}#SectionRiskIndex"
         >
           View the whole report.
