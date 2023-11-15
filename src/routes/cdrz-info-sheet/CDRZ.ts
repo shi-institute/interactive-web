@@ -11,7 +11,7 @@ export interface CDRZ {
   /** The totals and fractions of housholds: renters vs ownsers */
   tenure: Tenure;
   /** Median and aggregate income for this tract */
-  income?: Income;
+  income: Income[];
   zillow?: Zillow;
   risks?: Risks;
   elections: Election[];
@@ -51,8 +51,16 @@ export interface Tenure {
 }
 
 export interface Income {
-  median: number;
-  aggregate: number;
+  dataYears: { start: number; end: number };
+  dollarYear: number;
+  median: {
+    value: number;
+    marginOfError: number;
+  };
+  // aggregate: {
+  //   value: number,
+  //   marginOfError: number;
+  // }
 }
 
 export interface Zillow {

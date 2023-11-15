@@ -80,14 +80,24 @@
         <EthnicityBarChart data="{data.cdrz}" />
       </SubSection>
 
-      {#if showMore}
+      {#if data.cdrz.income[0]}
+        {@const income = data.cdrz.income[0]}
         <SubSection>
-          <SubHeading slot="heading">Income</SubHeading>
+          <SubHeading slot="heading">Median income</SubHeading>
+          <div style="padding-bottom: 10px;">
+            In {income.dollarYear} US dollars.
+            <i>
+              From American Community Survey Estimates, {income.dataYears.start} - {income.dataYears
+                .end}.
+            </i>
+          </div>
           <BoldNumber>
-            00
+            {income.median.value.toLocaleString('en-us')}
             <svelte:fragment slot="prefix">$</svelte:fragment>
-            <svelte:fragment slot="units">thousand</svelte:fragment>
-            <svelte:fragment slot="caption">Median</svelte:fragment>
+            <svelte:fragment slot="units">
+              ± {income.median.marginOfError.toLocaleString('en-us')}
+            </svelte:fragment>
+            <!-- <svelte:fragment slot="caption">Median</svelte:fragment> -->
           </BoldNumber>
         </SubSection>
       {/if}

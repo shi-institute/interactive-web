@@ -193,7 +193,6 @@
       "hispanicOrLatino": 3736,
       "notHispanicOrLatino": 7227
     },
-    "tract": "T45013002107",
     "elections": [
       {
         "precinct": "Bluffton 1A",
@@ -219,6 +218,20 @@
             "democraticPresident": 0.4438,
             "republicanPresident": 0.5437
           }
+        }
+      }
+    ],
+    "tract": "T45013002107",
+    "income": [
+      {
+        "dataYears": {
+          "start": 2017,
+          "end": 2021
+        },
+        "dollarYear": 2021,
+        "median": {
+          "value": 67443,
+          "marginOfError": 10466
         }
       }
     ]
@@ -417,7 +430,6 @@
       "hispanicOrLatino": 1100,
       "notHispanicOrLatino": 5853
     },
-    "tract": "T45015020718",
     "elections": [
       {
         "precinct": "Stratford 1",
@@ -443,6 +455,20 @@
             "democraticPresident": 0.4329,
             "republicanPresident": 0.5495
           }
+        }
+      }
+    ],
+    "tract": "T45015020718",
+    "income": [
+      {
+        "dataYears": {
+          "start": 2017,
+          "end": 2021
+        },
+        "dollarYear": 2021,
+        "median": {
+          "value": 50893,
+          "marginOfError": 15851
         }
       }
     ]
@@ -641,7 +667,6 @@
       "hispanicOrLatino": 2636,
       "notHispanicOrLatino": 3105
     },
-    "tract": "T45019003104",
     "elections": [
       {
         "precinct": "North Charleston 28",
@@ -667,6 +692,20 @@
             "democraticPresident": 0.5551,
             "republicanPresident": 0.4263
           }
+        }
+      }
+    ],
+    "tract": "T45019003104",
+    "income": [
+      {
+        "dataYears": {
+          "start": 2017,
+          "end": 2021
+        },
+        "dollarYear": 2021,
+        "median": {
+          "value": 30702,
+          "marginOfError": 2059
         }
       }
     ]
@@ -865,7 +904,6 @@
       "hispanicOrLatino": 745,
       "notHispanicOrLatino": 4357
     },
-    "tract": "T45019003111",
     "elections": [
       {
         "precinct": "North Charleston 18",
@@ -891,6 +929,20 @@
             "democraticPresident": 0.5551,
             "republicanPresident": 0.4263
           }
+        }
+      }
+    ],
+    "tract": "T45019003111",
+    "income": [
+      {
+        "dataYears": {
+          "start": 2017,
+          "end": 2021
+        },
+        "dollarYear": 2021,
+        "median": {
+          "value": 42404,
+          "marginOfError": 10744
         }
       }
     ]
@@ -1089,7 +1141,6 @@
       "hispanicOrLatino": 767,
       "notHispanicOrLatino": 6605
     },
-    "tract": "T45019003115",
     "elections": [
       {
         "precinct": "Deer Park 1B",
@@ -1115,6 +1166,20 @@
             "democraticPresident": 0.5551,
             "republicanPresident": 0.4263
           }
+        }
+      }
+    ],
+    "tract": "T45019003115",
+    "income": [
+      {
+        "dataYears": {
+          "start": 2017,
+          "end": 2021
+        },
+        "dollarYear": 2021,
+        "median": {
+          "value": 44194,
+          "marginOfError": 6949
         }
       }
     ]
@@ -1313,7 +1378,6 @@
       "hispanicOrLatino": 1370,
       "notHispanicOrLatino": 3500
     },
-    "tract": "T45019003400",
     "elections": [
       {
         "precinct": "North Charleston 9",
@@ -1339,6 +1403,20 @@
             "democraticPresident": 0.5551,
             "republicanPresident": 0.4263
           }
+        }
+      }
+    ],
+    "tract": "T45019003400",
+    "income": [
+      {
+        "dataYears": {
+          "start": 2017,
+          "end": 2021
+        },
+        "dollarYear": 2021,
+        "median": {
+          "value": 40023,
+          "marginOfError": 7349
         }
       }
     ]
@@ -1537,7 +1615,6 @@
       "hispanicOrLatino": 936,
       "notHispanicOrLatino": 7402
     },
-    "tract": "T45035010603",
     "elections": [
       {
         "precinct": "Clemson 3",
@@ -1563,6 +1640,20 @@
             "democraticPresident": 0.4377,
             "republicanPresident": 0.5424
           }
+        }
+      }
+    ],
+    "tract": "T45035010603",
+    "income": [
+      {
+        "dataYears": {
+          "start": 2017,
+          "end": 2021
+        },
+        "dollarYear": 2021,
+        "median": {
+          "value": 68500,
+          "marginOfError": 15544
         }
       }
     ]
@@ -1761,7 +1852,6 @@
       "hispanicOrLatino": 293,
       "notHispanicOrLatino": 5445
     },
-    "tract": "T45035010700",
     "elections": [
       {
         "precinct": "Carolina",
@@ -1787,6 +1877,20 @@
             "democraticPresident": 0.4377,
             "republicanPresident": 0.5424
           }
+        }
+      }
+    ],
+    "tract": "T45035010700",
+    "income": [
+      {
+        "dataYears": {
+          "start": 2017,
+          "end": 2021
+        },
+        "dollarYear": 2021,
+        "median": {
+          "value": 47589,
+          "marginOfError": 14700
         }
       }
     ]
@@ -1985,7 +2089,6 @@
       "hispanicOrLatino": 1654,
       "notHispanicOrLatino": 7662
     },
-    "tract": "T45035010818",
     "elections": [
       {
         "precinct": "Lincoln",
@@ -2011,6 +2114,20 @@
             "democraticPresident": 0.4377,
             "republicanPresident": 0.5424
           }
+        }
+      }
+    ],
+    "tract": "T45035010818",
+    "income": [
+      {
+        "dataYears": {
+          "start": 2017,
+          "end": 2021
+        },
+        "dollarYear": 2021,
+        "median": {
+          "value": 47143,
+          "marginOfError": 9265
         }
       }
     ]
@@ -2209,7 +2326,6 @@
       "hispanicOrLatino": 341,
       "notHispanicOrLatino": 4278
     },
-    "tract": "T45051050500",
     "elections": [
       {
         "precinct": "MYRTLEWOOD #1",
@@ -2235,6 +2351,20 @@
             "democraticPresident": 0.3292,
             "republicanPresident": 0.6611
           }
+        }
+      }
+    ],
+    "tract": "T45051050500",
+    "income": [
+      {
+        "dataYears": {
+          "start": 2017,
+          "end": 2021
+        },
+        "dollarYear": 2021,
+        "median": {
+          "value": 42662,
+          "marginOfError": 7903
         }
       }
     ]
