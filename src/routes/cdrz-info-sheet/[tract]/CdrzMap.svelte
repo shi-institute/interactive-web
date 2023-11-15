@@ -14,7 +14,7 @@
 
   function trigger() {
     const features = map?.querySourceFeatures('cdrzShapes');
-    const match = features.find((feature) => feature.properties['Tract FIPS'] === tract);
+    const match = features.find((feature) => feature.properties['Tract FIPS'] === tract.slice(-6));
 
     const x = match?.geometry.coordinates[0].map((arr) => arr[0]);
     const xMin = Math.min(...x);
@@ -44,7 +44,7 @@
     <GeoJSON id="cdrzShapes" data="{cdrz_shapes}" promoteId="Tract FIPS">
       <FillLayer
         paint="{{
-          'fill-color': ['match', ['get', 'Tract FIPS'], tract, '#c04a5f', '#ddd'],
+          'fill-color': ['match', ['get', 'Tract FIPS'], tract.slice(-6), '#c04a5f', '#ddd'],
           'fill-opacity': 0.5,
         }}"
         beforeLayerType="symbol"
