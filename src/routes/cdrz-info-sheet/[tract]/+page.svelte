@@ -58,14 +58,14 @@
       <SubSection>
         <SubHeading slot="heading">Population</SubHeading>
         <BoldNumber>
-          {data.cdrz.population.total}
+          {data.cdrz.population.total.toLocaleString('en-us')}
         </BoldNumber>
       </SubSection>
 
       <SubSection>
         <SubHeading slot="heading">Population density</SubHeading>
         <BoldNumber>
-          {data.cdrz.population.personsPerSquareMileDensity.toFixed(0)}
+          {parseInt(`${data.cdrz.population.personsPerSquareMileDensity}`).toLocaleString('en-us')}
           <svelte:fragment slot="units">people per square mile</svelte:fragment>
         </BoldNumber>
       </SubSection>
