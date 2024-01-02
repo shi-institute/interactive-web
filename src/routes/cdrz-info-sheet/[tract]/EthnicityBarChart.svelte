@@ -4,7 +4,7 @@
 
   export let data: CDRZ;
 
-  const ethnicityData = [
+  $: ethnicityData = [
     {
       tract: '',
       value: data.ethnicity.hispanicOrLatino,

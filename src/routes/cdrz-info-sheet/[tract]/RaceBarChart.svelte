@@ -4,7 +4,7 @@
 
   export let data: CDRZ;
 
-  const raceFigureData = (() => {
+  $: raceFigureData = (() => {
     const arr: {
       tract: string;
       race: string;

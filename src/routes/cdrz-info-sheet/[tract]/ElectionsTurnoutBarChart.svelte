@@ -6,7 +6,7 @@
 
   export let data: CDRZ;
 
-  const turnout = data.elections
+  $: turnout = data.elections
     .map((election) => {
       return {
         name: election.name,
