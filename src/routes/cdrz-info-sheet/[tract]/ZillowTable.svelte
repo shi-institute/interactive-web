@@ -46,6 +46,7 @@
   table {
     border-collapse: collapse;
     border: 1px solid color-mix(in srgb, currentColor, transparent 86%);
+    font-size: 14px;
   }
 
   tr:has(th) {
@@ -53,11 +54,11 @@
   }
 
   th {
-    height: 36px;
+    height: 30px;
   }
 
   tr {
-    height: 30px;
+    height: 26px;
   }
 
   th {
@@ -81,9 +82,9 @@
   }
 
   tr :where(td, th):first-child {
-    padding-left: 15px !important;
+    padding-left: 12px !important;
   }
   tr :where(td, th):last-child {
-    padding-right: 15px !important;
+    padding-right: 12px !important;
   }
 </style>

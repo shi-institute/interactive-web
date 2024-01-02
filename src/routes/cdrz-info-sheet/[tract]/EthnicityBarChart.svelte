@@ -24,6 +24,7 @@
     color: { legend: true, range: colors },
     marginTop: 0,
     marginLeft: 0,
+    marginBottom: 40,
     x: { label: 'Population' },
     y: { axis: null },
     marks: [
@@ -35,7 +36,7 @@
       }),
       Plot.ruleX([0]),
     ],
-    height: 55,
+    height: 65,
   };
 
   let div: HTMLDivElement;
@@ -50,11 +51,16 @@
 <style>
   /* offset the zero from the left by two pixels so it is not cut off */
   div :global(g[aria-label='x-axis tick label'] > text:first-of-type) {
-    transform: translate(2px, 25px);
+    transform: translate(3px, 25px);
   }
 
   /* adjust spacing around the swatches */
   div :global(div[class*='-swatches']) {
     margin-bottom: 0;
+  }
+
+  div :global([class*='-swatches']),
+  div :global(svg) {
+    font-size: 13px;
   }
 </style>

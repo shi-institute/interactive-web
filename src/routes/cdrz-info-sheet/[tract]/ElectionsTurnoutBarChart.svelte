@@ -27,11 +27,12 @@
   let plotOptions: Plot.PlotOptions;
   $: plotOptions = {
     color: { legend: true, range: colors, domain },
-    height: 92,
+    height: 102,
     width: div?.clientWidth,
     x: { tickFormat: '.0%', domain: [0, 1], label: 'Voter turnout' },
     y: { axis: null, padding: 0.0, domain },
     marginLeft: 0,
+    marginBottom: 40,
     marks: [
       Plot.frame({ strokeOpacity: 0.1 }),
       Plot.barX(turnout, {
@@ -69,11 +70,16 @@
 <style>
   /* offset the zero from the left by two pixels so it is not cut off */
   div :global(g[aria-label='x-axis tick label'] > text:first-of-type) {
-    transform: translate(6px, 62px);
+    transform: translate(8px, 62px);
   }
 
   /* adjust spacing around the swatches */
   div :global(div[class*='-swatches']) {
     margin-bottom: 0;
+  }
+
+  div :global([class*='-swatches']),
+  div :global(svg) {
+    font-size: 13px;
   }
 </style>

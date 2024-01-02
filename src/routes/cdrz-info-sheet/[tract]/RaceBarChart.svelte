@@ -59,9 +59,10 @@
   $: plotOptions = {
     color: { legend: false, range: colors },
     height: 190,
-    marginLeft: 160,
-    marginRight: 70,
+    marginLeft: 210,
+    marginRight: 90,
     marginTop: 0,
+    marginBottom: 40,
     x: { label: 'Population' },
     y: {
       label: null,
@@ -97,3 +98,9 @@
 </script>
 
 <div bind:this="{div}" role="img"></div>
+
+<style>
+  div :global(svg) {
+    font-size: 13px;
+  }
+</style>
