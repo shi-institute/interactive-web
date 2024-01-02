@@ -169,7 +169,6 @@
       "hispanicOrLatino": 3300,
       "notHispanicOrLatino": 6576
     },
-    "tract": "T45013002107",
     "income": [
       {
         "dataYears": {
@@ -182,7 +181,15 @@
           "marginOfError": 6045
         }
       }
-    ]
+    ],
+    "tract": "T45013002107",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.46,
+      "tract": 0.38
+    }
   },
   {
     "risks": {
@@ -354,7 +361,6 @@
       "hispanicOrLatino": 557,
       "notHispanicOrLatino": 3940
     },
-    "tract": "T45015020718",
     "income": [
       {
         "dataYears": {
@@ -367,7 +373,15 @@
           "marginOfError": 3901
         }
       }
-    ]
+    ],
+    "tract": "T45015020718",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.4,
+      "tract": 0.3
+    }
   },
   {
     "risks": {
@@ -539,7 +553,6 @@
       "hispanicOrLatino": 2095,
       "notHispanicOrLatino": 2829
     },
-    "tract": "T45019003104",
     "income": [
       {
         "dataYears": {
@@ -552,7 +565,15 @@
           "marginOfError": 3662
         }
       }
-    ]
+    ],
+    "tract": "T45019003104",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.49,
+      "tract": 0.39
+    }
   },
   {
     "risks": {
@@ -724,7 +745,6 @@
       "hispanicOrLatino": 1042,
       "notHispanicOrLatino": 5086
     },
-    "tract": "T45019003111",
     "income": [
       {
         "dataYears": {
@@ -737,7 +757,15 @@
           "marginOfError": 5478
         }
       }
-    ]
+    ],
+    "tract": "T45019003111",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.49,
+      "tract": 0.37
+    }
   },
   {
     "risks": {
@@ -909,7 +937,6 @@
       "hispanicOrLatino": 392,
       "notHispanicOrLatino": 6721
     },
-    "tract": "T45019003115",
     "income": [
       {
         "dataYears": {
@@ -922,7 +949,15 @@
           "marginOfError": 6675
         }
       }
-    ]
+    ],
+    "tract": "T45019003115",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.49,
+      "tract": 0.4
+    }
   },
   {
     "risks": {
@@ -1094,7 +1129,6 @@
       "hispanicOrLatino": 992,
       "notHispanicOrLatino": 3458
     },
-    "tract": "T45019003400",
     "income": [
       {
         "dataYears": {
@@ -1107,7 +1141,15 @@
           "marginOfError": 5757
         }
       }
-    ]
+    ],
+    "tract": "T45019003400",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.49,
+      "tract": 0.4
+    }
   },
   {
     "risks": {
@@ -1279,7 +1321,6 @@
       "hispanicOrLatino": 352,
       "notHispanicOrLatino": 5904
     },
-    "tract": "T45035010603",
     "income": [
       {
         "dataYears": {
@@ -1292,7 +1333,15 @@
           "marginOfError": 10800
         }
       }
-    ]
+    ],
+    "tract": "T45035010603",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.4,
+      "tract": 0.43
+    }
   },
   {
     "risks": {
@@ -1464,7 +1513,6 @@
       "hispanicOrLatino": 361,
       "notHispanicOrLatino": 5211
     },
-    "tract": "T45035010700",
     "income": [
       {
         "dataYears": {
@@ -1477,7 +1525,15 @@
           "marginOfError": 7596
         }
       }
-    ]
+    ],
+    "tract": "T45035010700",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.4,
+      "tract": 0.4
+    }
   },
   {
     "risks": {
@@ -1649,7 +1705,6 @@
       "hispanicOrLatino": 926,
       "notHispanicOrLatino": 7090
     },
-    "tract": "T45035010818",
     "income": [
       {
         "dataYears": {
@@ -1662,7 +1717,15 @@
           "marginOfError": 5468
         }
       }
-    ]
+    ],
+    "tract": "T45035010818",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.4,
+      "tract": 0.4
+    }
   },
   {
     "risks": {
@@ -1834,7 +1897,6 @@
       "hispanicOrLatino": 240,
       "notHispanicOrLatino": 4081
     },
-    "tract": "T45051050500",
     "income": [
       {
         "dataYears": {
@@ -1847,6 +1909,14 @@
           "marginOfError": 6849
         }
       }
-    ]
+    ],
+    "tract": "T45051050500",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.45,
+      "tract": 0.41
+    }
   }
 ]

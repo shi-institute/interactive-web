@@ -222,7 +222,6 @@
         }
       }
     ],
-    "tract": "T45013002107",
     "income": [
       {
         "dataYears": {
@@ -235,7 +234,15 @@
           "marginOfError": 10466
         }
       }
-    ]
+    ],
+    "tract": "T45013002107",
+    "gini": {
+      "yearStart": 2017,
+      "yearEnd": 2021,
+      "state": 0.48,
+      "county": 0.48,
+      "tract": 0.42
+    }
   },
   {
     "zillow": {
@@ -460,7 +467,6 @@
         }
       }
     ],
-    "tract": "T45015020718",
     "income": [
       {
         "dataYears": {
@@ -473,7 +479,15 @@
           "marginOfError": 15851
         }
       }
-    ]
+    ],
+    "tract": "T45015020718",
+    "gini": {
+      "yearStart": 2017,
+      "yearEnd": 2021,
+      "state": 0.48,
+      "county": 0.43,
+      "tract": 0.43
+    }
   },
   {
     "zillow": {
@@ -698,7 +712,6 @@
         }
       }
     ],
-    "tract": "T45019003104",
     "income": [
       {
         "dataYears": {
@@ -711,7 +724,15 @@
           "marginOfError": 2059
         }
       }
-    ]
+    ],
+    "tract": "T45019003104",
+    "gini": {
+      "yearStart": 2017,
+      "yearEnd": 2021,
+      "state": 0.48,
+      "county": 0.52,
+      "tract": 0.6
+    }
   },
   {
     "zillow": {
@@ -936,7 +957,6 @@
         }
       }
     ],
-    "tract": "T45019003111",
     "income": [
       {
         "dataYears": {
@@ -949,7 +969,15 @@
           "marginOfError": 10744
         }
       }
-    ]
+    ],
+    "tract": "T45019003111",
+    "gini": {
+      "yearStart": 2017,
+      "yearEnd": 2021,
+      "state": 0.48,
+      "county": 0.52,
+      "tract": 0.4
+    }
   },
   {
     "zillow": {
@@ -1174,7 +1202,6 @@
         }
       }
     ],
-    "tract": "T45019003115",
     "income": [
       {
         "dataYears": {
@@ -1187,7 +1214,15 @@
           "marginOfError": 6949
         }
       }
-    ]
+    ],
+    "tract": "T45019003115",
+    "gini": {
+      "yearStart": 2017,
+      "yearEnd": 2021,
+      "state": 0.48,
+      "county": 0.52,
+      "tract": 0.43
+    }
   },
   {
     "zillow": {
@@ -1412,7 +1447,6 @@
         }
       }
     ],
-    "tract": "T45019003400",
     "income": [
       {
         "dataYears": {
@@ -1425,7 +1459,15 @@
           "marginOfError": 7349
         }
       }
-    ]
+    ],
+    "tract": "T45019003400",
+    "gini": {
+      "yearStart": 2017,
+      "yearEnd": 2021,
+      "state": 0.48,
+      "county": 0.52,
+      "tract": 0.4
+    }
   },
   {
     "zillow": {
@@ -1650,7 +1692,6 @@
         }
       }
     ],
-    "tract": "T45035010603",
     "income": [
       {
         "dataYears": {
@@ -1663,7 +1704,15 @@
           "marginOfError": 15544
         }
       }
-    ]
+    ],
+    "tract": "T45035010603",
+    "gini": {
+      "yearStart": 2017,
+      "yearEnd": 2021,
+      "state": 0.48,
+      "county": 0.41,
+      "tract": 0.42
+    }
   },
   {
     "zillow": {
@@ -1888,7 +1937,6 @@
         }
       }
     ],
-    "tract": "T45035010700",
     "income": [
       {
         "dataYears": {
@@ -1901,7 +1949,15 @@
           "marginOfError": 14700
         }
       }
-    ]
+    ],
+    "tract": "T45035010700",
+    "gini": {
+      "yearStart": 2017,
+      "yearEnd": 2021,
+      "state": 0.48,
+      "county": 0.41,
+      "tract": 0.43
+    }
   },
   {
     "zillow": {
@@ -2126,7 +2182,6 @@
         }
       }
     ],
-    "tract": "T45035010818",
     "income": [
       {
         "dataYears": {
@@ -2139,7 +2194,15 @@
           "marginOfError": 9265
         }
       }
-    ]
+    ],
+    "tract": "T45035010818",
+    "gini": {
+      "yearStart": 2017,
+      "yearEnd": 2021,
+      "state": 0.48,
+      "county": 0.41,
+      "tract": 0.47
+    }
   },
   {
     "zillow": {
@@ -2364,7 +2427,6 @@
         }
       }
     ],
-    "tract": "T45051050500",
     "income": [
       {
         "dataYears": {
@@ -2377,6 +2439,14 @@
           "marginOfError": 7903
         }
       }
-    ]
+    ],
+    "tract": "T45051050500",
+    "gini": {
+      "yearStart": 2017,
+      "yearEnd": 2021,
+      "state": 0.48,
+      "county": 0.44,
+      "tract": 0.49
+    }
   }
 ]
