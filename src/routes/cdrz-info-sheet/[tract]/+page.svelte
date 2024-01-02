@@ -31,10 +31,10 @@
   </svelte:fragment>
 </PageTitle>
 
-<a href="/cdrz-info-sheet" class="back">← Back to all</a>
-
 <div class="page-content-wrapper">
   <article>
+    <a href="/cdrz-info-sheet" class="back">← Back to all</a>
+
     <!-- <div class="note">All numbers are based on 2020 data unless otherwise specified.</div> -->
 
     <div class="top-grid">
@@ -272,7 +272,7 @@
   </article>
 
   <aside>
-    <b style="display: block; padding-bottom: 10px;">Options</b>
+    <TextBlock variant="bodyStrong" style="padding: 24px 0 0px 0;">Options</TextBlock>
     <TextBlock variant="body" class="cdrz-info-sidebar--field-title">Year</TextBlock>
     <TextBlock variant="caption" class="cdrz-info-sidebar--field-caption">
       Choose the year for census data
@@ -287,7 +287,9 @@
         bind:value="{year}"
       />
     </div>
-    <TextBlock variant="body" class="cdrz-info-sidebar--field-title">Details</TextBlock>
+    <TextBlock variant="body" class="cdrz-info-sidebar--field-title">
+      Details and descriptions
+    </TextBlock>
     <div>
       <ToggleSwitch bind:checked="{showMore}">Show more details</ToggleSwitch>
     </div>
@@ -305,6 +307,11 @@
     flex-grow: 1;
     max-width: 240px;
   }
+  @media print {
+    aside {
+      display: none;
+    }
+  }
 
   aside :global(.cdrz-info-sidebar--field-title) {
     display: block;
@@ -319,11 +326,16 @@
 
   article {
     width: 8in;
-    border-right: 1px solid green;
+    border-right: 1px solid color-mix(in srgb, currentColor, transparent 86%);
     padding: 20px;
     box-sizing: border-box;
     flex-grow: 0;
     flex-shrink: 0;
+  }
+  @media print {
+    article {
+      border: none;
+    }
   }
 
   .top-grid {
@@ -378,7 +390,7 @@
 
   .back {
     display: block;
-    margin: 16px 20px 0;
+    margin: 0 0 16px 0;
   }
   @media print {
     .back {
