@@ -86,4 +86,8 @@
   tr :where(td, th):last-child {
     padding-right: 12px !important;
   }
+
+  tr:not(:has(th)):hover {
+    background-color: color-mix(in srgb, currentColor, transparent 94%);
+  }
 </style>
