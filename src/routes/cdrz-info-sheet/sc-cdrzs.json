@@ -22,6 +22,7 @@
       ]
     },
     "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
         "rating": "Very High",
         "score": 99.83470484707226
@@ -259,6 +260,7 @@
       ]
     },
     "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
         "rating": "Very High",
         "score": 99.71935499215145
@@ -496,6 +498,7 @@
       ]
     },
     "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
         "rating": "Very High",
         "score": 99.72054416591352
@@ -733,6 +736,7 @@
       ]
     },
     "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
         "rating": "Very High",
         "score": 99.72767920848594
@@ -970,6 +974,7 @@
       ]
     },
     "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
         "rating": "Very High",
         "score": 99.70508490700661
@@ -1207,6 +1212,7 @@
       ]
     },
     "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
         "rating": "Very High",
         "score": 99.71578747086525
@@ -1444,6 +1450,7 @@
       ]
     },
     "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
         "rating": "Very High",
         "score": 99.70746325453075
@@ -1681,6 +1688,7 @@
       ]
     },
     "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
         "rating": "Very High",
         "score": 99.73005755601008
@@ -1918,6 +1926,7 @@
       ]
     },
     "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
         "rating": "Very High",
         "score": 99.85373162726538
@@ -2155,6 +2164,7 @@
       ]
     },
     "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
         "rating": "Very High",
         "score": 99.73124672977215
