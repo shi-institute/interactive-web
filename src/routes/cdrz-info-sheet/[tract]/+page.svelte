@@ -89,13 +89,13 @@
           {@const income = cdrz.income[0]}
           <SubSection>
             <SubHeading slot="heading">Median income</SubHeading>
-            <div style="padding-bottom: 10px;">
+            <TextBlock style="padding-bottom: 10px;">
               In {income.dollarYear} US dollars.
               <i>
                 From American Community Survey Estimates, {income.dataYears.start} - {income
                   .dataYears.end}.
               </i>
-            </div>
+            </TextBlock>
             <BoldNumber>
               {income.median.value.toLocaleString('en-us')}
               <svelte:fragment slot="prefix">$</svelte:fragment>
@@ -111,7 +111,7 @@
           {@const gini = cdrz.gini}
           <SubSection>
             <SubHeading slot="heading">Gini coefficient</SubHeading>
-            <div style="padding-bottom: 10px;">
+            <TextBlock style="padding-bottom: 10px;">
               The Gini coefficient is a measure of income inequality.
               {#if showMore}
                 0 indicates perfect equality and 1 indicates maximum inequality.
@@ -119,7 +119,7 @@
               <i>
                 From American Community Survey Estimates, {gini.yearStart} - {gini.yearEnd}.
               </i>
-            </div>
+            </TextBlock>
             <BoldNumber>
               {gini.tract}
             </BoldNumber>
@@ -151,7 +151,7 @@
       {@const election = cdrz.elections[0]}
       <section>
         <SectionHeading>Voting</SectionHeading>
-        <div>
+        <TextBlock>
           From the South Carolina Election Commission
           <!-- prettier-ignore -->
           <span>(<a href="https://scvotes.gov/">https://scvotes.gov/</a>).</span>
@@ -162,9 +162,9 @@
               than one precinct centroid.
             </i>
           {/if}
-        </div>
+        </TextBlock>
 
-        <p>Precinct: {election.precinct}</p>
+        <TextBlock>Precinct: {election.precinct}</TextBlock>
 
         <SubSection>
           <SubHeading slot="heading">Turnout</SubHeading>
@@ -181,7 +181,9 @@
         <div style="padding: 16px 0;">
           <SubSection>
             <SubHeading slot="heading">Median house value</SubHeading>
-            <i>From Zillow Home Value Index, {formatISODate(cdrz.zillow.zhvi[0].reportedAt)}.</i>
+            <TextBlock>
+              <i>From Zillow Home Value Index, {formatISODate(cdrz.zillow.zhvi[0].reportedAt)}.</i>
+            </TextBlock>
             <div class="zhvi">
               <BoldNumber>
                 {Math.round(cdrz.zillow?.zhvi[0]?.zip || 0).toLocaleString('en-us')}
@@ -191,13 +193,13 @@
             </div>
             {#if showMore}
               <ZillowTable zillow="{cdrz.zillow}" style="margin-top: 20px;" />
-              <p style="margin-top: 6px;">
+              <TextBlock style="margin-top: 6px;">
                 <i>
                   Changes were calculated from {formatISODate(
                     cdrz.zillow.zhvi[0].increaseRates.startedAt
                   )} to {formatISODate(cdrz.zillow.zhvi[0].increaseRates.endedAt)}.
                 </i>
-              </p>
+              </TextBlock>
             {/if}
           </SubSection>
         </div>
@@ -207,7 +209,7 @@
     {#if cdrz.risks}
       <section>
         <SectionHeading>Hazard risk index</SectionHeading>
-        <div>
+        <TextBlock>
           From the National Risk Index ({formatISODate(cdrz.risks.timestamp, false, true, false)}).
           <a
             href="https://hazards.fema.gov/nri/report/viewer?dataLOD=Census%20tracts&dataIDs={data
@@ -215,7 +217,7 @@
           >
             View the whole report.
           </a>
-        </div>
+        </TextBlock>
 
         <div class="columns">
           <SubSection>
