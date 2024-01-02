@@ -84,68 +84,67 @@
           <SubHeading slot="heading">Ethnicity</SubHeading>
           <EthnicityBarChart data="{cdrz}" />
         </SubSection>
-
-        {#if cdrz.income[0]}
-          {@const income = cdrz.income[0]}
-          <SubSection>
-            <SubHeading slot="heading">Median income</SubHeading>
-            <TextBlock style="padding-bottom: 10px;">
-              In {income.dollarYear} US dollars.
-              <i>
-                From American Community Survey Estimates, {income.dataYears.start} - {income
-                  .dataYears.end}.
-              </i>
-            </TextBlock>
-            <BoldNumber>
-              {income.median.value.toLocaleString('en-us')}
-              <svelte:fragment slot="prefix">$</svelte:fragment>
-              <svelte:fragment slot="units">
-                ± {income.median.marginOfError.toLocaleString('en-us')}
-              </svelte:fragment>
-              <!-- <svelte:fragment slot="caption">Median</svelte:fragment> -->
-            </BoldNumber>
-          </SubSection>
-        {/if}
-
-        {#if cdrz.gini}
-          {@const gini = cdrz.gini}
-          <SubSection>
-            <SubHeading slot="heading">Gini coefficient</SubHeading>
-            <TextBlock style="padding-bottom: 10px;">
-              The Gini coefficient is a measure of income inequality.
-              {#if showMore}
-                0 indicates perfect equality and 1 indicates maximum inequality.
-              {/if}
-              <i>
-                From American Community Survey Estimates, {gini.yearStart} - {gini.yearEnd}.
-              </i>
-            </TextBlock>
-            <BoldNumber>
-              {gini.tract}
-            </BoldNumber>
-            {#if showMore}
-              <GiniTable
-                gini="{gini}"
-                lastGini="{(year === 2020 && data.cdrz2010?.gini) || undefined}"
-                style="margin-top: 10px;"
-              />
-              <TextBlock style="opacity: 0.8;">
-                Negative percentages indicate reduced inequality.
-              </TextBlock>
-            {/if}
-          </SubSection>
-        {/if}
-
-        <SubSection>
-          <SubHeading slot="heading">Renters &amp; owners</SubHeading>
-          <RentersOwnerPie
-            size="{100}"
-            renters="{cdrz.tenure.renter.fraction}"
-            owners="{cdrz.tenure.owner.fraction}"
-          />
-        </SubSection>
       </div>
     </section>
+
+    {#if cdrz.income?.[0] || cdrz.gini}
+      <section>
+        <SectionHeading>Income</SectionHeading>
+
+        <div class="grid">
+          {#if cdrz.income?.[0]}
+            {@const income = cdrz.income[0]}
+            <SubSection>
+              <SubHeading slot="heading">Median income</SubHeading>
+              <TextBlock style="padding-bottom: 10px;">
+                In {income.dollarYear} US dollars.
+                <i>
+                  From American Community Survey Estimates, {income.dataYears.start} - {income
+                    .dataYears.end}.
+                </i>
+              </TextBlock>
+              <BoldNumber>
+                {income.median.value.toLocaleString('en-us')}
+                <svelte:fragment slot="prefix">$</svelte:fragment>
+                <svelte:fragment slot="units">
+                  ± {income.median.marginOfError.toLocaleString('en-us')}
+                </svelte:fragment>
+                <!-- <svelte:fragment slot="caption">Median</svelte:fragment> -->
+              </BoldNumber>
+            </SubSection>
+          {/if}
+
+          {#if cdrz.gini}
+            {@const gini = cdrz.gini}
+            <SubSection>
+              <SubHeading slot="heading">Gini coefficient</SubHeading>
+              <TextBlock style="padding-bottom: 10px;">
+                The Gini coefficient is a measure of income inequality.
+                {#if showMore}
+                  0 indicates perfect equality and 1 indicates maximum inequality.
+                {/if}
+                <i>
+                  From American Community Survey Estimates, {gini.yearStart} - {gini.yearEnd}.
+                </i>
+              </TextBlock>
+              <BoldNumber>
+                {gini.tract}
+              </BoldNumber>
+              {#if showMore}
+                <GiniTable
+                  gini="{gini}"
+                  lastGini="{(year === 2020 && data.cdrz2010?.gini) || undefined}"
+                  style="margin-top: 10px;"
+                />
+                <TextBlock style="opacity: 0.8;">
+                  Negative percentages indicate reduced inequality.
+                </TextBlock>
+              {/if}
+            </SubSection>
+          {/if}
+        </div>
+      </section>
+    {/if}
 
     {#if cdrz.elections?.[0]}
       {@const election = cdrz.elections[0]}
@@ -174,11 +173,11 @@
       </section>
     {/if}
 
-    {#if cdrz.zillow?.zhvi[0]}
-      <section>
-        <SectionHeading>Housing</SectionHeading>
+    <section>
+      <SectionHeading>Housing</SectionHeading>
 
-        <div style="padding: 16px 0;">
+      <div class="grid">
+        {#if cdrz.zillow?.zhvi[0]}
           <SubSection>
             <SubHeading slot="heading">Median house value</SubHeading>
             <TextBlock>
@@ -202,9 +201,19 @@
               </TextBlock>
             {/if}
           </SubSection>
-        </div>
-      </section>
-    {/if}
+        {/if}
+
+        <SubSection>
+          <SubHeading slot="heading">Renters &amp; owners</SubHeading>
+          <RentersOwnerPie
+            size="{100}"
+            renters="{cdrz.tenure.renter.fraction}"
+            owners="{cdrz.tenure.owner.fraction}"
+            style="margin-top: 6px;"
+          />
+        </SubSection>
+      </div>
+    </section>
 
     {#if cdrz.risks}
       <section>

@@ -3,6 +3,7 @@
 
   export let renters: number;
   export let owners: number;
+  export let style = '';
 
   $: total = renters + owners;
   $: rentersFraction = renters / total;
@@ -10,7 +11,7 @@
 </script>
 
 <!-- adapted from https://sparkbox.com/foundry/how_to_code_an_SVG_pie_chart -->
-<div class="wrapper">
+<div class="wrapper" style="{style}">
   <svg height="{size}" width="{size}" viewBox="0 0 20 20">
     <circle r="10" cx="10" cy="10" fill="olive"></circle>
     <circle
