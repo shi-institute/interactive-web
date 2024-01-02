@@ -13,6 +13,7 @@
   import SubHeading from './SubHeading.svelte';
   import SubSection from './SubSection.svelte';
   import UrbanRuralPie from './UrbanRuralPie.svelte';
+  import ZillowTable from './ZillowTable.svelte';
 
   export let data;
 
@@ -147,77 +148,27 @@
       <section>
         <SectionHeading>Housing</SectionHeading>
 
-        <div class="grid">
+        <div style="padding: 16px 0;">
           <SubSection>
-            <SubHeading slot="heading">Zillow Home Value Index (ZHVI)</SubHeading>
-            As of {formatISODate(cdrz.zillow.zhvi[0].reportedAt)}
+            <SubHeading slot="heading">Median house value</SubHeading>
+            <i>From Zillow Home Value Index, {formatISODate(cdrz.zillow.zhvi[0].reportedAt)}.</i>
             <div class="zhvi">
               <BoldNumber>
-                {Math.round((cdrz.zillow?.zhvi[0]?.state || 0) / 1000)}
+                {Math.round(cdrz.zillow?.zhvi[0]?.zip || 0).toLocaleString('en-us')}
                 <svelte:fragment slot="prefix">$</svelte:fragment>
-                <svelte:fragment slot="units">thousand</svelte:fragment>
-                <svelte:fragment slot="caption">State</svelte:fragment>
-              </BoldNumber>
-              <BoldNumber>
-                {Math.round((cdrz.zillow?.zhvi[0]?.county || 0) / 1000)}
-                <svelte:fragment slot="prefix">$</svelte:fragment>
-                <svelte:fragment slot="units">thousand</svelte:fragment>
-                <svelte:fragment slot="caption">County</svelte:fragment>
-              </BoldNumber>
-              <BoldNumber>
-                {Math.round((cdrz.zillow?.zhvi[0]?.zip || 0) / 1000)}
-                <svelte:fragment slot="prefix">$</svelte:fragment>
-                <svelte:fragment slot="units">thousand</svelte:fragment>
-                <svelte:fragment slot="caption">Zip</svelte:fragment>
-              </BoldNumber>
-              {#if showMore}
-                <BoldNumber>
-                  {Math.round((cdrz.zillow?.zhvi[0]?.msa || 0) / 1000)}
-                  <svelte:fragment slot="prefix">$</svelte:fragment>
-                  <svelte:fragment slot="units">thousand</svelte:fragment>
-                  <svelte:fragment slot="caption">MSA</svelte:fragment>
-                </BoldNumber>
-                <BoldNumber>
-                  {Math.round((cdrz.zillow?.zhvi[0]?.city || 0) / 1000)}
-                  <svelte:fragment slot="prefix">$</svelte:fragment>
-                  <svelte:fragment slot="units">thousand</svelte:fragment>
-                  <svelte:fragment slot="caption">City</svelte:fragment>
-                </BoldNumber>
-              {/if}
-            </div>
-          </SubSection>
-
-          <SubSection>
-            <SubHeading slot="heading">ZHVI Change</SubHeading>
-            Cacluated from {formatISODate(cdrz.zillow.zhvi[0].increaseRates.startedAt)} to {formatISODate(
-              cdrz.zillow.zhvi[0].increaseRates.endedAt
-            )}
-            <div class="zhvi">
-              <BoldNumber>
-                {Math.round(cdrz.zillow.zhvi[0].increaseRates.state)}
-                <svelte:fragment slot="suffix">%</svelte:fragment>
-                <svelte:fragment slot="units">
-                  <span class="warning">increase</span>
-                </svelte:fragment>
-                <svelte:fragment slot="caption">State</svelte:fragment>
-              </BoldNumber>
-              <BoldNumber>
-                {Math.round(cdrz.zillow.zhvi[0].increaseRates.county)}
-                <svelte:fragment slot="suffix">%</svelte:fragment>
-                <svelte:fragment slot="units">
-                  <span class="warning">increase</span>
-                </svelte:fragment>
-                <svelte:fragment slot="caption">County</svelte:fragment>
-              </BoldNumber>
-              <BoldNumber>
-                {Math.round(cdrz.zillow.zhvi[0].increaseRates.zip)}
-                <svelte:fragment slot="suffix">%</svelte:fragment>
-                <svelte:fragment slot="units">
-                  <span class="warning">increase</span>
-                </svelte:fragment>
-                <svelte:fragment slot="caption">Zip</svelte:fragment>
+                <svelte:fragment slot="units">&nbsp;&nbsp;&nbsp;In this ZIP code</svelte:fragment>
               </BoldNumber>
             </div>
+            {#if showMore}
+              <ZillowTable zillow="{cdrz.zillow}" style="margin-top: 20px;" />
+              <p style="margin-top: 6px;">
+                <i>
+                  Changes were calculated from {formatISODate(
+                    cdrz.zillow.zhvi[0].increaseRates.startedAt
+                  )} to {formatISODate(cdrz.zillow.zhvi[0].increaseRates.endedAt)}.
+                </i>
+              </p>
+            {/if}
           </SubSection>
         </div>
       </section>
