@@ -6,6 +6,7 @@
   import CdrzMap from './CdrzMap.svelte';
   import ElectionsTurnoutBarChart from './ElectionsTurnoutBarChart.svelte';
   import EthnicityBarChart from './EthnicityBarChart.svelte';
+  import GiniTable from './GiniTable.svelte';
   import RaceBarChart from './RaceBarChart.svelte';
   import RentersOwnerPie from './RentersOwnerPie.svelte';
   import RiskRating from './RiskRating.svelte';
@@ -103,6 +104,35 @@
               </svelte:fragment>
               <!-- <svelte:fragment slot="caption">Median</svelte:fragment> -->
             </BoldNumber>
+          </SubSection>
+        {/if}
+
+        {#if cdrz.gini}
+          {@const gini = cdrz.gini}
+          <SubSection>
+            <SubHeading slot="heading">Gini coefficient</SubHeading>
+            <div style="padding-bottom: 10px;">
+              The Gini coefficient is a measure of income inequality.
+              {#if showMore}
+                0 indicates perfect equality and 1 indicates maximum inequality.
+              {/if}
+              <i>
+                From American Community Survey Estimates, {gini.yearStart} - {gini.yearEnd}.
+              </i>
+            </div>
+            <BoldNumber>
+              {gini.tract}
+            </BoldNumber>
+            {#if showMore}
+              <GiniTable
+                gini="{gini}"
+                lastGini="{(year === 2020 && data.cdrz2010?.gini) || undefined}"
+                style="margin-top: 10px;"
+              />
+              <TextBlock style="opacity: 0.8;">
+                Negative percentages indicate reduced inequality.
+              </TextBlock>
+            {/if}
           </SubSection>
         {/if}
 

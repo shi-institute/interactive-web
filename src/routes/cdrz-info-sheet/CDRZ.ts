@@ -15,6 +15,7 @@ export interface CDRZ {
   zillow?: Zillow;
   risks?: Risks;
   elections: Election[];
+  gini?: Gini;
 }
 
 export interface Place {
@@ -180,4 +181,15 @@ export interface ElectionTurnout {
   democraticPresident: number;
   /** percentage of voters in who voted for the Republican presidential ticket */
   republicanPresident: number;
+}
+
+export interface Gini {
+  yearStart: number;
+  yearEnd: number;
+  /* Gini index for entire state */
+  state: number;
+  /* Gini index for entire county */
+  county: number;
+  /* Gini index for entire tract */
+  tract: number;
 }
