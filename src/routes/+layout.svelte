@@ -1,4 +1,5 @@
 <script lang="ts">
+  import 'fluent-svelte/theme.css';
   import 'leaflet/dist/leaflet.css';
 </script>
 
@@ -12,8 +13,8 @@
       <a href="/sitemap">Sitemap</a>
     </ul>
   </nav>
-  <div class="title" />
-  <div class="meta" />
+  <div class="title"></div>
+  <div class="meta"></div>
 </header>
 
 <main>
@@ -62,6 +63,9 @@
   main {
     flex-grow: 1;
   }
+  :global(:root) {
+    --fds-accent-dark-1: 260, 70%, 48%;
+  }
   @media (prefers-color-scheme: dark) {
     main {
       background-color: #212121;
@@ -72,6 +76,9 @@
     }
     :global(a:visited) {
       color: rgb(190, 160, 238);
+    }
+    :global(:root) {
+      --fds-accent-light-2: 260, 70%, 78%;
     }
   }
 </style>
