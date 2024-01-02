@@ -1,7 +1,7 @@
 <script lang="ts">
   import PageTitle from '$lib/PageTitle.svelte';
   import { formatISODate } from '$utils/formatISODate';
-  import { ToggleSwitch } from 'fluent-svelte';
+  import { ComboBox, TextBlock, ToggleSwitch } from 'fluent-svelte';
   import BoldNumber from './BoldNumber.svelte';
   import CdrzMap from './CdrzMap.svelte';
   import ElectionsTurnoutBarChart from './ElectionsTurnoutBarChart.svelte';
@@ -16,266 +16,322 @@
 
   export let data;
 
+  let year = 2020;
   let showMore = false;
+
+  $: cdrz = year === 2010 && data.cdrz2010 ? data.cdrz2010 : data.cdrz;
 </script>
 
 <PageTitle>
   Climate Disaster Resilience Zone (CDRZ) info sheet
   <svelte:fragment slot="caption">
-    South Carolina Tract <code>{data.cdrz.tract}</code>
+    South Carolina Tract <code>{cdrz.tract}</code>
   </svelte:fragment>
 </PageTitle>
 
 <a href="/cdrz-info-sheet" class="back">← Back to all</a>
 
-<article>
-  <ToggleSwitch bind:checked="{showMore}">Show more details</ToggleSwitch>
-  <div class="note">All numbers are based on 2020 data unless otherwise specified.</div>
+<div class="page-content-wrapper">
+  <article>
+    <!-- <div class="note">All numbers are based on 2020 data unless otherwise specified.</div> -->
 
-  <div class="top-grid">
-    <section id="mapSection" style="min-height: 250px;">
-      <CdrzMap tract="{data.cdrz.tract}" />
-    </section>
+    <div class="top-grid">
+      <section id="mapSection" style="min-height: 250px;">
+        <CdrzMap tract="{cdrz.tract}" />
+      </section>
+      <section>
+        <SectionHeading noTopMargin>Places within this tract</SectionHeading>
+        <ul>
+          {#each cdrz.places as place}
+            <li>{place.name}</li>
+          {/each}
+        </ul>
+
+        <UrbanRuralPie
+          size="{100}"
+          urbanFraction="{cdrz.urban.fraction}"
+          ruralFraction="{cdrz.rural.fraction}"
+        />
+      </section>
+    </div>
     <section>
-      <SectionHeading noTopMargin>Places within this tract</SectionHeading>
-      <ul>
-        {#each data.cdrz.places as place}
-          <li>{place.name}</li>
-        {/each}
-      </ul>
+      <SectionHeading>Demographics</SectionHeading>
 
-      <UrbanRuralPie
-        size="{100}"
-        urbanFraction="{data.cdrz.urban.fraction}"
-        ruralFraction="{data.cdrz.rural.fraction}"
-      />
-    </section>
-  </div>
-  <section>
-    <SectionHeading>Demographics</SectionHeading>
-
-    <div class="grid">
-      <SubSection>
-        <SubHeading slot="heading">Population</SubHeading>
-        <BoldNumber>
-          {data.cdrz.population.total.toLocaleString('en-us')}
-        </BoldNumber>
-      </SubSection>
-
-      <SubSection>
-        <SubHeading slot="heading">Population density</SubHeading>
-        <BoldNumber>
-          {parseInt(`${data.cdrz.population.personsPerSquareMileDensity}`).toLocaleString('en-us')}
-          <svelte:fragment slot="units">people per square mile</svelte:fragment>
-        </BoldNumber>
-      </SubSection>
-
-      <SubSection style="grid-column: 1 / 3">
-        <SubHeading slot="heading">Race</SubHeading>
-        <RaceBarChart data="{data.cdrz}" />
-      </SubSection>
-
-      <SubSection style="grid-column: 1 / 3">
-        <SubHeading slot="heading">Ethnicity</SubHeading>
-        <EthnicityBarChart data="{data.cdrz}" />
-      </SubSection>
-
-      {#if data.cdrz.income[0]}
-        {@const income = data.cdrz.income[0]}
+      <div class="grid">
         <SubSection>
-          <SubHeading slot="heading">Median income</SubHeading>
-          <div style="padding-bottom: 10px;">
-            In {income.dollarYear} US dollars.
-            <i>
-              From American Community Survey Estimates, {income.dataYears.start} - {income.dataYears
-                .end}.
-            </i>
-          </div>
+          <SubHeading slot="heading">Population</SubHeading>
           <BoldNumber>
-            {income.median.value.toLocaleString('en-us')}
-            <svelte:fragment slot="prefix">$</svelte:fragment>
-            <svelte:fragment slot="units">
-              ± {income.median.marginOfError.toLocaleString('en-us')}
-            </svelte:fragment>
-            <!-- <svelte:fragment slot="caption">Median</svelte:fragment> -->
+            {cdrz.population.total.toLocaleString('en-us')}
           </BoldNumber>
         </SubSection>
-      {/if}
 
-      <SubSection>
-        <SubHeading slot="heading">Renters &amp; owners</SubHeading>
-        <RentersOwnerPie
-          size="{100}"
-          renters="{data.cdrz.tenure.renter.fraction}"
-          owners="{data.cdrz.tenure.owner.fraction}"
-        />
-      </SubSection>
-    </div>
-  </section>
+        <SubSection>
+          <SubHeading slot="heading">Population density</SubHeading>
+          <BoldNumber>
+            {parseInt(`${cdrz.population.personsPerSquareMileDensity}`).toLocaleString('en-us')}
+            <svelte:fragment slot="units">people per square mile</svelte:fragment>
+          </BoldNumber>
+        </SubSection>
 
-  {#if data.cdrz.elections[0]}
-    {@const election = data.cdrz.elections[0]}
-    <section>
-      <SectionHeading>Voting</SectionHeading>
-      <div>
-        From the South Carolina Election Commission
-        <!-- prettier-ignore -->
-        <span>(<a href="https://scvotes.gov/">https://scvotes.gov/</a>).</span>
-        {#if showMore}
-          <i>
-            Election precincts do not align with Census tracts. Preicincts were associated with a
-            tract if the precinct centroid was contained by the tract. No tract contained more than
-            one precinct centroid.
-          </i>
+        <SubSection style="grid-column: 1 / 3">
+          <SubHeading slot="heading">Race</SubHeading>
+          <RaceBarChart data="{cdrz}" />
+        </SubSection>
+
+        <SubSection style="grid-column: 1 / 3">
+          <SubHeading slot="heading">Ethnicity</SubHeading>
+          <EthnicityBarChart data="{cdrz}" />
+        </SubSection>
+
+        {#if cdrz.income[0]}
+          {@const income = cdrz.income[0]}
+          <SubSection>
+            <SubHeading slot="heading">Median income</SubHeading>
+            <div style="padding-bottom: 10px;">
+              In {income.dollarYear} US dollars.
+              <i>
+                From American Community Survey Estimates, {income.dataYears.start} - {income
+                  .dataYears.end}.
+              </i>
+            </div>
+            <BoldNumber>
+              {income.median.value.toLocaleString('en-us')}
+              <svelte:fragment slot="prefix">$</svelte:fragment>
+              <svelte:fragment slot="units">
+                ± {income.median.marginOfError.toLocaleString('en-us')}
+              </svelte:fragment>
+              <!-- <svelte:fragment slot="caption">Median</svelte:fragment> -->
+            </BoldNumber>
+          </SubSection>
         {/if}
+
+        <SubSection>
+          <SubHeading slot="heading">Renters &amp; owners</SubHeading>
+          <RentersOwnerPie
+            size="{100}"
+            renters="{cdrz.tenure.renter.fraction}"
+            owners="{cdrz.tenure.owner.fraction}"
+          />
+        </SubSection>
       </div>
-
-      <p>Precinct: {election.precinct}</p>
-
-      <SubSection>
-        <SubHeading slot="heading">Turnout</SubHeading>
-        <div>{election.name || formatISODate(election.date)}</div>
-        <ElectionsTurnoutBarChart data="{data.cdrz}" />
-      </SubSection>
     </section>
-  {/if}
 
-  <section>
-    <SectionHeading>Housing</SectionHeading>
+    {#if cdrz.elections?.[0]}
+      {@const election = cdrz.elections[0]}
+      <section>
+        <SectionHeading>Voting</SectionHeading>
+        <div>
+          From the South Carolina Election Commission
+          <!-- prettier-ignore -->
+          <span>(<a href="https://scvotes.gov/">https://scvotes.gov/</a>).</span>
+          {#if showMore}
+            <i>
+              Election precincts do not align with Census tracts. Preicincts were associated with a
+              tract if the precinct centroid was contained by the tract. No tract contained more
+              than one precinct centroid.
+            </i>
+          {/if}
+        </div>
 
-    <div class="grid">
-      {#if data.cdrz.zillow?.zhvi[0]}
+        <p>Precinct: {election.precinct}</p>
+
         <SubSection>
-          <SubHeading slot="heading">Zillow Home Value Index (ZHVI)</SubHeading>
-          As of {formatISODate(data.cdrz.zillow.zhvi[0].reportedAt)}
-          <div class="zhvi">
-            <BoldNumber>
-              {Math.round((data.cdrz.zillow?.zhvi[0]?.state || 0) / 1000)}
-              <svelte:fragment slot="prefix">$</svelte:fragment>
-              <svelte:fragment slot="units">thousand</svelte:fragment>
-              <svelte:fragment slot="caption">State</svelte:fragment>
-            </BoldNumber>
-            <BoldNumber>
-              {Math.round((data.cdrz.zillow?.zhvi[0]?.county || 0) / 1000)}
-              <svelte:fragment slot="prefix">$</svelte:fragment>
-              <svelte:fragment slot="units">thousand</svelte:fragment>
-              <svelte:fragment slot="caption">County</svelte:fragment>
-            </BoldNumber>
-            <BoldNumber>
-              {Math.round((data.cdrz.zillow?.zhvi[0]?.zip || 0) / 1000)}
-              <svelte:fragment slot="prefix">$</svelte:fragment>
-              <svelte:fragment slot="units">thousand</svelte:fragment>
-              <svelte:fragment slot="caption">Zip</svelte:fragment>
-            </BoldNumber>
-            {#if showMore}
+          <SubHeading slot="heading">Turnout</SubHeading>
+          <div>{election.name || formatISODate(election.date)}</div>
+          <ElectionsTurnoutBarChart data="{cdrz}" />
+        </SubSection>
+      </section>
+    {/if}
+
+    {#if cdrz.zillow?.zhvi[0]}
+      <section>
+        <SectionHeading>Housing</SectionHeading>
+
+        <div class="grid">
+          <SubSection>
+            <SubHeading slot="heading">Zillow Home Value Index (ZHVI)</SubHeading>
+            As of {formatISODate(cdrz.zillow.zhvi[0].reportedAt)}
+            <div class="zhvi">
               <BoldNumber>
-                {Math.round((data.cdrz.zillow?.zhvi[0]?.msa || 0) / 1000)}
+                {Math.round((cdrz.zillow?.zhvi[0]?.state || 0) / 1000)}
                 <svelte:fragment slot="prefix">$</svelte:fragment>
                 <svelte:fragment slot="units">thousand</svelte:fragment>
-                <svelte:fragment slot="caption">MSA</svelte:fragment>
+                <svelte:fragment slot="caption">State</svelte:fragment>
               </BoldNumber>
               <BoldNumber>
-                {Math.round((data.cdrz.zillow?.zhvi[0]?.city || 0) / 1000)}
+                {Math.round((cdrz.zillow?.zhvi[0]?.county || 0) / 1000)}
                 <svelte:fragment slot="prefix">$</svelte:fragment>
                 <svelte:fragment slot="units">thousand</svelte:fragment>
-                <svelte:fragment slot="caption">City</svelte:fragment>
+                <svelte:fragment slot="caption">County</svelte:fragment>
               </BoldNumber>
-            {/if}
-          </div>
-        </SubSection>
-
-        <SubSection>
-          <SubHeading slot="heading">ZHVI Change</SubHeading>
-          Cacluated from {formatISODate(data.cdrz.zillow.zhvi[0].increaseRates.startedAt)} to {formatISODate(
-            data.cdrz.zillow.zhvi[0].increaseRates.endedAt
-          )}
-          <div class="zhvi">
-            <BoldNumber>
-              {Math.round(data.cdrz.zillow.zhvi[0].increaseRates.state)}
-              <svelte:fragment slot="suffix">%</svelte:fragment>
-              <svelte:fragment slot="units"><span class="warning">increase</span></svelte:fragment>
-              <svelte:fragment slot="caption">State</svelte:fragment>
-            </BoldNumber>
-            <BoldNumber>
-              {Math.round(data.cdrz.zillow.zhvi[0].increaseRates.county)}
-              <svelte:fragment slot="suffix">%</svelte:fragment>
-              <svelte:fragment slot="units"><span class="warning">increase</span></svelte:fragment>
-              <svelte:fragment slot="caption">County</svelte:fragment>
-            </BoldNumber>
-            <BoldNumber>
-              {Math.round(data.cdrz.zillow.zhvi[0].increaseRates.zip)}
-              <svelte:fragment slot="suffix">%</svelte:fragment>
-              <svelte:fragment slot="units"><span class="warning">increase</span></svelte:fragment>
-              <svelte:fragment slot="caption">Zip</svelte:fragment>
-            </BoldNumber>
-          </div>
-        </SubSection>
-      {/if}
-    </div>
-  </section>
-
-  {#if data.cdrz.risks}
-    <section>
-      <SectionHeading>Hazard risk index</SectionHeading>
-      <div>
-        From the National Risk Index.
-        <a
-          href="https://hazards.fema.gov/nri/report/viewer?dataLOD=Census%20tracts&dataIDs={data
-            .cdrz.tract}#SectionRiskIndex"
-        >
-          View the whole report.
-        </a>
-      </div>
-
-      <div class="columns">
-        <SubSection>
-          <SubHeading slot="heading">Composite ratings</SubHeading>
-          <div class="ratings">
-            <h4>Composite NRI</h4>
-            <RiskRating
-              rating="{data.cdrz.risks.compositeNRI.rating}"
-              score="{data.cdrz.risks.compositeNRI.score}"
-            />
-            <h4>Expected annual loss</h4>
-            <RiskRating
-              rating="{data.cdrz.risks.compositeExpectedAnnualLoss.rating}"
-              score="{data.cdrz.risks.compositeExpectedAnnualLoss.score}"
-            />
-            <h4>Social vulnerability</h4>
-            <RiskRating
-              rating="{data.cdrz.risks.socialVulnerability.rating}"
-              score="{data.cdrz.risks.socialVulnerability.score}"
-            />
-            <h4>Community resilience</h4>
-            <RiskRating
-              rating="{data.cdrz.risks.communityResilience.rating}"
-              score="{data.cdrz.risks.communityResilience.score}"
-            />
-          </div>
-        </SubSection>
-
-        <SubSection>
-          <SubHeading slot="heading">Hazards</SubHeading>
-          <div class="ratings">
-            {#each Object.entries(data.cdrz.risks.natural) as [key, value]}
-              {#if showMore || (value.rating !== 'Not Applicable' && value.rating !== 'Insufficient Data')}
-                <h4>{key}</h4>
-                <RiskRating rating="{value.rating}" score="{value.score}" />
+              <BoldNumber>
+                {Math.round((cdrz.zillow?.zhvi[0]?.zip || 0) / 1000)}
+                <svelte:fragment slot="prefix">$</svelte:fragment>
+                <svelte:fragment slot="units">thousand</svelte:fragment>
+                <svelte:fragment slot="caption">Zip</svelte:fragment>
+              </BoldNumber>
+              {#if showMore}
+                <BoldNumber>
+                  {Math.round((cdrz.zillow?.zhvi[0]?.msa || 0) / 1000)}
+                  <svelte:fragment slot="prefix">$</svelte:fragment>
+                  <svelte:fragment slot="units">thousand</svelte:fragment>
+                  <svelte:fragment slot="caption">MSA</svelte:fragment>
+                </BoldNumber>
+                <BoldNumber>
+                  {Math.round((cdrz.zillow?.zhvi[0]?.city || 0) / 1000)}
+                  <svelte:fragment slot="prefix">$</svelte:fragment>
+                  <svelte:fragment slot="units">thousand</svelte:fragment>
+                  <svelte:fragment slot="caption">City</svelte:fragment>
+                </BoldNumber>
               {/if}
-            {/each}
-          </div>
-        </SubSection>
-      </div>
-    </section>
-  {/if}
-</article>
+            </div>
+          </SubSection>
+
+          <SubSection>
+            <SubHeading slot="heading">ZHVI Change</SubHeading>
+            Cacluated from {formatISODate(cdrz.zillow.zhvi[0].increaseRates.startedAt)} to {formatISODate(
+              cdrz.zillow.zhvi[0].increaseRates.endedAt
+            )}
+            <div class="zhvi">
+              <BoldNumber>
+                {Math.round(cdrz.zillow.zhvi[0].increaseRates.state)}
+                <svelte:fragment slot="suffix">%</svelte:fragment>
+                <svelte:fragment slot="units">
+                  <span class="warning">increase</span>
+                </svelte:fragment>
+                <svelte:fragment slot="caption">State</svelte:fragment>
+              </BoldNumber>
+              <BoldNumber>
+                {Math.round(cdrz.zillow.zhvi[0].increaseRates.county)}
+                <svelte:fragment slot="suffix">%</svelte:fragment>
+                <svelte:fragment slot="units">
+                  <span class="warning">increase</span>
+                </svelte:fragment>
+                <svelte:fragment slot="caption">County</svelte:fragment>
+              </BoldNumber>
+              <BoldNumber>
+                {Math.round(cdrz.zillow.zhvi[0].increaseRates.zip)}
+                <svelte:fragment slot="suffix">%</svelte:fragment>
+                <svelte:fragment slot="units">
+                  <span class="warning">increase</span>
+                </svelte:fragment>
+                <svelte:fragment slot="caption">Zip</svelte:fragment>
+              </BoldNumber>
+            </div>
+          </SubSection>
+        </div>
+      </section>
+    {/if}
+
+    {#if cdrz.risks}
+      <section>
+        <SectionHeading>Hazard risk index</SectionHeading>
+        <div>
+          From the National Risk Index ({formatISODate(cdrz.risks.timestamp, false, true, false)}).
+          <a
+            href="https://hazards.fema.gov/nri/report/viewer?dataLOD=Census%20tracts&dataIDs={data
+              .cdrz.tract}#SectionRiskIndex"
+          >
+            View the whole report.
+          </a>
+        </div>
+
+        <div class="columns">
+          <SubSection>
+            <SubHeading slot="heading">Composite ratings</SubHeading>
+            <div class="ratings">
+              <h4>Composite NRI</h4>
+              <RiskRating
+                rating="{cdrz.risks.compositeNRI.rating}"
+                score="{cdrz.risks.compositeNRI.score}"
+              />
+              <h4>Expected annual loss</h4>
+              <RiskRating
+                rating="{cdrz.risks.compositeExpectedAnnualLoss.rating}"
+                score="{cdrz.risks.compositeExpectedAnnualLoss.score}"
+              />
+              <h4>Social vulnerability</h4>
+              <RiskRating
+                rating="{cdrz.risks.socialVulnerability.rating}"
+                score="{cdrz.risks.socialVulnerability.score}"
+              />
+              <h4>Community resilience</h4>
+              <RiskRating
+                rating="{cdrz.risks.communityResilience.rating}"
+                score="{cdrz.risks.communityResilience.score}"
+              />
+            </div>
+          </SubSection>
+
+          <SubSection>
+            <SubHeading slot="heading">Hazards</SubHeading>
+            <div class="ratings">
+              {#each Object.entries(cdrz.risks.natural) as [key, value]}
+                {#if showMore || (value.rating !== 'Not Applicable' && value.rating !== 'Insufficient Data')}
+                  <h4>{key}</h4>
+                  <RiskRating rating="{value.rating}" score="{value.score}" />
+                {/if}
+              {/each}
+            </div>
+          </SubSection>
+        </div>
+      </section>
+    {/if}
+  </article>
+
+  <aside>
+    <b style="display: block; padding-bottom: 10px;">Options</b>
+    <TextBlock variant="body" class="cdrz-info-sidebar--field-title">Year</TextBlock>
+    <TextBlock variant="caption" class="cdrz-info-sidebar--field-caption">
+      Choose the year for census data
+    </TextBlock>
+    <div>
+      <ComboBox
+        style="width: 100%;"
+        items="{[
+          { name: '2020', value: 2020 },
+          { name: '2010', value: 2010 },
+        ]}"
+        bind:value="{year}"
+      />
+    </div>
+    <TextBlock variant="body" class="cdrz-info-sidebar--field-title">Details</TextBlock>
+    <div>
+      <ToggleSwitch bind:checked="{showMore}">Show more details</ToggleSwitch>
+    </div>
+  </aside>
+</div>
 
 <style>
+  .page-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  aside {
+    flex-grow: 1;
+    max-width: 240px;
+  }
+
+  aside :global(.cdrz-info-sidebar--field-title) {
+    display: block;
+    padding-top: 10px;
+  }
+
+  aside :global(.cdrz-info-sidebar--field-caption) {
+    display: block;
+    margin-top: -2px;
+    margin-bottom: 4px;
+  }
+
   article {
     width: 8in;
     border-right: 1px solid green;
     padding: 20px;
     box-sizing: border-box;
+    flex-grow: 0;
+    flex-shrink: 0;
   }
 
   .top-grid {

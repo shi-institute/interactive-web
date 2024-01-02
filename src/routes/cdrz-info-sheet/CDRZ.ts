@@ -103,6 +103,7 @@ export interface ZillowHomeValueIndex {
 }
 
 export interface Risks {
+  timestamp: ISODate;
   compositeNRI: Risk;
   compositeExpectedAnnualLoss: Risk;
   socialVulnerability: Risk;
