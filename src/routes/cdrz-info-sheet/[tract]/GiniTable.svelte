@@ -21,21 +21,21 @@
       <td>State</td>
       <td>{gini.state}</td>
       {#if lastGini}
-        <td>{Math.round(((lastGini.state - gini.state) / lastGini.state) * 100)} %</td>
+        <td>{Math.round(((gini.state - lastGini.state) / lastGini.state) * 100)} %</td>
       {/if}
     </tr>
     <tr>
       <td>County</td>
       <td>{gini.county}</td>
       {#if lastGini}
-        <td>{Math.round(((lastGini.county - gini.county) / lastGini.county) * 100)} %</td>
+        <td>{Math.round(((gini.county - lastGini.county) / lastGini.county) * 100)} %</td>
       {/if}
     </tr>
     <tr>
       <td>Tract</td>
       <td>{gini.tract}</td>
       {#if lastGini}
-        <td>{Math.round(((lastGini.tract - gini.tract) / lastGini.tract) * 100)} %</td>
+        <td>{Math.round(((gini.tract - lastGini.tract) / lastGini.tract) * 100)} %</td>
       {/if}
     </tr>
   </tbody>
