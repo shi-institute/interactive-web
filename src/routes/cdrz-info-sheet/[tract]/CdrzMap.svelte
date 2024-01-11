@@ -1,5 +1,6 @@
 <script lang="ts">
   import { FillLayer, GeoJSON, LineLayer, MapLibre } from 'svelte-maplibre';
+  import { themeMode } from '../../../stores/themeMode';
   import cdrz_shapes from '../SC_FEMA_CDRZ.geo.json';
 
   export let map: maplibregl.Map | undefined = undefined;
@@ -37,7 +38,9 @@
 <div>
   <MapLibre
     bind:map="{map}"
-    style="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+    style="https://basemaps.cartocdn.com/gl/{$themeMode === 'dark'
+      ? 'dark-matter'
+      : 'positron'}-gl-style/style.json"
     center="{[-82.4013, 34.8622]}"
     zoom="{4}"
   >

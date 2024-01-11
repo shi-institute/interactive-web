@@ -1,6 +1,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { FillLayer, GeoJSON, LineLayer, MapLibre, MarkerLayer } from 'svelte-maplibre';
+  import { themeMode } from '../../stores/themeMode';
   import cdrz_shapes from './SC_FEMA_CDRZ.geo.json';
 
   export let map: maplibregl.Map | undefined = undefined;
@@ -47,7 +48,9 @@
 <div class="map-wrapper">
   <MapLibre
     bind:map="{map}"
-    style="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+    style="https://basemaps.cartocdn.com/gl/{$themeMode === 'dark'
+      ? 'dark-matter'
+      : 'positron'}-gl-style/style.json"
     center="{[-82.4013, 34.8622]}"
     zoom="{4}"
   >
@@ -96,8 +99,12 @@
     font-size: 16px;
     line-height: 16px;
     text-align: center;
-    color: black;
     text-shadow: 1px 1px 3px white;
     font-weight: bold;
+  }
+  @media (prefers-color-scheme: dark) {
+    .tract-label {
+      text-shadow: 1px 1px 3px black;
+    }
   }
 </style>
