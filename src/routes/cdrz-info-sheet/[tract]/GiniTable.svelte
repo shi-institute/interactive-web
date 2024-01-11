@@ -32,7 +32,7 @@
       {/if}
     </tr>
     <tr>
-      <td>Tract</td>
+      <td>Tract ☄</td>
       <td>{gini.tract}</td>
       {#if lastGini}
         <td>{Math.round(((gini.tract - lastGini.tract) / lastGini.tract) * 100)} %</td>

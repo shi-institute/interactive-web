@@ -25,7 +25,7 @@
       <td>+ {Math.round(zillow.zhvi[0].increaseRates.county)} %</td>
     </tr>
     <tr>
-      <td>Zip</td>
+      <td>Zip ☄</td>
       <td>$ {Math.round(zillow.zhvi[0]?.zip || 0).toLocaleString('en-us')}</td>
       <td>+ {Math.round(zillow.zhvi[0].increaseRates.zip)} %</td>
     </tr>
