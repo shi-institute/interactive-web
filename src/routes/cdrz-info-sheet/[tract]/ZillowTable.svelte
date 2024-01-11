@@ -29,7 +29,7 @@
       <td>$ {Math.round(zillow.zhvi[0]?.zip || 0).toLocaleString('en-us')}</td>
       <td>+ {Math.round(zillow.zhvi[0].increaseRates.zip)} %</td>
     </tr>
-    <tr>
+    <!-- <tr>
       <td>MSA</td>
       <td>$ {Math.round(zillow.zhvi[0]?.msa || 0).toLocaleString('en-us')}</td>
       <td></td>
@@ -38,7 +38,7 @@
       <td>City</td>
       <td>$ {Math.round(zillow.zhvi[0]?.city || 0).toLocaleString('en-us')}</td>
       <td></td>
-    </tr>
+    </tr> -->
   </tbody>
 </table>
 
