@@ -94,15 +94,15 @@
       }
     },
     "population": {
-      "total": "9876",
+      "total": 9876,
       "personsPerSquareMileDensity": 330.9840652333317
     },
     "urban": {
-      "total": "9876",
-      "fraction": 98.76
+      "total": 9876,
+      "fraction": 1
     },
     "rural": {
-      "total": "0",
+      "total": 0,
       "fraction": 0
     },
     "tenure": {
@@ -286,15 +286,15 @@
       }
     },
     "population": {
-      "total": "4497",
+      "total": 4497,
       "personsPerSquareMileDensity": 1993.9876320072688
     },
     "urban": {
-      "total": "4497",
-      "fraction": 44.97
+      "total": 4497,
+      "fraction": 1
     },
     "rural": {
-      "total": "0",
+      "total": 0,
       "fraction": 0
     },
     "tenure": {
@@ -478,15 +478,15 @@
       }
     },
     "population": {
-      "total": "4924",
+      "total": 4924,
       "personsPerSquareMileDensity": 11585.730947883096
     },
     "urban": {
-      "total": "4924",
-      "fraction": 49.24
+      "total": 4924,
+      "fraction": 1
     },
     "rural": {
-      "total": "0",
+      "total": 0,
       "fraction": 0
     },
     "tenure": {
@@ -670,15 +670,15 @@
       }
     },
     "population": {
-      "total": "6128",
+      "total": 6128,
       "personsPerSquareMileDensity": 3244.3541380540782
     },
     "urban": {
-      "total": "6128",
-      "fraction": 61.28
+      "total": 6128,
+      "fraction": 1
     },
     "rural": {
-      "total": "0",
+      "total": 0,
       "fraction": 0
     },
     "tenure": {
@@ -862,15 +862,15 @@
       }
     },
     "population": {
-      "total": "7113",
+      "total": 7113,
       "personsPerSquareMileDensity": 642.5736235549701
     },
     "urban": {
-      "total": "7113",
-      "fraction": 71.13
+      "total": 7113,
+      "fraction": 1
     },
     "rural": {
-      "total": "0",
+      "total": 0,
       "fraction": 0
     },
     "tenure": {
@@ -1054,15 +1054,15 @@
       }
     },
     "population": {
-      "total": "4450",
+      "total": 4450,
       "personsPerSquareMileDensity": 508.98244841864266
     },
     "urban": {
-      "total": "4450",
-      "fraction": 44.5
+      "total": 4450,
+      "fraction": 1
     },
     "rural": {
-      "total": "0",
+      "total": 0,
       "fraction": 0
     },
     "tenure": {
@@ -1246,16 +1246,16 @@
       }
     },
     "population": {
-      "total": "6256",
+      "total": 6256,
       "personsPerSquareMileDensity": 88.28408866671214
     },
     "urban": {
-      "total": "6248",
-      "fraction": 62.48
+      "total": 6248,
+      "fraction": 0.9987212276214834
     },
     "rural": {
-      "total": "8",
-      "fraction": 0.08
+      "total": 8,
+      "fraction": 0.0012787723785166241
     },
     "tenure": {
       "renter": {
@@ -1438,15 +1438,15 @@
       }
     },
     "population": {
-      "total": "5572",
+      "total": 5572,
       "personsPerSquareMileDensity": 63.73328791917933
     },
     "urban": {
-      "total": "5572",
-      "fraction": 55.72
+      "total": 5572,
+      "fraction": 1
     },
     "rural": {
-      "total": "0",
+      "total": 0,
       "fraction": 0
     },
     "tenure": {
@@ -1630,15 +1630,15 @@
       }
     },
     "population": {
-      "total": "8016",
+      "total": 8016,
       "personsPerSquareMileDensity": 84.07615722157702
     },
     "urban": {
-      "total": "8016",
-      "fraction": 80.16
+      "total": 8016,
+      "fraction": 1
     },
     "rural": {
-      "total": "0",
+      "total": 0,
       "fraction": 0
     },
     "tenure": {
@@ -1822,15 +1822,15 @@
       }
     },
     "population": {
-      "total": "4321",
+      "total": 4321,
       "personsPerSquareMileDensity": 1147.995731919246
     },
     "urban": {
-      "total": "4321",
-      "fraction": 43.21
+      "total": 4321,
+      "fraction": 1
     },
     "rural": {
-      "total": "0",
+      "total": 0,
       "fraction": 0
     },
     "tenure": {
