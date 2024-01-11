@@ -2,6 +2,7 @@
   import PageTitle from '$lib/PageTitle.svelte';
   import { formatISODate } from '$utils/formatISODate';
   import { ComboBox, TextBlock, ToggleSwitch } from 'fluent-svelte';
+  import { cdrzOptionsStore } from '../../../stores/cdrzOptionsStore';
   import BoldNumber from './BoldNumber.svelte';
   import CdrzMap from './CdrzMap.svelte';
   import ElectionsTurnoutBarChart from './ElectionsTurnoutBarChart.svelte';
@@ -11,6 +12,7 @@
   import RentersOwnerPie from './RentersOwnerPie.svelte';
   import RiskRating from './RiskRating.svelte';
   import SectionHeading from './SectionHeading.svelte';
+  import Sidebar from './Sidebar.svelte';
   import SubHeading from './SubHeading.svelte';
   import SubSection from './SubSection.svelte';
   import UrbanRuralPie from './UrbanRuralPie.svelte';
@@ -18,8 +20,8 @@
 
   export let data;
 
-  let year = 2020;
-  let showMore = false;
+  $: year = $cdrzOptionsStore.year;
+  $: showMore = $cdrzOptionsStore.showMore;
 
   $: cdrz = year === 2010 && data.cdrz2010 ? data.cdrz2010 : data.cdrz;
 </script>
@@ -271,29 +273,7 @@
     {/if}
   </article>
 
-  <aside>
-    <TextBlock variant="bodyStrong" style="padding: 24px 0 0px 0;">Options</TextBlock>
-    <TextBlock variant="body" class="cdrz-info-sidebar--field-title">Year</TextBlock>
-    <TextBlock variant="caption" class="cdrz-info-sidebar--field-caption">
-      Choose the year for census data
-    </TextBlock>
-    <div>
-      <ComboBox
-        style="width: 100%;"
-        items="{[
-          { name: '2020', value: 2020 },
-          { name: '2010', value: 2010 },
-        ]}"
-        bind:value="{year}"
-      />
-    </div>
-    <TextBlock variant="body" class="cdrz-info-sidebar--field-title">
-      Details and descriptions
-    </TextBlock>
-    <div>
-      <ToggleSwitch bind:checked="{showMore}">Show more details</ToggleSwitch>
-    </div>
-  </aside>
+  <Sidebar />
 </div>
 
 <style>
@@ -301,27 +281,6 @@
     display: flex;
     flex-direction: row;
     gap: 20px;
-  }
-
-  aside {
-    flex-grow: 1;
-    max-width: 240px;
-  }
-  @media print {
-    aside {
-      display: none;
-    }
-  }
-
-  aside :global(.cdrz-info-sidebar--field-title) {
-    display: block;
-    padding-top: 10px;
-  }
-
-  aside :global(.cdrz-info-sidebar--field-caption) {
-    display: block;
-    margin-top: -2px;
-    margin-bottom: 4px;
   }
 
   article {
