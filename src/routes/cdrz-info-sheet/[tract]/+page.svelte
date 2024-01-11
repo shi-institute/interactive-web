@@ -24,9 +24,11 @@
   $: showMore = $cdrzOptionsStore.showMore;
 
   $: cdrz = year === 2010 && data.cdrz2010 ? data.cdrz2010 : data.cdrz;
+
+  $: pageTitleElemVisibleHeight = 78;
 </script>
 
-<PageTitle>
+<PageTitle bind:visibleHeight="{pageTitleElemVisibleHeight}">
   Climate Disaster Resilience Zone (CDRZ) info sheet
   <svelte:fragment slot="caption">
     South Carolina Tract <code>{cdrz.tract}</code>
@@ -273,19 +275,17 @@
     {/if}
   </article>
 
-  <Sidebar />
+  <Sidebar pageTitleElemVisibleHeight="{pageTitleElemVisibleHeight}" />
 </div>
 
 <style>
   .page-content-wrapper {
     display: flex;
     flex-direction: row;
-    gap: 20px;
   }
 
   article {
     width: 8in;
-    border-right: 1px solid color-mix(in srgb, currentColor, transparent 86%);
     padding: 20px;
     box-sizing: border-box;
     flex-grow: 0;
