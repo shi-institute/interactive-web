@@ -185,7 +185,10 @@
           <SubSection>
             <SubHeading slot="heading">Median house value</SubHeading>
             <TextBlock>
-              <i>From Zillow Home Value Index, {formatISODate(cdrz.zillow.zhvi[0].reportedAt)}.</i>
+              From Zillow Home Value Index, {formatISODate(cdrz.zillow.zhvi[0].reportedAt)}.
+              {#if showMore}
+                <i>Tract-level data is not made available by Zillow.</i>
+              {/if}
             </TextBlock>
             <div class="zhvi">
               <BoldNumber>
