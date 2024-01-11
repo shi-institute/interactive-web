@@ -3,12 +3,14 @@
   import { cdrzOptionsStore } from '../../../stores/cdrzOptionsStore';
 
   export let pageTitleElemVisibleHeight: number;
+  export let noBorderLeft = false;
 </script>
 
-<aside>
+<aside class:noBorderLeft="{noBorderLeft}">
   <div class="sticky-wrapper" style="--pageTitleElemVisibleHeight: {pageTitleElemVisibleHeight}px;">
     <div class="wrapper-internal">
       <TextBlock variant="bodyStrong" style="padding: 24px 0 0px 0;">Options</TextBlock>
+
       <TextBlock variant="body" class="cdrz-info-sidebar--field-title">Year</TextBlock>
       <TextBlock variant="caption" class="cdrz-info-sidebar--field-caption">
         Choose the year for census data
@@ -23,11 +25,19 @@
           bind:value="{$cdrzOptionsStore.year}"
         />
       </div>
+
       <TextBlock variant="body" class="cdrz-info-sidebar--field-title">
         Details and descriptions
       </TextBlock>
       <div>
         <ToggleSwitch bind:checked="{$cdrzOptionsStore.showMore}">Show more details</ToggleSwitch>
+      </div>
+
+      <TextBlock variant="body" class="cdrz-info-sidebar--field-title">Layout</TextBlock>
+      <div>
+        <ToggleSwitch bind:checked="{$cdrzOptionsStore.useFixedWidth}">
+          Use fixed width (good for printing)
+        </ToggleSwitch>
       </div>
     </div>
   </div>
@@ -36,8 +46,10 @@
 <style>
   aside {
     flex-grow: 1;
-
     border-left: 1px solid color-mix(in srgb, currentColor, transparent 86%);
+  }
+  aside.noBorderLeft {
+    border-left: none;
   }
   @media print {
     aside {

@@ -7,6 +7,7 @@
   import CdrzMap from './CdrzMap.svelte';
   import ElectionsTurnoutBarChart from './ElectionsTurnoutBarChart.svelte';
   import EthnicityBarChart from './EthnicityBarChart.svelte';
+  import FloatingSidebar from './FloatingSidebar.svelte';
   import GiniTable from './GiniTable.svelte';
   import RaceBarChart from './RaceBarChart.svelte';
   import RentersOwnerPie from './RentersOwnerPie.svelte';
@@ -26,6 +27,10 @@
   $: cdrz = year === 2010 && data.cdrz2010 ? data.cdrz2010 : data.cdrz;
 
   $: pageTitleElemVisibleHeight = 78;
+
+  let pageWidth = 1200;
+
+  $: fixedSidebarEnabled = pageWidth >= 1080;
 </script>
 
 <PageTitle bind:visibleHeight="{pageTitleElemVisibleHeight}">
@@ -35,8 +40,13 @@
   </svelte:fragment>
 </PageTitle>
 
+<svelte:window bind:innerWidth="{pageWidth}" />
+
 <div class="page-content-wrapper">
-  <article>
+  <article
+    class:useFixedWidth="{$cdrzOptionsStore.useFixedWidth}"
+    class:fixedSidebarEnabled="{fixedSidebarEnabled}"
+  >
     <a href="/cdrz-info-sheet" class="back">← Back to all</a>
 
     <!-- <div class="note">All numbers are based on 2020 data unless otherwise specified.</div> -->
@@ -278,7 +288,11 @@
     {/if}
   </article>
 
-  <Sidebar pageTitleElemVisibleHeight="{pageTitleElemVisibleHeight}" />
+  {#if fixedSidebarEnabled}
+    <Sidebar pageTitleElemVisibleHeight="{pageTitleElemVisibleHeight}" />
+  {:else}
+    <FloatingSidebar />
+  {/if}
 </div>
 
 <style>
@@ -288,11 +302,17 @@
   }
 
   article {
-    width: 8in;
     padding: 20px;
+    width: 100%;
     box-sizing: border-box;
     flex-grow: 0;
     flex-shrink: 0;
+  }
+  article.fixedSidebarEnabled {
+    width: calc(100% - 300px);
+  }
+  article.useFixedWidth {
+    width: 8in;
   }
   @media print {
     article {
