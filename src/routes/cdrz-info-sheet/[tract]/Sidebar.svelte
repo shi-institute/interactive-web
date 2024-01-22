@@ -33,10 +33,10 @@
         <ToggleSwitch bind:checked="{$cdrzOptionsStore.showMore}">Show more details</ToggleSwitch>
       </div>
 
-      <TextBlock variant="body" class="cdrz-info-sidebar--field-title">Layout</TextBlock>
+      <TextBlock variant="body" class="cdrz-info-sidebar--field-title">Compare</TextBlock>
       <div>
-        <ToggleSwitch bind:checked="{$cdrzOptionsStore.useFixedWidth}">
-          Use fixed width (good for printing)
+        <ToggleSwitch bind:checked="{$cdrzOptionsStore.compareSideBySide}">
+          Show multiple tracts side-by-side
         </ToggleSwitch>
       </div>
     </div>
@@ -46,6 +46,7 @@
 <style>
   aside {
     flex-grow: 1;
+    flex-shrink: 0;
     border-left: 1px solid color-mix(in srgb, currentColor, transparent 86%);
   }
   aside.noBorderLeft {
