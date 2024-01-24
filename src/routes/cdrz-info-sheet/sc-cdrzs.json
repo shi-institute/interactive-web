@@ -147,8 +147,12 @@
         "type": "msa"
       },
       {
-        "name": "Salkehatchie Watershed",
-        "type": "watershed"
+        "name": "Salkehatchie river basin",
+        "type": "major_river_basin"
+      },
+      {
+        "name": "Savannah river basin",
+        "type": "major_river_basin"
       }
     ],
     "race": {
@@ -392,8 +396,8 @@
         "type": "msa"
       },
       {
-        "name": "Santee Watershed",
-        "type": "watershed"
+        "name": "Santee river basin",
+        "type": "major_river_basin"
       }
     ],
     "race": {
@@ -637,8 +641,8 @@
         "type": "msa"
       },
       {
-        "name": "Santee Watershed",
-        "type": "watershed"
+        "name": "Santee river basin",
+        "type": "major_river_basin"
       }
     ],
     "race": {
@@ -882,8 +886,8 @@
         "type": "msa"
       },
       {
-        "name": "Santee Watershed",
-        "type": "watershed"
+        "name": "Santee river basin",
+        "type": "major_river_basin"
       }
     ],
     "race": {
@@ -1127,8 +1131,8 @@
         "type": "msa"
       },
       {
-        "name": "Santee Watershed",
-        "type": "watershed"
+        "name": "Santee river basin",
+        "type": "major_river_basin"
       }
     ],
     "race": {
@@ -1372,8 +1376,8 @@
         "type": "msa"
       },
       {
-        "name": "Santee Watershed",
-        "type": "watershed"
+        "name": "Santee river basin",
+        "type": "major_river_basin"
       }
     ],
     "race": {
@@ -1617,8 +1621,8 @@
         "type": "msa"
       },
       {
-        "name": "Santee Watershed",
-        "type": "watershed"
+        "name": "Santee river basin",
+        "type": "major_river_basin"
       }
     ],
     "race": {
@@ -1862,8 +1866,8 @@
         "type": "msa"
       },
       {
-        "name": "Santee Watershed",
-        "type": "watershed"
+        "name": "Santee river basin",
+        "type": "major_river_basin"
       }
     ],
     "race": {
@@ -2107,8 +2111,8 @@
         "type": "msa"
       },
       {
-        "name": "Santee Watershed",
-        "type": "watershed"
+        "name": "Santee river basin",
+        "type": "major_river_basin"
       }
     ],
     "race": {
@@ -2352,8 +2356,8 @@
         "type": "msa"
       },
       {
-        "name": "PeeDee Watershed",
-        "type": "watershed"
+        "name": "PeeDee river basin",
+        "type": "major_river_basin"
       }
     ],
     "race": {
