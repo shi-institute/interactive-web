@@ -1,6 +1,16 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { FillLayer, GeoJSON, LineLayer, MapLibre, MarkerLayer } from 'svelte-maplibre';
+  import { getBasemapLocation } from '$utils/getBasemapLocation';
+  import {
+    FillLayer,
+    GeoJSON,
+    LineLayer,
+    MapLibre,
+    MarkerLayer,
+    RasterLayer,
+    RasterTileSource,
+  } from 'svelte-maplibre';
+  import { appSettings } from '../../stores/appSettings';
   import { themeMode } from '../../stores/themeMode';
   import cdrz_shapes from './SC_FEMA_CDRZ.geo.json';
 
@@ -48,9 +58,7 @@
 <div class="map-wrapper">
   <MapLibre
     bind:map="{map}"
-    style="https://basemaps.cartocdn.com/gl/{$themeMode === 'dark'
-      ? 'dark-matter'
-      : 'positron'}-gl-style/style.json"
+    style="{getBasemapLocation($appSettings.basemap)[+($themeMode === 'dark')]}"
     center="{[-82.4013, 34.8622]}"
     zoom="{4}"
   >
@@ -81,6 +89,15 @@
         </button>
       </MarkerLayer>
     </GeoJSON>
+    {#if $appSettings.basemap === 'OpenStreetMap'}
+      <RasterTileSource
+        tiles="{['https://tile.openstreetmap.org/{z}/{x}/{y}.png']}"
+        tileSize="{256}"
+        id="osm"
+      >
+        <RasterLayer paint="{{ 'raster-opacity': 0.3 }}" id="osm-raster" />
+      </RasterTileSource>
+    {/if}
   </MapLibre>
 </div>
 

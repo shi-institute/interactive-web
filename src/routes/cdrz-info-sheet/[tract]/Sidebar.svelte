@@ -1,5 +1,6 @@
 <script lang="ts">
   import { ComboBox, TextBlock, ToggleSwitch } from 'fluent-svelte';
+  import { appSettings, basemapNames } from '../../../stores/appSettings';
   import { cdrzOptionsStore } from '../../../stores/cdrzOptionsStore';
 
   export let pageTitleElemVisibleHeight: number;
@@ -38,6 +39,15 @@
         <ToggleSwitch bind:checked="{$cdrzOptionsStore.compareSideBySide}">
           Show multiple tracts side-by-side
         </ToggleSwitch>
+      </div>
+
+      <TextBlock variant="body" class="cdrz-info-sidebar--field-title">Basemap style</TextBlock>
+      <div>
+        <ComboBox
+          style="width: 100%;"
+          items="{basemapNames.map((name) => ({ name, value: name }))}"
+          bind:value="{$appSettings.basemap}"
+        />
       </div>
     </div>
   </div>

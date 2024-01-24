@@ -1,5 +1,6 @@
 <script lang="ts">
   import PageTitle from '$lib/PageTitle.svelte';
+  import { appSettings } from '../../stores/appSettings';
   import LandingPageMap from './LandingPageMap.svelte';
 
   export let data;
@@ -31,7 +32,9 @@
   class="map"
   style="--pageTitleVisibleHeight: {pageTitleVisibleHeight}px; --listHeight: {listHeight}px;"
 >
-  <LandingPageMap />
+  {#key $appSettings.basemap}
+    <LandingPageMap />
+  {/key}
 </div>
 
 <style>

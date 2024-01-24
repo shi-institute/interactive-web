@@ -3,6 +3,7 @@
   import { page } from '$app/stores';
   import { formatISODate } from '$utils/formatISODate';
   import { IconButton, TextBlock } from 'fluent-svelte';
+  import { appSettings } from '../../../stores/appSettings';
   import { cdrzOptionsStore } from '../../../stores/cdrzOptionsStore';
   import type { PageData } from './$types';
   import BoldNumber from './BoldNumber.svelte';
@@ -70,7 +71,9 @@
 
   <div class="top-grid">
     <section id="mapSection" style="min-height: 250px;">
-      <CdrzMap tract="{cdrz.tract}" />
+      {#key $appSettings.basemap}
+        <CdrzMap tract="{cdrz.tract}" />
+      {/key}
     </section>
     <section>
       <SectionHeading noTopMargin>Places within this tract</SectionHeading>
