@@ -29,7 +29,7 @@
   <ComboBox
     style="width: 100%;"
     items="{cdrzs.map((cdrz) => ({
-      name: `${cdrz.tract} (${cdrz.places[0].name})`,
+      name: `${cdrz.tract} (${cdrz.nickname || cdrz.places[0].name})`,
       value: cdrz.tract,
     }))}"
     bind:value="{selectedTract}"

@@ -1,5 +1,6 @@
 [
   {
+    "nickname": "Bluffton",
     "risks": {
       "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
@@ -122,6 +123,10 @@
         "type": "town"
       },
       {
+        "name": "",
+        "type": "poi"
+      },
+      {
         "name": "Salkehatchie river basin",
         "type": "major_river_basin"
       },
@@ -196,6 +201,7 @@
     }
   },
   {
+    "nickname": "Goose Creek",
     "risks": {
       "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
@@ -318,6 +324,10 @@
         "type": "city"
       },
       {
+        "name": "",
+        "type": "poi"
+      },
+      {
         "name": "Santee river basin",
         "type": "major_river_basin"
       }
@@ -388,6 +398,7 @@
     }
   },
   {
+    "nickname": "North Charleston D",
     "risks": {
       "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
@@ -506,8 +517,16 @@
     },
     "places": [
       {
-        "name": "Hanahan",
+        "name": "North Charleston",
         "type": "city"
+      },
+      {
+        "name": "Trident Technical College",
+        "type": "poi"
+      },
+      {
+        "name": "Carolina Memorial Gardens",
+        "type": "poi"
       },
       {
         "name": "Santee river basin",
@@ -580,6 +599,7 @@
     }
   },
   {
+    "nickname": "North Charleston A",
     "risks": {
       "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
@@ -702,6 +722,18 @@
         "type": "city"
       },
       {
+        "name": "CHS Airport",
+        "type": "poi"
+      },
+      {
+        "name": "Boeing Plant",
+        "type": "poi"
+      },
+      {
+        "name": "Tanger Outlet",
+        "type": "poi"
+      },
+      {
         "name": "Santee river basin",
         "type": "major_river_basin"
       }
@@ -772,6 +804,7 @@
     }
   },
   {
+    "nickname": "North Charleston E",
     "risks": {
       "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
@@ -890,8 +923,16 @@
     },
     "places": [
       {
-        "name": "Goose Creek",
+        "name": "North Charleston",
         "type": "city"
+      },
+      {
+        "name": "Wannamaker County Park",
+        "type": "poi"
+      },
+      {
+        "name": "Charleston Southern University",
+        "type": "poi"
       },
       {
         "name": "Santee river basin",
@@ -964,6 +1005,7 @@
     }
   },
   {
+    "nickname": "North Charleston C",
     "risks": {
       "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
@@ -1082,8 +1124,12 @@
     },
     "places": [
       {
-        "name": "Hanahan",
+        "name": "North Charleston",
         "type": "city"
+      },
+      {
+        "name": "North Charleston Port",
+        "type": "poi"
       },
       {
         "name": "Santee river basin",
@@ -1156,6 +1202,7 @@
     }
   },
   {
+    "nickname": "Summerville B",
     "risks": {
       "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
@@ -1278,6 +1325,10 @@
         "type": "town"
       },
       {
+        "name": "Azelea Estates",
+        "type": "poi"
+      },
+      {
         "name": "Santee river basin",
         "type": "major_river_basin"
       }
@@ -1348,6 +1399,7 @@
     }
   },
   {
+    "nickname": "Summerville A",
     "risks": {
       "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
@@ -1470,6 +1522,10 @@
         "type": "town"
       },
       {
+        "name": "Historic Summerville",
+        "type": "poi"
+      },
+      {
         "name": "Santee river basin",
         "type": "major_river_basin"
       }
@@ -1540,6 +1596,7 @@
     }
   },
   {
+    "nickname": "North Charleston B",
     "risks": {
       "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
@@ -1662,6 +1719,10 @@
         "type": "city"
       },
       {
+        "name": "Windsor Hill Neighborhood",
+        "type": "poi"
+      },
+      {
         "name": "Santee river basin",
         "type": "major_river_basin"
       }
@@ -1732,6 +1793,7 @@
     }
   },
   {
+    "nickname": "Myrtle",
     "risks": {
       "timestamp": "2023-11-08T05:00:00.000Z",
       "compositeNRI": {
@@ -1852,6 +1914,10 @@
       {
         "name": "Myrtle Beach",
         "type": "city"
+      },
+      {
+        "name": "",
+        "type": "poi"
       },
       {
         "name": "PeeDee river basin",

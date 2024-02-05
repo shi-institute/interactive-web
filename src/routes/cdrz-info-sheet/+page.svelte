@@ -23,7 +23,9 @@
 
   <ul>
     {#each data.cdrzs as cdrz}
-      <a href="/cdrz-info-sheet/{cdrz.tract}"><li>{cdrz.tract} ({cdrz.places[0].name})</li></a>
+      <a href="/cdrz-info-sheet/{cdrz.tract}">
+        <li>{cdrz.tract} ({cdrz.nickname || cdrz.places[0].name})</li>
+      </a>
     {/each}
   </ul>
 </div>

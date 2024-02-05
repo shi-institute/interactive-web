@@ -1,5 +1,6 @@
 [
   {
+    "nickname": "Bluffton",
     "zillow": {
       "totalPopulation": 10963,
       "zipCode": 29910,
@@ -143,6 +144,10 @@
         "type": "town"
       },
       {
+        "name": "",
+        "type": "poi"
+      },
+      {
         "name": "Hilton Head Island-Bluffton, SC",
         "type": "msa"
       },
@@ -249,6 +254,7 @@
     }
   },
   {
+    "nickname": "Goose Creek",
     "zillow": {
       "totalPopulation": 6953,
       "zipCode": 29486,
@@ -392,6 +398,10 @@
         "type": "city"
       },
       {
+        "name": "",
+        "type": "poi"
+      },
+      {
         "name": "Charleston-North Charleston, SC",
         "type": "msa"
       },
@@ -494,6 +504,7 @@
     }
   },
   {
+    "nickname": "North Charleston D",
     "zillow": {
       "totalPopulation": 5741,
       "zipCode": 29406,
@@ -633,8 +644,16 @@
     },
     "places": [
       {
-        "name": "Hanahan",
+        "name": "North Charleston",
         "type": "city"
+      },
+      {
+        "name": "Trident Technical College",
+        "type": "poi"
+      },
+      {
+        "name": "Carolina Memorial Gardens",
+        "type": "poi"
       },
       {
         "name": "Charleston-North Charleston, SC",
@@ -739,6 +758,7 @@
     }
   },
   {
+    "nickname": "North Charleston A",
     "zillow": {
       "totalPopulation": 5102,
       "zipCode": 29418,
@@ -882,6 +902,18 @@
         "type": "city"
       },
       {
+        "name": "CHS Airport",
+        "type": "poi"
+      },
+      {
+        "name": "Boeing Plant",
+        "type": "poi"
+      },
+      {
+        "name": "Tanger Outlet",
+        "type": "poi"
+      },
+      {
         "name": "Charleston-North Charleston, SC",
         "type": "msa"
       },
@@ -984,6 +1016,7 @@
     }
   },
   {
+    "nickname": "North Charleston E",
     "zillow": {
       "totalPopulation": 7372,
       "zipCode": 29406,
@@ -1123,8 +1156,16 @@
     },
     "places": [
       {
-        "name": "Goose Creek",
+        "name": "North Charleston",
         "type": "city"
+      },
+      {
+        "name": "Wannamaker County Park",
+        "type": "poi"
+      },
+      {
+        "name": "Charleston Southern University",
+        "type": "poi"
       },
       {
         "name": "Charleston-North Charleston, SC",
@@ -1229,6 +1270,7 @@
     }
   },
   {
+    "nickname": "North Charleston C",
     "zillow": {
       "totalPopulation": 4870,
       "zipCode": 29406,
@@ -1368,8 +1410,12 @@
     },
     "places": [
       {
-        "name": "Hanahan",
+        "name": "North Charleston",
         "type": "city"
+      },
+      {
+        "name": "North Charleston Port",
+        "type": "poi"
       },
       {
         "name": "Charleston-North Charleston, SC",
@@ -1474,6 +1520,7 @@
     }
   },
   {
+    "nickname": "Summerville B",
     "zillow": {
       "totalPopulation": 8338,
       "zipCode": 29483,
@@ -1617,6 +1664,10 @@
         "type": "town"
       },
       {
+        "name": "Azelea Estates",
+        "type": "poi"
+      },
+      {
         "name": "Charleston-North Charleston, SC",
         "type": "msa"
       },
@@ -1719,6 +1770,7 @@
     }
   },
   {
+    "nickname": "Summerville A",
     "zillow": {
       "totalPopulation": 5738,
       "zipCode": 29483,
@@ -1862,6 +1914,10 @@
         "type": "town"
       },
       {
+        "name": "Historic Summerville",
+        "type": "poi"
+      },
+      {
         "name": "Charleston-North Charleston, SC",
         "type": "msa"
       },
@@ -1964,6 +2020,7 @@
     }
   },
   {
+    "nickname": "North Charleston B",
     "zillow": {
       "totalPopulation": 9316,
       "zipCode": 29420,
@@ -2107,6 +2164,10 @@
         "type": "city"
       },
       {
+        "name": "Windsor Hill Neighborhood",
+        "type": "poi"
+      },
+      {
         "name": "Charleston-North Charleston, SC",
         "type": "msa"
       },
@@ -2209,6 +2270,7 @@
     }
   },
   {
+    "nickname": "Myrtle",
     "zillow": {
       "totalPopulation": 4619,
       "zipCode": 29577,
@@ -2350,6 +2412,10 @@
       {
         "name": "Myrtle Beach",
         "type": "city"
+      },
+      {
+        "name": "",
+        "type": "poi"
       },
       {
         "name": "Myrtle Beach-Conway-North Myrtle Beach, SC-NC",

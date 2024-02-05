@@ -20,7 +20,7 @@ export interface CDRZ {
 
 export interface Place {
   name: string;
-  type?: 'city' | 'msa' | 'place' | 'watershed';
+  type?: 'city' | 'msa' | 'place' | 'watershed' | 'poi';
   coordinates?: {
     longitude: number;
     latitude: number;

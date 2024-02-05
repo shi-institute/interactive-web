@@ -78,7 +78,7 @@
     <section>
       <SectionHeading noTopMargin>Places within this tract</SectionHeading>
       <ul>
-        {#each cdrz.places as place}
+        {#each cdrz.places.sort((a, b) => (b.type === 'poi' ? -1 : 0)) as place}
           <li>{place.name}</li>
         {/each}
       </ul>
