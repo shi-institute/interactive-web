@@ -13,6 +13,7 @@
   import { appSettings } from '../../stores/appSettings';
   import { themeMode } from '../../stores/themeMode';
   import cdrz_shapes from './SC_FEMA_CDRZ.geo.json';
+  import scCDRZs from './sc-cdrzs.json';
 
   export let map: maplibregl.Map | undefined = undefined;
 
@@ -53,6 +54,20 @@
   function goToTract(tract: string) {
     goto(`/cdrz-info-sheet/${tract}`);
   }
+
+  const shapesWithNicknames = {
+    ...cdrz_shapes,
+    features: cdrz_shapes.features.map((feature) => {
+      return {
+        ...feature,
+        properties: {
+          ...feature.properties,
+          Nickname:
+            scCDRZs.find((cdrz) => cdrz.tract === feature.properties['NRI ID'])?.nickname || '',
+        },
+      };
+    }),
+  };
 </script>
 
 <div class="map-wrapper">
@@ -62,7 +77,7 @@
     center="{[-82.4013, 34.8622]}"
     zoom="{4}"
   >
-    <GeoJSON id="cdrzShapes" data="{cdrz_shapes}" promoteId="Tract FIPS">
+    <GeoJSON id="cdrzShapes" data="{shapesWithNicknames}" promoteId="Tract FIPS">
       <FillLayer
         on:click="{(evt) => goToTract(evt.detail.features?.[0]?.properties?.['NRI ID'])}"
         paint="{{
@@ -84,7 +99,7 @@
           {parseInt(feature.properties?.['Tract FIPS'])}
           <br />
           <span style="font-size: 80%; font-style: italic; font-weight: normal;">
-            {feature.properties?.County}
+            {feature.properties?.Nickname}
           </span>
         </button>
       </MarkerLayer>
