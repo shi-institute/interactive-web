@@ -21,7 +21,8 @@
     {#if $cdrzOptionsStore.compareSideBySide && data.tracts.length > 1}
       South Carolina Tracts <code>{data.tracts}</code>
     {:else}
-      South Carolina Tract <code>{data.tracts[0]}</code>
+      {data.cdrz.nickname} – Tract
+      <code>{data.tracts[0]}</code>
     {/if}
   </svelte:fragment>
 </PageTitle>

@@ -49,7 +49,10 @@
   class:fixedSidebarEnabled="{fixedSidebarEnabled}"
   class:showBorderRight="{$cdrzOptionsStore.compareSideBySide}"
 >
-  <a href="/cdrz-info-sheet" class="back" class:hideBackToAll="{hideBackToAll}">← Back to all</a>
+  <div class="back">
+    <a href="/cdrz-info-sheet" class:hideBackToAll="{hideBackToAll}">← Back to all</a>
+    <span>{data.cdrz.nickname}</span>
+  </div>
 
   {#if showRemoveButton}
     <IconButton class="remove-icon" on:click="{removeThisTract}">
@@ -383,8 +386,10 @@
   }
 
   .back {
-    display: block;
+    display: flex;
     margin: 0 0 16px 0;
+    align-items: center;
+    justify-content: space-between;
   }
   .back.hideBackToAll {
     visibility: hidden;

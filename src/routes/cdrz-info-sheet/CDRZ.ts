@@ -1,4 +1,5 @@
 export interface CDRZ {
+  nickname?: string;
   /** The name/number of the census tract */
   tract: string;
   places: Place[];
