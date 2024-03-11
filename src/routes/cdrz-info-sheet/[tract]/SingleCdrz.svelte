@@ -11,6 +11,7 @@
   import ElectionsTurnoutBarChart from './ElectionsTurnoutBarChart.svelte';
   import EthnicityBarChart from './EthnicityBarChart.svelte';
   import GiniTable from './GiniTable.svelte';
+  import PresidentialElectionTable from './PresidentialElectionTable.svelte';
   import RaceBarChart from './RaceBarChart.svelte';
   import RentersOwnerPie from './RentersOwnerPie.svelte';
   import RiskRating from './RiskRating.svelte';
@@ -207,6 +208,21 @@
         <div>{election.name || formatISODate(election.date)}</div>
         <ElectionsTurnoutBarChart data="{cdrz}" />
       </SubSection>
+
+      {#if election.turnout?.state?.democraticPresident && election.turnout.county.democraticPresident && election.turnout.precinct.democraticPresident}
+        <SubSection>
+          <SubHeading slot="heading">Presidential election results</SubHeading>
+          <div>{election.name?.replace('(SC)', '').trim() || formatISODate(election.date)}</div>
+          {#if showMore}
+            <i>
+              Results are shown in percentage points. Percentage points are calculated as the
+              difference between a candidate's percent of the popular vote and all of their
+              oponents' percents of the popular vote.
+            </i>
+          {/if}
+          <PresidentialElectionTable election="{election}" style="margin-top: 10px;" />
+        </SubSection>
+      {/if}
     </section>
   {/if}
 
