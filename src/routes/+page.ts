@@ -3,6 +3,14 @@ import type { PageLoad } from './$types';
 export const load = (({ url }) => {
   const visualizations: VizPageInfo[] = [
     {
+      label: 'South Carolina Communnity Disaster Resilience Zones (CDRZs)',
+      caption: 'Information sheets for each of the CDRZs in South Carolina.',
+      authors: ['Jack Buehner', 'Mike Winiski', 'Zury Marroquin'],
+      href: '/cdrz-info-sheet',
+      date: new Date('2024-01-01'),
+      backgroundHref: '/pexels-eva-bronzini-6420126.jpg',
+    },
+    {
       label: 'Racial Displacement in Greenville, SC',
       caption:
         'An exploration of historic and current population shifts in the City of Greenville and surrounding Greenville County.',
