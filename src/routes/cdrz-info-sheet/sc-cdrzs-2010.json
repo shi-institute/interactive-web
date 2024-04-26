@@ -1,0 +1,1992 @@
+[
+  {
+    "nickname": "Bluffton",
+    "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.83470484707226
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.77922352443808
+      },
+      "socialVulnerability": {
+        "rating": "Relatively High",
+        "score": 75.30999755859375
+      },
+      "communityResilience": {
+        "rating": "Relatively Moderate",
+        "score": 51.97999954223633
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Relatively Low",
+          "score": 84.46720441519847
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Earthquake": {
+          "rating": "Relatively Moderate",
+          "score": 87.66587594241022
+        },
+        "Hail": {
+          "rating": "Relatively Moderate",
+          "score": 80.42228518357413
+        },
+        "Heat Wave": {
+          "rating": "Relatively High",
+          "score": 81.11891396763511
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.97711426086691
+        },
+        "Ice Storm": {
+          "rating": "Relatively High",
+          "score": 92.02913448265735
+        },
+        "Landslide": {
+          "rating": "Relatively Low",
+          "score": 59.94578987684874
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 99.7484457541237
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Low",
+          "score": 51.75094534607887
+        },
+        "Strong Wind": {
+          "rating": "Relatively High",
+          "score": 88.09089947214352
+        },
+        "Tornado": {
+          "rating": "Relatively High",
+          "score": 79.5429162600957
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Moderate",
+          "score": 92.1158717134601
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 60.712356436573735
+        }
+      }
+    },
+    "population": {
+      "total": 9876,
+      "personsPerSquareMileDensity": 330.9840652333317
+    },
+    "urban": {
+      "total": 9876,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
+    },
+    "tenure": {
+      "renter": {
+        "total": 1470,
+        "fraction": 0.4373698304076168
+      },
+      "owner": {
+        "total": 1891,
+        "fraction": 0.5626301695923832
+      },
+      "totalHouseholds": 3361
+    },
+    "places": [
+      {
+        "name": "Bluffton",
+        "type": "town"
+      },
+      {
+        "name": "",
+        "type": "poi"
+      },
+      {
+        "name": "Salkehatchie river basin",
+        "type": "major_river_basin"
+      },
+      {
+        "name": "Savannah river basin",
+        "type": "major_river_basin"
+      }
+    ],
+    "race": {
+      "total": 9876,
+      "white": {
+        "total": 5869,
+        "hispanicOrLatino": 1204,
+        "notHispanicOrLatino": 4665
+      },
+      "black": {
+        "total": 1637,
+        "hispanicOrLatino": 26,
+        "notHispanicOrLatino": 1611
+      },
+      "americanIndianAlaskanNative": {
+        "total": 15,
+        "hispanicOrLatino": 10,
+        "notHispanicOrLatino": 5
+      },
+      "asian": {
+        "total": 113,
+        "hispanicOrLatino": 2,
+        "notHispanicOrLatino": 111
+      },
+      "pacificIslander": {
+        "total": 4,
+        "hispanicOrLatino": 2,
+        "notHispanicOrLatino": 2
+      },
+      "other": {
+        "total": 1948,
+        "hispanicOrLatino": 1937,
+        "notHispanicOrLatino": 11
+      },
+      "twoOrMore": {
+        "total": 290,
+        "hispanicOrLatino": 119,
+        "notHispanicOrLatino": 171
+      }
+    },
+    "ethnicity": {
+      "total": 9876,
+      "hispanicOrLatino": 3300,
+      "notHispanicOrLatino": 6576
+    },
+    "income": [
+      {
+        "dataYears": {
+          "start": 2006,
+          "end": 2010
+        },
+        "dollarYear": 2010,
+        "median": {
+          "value": 52596,
+          "marginOfError": 6045
+        }
+      }
+    ],
+    "tract": "T45013002107",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.46,
+      "tract": 0.38
+    }
+  },
+  {
+    "nickname": "Goose Creek",
+    "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.71935499215145
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.5185193884022
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": 90.22000122070312
+      },
+      "communityResilience": {
+        "rating": "Relatively Moderate",
+        "score": 56.470001220703125
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Very Low",
+          "score": 72.35194226278921
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "Very Low",
+          "score": 72.60201502451183
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 99.05935129295159
+        },
+        "Hail": {
+          "rating": "Relatively Moderate",
+          "score": 75.01087454885318
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 69.68081358479931
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.37140503181118
+        },
+        "Ice Storm": {
+          "rating": "Relatively Low",
+          "score": 65.54377514758143
+        },
+        "Landslide": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 95.52592805548568
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Low",
+          "score": 42.588721610259064
+        },
+        "Strong Wind": {
+          "rating": "Relatively High",
+          "score": 81.95765391895227
+        },
+        "Tornado": {
+          "rating": "Relatively Moderate",
+          "score": 68.41913450347398
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Moderate",
+          "score": 86.45309359875377
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 74.91016276393357
+        }
+      }
+    },
+    "population": {
+      "total": 4497,
+      "personsPerSquareMileDensity": 1993.9876320072688
+    },
+    "urban": {
+      "total": 4497,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
+    },
+    "tenure": {
+      "renter": {
+        "total": 619,
+        "fraction": 0.3823347745521927
+      },
+      "owner": {
+        "total": 1000,
+        "fraction": 0.6176652254478073
+      },
+      "totalHouseholds": 1619
+    },
+    "places": [
+      {
+        "name": "Goose Creek",
+        "type": "city"
+      },
+      {
+        "name": "",
+        "type": "poi"
+      },
+      {
+        "name": "Santee river basin",
+        "type": "major_river_basin"
+      }
+    ],
+    "race": {
+      "total": 4497,
+      "white": {
+        "total": 3089,
+        "hispanicOrLatino": 221,
+        "notHispanicOrLatino": 2868
+      },
+      "black": {
+        "total": 871,
+        "hispanicOrLatino": 23,
+        "notHispanicOrLatino": 848
+      },
+      "americanIndianAlaskanNative": {
+        "total": 26,
+        "hispanicOrLatino": 5,
+        "notHispanicOrLatino": 21
+      },
+      "asian": {
+        "total": 58,
+        "hispanicOrLatino": 5,
+        "notHispanicOrLatino": 53
+      },
+      "pacificIslander": {
+        "total": 5,
+        "hispanicOrLatino": 4,
+        "notHispanicOrLatino": 1
+      },
+      "other": {
+        "total": 267,
+        "hispanicOrLatino": 261,
+        "notHispanicOrLatino": 6
+      },
+      "twoOrMore": {
+        "total": 181,
+        "hispanicOrLatino": 38,
+        "notHispanicOrLatino": 143
+      }
+    },
+    "ethnicity": {
+      "total": 4497,
+      "hispanicOrLatino": 557,
+      "notHispanicOrLatino": 3940
+    },
+    "income": [
+      {
+        "dataYears": {
+          "start": 2006,
+          "end": 2010
+        },
+        "dollarYear": 2010,
+        "median": {
+          "value": 36681,
+          "marginOfError": 3901
+        }
+      }
+    ],
+    "tract": "T45015020718",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.4,
+      "tract": 0.3
+    }
+  },
+  {
+    "nickname": "North Charleston D",
+    "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.72054416591352
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.45040749700541
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": 99.47000122070312
+      },
+      "communityResilience": {
+        "rating": "Very High",
+        "score": 89.1500015258789
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Very Low",
+          "score": 70.26374442793461
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 98.68708457617963
+        },
+        "Hail": {
+          "rating": "Relatively Low",
+          "score": 67.8301454250479
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 60.42346806961505
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.4797308637078
+        },
+        "Ice Storm": {
+          "rating": "Relatively Low",
+          "score": 50.7342359540662
+        },
+        "Landslide": {
+          "rating": "Very Low",
+          "score": 40.74126451004655
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 96.45068937842144
+        },
+        "Riverine Flooding": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 46.78642386052363
+        },
+        "Tornado": {
+          "rating": "Relatively Low",
+          "score": 42.0345399184115
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 77.38218401055974
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 68.36320078915847
+        }
+      }
+    },
+    "population": {
+      "total": 4924,
+      "personsPerSquareMileDensity": 11585.730947883096
+    },
+    "urban": {
+      "total": 4924,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
+    },
+    "tenure": {
+      "renter": {
+        "total": 1269,
+        "fraction": 0.7149295774647887
+      },
+      "owner": {
+        "total": 506,
+        "fraction": 0.28507042253521125
+      },
+      "totalHouseholds": 1775
+    },
+    "places": [
+      {
+        "name": "North Charleston",
+        "type": "city"
+      },
+      {
+        "name": "Trident Technical College",
+        "type": "poi"
+      },
+      {
+        "name": "Carolina Memorial Gardens",
+        "type": "poi"
+      },
+      {
+        "name": "Santee river basin",
+        "type": "major_river_basin"
+      }
+    ],
+    "race": {
+      "total": 4924,
+      "white": {
+        "total": 1670,
+        "hispanicOrLatino": 422,
+        "notHispanicOrLatino": 1248
+      },
+      "black": {
+        "total": 1481,
+        "hispanicOrLatino": 34,
+        "notHispanicOrLatino": 1447
+      },
+      "americanIndianAlaskanNative": {
+        "total": 53,
+        "hispanicOrLatino": 29,
+        "notHispanicOrLatino": 24
+      },
+      "asian": {
+        "total": 64,
+        "hispanicOrLatino": 5,
+        "notHispanicOrLatino": 59
+      },
+      "pacificIslander": {
+        "total": 8,
+        "hispanicOrLatino": 6,
+        "notHispanicOrLatino": 2
+      },
+      "other": {
+        "total": 1550,
+        "hispanicOrLatino": 1542,
+        "notHispanicOrLatino": 8
+      },
+      "twoOrMore": {
+        "total": 98,
+        "hispanicOrLatino": 57,
+        "notHispanicOrLatino": 41
+      }
+    },
+    "ethnicity": {
+      "total": 4924,
+      "hispanicOrLatino": 2095,
+      "notHispanicOrLatino": 2829
+    },
+    "income": [
+      {
+        "dataYears": {
+          "start": 2006,
+          "end": 2010
+        },
+        "dollarYear": 2010,
+        "median": {
+          "value": 32101,
+          "marginOfError": 3662
+        }
+      }
+    ],
+    "tract": "T45019003104",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.49,
+      "tract": 0.39
+    }
+  },
+  {
+    "nickname": "North Charleston A",
+    "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.72767920848594
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.76160838011133
+      },
+      "socialVulnerability": {
+        "rating": "Relatively Moderate",
+        "score": 58.41999816894531
+      },
+      "communityResilience": {
+        "rating": "Very High",
+        "score": 89.1500015258789
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Very Low",
+          "score": 73.80067926130334
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 99.3071376564812
+        },
+        "Hail": {
+          "rating": "Relatively Low",
+          "score": 66.49580889009064
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 58.60206214622919
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.83217124635735
+        },
+        "Ice Storm": {
+          "rating": "Relatively Low",
+          "score": 49.14388087755881
+        },
+        "Landslide": {
+          "rating": "Relatively Low",
+          "score": 53.439396617759705
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 95.1545860734778
+        },
+        "Riverine Flooding": {
+          "rating": "Very Low",
+          "score": 26.313502595297933
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 45.004173475505816
+        },
+        "Tornado": {
+          "rating": "Relatively Low",
+          "score": 42.866883765768094
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 55.84174663765117
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 66.53005143622144
+        }
+      }
+    },
+    "population": {
+      "total": 6128,
+      "personsPerSquareMileDensity": 3244.3541380540782
+    },
+    "urban": {
+      "total": 6128,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
+    },
+    "tenure": {
+      "renter": {
+        "total": 1132,
+        "fraction": 0.5085354896675651
+      },
+      "owner": {
+        "total": 1094,
+        "fraction": 0.4914645103324349
+      },
+      "totalHouseholds": 2226
+    },
+    "places": [
+      {
+        "name": "North Charleston",
+        "type": "city"
+      },
+      {
+        "name": "CHS Airport",
+        "type": "poi"
+      },
+      {
+        "name": "Boeing Plant",
+        "type": "poi"
+      },
+      {
+        "name": "Tanger Outlet",
+        "type": "poi"
+      },
+      {
+        "name": "Santee river basin",
+        "type": "major_river_basin"
+      }
+    ],
+    "race": {
+      "total": 6128,
+      "white": {
+        "total": 1233,
+        "hispanicOrLatino": 186,
+        "notHispanicOrLatino": 1047
+      },
+      "black": {
+        "total": 3835,
+        "hispanicOrLatino": 31,
+        "notHispanicOrLatino": 3804
+      },
+      "americanIndianAlaskanNative": {
+        "total": 32,
+        "hispanicOrLatino": 12,
+        "notHispanicOrLatino": 20
+      },
+      "asian": {
+        "total": 90,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 90
+      },
+      "pacificIslander": {
+        "total": 12,
+        "hispanicOrLatino": 6,
+        "notHispanicOrLatino": 6
+      },
+      "other": {
+        "total": 800,
+        "hispanicOrLatino": 780,
+        "notHispanicOrLatino": 20
+      },
+      "twoOrMore": {
+        "total": 126,
+        "hispanicOrLatino": 27,
+        "notHispanicOrLatino": 99
+      }
+    },
+    "ethnicity": {
+      "total": 6128,
+      "hispanicOrLatino": 1042,
+      "notHispanicOrLatino": 5086
+    },
+    "income": [
+      {
+        "dataYears": {
+          "start": 2006,
+          "end": 2010
+        },
+        "dollarYear": 2010,
+        "median": {
+          "value": 39864,
+          "marginOfError": 5478
+        }
+      }
+    ],
+    "tract": "T45019003111",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.49,
+      "tract": 0.37
+    }
+  },
+  {
+    "nickname": "North Charleston E",
+    "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.70508490700661
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.50442727294079
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": 92.98999786376953
+      },
+      "communityResilience": {
+        "rating": "Very High",
+        "score": 89.1500015258789
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Very Low",
+          "score": 71.75493525790702
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 98.73993000915988
+        },
+        "Hail": {
+          "rating": "Relatively Low",
+          "score": 71.48516946661807
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 65.39446179862367
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.54686236516486
+        },
+        "Ice Storm": {
+          "rating": "Relatively Low",
+          "score": 57.1029986196364
+        },
+        "Landslide": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 98.2499011751177
+        },
+        "Riverine Flooding": {
+          "rating": "Very Low",
+          "score": 28.387392254033866
+        },
+        "Strong Wind": {
+          "rating": "Relatively Moderate",
+          "score": 54.697217291120495
+        },
+        "Tornado": {
+          "rating": "Relatively Low",
+          "score": 47.32603660902176
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 64.72714732498544
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 73.09815158418864
+        }
+      }
+    },
+    "population": {
+      "total": 7113,
+      "personsPerSquareMileDensity": 642.5736235549701
+    },
+    "urban": {
+      "total": 7113,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
+    },
+    "tenure": {
+      "renter": {
+        "total": 1600,
+        "fraction": 0.5979073243647235
+      },
+      "owner": {
+        "total": 1076,
+        "fraction": 0.4020926756352765
+      },
+      "totalHouseholds": 2676
+    },
+    "places": [
+      {
+        "name": "North Charleston",
+        "type": "city"
+      },
+      {
+        "name": "Wannamaker County Park",
+        "type": "poi"
+      },
+      {
+        "name": "Charleston Southern University",
+        "type": "poi"
+      },
+      {
+        "name": "Santee river basin",
+        "type": "major_river_basin"
+      }
+    ],
+    "race": {
+      "total": 7113,
+      "white": {
+        "total": 3976,
+        "hispanicOrLatino": 157,
+        "notHispanicOrLatino": 3819
+      },
+      "black": {
+        "total": 2506,
+        "hispanicOrLatino": 33,
+        "notHispanicOrLatino": 2473
+      },
+      "americanIndianAlaskanNative": {
+        "total": 55,
+        "hispanicOrLatino": 3,
+        "notHispanicOrLatino": 52
+      },
+      "asian": {
+        "total": 138,
+        "hispanicOrLatino": 1,
+        "notHispanicOrLatino": 137
+      },
+      "pacificIslander": {
+        "total": 7,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 7
+      },
+      "other": {
+        "total": 202,
+        "hispanicOrLatino": 152,
+        "notHispanicOrLatino": 50
+      },
+      "twoOrMore": {
+        "total": 229,
+        "hispanicOrLatino": 46,
+        "notHispanicOrLatino": 183
+      }
+    },
+    "ethnicity": {
+      "total": 7113,
+      "hispanicOrLatino": 392,
+      "notHispanicOrLatino": 6721
+    },
+    "income": [
+      {
+        "dataYears": {
+          "start": 2006,
+          "end": 2010
+        },
+        "dollarYear": 2010,
+        "median": {
+          "value": 35614,
+          "marginOfError": 6675
+        }
+      }
+    ],
+    "tract": "T45019003115",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.49,
+      "tract": 0.4
+    }
+  },
+  {
+    "nickname": "North Charleston C",
+    "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.71578747086525
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.45275618291566
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": 98.94000244140625
+      },
+      "communityResilience": {
+        "rating": "Very High",
+        "score": 89.1500015258789
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Relatively Low",
+          "score": 88.41010401188707
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 98.05998543814735
+        },
+        "Hail": {
+          "rating": "Relatively Low",
+          "score": 65.93033234972549
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 57.24217300420415
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.6078910028531
+        },
+        "Ice Storm": {
+          "rating": "Relatively Low",
+          "score": 47.534435666245706
+        },
+        "Landslide": {
+          "rating": "Relatively Low",
+          "score": 51.76948912851335
+        },
+        "Lightning": {
+          "rating": "Very High",
+          "score": 94.92219786538254
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Low",
+          "score": 65.72562651196655
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 43.89790855973948
+        },
+        "Tornado": {
+          "rating": "Relatively Low",
+          "score": 40.66140769565371
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 63.03735150369234
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 65.37802099725204
+        }
+      }
+    },
+    "population": {
+      "total": 4450,
+      "personsPerSquareMileDensity": 508.98244841864266
+    },
+    "urban": {
+      "total": 4450,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
+    },
+    "tenure": {
+      "renter": {
+        "total": 1080,
+        "fraction": 0.6878980891719745
+      },
+      "owner": {
+        "total": 490,
+        "fraction": 0.31210191082802546
+      },
+      "totalHouseholds": 1570
+    },
+    "places": [
+      {
+        "name": "North Charleston",
+        "type": "city"
+      },
+      {
+        "name": "North Charleston Port",
+        "type": "poi"
+      },
+      {
+        "name": "Santee river basin",
+        "type": "major_river_basin"
+      }
+    ],
+    "race": {
+      "total": 4450,
+      "white": {
+        "total": 1562,
+        "hispanicOrLatino": 540,
+        "notHispanicOrLatino": 1022
+      },
+      "black": {
+        "total": 2353,
+        "hispanicOrLatino": 13,
+        "notHispanicOrLatino": 2340
+      },
+      "americanIndianAlaskanNative": {
+        "total": 21,
+        "hispanicOrLatino": 11,
+        "notHispanicOrLatino": 10
+      },
+      "asian": {
+        "total": 15,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 15
+      },
+      "pacificIslander": {
+        "total": 5,
+        "hispanicOrLatino": 3,
+        "notHispanicOrLatino": 2
+      },
+      "other": {
+        "total": 389,
+        "hispanicOrLatino": 388,
+        "notHispanicOrLatino": 1
+      },
+      "twoOrMore": {
+        "total": 105,
+        "hispanicOrLatino": 37,
+        "notHispanicOrLatino": 68
+      }
+    },
+    "ethnicity": {
+      "total": 4450,
+      "hispanicOrLatino": 992,
+      "notHispanicOrLatino": 3458
+    },
+    "income": [
+      {
+        "dataYears": {
+          "start": 2006,
+          "end": 2010
+        },
+        "dollarYear": 2010,
+        "median": {
+          "value": 30123,
+          "marginOfError": 5757
+        }
+      }
+    ],
+    "tract": "T45019003400",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.49,
+      "tract": 0.4
+    }
+  },
+  {
+    "nickname": "Summerville B",
+    "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.70746325453075
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.72872677736805
+      },
+      "socialVulnerability": {
+        "rating": "Relatively High",
+        "score": 60.290000915527344
+      },
+      "communityResilience": {
+        "rating": "Relatively Moderate",
+        "score": 48.22999954223633
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "Very Low",
+          "score": 78.7693537578914
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 98.83035441670386
+        },
+        "Hail": {
+          "rating": "Relatively Moderate",
+          "score": 78.03458694348761
+        },
+        "Heat Wave": {
+          "rating": "Relatively High",
+          "score": 79.00861967729055
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.82301695070412
+        },
+        "Ice Storm": {
+          "rating": "Relatively High",
+          "score": 95.41983611853504
+        },
+        "Landslide": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Lightning": {
+          "rating": "Relatively Moderate",
+          "score": 65.61852397551539
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Moderate",
+          "score": 83.3525142682669
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 47.48239498712689
+        },
+        "Tornado": {
+          "rating": "Relatively High",
+          "score": 79.97084445280446
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Moderate",
+          "score": 91.11341015304484
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 78.60347135777532
+        }
+      }
+    },
+    "population": {
+      "total": 6256,
+      "personsPerSquareMileDensity": 88.28408866671214
+    },
+    "urban": {
+      "total": 6248,
+      "fraction": 0.9987212276214834
+    },
+    "rural": {
+      "total": 8,
+      "fraction": 0.0012787723785166241
+    },
+    "tenure": {
+      "renter": {
+        "total": 364,
+        "fraction": 0.16883116883116883
+      },
+      "owner": {
+        "total": 1792,
+        "fraction": 0.8311688311688312
+      },
+      "totalHouseholds": 2156
+    },
+    "places": [
+      {
+        "name": "Summerville",
+        "type": "town"
+      },
+      {
+        "name": "Azelea Estates",
+        "type": "poi"
+      },
+      {
+        "name": "Santee river basin",
+        "type": "major_river_basin"
+      }
+    ],
+    "race": {
+      "total": 6256,
+      "white": {
+        "total": 5082,
+        "hispanicOrLatino": 147,
+        "notHispanicOrLatino": 4935
+      },
+      "black": {
+        "total": 730,
+        "hispanicOrLatino": 12,
+        "notHispanicOrLatino": 718
+      },
+      "americanIndianAlaskanNative": {
+        "total": 58,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 58
+      },
+      "asian": {
+        "total": 40,
+        "hispanicOrLatino": 1,
+        "notHispanicOrLatino": 39
+      },
+      "pacificIslander": {
+        "total": 3,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 3
+      },
+      "other": {
+        "total": 177,
+        "hispanicOrLatino": 161,
+        "notHispanicOrLatino": 16
+      },
+      "twoOrMore": {
+        "total": 166,
+        "hispanicOrLatino": 31,
+        "notHispanicOrLatino": 135
+      }
+    },
+    "ethnicity": {
+      "total": 6256,
+      "hispanicOrLatino": 352,
+      "notHispanicOrLatino": 5904
+    },
+    "income": [
+      {
+        "dataYears": {
+          "start": 2006,
+          "end": 2010
+        },
+        "dollarYear": 2010,
+        "median": {
+          "value": 52411,
+          "marginOfError": 10800
+        }
+      }
+    ],
+    "tract": "T45035010603",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.4,
+      "tract": 0.43
+    }
+  },
+  {
+    "nickname": "Summerville A",
+    "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.73005755601008
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.52204241726754
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": 90.44999694824219
+      },
+      "communityResilience": {
+        "rating": "Relatively Moderate",
+        "score": 48.22999954223633
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "Very Low",
+          "score": 72.22463878863404
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 98.80804190055665
+        },
+        "Hail": {
+          "rating": "Relatively Moderate",
+          "score": 73.91754152902035
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 71.74178547102896
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.48430801153442
+        },
+        "Ice Storm": {
+          "rating": "Relatively High",
+          "score": 92.96601956004582
+        },
+        "Landslide": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Lightning": {
+          "rating": "Relatively Moderate",
+          "score": 51.478779602544286
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Moderate",
+          "score": 89.42504168917492
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 40.793077908794864
+        },
+        "Tornado": {
+          "rating": "Relatively Moderate",
+          "score": 70.65282561926148
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 83.33987371124826
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 71.48695304976866
+        }
+      }
+    },
+    "population": {
+      "total": 5572,
+      "personsPerSquareMileDensity": 63.73328791917933
+    },
+    "urban": {
+      "total": 5572,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
+    },
+    "tenure": {
+      "renter": {
+        "total": 1075,
+        "fraction": 0.4853273137697517
+      },
+      "owner": {
+        "total": 1140,
+        "fraction": 0.5146726862302483
+      },
+      "totalHouseholds": 2215
+    },
+    "places": [
+      {
+        "name": "Summerville",
+        "type": "town"
+      },
+      {
+        "name": "Historic Summerville",
+        "type": "poi"
+      },
+      {
+        "name": "Santee river basin",
+        "type": "major_river_basin"
+      }
+    ],
+    "race": {
+      "total": 5572,
+      "white": {
+        "total": 2782,
+        "hispanicOrLatino": 172,
+        "notHispanicOrLatino": 2610
+      },
+      "black": {
+        "total": 2456,
+        "hispanicOrLatino": 25,
+        "notHispanicOrLatino": 2431
+      },
+      "americanIndianAlaskanNative": {
+        "total": 17,
+        "hispanicOrLatino": 4,
+        "notHispanicOrLatino": 13
+      },
+      "asian": {
+        "total": 40,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 40
+      },
+      "pacificIslander": {
+        "total": 0,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 0
+      },
+      "other": {
+        "total": 136,
+        "hispanicOrLatino": 133,
+        "notHispanicOrLatino": 3
+      },
+      "twoOrMore": {
+        "total": 141,
+        "hispanicOrLatino": 27,
+        "notHispanicOrLatino": 114
+      }
+    },
+    "ethnicity": {
+      "total": 5572,
+      "hispanicOrLatino": 361,
+      "notHispanicOrLatino": 5211
+    },
+    "income": [
+      {
+        "dataYears": {
+          "start": 2006,
+          "end": 2010
+        },
+        "dollarYear": 2010,
+        "median": {
+          "value": 34646,
+          "marginOfError": 7596
+        }
+      }
+    ],
+    "tract": "T45035010700",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.4,
+      "tract": 0.4
+    }
+  },
+  {
+    "nickname": "North Charleston B",
+    "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.85373162726538
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.74751626464993
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": 86.81999969482422
+      },
+      "communityResilience": {
+        "rating": "Relatively Moderate",
+        "score": 48.22999954223633
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Very Low",
+          "score": 72.11844618976862
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "Very Low",
+          "score": 69.27851776960064
+        },
+        "Earthquake": {
+          "rating": "Very High",
+          "score": 99.25429222350095
+        },
+        "Hail": {
+          "rating": "Relatively Moderate",
+          "score": 73.51900400888773
+        },
+        "Heat Wave": {
+          "rating": "Relatively High",
+          "score": 81.07311459238556
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.8169140869353
+        },
+        "Ice Storm": {
+          "rating": "Relatively High",
+          "score": 92.7384064142853
+        },
+        "Landslide": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Lightning": {
+          "rating": "Relatively Moderate",
+          "score": 71.89300559408728
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Low",
+          "score": 50.52962867275759
+        },
+        "Strong Wind": {
+          "rating": "Relatively Low",
+          "score": 31.089453451052773
+        },
+        "Tornado": {
+          "rating": "Relatively Moderate",
+          "score": 65.20497055054608
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 81.61559226094919
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 80.3544167038542
+        }
+      }
+    },
+    "population": {
+      "total": 8016,
+      "personsPerSquareMileDensity": 84.07615722157702
+    },
+    "urban": {
+      "total": 8016,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
+    },
+    "tenure": {
+      "renter": {
+        "total": 1169,
+        "fraction": 0.42962146269753765
+      },
+      "owner": {
+        "total": 1552,
+        "fraction": 0.5703785373024624
+      },
+      "totalHouseholds": 2721
+    },
+    "places": [
+      {
+        "name": "North Charleston",
+        "type": "city"
+      },
+      {
+        "name": "Windsor Hill Neighborhood",
+        "type": "poi"
+      },
+      {
+        "name": "Santee river basin",
+        "type": "major_river_basin"
+      }
+    ],
+    "race": {
+      "total": 8016,
+      "white": {
+        "total": 3080,
+        "hispanicOrLatino": 401,
+        "notHispanicOrLatino": 2679
+      },
+      "black": {
+        "total": 3944,
+        "hispanicOrLatino": 38,
+        "notHispanicOrLatino": 3906
+      },
+      "americanIndianAlaskanNative": {
+        "total": 32,
+        "hispanicOrLatino": 5,
+        "notHispanicOrLatino": 27
+      },
+      "asian": {
+        "total": 231,
+        "hispanicOrLatino": 1,
+        "notHispanicOrLatino": 230
+      },
+      "pacificIslander": {
+        "total": 17,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 17
+      },
+      "other": {
+        "total": 404,
+        "hispanicOrLatino": 388,
+        "notHispanicOrLatino": 16
+      },
+      "twoOrMore": {
+        "total": 308,
+        "hispanicOrLatino": 93,
+        "notHispanicOrLatino": 215
+      }
+    },
+    "ethnicity": {
+      "total": 8016,
+      "hispanicOrLatino": 926,
+      "notHispanicOrLatino": 7090
+    },
+    "income": [
+      {
+        "dataYears": {
+          "start": 2006,
+          "end": 2010
+        },
+        "dollarYear": 2010,
+        "median": {
+          "value": 39100,
+          "marginOfError": 5468
+        }
+      }
+    ],
+    "tract": "T45035010818",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.4,
+      "tract": 0.4
+    }
+  },
+  {
+    "nickname": "Myrtle",
+    "risks": {
+      "timestamp": "2023-11-08T05:00:00.000Z",
+      "compositeNRI": {
+        "rating": "Very High",
+        "score": 99.73124672977215
+      },
+      "compositeExpectedAnnualLoss": {
+        "rating": "Very High",
+        "score": 99.55374967705569
+      },
+      "socialVulnerability": {
+        "rating": "Very High",
+        "score": 87.18000030517578
+      },
+      "communityResilience": {
+        "rating": "Relatively Moderate",
+        "score": 49.61000061035156
+      },
+      "natural": {
+        "Avalanche": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Coastal Flooding": {
+          "rating": "Relatively Low",
+          "score": 86.2555720653789
+        },
+        "Cold Wave": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Drought": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Earthquake": {
+          "rating": "Relatively Moderate",
+          "score": 81.68964464382178
+        },
+        "Hail": {
+          "rating": "Relatively Low",
+          "score": 55.524858630864905
+        },
+        "Heat Wave": {
+          "rating": "Relatively Moderate",
+          "score": 54.3474176198417
+        },
+        "Hurricane": {
+          "rating": "Very High",
+          "score": 99.90540561158323
+        },
+        "Ice Storm": {
+          "rating": "Relatively Moderate",
+          "score": 75.69678992040882
+        },
+        "Landslide": {
+          "rating": "No Expected Annual Losses",
+          "score": 0
+        },
+        "Lightning": {
+          "rating": "Relatively High",
+          "score": 84.16046765132185
+        },
+        "Riverine Flooding": {
+          "rating": "Relatively Low",
+          "score": 62.66176574206731
+        },
+        "Strong Wind": {
+          "rating": "Relatively Moderate",
+          "score": 63.87768777700708
+        },
+        "Tornado": {
+          "rating": "Relatively High",
+          "score": 81.97999083011015
+        },
+        "Tsunami": {
+          "rating": "Insufficient Data",
+          "score": null
+        },
+        "Volcanic Activity": {
+          "rating": "Not Applicable",
+          "score": null
+        },
+        "Wildfire": {
+          "rating": "Relatively Low",
+          "score": 57.82407572568465
+        },
+        "Winter Weather": {
+          "rating": "Relatively Moderate",
+          "score": 81.5134932005543
+        }
+      }
+    },
+    "population": {
+      "total": 4321,
+      "personsPerSquareMileDensity": 1147.995731919246
+    },
+    "urban": {
+      "total": 4321,
+      "fraction": 1
+    },
+    "rural": {
+      "total": 0,
+      "fraction": 0
+    },
+    "tenure": {
+      "renter": {
+        "total": 1027,
+        "fraction": 0.469807868252516
+      },
+      "owner": {
+        "total": 1159,
+        "fraction": 0.530192131747484
+      },
+      "totalHouseholds": 2186
+    },
+    "places": [
+      {
+        "name": "Myrtle Beach",
+        "type": "city"
+      },
+      {
+        "name": "",
+        "type": "poi"
+      },
+      {
+        "name": "PeeDee river basin",
+        "type": "major_river_basin"
+      }
+    ],
+    "race": {
+      "total": 4321,
+      "white": {
+        "total": 3777,
+        "hispanicOrLatino": 89,
+        "notHispanicOrLatino": 3688
+      },
+      "black": {
+        "total": 199,
+        "hispanicOrLatino": 6,
+        "notHispanicOrLatino": 193
+      },
+      "americanIndianAlaskanNative": {
+        "total": 27,
+        "hispanicOrLatino": 1,
+        "notHispanicOrLatino": 26
+      },
+      "asian": {
+        "total": 54,
+        "hispanicOrLatino": 2,
+        "notHispanicOrLatino": 52
+      },
+      "pacificIslander": {
+        "total": 15,
+        "hispanicOrLatino": 0,
+        "notHispanicOrLatino": 15
+      },
+      "other": {
+        "total": 151,
+        "hispanicOrLatino": 121,
+        "notHispanicOrLatino": 30
+      },
+      "twoOrMore": {
+        "total": 98,
+        "hispanicOrLatino": 21,
+        "notHispanicOrLatino": 77
+      }
+    },
+    "ethnicity": {
+      "total": 4321,
+      "hispanicOrLatino": 240,
+      "notHispanicOrLatino": 4081
+    },
+    "income": [
+      {
+        "dataYears": {
+          "start": 2006,
+          "end": 2010
+        },
+        "dollarYear": 2010,
+        "median": {
+          "value": 39940,
+          "marginOfError": 6849
+        }
+      }
+    ],
+    "tract": "T45051050500",
+    "gini": {
+      "yearStart": 2007,
+      "yearEnd": 2011,
+      "state": 0.46,
+      "county": 0.45,
+      "tract": 0.41
+    }
+  }
+]
