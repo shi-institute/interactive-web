@@ -20,11 +20,11 @@
 <section class="cards">
   {#each data.visualizations as vizInfo}
     <article class="card">
-      <a href={vizInfo.href}>
-        <img src={vizInfo.backgroundHref} alt="" />
+      <a href="/research{vizInfo.href}">
+        <img src="{vizInfo.backgroundHref}" alt="" />
       </a>
       <div class="meta">
-        <a href={vizInfo.href}>
+        <a href="/research{vizInfo.href}">
           <h1>
             {vizInfo.label}
             {#if vizInfo.date}

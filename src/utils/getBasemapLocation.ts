@@ -1,4 +1,4 @@
-import type { basemapNames } from '../stores/appSettings';
+import type { basemapNames } from '$stores/appSettings';
 
 export function getBasemapLocation(name: (typeof basemapNames)[number]) {
   const split = name.split(' | ');

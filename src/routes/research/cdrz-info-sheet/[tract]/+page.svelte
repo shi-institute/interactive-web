@@ -1,6 +1,6 @@
 <script lang="ts">
   import PageTitle from '$lib/PageTitle.svelte';
-  import { cdrzOptionsStore } from '../../../stores/cdrzOptionsStore';
+  import { cdrzOptionsStore } from '$stores/cdrzOptionsStore';
   import AddSideBySide from './AddSideBySide.svelte';
   import FloatingSidebar from './FloatingSidebar.svelte';
   import Sidebar from './Sidebar.svelte';

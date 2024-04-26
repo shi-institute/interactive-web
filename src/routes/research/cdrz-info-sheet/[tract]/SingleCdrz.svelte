@@ -1,10 +1,10 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
+  import { appSettings } from '$stores/appSettings';
+  import { cdrzOptionsStore } from '$stores/cdrzOptionsStore';
   import { formatISODate } from '$utils/formatISODate';
   import { IconButton, TextBlock } from 'fluent-svelte';
-  import { appSettings } from '../../../stores/appSettings';
-  import { cdrzOptionsStore } from '../../../stores/cdrzOptionsStore';
   import type { PageData } from './$types';
   import BoldNumber from './BoldNumber.svelte';
   import CdrzMap from './CdrzMap.svelte';
