@@ -1,5 +1,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { appSettings } from '$stores/appSettings';
+  import { themeMode } from '$stores/themeMode';
   import { getBasemapLocation } from '$utils/getBasemapLocation';
   import {
     FillLayer,
@@ -10,8 +12,6 @@
     RasterLayer,
     RasterTileSource,
   } from 'svelte-maplibre';
-  import { appSettings } from '../../stores/appSettings';
-  import { themeMode } from '../../stores/themeMode';
   import cdrz_shapes from './SC_FEMA_CDRZ.geo.json';
   import scCDRZs from './sc-cdrzs.json';
 

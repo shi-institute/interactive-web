@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { dev } from '$app/environment';
   import 'fluent-svelte/theme.css';
   import 'leaflet/dist/leaflet.css';
   import { onDestroy, onMount } from 'svelte';
@@ -39,8 +40,10 @@
       <a href="https://www.furman.edu/shi-institute/sustainability-research/">
         Shi Applied Research
       </a>
-      <a href="/">All Visualizations</a>
-      <a href="/sitemap">Sitemap</a>
+      <a href="/research">All Visualizations</a>
+      {#if dev}
+        <a href="/research/sitemap">Sitemap</a>
+      {/if}
     </ul>
   </nav>
   <div class="title"></div>

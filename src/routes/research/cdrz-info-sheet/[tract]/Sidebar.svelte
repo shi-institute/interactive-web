@@ -1,7 +1,7 @@
 <script lang="ts">
+  import { appSettings, basemapNames } from '$stores/appSettings';
+  import { cdrzOptionsStore } from '$stores/cdrzOptionsStore';
   import { ComboBox, TextBlock, ToggleSwitch } from 'fluent-svelte';
-  import { appSettings, basemapNames } from '../../../stores/appSettings';
-  import { cdrzOptionsStore } from '../../../stores/cdrzOptionsStore';
 
   export let pageTitleElemVisibleHeight: number;
   export let noBorderLeft = false;

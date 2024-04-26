@@ -1,6 +1,6 @@
 <script lang="ts">
   import PageTitle from '$lib/PageTitle.svelte';
-  import { appSettings } from '../../stores/appSettings';
+  import { appSettings } from '$stores/appSettings';
   import LandingPageMap from './LandingPageMap.svelte';
 
   export let data;
@@ -23,7 +23,7 @@
 
   <ul>
     {#each data.cdrzs as cdrz}
-      <a href="/cdrz-info-sheet/{cdrz.tract}">
+      <a href="/research/cdrz-info-sheet/{cdrz.tract}">
         <li>{cdrz.tract} ({cdrz.nickname || cdrz.places[0].name})</li>
       </a>
     {/each}

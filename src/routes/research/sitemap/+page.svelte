@@ -11,7 +11,8 @@
 <h1>Pages on {data.url}</h1>
 
 <ul>
-  {#each data.pageNames as pageName}
-    <li><a href={pageName}>{pageName}</a></li>
+  <!-- list all non-dynanmic routes -->
+  {#each data.pageNames.filter((pageName) => !pageName.includes('[')) as pageName}
+    <li><a href="/research{pageName}">{pageName}</a></li>
   {/each}
 </ul>

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { appSettings } from '$stores/appSettings';
+  import { themeMode } from '$stores/themeMode';
   import { getBasemapLocation } from '$utils/getBasemapLocation';
   import {
     FillLayer,
@@ -8,8 +10,6 @@
     RasterLayer,
     RasterTileSource,
   } from 'svelte-maplibre';
-  import { appSettings } from '../../../stores/appSettings';
-  import { themeMode } from '../../../stores/themeMode';
   import cdrz_shapes from '../SC_FEMA_CDRZ.geo.json';
 
   export let map: maplibregl.Map | undefined = undefined;
