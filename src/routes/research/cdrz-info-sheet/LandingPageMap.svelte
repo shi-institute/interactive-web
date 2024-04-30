@@ -52,7 +52,7 @@
   }
 
   function goToTract(tract: string) {
-    goto(`/cdrz-info-sheet/${tract}`);
+    goto(`/research/cdrz-info-sheet/${tract}`);
   }
 
   const shapesWithNicknames = {

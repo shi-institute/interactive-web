@@ -81,7 +81,7 @@
   .card h1 {
     font-size: 20px;
     font-weight: 600;
-    margin: 0;
+    margin: 0 0 3px 0;
     margin-top: auto;
   }
   .card h1:hover {
@@ -103,6 +103,7 @@
     font-size: 13px;
     font-weight: 500;
     opacity: 0.8;
+    font-family: Lato, sans-serif;
   }
 
   .card .byline {

@@ -7,8 +7,8 @@
 <style>
   h2 {
     font-size: 24px;
-    font-family: Rubik, sans-serif;
-    font-weight: 500;
+    font-family: 'Abril Text', serif;
+    font-weight: 600;
     margin: 0;
     position: relative;
     padding-top: 10px;

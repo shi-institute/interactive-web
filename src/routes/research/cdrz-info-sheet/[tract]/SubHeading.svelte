@@ -3,8 +3,8 @@
 <style>
   h3 {
     font-size: 20px;
-    font-family: Rubik, sans-serif;
-    font-weight: 500;
+    font-family: 'Abril Text', serif;
+    font-weight: 600;
     margin: 0;
   }
 
