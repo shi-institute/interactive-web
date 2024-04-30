@@ -29,18 +29,42 @@ figure > h6 {
   }
 }
 
+/* heading */
 figure > h2 {
-  font-size: 20px;
+  font-family: 'Abril Text', serif;
+  font-weight: 600;
+  font-size: 24px;
+  font-variant: lining-nums;
+  margin-bottom: 0;
 }
 
+/* subheading */
 figure > h3 {
+  font-family: Lato, sans-serif;
+  font-weight: 400;
   font-size: 16px;
-  font-weight: normal;
 }
 
+/* caption */
 figcaption {
-  font: small var(--sans-serif);
-  color: var(--syntax-unknown-variable);
+  font-family: Lato, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #838383;
+}
+
+/* legend swatches */
+figure > div[class^='plot-'][class*='-swatches'] {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+/* figure */
+figure > svg {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  font-size: 12px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -50,5 +74,8 @@ figcaption {
   }
   g[aria-label='crosshair text'] {
     stroke: #212121;
+  }
+  figcaption {
+    color: #cccccc;
   }
 }
