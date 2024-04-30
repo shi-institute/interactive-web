@@ -48,9 +48,9 @@
   const domain = [
     'White',
     'Black',
-    'American Indian or Alaskan Native',
+    'American Indian\nor Alaskan Native',
     'Asian',
-    'Hawaiian or Pacific Islander',
+    'Hawaiian or\nPacific Islander',
     'Two or more',
     'Other',
   ];
@@ -59,8 +59,8 @@
   $: plotOptions = {
     color: { legend: false, range: colors },
     height: 190,
-    marginLeft: 210,
-    marginRight: 90,
+    marginLeft: 140,
+    marginRight: 110,
     marginTop: 0,
     marginBottom: 40,
     x: { label: 'Population' },
@@ -97,7 +97,9 @@
   }
 </script>
 
-<div bind:this="{div}" role="img"></div>
+<div role="img">
+  <figure bind:this="{div}"></figure>
+</div>
 
 <style>
   div :global(svg) {

@@ -19,7 +19,7 @@
   }
 
   .number {
-    font-family: Rubik, sans-serif;
+    font-family: JetBrains Mono, monospace;
     font-size: 24px;
     font-weight: 500;
     display: flex;
