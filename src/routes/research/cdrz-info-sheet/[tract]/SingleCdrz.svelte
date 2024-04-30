@@ -51,7 +51,7 @@
   class:showBorderRight="{$cdrzOptionsStore.compareSideBySide}"
 >
   <div class="back">
-    <a href="/cdrz-info-sheet" class:hideBackToAll="{hideBackToAll}">← Back to all</a>
+    <a href="/research/cdrz-info-sheet" class:hideBackToAll="{hideBackToAll}">← Back to all</a>
     <span>{data.cdrz.nickname}</span>
   </div>
 
