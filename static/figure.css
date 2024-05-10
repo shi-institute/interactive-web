@@ -78,4 +78,7 @@ figure > svg {
   figcaption {
     color: #cccccc;
   }
+  g[aria-label='tip'] {
+    fill: #282828;
+  }
 }
