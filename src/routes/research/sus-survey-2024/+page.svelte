@@ -250,7 +250,35 @@
     }, {});
   }
 
+  function getClimateChangeProblemResponse(
+    data: CleanResponse[],
+    type: 'current_lifetime' | 'future_generations'
+  ) {
+    const responses = data
+      .map((d) => [d.role, d.behavior.climate_change_problem[type]] as const)
+      .filter((x): x is [(typeof x)[0], NonNullable<(typeof x)[1]>] => !!x[1]);
+    const counts: Record<string, number> = {};
+    let sum = 0;
+
+    for (const [role, response] of responses) {
+      counts[`${role}_${response}`] = (counts[`${role}_${response}`] || 0) + 1;
+      sum++;
+    }
+
+    return Object.entries(counts).map(([role_response, count]) => {
+      const [role, response] = role_response.split('_');
+      return {
+        role,
+        response,
+        count,
+        percentage: count / sum,
+      };
+    });
+  }
+
   $: shiParticipation = getBehaviorShiParticipation(data.surveyData);
+
+  $: console.log(getClimateChangeProblemResponse(data.surveyData, 'future_generations'));
 
   function sortByRole(
     a: { role: NonNullable<CleanResponse['role']> },
@@ -447,6 +475,54 @@
         marginTop: 0,
         marks: [
           Plot.barX(getBehaviorShiParticipationReasons(data.surveyData), {
+            x: 'percentage',
+            y: 'response',
+            fill: 'role',
+            sort: sortByRole,
+            tip: true,
+          }),
+        ],
+      }}"
+    />
+  </div>
+</div>
+
+<h2>Is climate change a problem?</h2>
+<div class="facets">
+  <div class="facet">
+    <PlotContainer
+      fullWidth
+      plot="{{
+        title: 'In your current lifetime',
+        color: roleLegendSpec,
+        marginBottom: 40,
+        marginLeft: 130,
+        marginTop: 0,
+        y: { label: '' },
+        marks: [
+          Plot.barX(getClimateChangeProblemResponse(data.surveyData, 'current_lifetime'), {
+            x: 'percentage',
+            y: 'response',
+            fill: 'role',
+            sort: sortByRole,
+            tip: true,
+          }),
+        ],
+      }}"
+    />
+  </div>
+  <div class="facet">
+    <PlotContainer
+      fullWidth
+      plot="{{
+        title: 'For future generations',
+        color: roleLegendSpec,
+        marginBottom: 40,
+        marginLeft: 130,
+        marginTop: 0,
+        y: { label: '' },
+        marks: [
+          Plot.barX(getClimateChangeProblemResponse(data.surveyData, 'future_generations'), {
             x: 'percentage',
             y: 'response',
             fill: 'role',
