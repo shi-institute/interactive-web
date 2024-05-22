@@ -82,6 +82,176 @@
     });
   }
 
+  function getEngagementSources(data: CleanResponse[]) {
+    const responses = data
+      .map((d) => [d.role, d.outreach.how_hear_about_events] as const)
+      .filter(
+        (x): x is [(typeof x)[0], NonNullable<(typeof x)[1]>] => !!x[1] && Array.isArray(x[1])
+      );
+    const counts: Record<string, number> = {};
+    let sum = 0;
+
+    for (const [role, responseArr] of responses) {
+      for (const response of responseArr) {
+        counts[`${role}_${response}`] = (counts[`${role}_${response}`] || 0) + 1;
+        sum++;
+      }
+    }
+
+    return Object.entries(counts).map(([role_response, count]) => {
+      const [role, response] = role_response.split('_');
+      return {
+        role,
+        response,
+        count,
+        percentage: count / sum,
+      };
+    });
+  }
+
+  function getEngagementSocialPlatforms(data: CleanResponse[]) {
+    const responses = data
+      .map((d) => [d.role, d.outreach.social_media_platforms_used] as const)
+      .filter(
+        (x): x is [(typeof x)[0], NonNullable<(typeof x)[1]>] => !!x[1] && Array.isArray(x[1])
+      );
+    const counts: Record<string, number> = {};
+    let sum = 0;
+
+    for (const [role, responseArr] of responses) {
+      for (const response of responseArr) {
+        counts[`${role}_${response}`] = (counts[`${role}_${response}`] || 0) + 1;
+        sum++;
+      }
+    }
+
+    return Object.entries(counts).map(([role_response, count]) => {
+      const [role, response] = role_response.split('_');
+      return {
+        role,
+        response,
+        count,
+        percentage: count / sum,
+      };
+    });
+  }
+
+  function getBehaviorParticipation(data: CleanResponse[]) {
+    const responses = data
+      .map(
+        (d) =>
+          [
+            d.role,
+            d.behavior.students
+              ? d.behavior.students.particpated_attended
+              : d.behavior.facstaff!.particpated_attended_led,
+          ] as const
+      )
+      .filter(
+        (x): x is [(typeof x)[0], NonNullable<(typeof x)[1]>] => !!x[1] && Array.isArray(x[1])
+      );
+    const counts: Record<string, number> = {};
+    let sum = 0;
+
+    for (const [role, responseArr] of responses) {
+      for (const response of responseArr) {
+        counts[`${role}_${response}`] = (counts[`${role}_${response}`] || 0) + 1;
+        sum++;
+      }
+    }
+
+    return Object.entries(counts).map(([role_response, count]) => {
+      const [role, response] = role_response.split('_');
+      const responseMap = {
+        'CLPs or events': 'CLPs or events',
+        'Campus or community events': 'Campus/community events*',
+        'Community service projects or volunteer work': 'Volunteer',
+        Courses: 'Courses',
+        'I have never participated in or attended sustainability-related things through Furman.':
+          'Never',
+        Internships: 'Internships',
+        'Other (please describe):': 'Other',
+        'Research projects': 'Research',
+        'Workshops or conferences': 'Workshops/conferences*',
+      };
+      return {
+        role,
+        response: responseMap[response],
+        count,
+        percentage: count / sum,
+      };
+    });
+  }
+
+  function getBehaviorShiParticipationReasons(data: CleanResponse[]) {
+    const responses = data
+      .map((d) => [d.role, d.behavior.why_engaged_shi_institute] as const)
+      .filter(
+        (x): x is [(typeof x)[0], NonNullable<(typeof x)[1]>] => !!x[1] && Array.isArray(x[1])
+      );
+    const counts: Record<string, number> = {};
+    let sum = 0;
+
+    for (const [role, responseArr] of responses) {
+      for (const response of responseArr) {
+        counts[`${role}_${response}`] = (counts[`${role}_${response}`] || 0) + 1;
+        sum++;
+      }
+    }
+
+    const responseMap = {
+      'For an interview or meeting': 'Interview/meeting',
+      'I have worked at the Shi Institute': 'Employment',
+      'Other (please describe):': 'Other',
+      'To attend an event': 'Event',
+      'To learn more about sustainability': 'Learn sustainability',
+      'To visit the Furman Farm': 'Farm visit',
+    };
+
+    return Object.entries(counts).map(([role_response, count]) => {
+      const [role, response] = role_response.split('_');
+      return {
+        role,
+        response: responseMap[response] || response,
+        count,
+        percentage: count / sum,
+      };
+    });
+  }
+
+  function getBehaviorShiParticipation(data: CleanResponse[]) {
+    const responses = data
+      .map((d) => [d.role, d.behavior.has_engaged_shi_institute] as const)
+      .filter((x): x is [(typeof x)[0], NonNullable<(typeof x)[1]>] => x[1] !== null);
+    const counts: Record<string, number> = {};
+    let sum = 0;
+
+    for (const [role, response] of responses) {
+      counts[`${role}_${response}`] = (counts[`${role}_${response}`] || 0) + 1;
+      sum++;
+    }
+
+    const tidy = Object.entries(counts).map(([role_response, count]) => {
+      const [role, response] = role_response.split('_');
+      return {
+        role,
+        response: response === 'true' ? 'Yes' : 'No',
+        count,
+        percentage: count / sum,
+      };
+    });
+
+    return tidy.reduce((acc, d) => {
+      acc[d.role] = {
+        ...acc[d.role],
+        [d.response]: d.percentage,
+      };
+      return acc;
+    }, {});
+  }
+
+  $: shiParticipation = getBehaviorShiParticipation(data.surveyData);
+
   function sortByRole(
     a: { role: NonNullable<CleanResponse['role']> },
     b: { role: NonNullable<CleanResponse['role']> }
@@ -187,6 +357,106 @@
       />
     </div>
   {/each}
+</div>
+
+<h2>Engagement</h2>
+<div class="facets">
+  <div class="facet">
+    <PlotContainer
+      fullWidth
+      plot="{{
+        title: 'How students, faculty, and staff hear about sustainability events',
+        color: roleLegendSpec,
+        marginBottom: 40,
+        marginLeft: 286,
+        marginTop: 0,
+        marks: [
+          Plot.barX(getEngagementSources(data.surveyData), {
+            x: 'percentage',
+            y: 'response',
+            fill: 'role',
+            sort: sortByRole,
+            tip: true,
+          }),
+        ],
+      }}"
+    />
+  </div>
+  <div class="facet">
+    <PlotContainer
+      fullWidth
+      plot="{{
+        title: 'Social media platforms used by students, faculty, and staff',
+        color: roleLegendSpec,
+        marginBottom: 40,
+        marginLeft: 110,
+        marginTop: 0,
+        marks: [
+          Plot.barX(
+            getEngagementSocialPlatforms(data.surveyData).map((d) => ({
+              ...d,
+              response: d.response.replace('(name below)', ''),
+            })),
+            {
+              x: 'percentage',
+              y: 'response',
+              fill: 'role',
+              sort: sortByRole,
+              tip: true,
+            }
+          ),
+        ],
+      }}"
+    />
+  </div>
+  <div class="facet">
+    <PlotContainer
+      fullWidth
+      plot="{{
+        title: 'Participation in sustainability behaviors',
+        caption: '* response only available to faculty and staff',
+        color: roleLegendSpec,
+        marginBottom: 40,
+        marginLeft: 210,
+        marginTop: 0,
+        marks: [
+          Plot.barX(getBehaviorParticipation(data.surveyData), {
+            x: 'percentage',
+            y: 'response',
+            fill: 'role',
+            sort: sortByRole,
+            tip: true,
+          }),
+        ],
+      }}"
+    />
+  </div>
+  <div class="facet">
+    <PlotContainer
+      fullWidth
+      plot="{{
+        title: 'Reasons for engaging with the Shi Institute',
+        caption: `${(shiParticipation.student.Yes * 100).toFixed(0)}% of students, ${(
+          shiParticipation.faculty.Yes * 100
+        ).toFixed(0)}% of faculty, and ${(shiParticipation.staff.Yes * 100).toFixed(
+          0
+        )}% of staff have engaged with the Shi Institute.`,
+        color: roleLegendSpec,
+        marginBottom: 40,
+        marginLeft: 180,
+        marginTop: 0,
+        marks: [
+          Plot.barX(getBehaviorShiParticipationReasons(data.surveyData), {
+            x: 'percentage',
+            y: 'response',
+            fill: 'role',
+            sort: sortByRole,
+            tip: true,
+          }),
+        ],
+      }}"
+    />
+  </div>
 </div>
 
 <style>
