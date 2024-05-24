@@ -3,6 +3,8 @@ import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { toCleanData } from './toCleanData';
 
+import 'groupby-polyfill/lib/polyfill.js';
+
 export const load = (async ({ fetch, parent, url }) => {
   const { session } = await parent();
 
