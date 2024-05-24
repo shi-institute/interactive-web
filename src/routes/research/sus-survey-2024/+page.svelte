@@ -276,9 +276,111 @@
     });
   }
 
+  function getLiteracyReport(data: CleanResponse[]) {
+    return [
+      getLiteracyResponse(data, 'not_an_SDG', 'Space exploration'),
+      getLiteracyResponse(
+        data,
+        'LCA_def',
+        'An assessment of the total environmental impact of a product from the time the raw materials are gathered to their ultimate disposal'
+      ),
+      getLiteracyResponse(data, 'not_sus', 'Democracy'),
+      getLiteracyResponse(data, 'current_human_population', '8.0 billion'),
+      getLiteracyResponse(data, 'high_GHG_foods', 'Beef'),
+      getLiteracyResponse(data, 'know_EPA', 'Environmental Protection Agency (the EPA)'),
+      getLiteracyResponse(data, 'know_ecosystem_services', 'Ecosystem services'),
+      getLiteracyResponse(
+        data,
+        'sus_dev_def',
+        'Meeting the needs of the present without compromising the ability of future generations to meet their own needs'
+      ),
+      getLiteracyResponse(
+        data,
+        'human_env_impact_factors',
+        'The number of people on the planet,The amount of materials used per person,The use of technology'
+      ),
+      getLiteracyResponse(data, 'know_GHG', 'Greenhouse gases'),
+      getLiteracyResponse(data, 'energy_provider', 'Duke Energy'),
+      getLiteracyResponse(data, 'furman_carbon_footprint', 'Purchased Electricity'),
+      getLiteracyResponse(
+        data,
+        'can_recyle',
+        'Paper,Plastics #1 and #2,Cardboard,Aluminum Cans,Batteries and Electronic Waste'
+      ),
+      getLiteracyResponse(data, 'solar_farm_bill_reduction', '5 –10 %'),
+    ].flat();
+  }
+
+  function getLiteracyResponse(
+    data: CleanResponse[],
+    key: keyof CleanResponse['sustainability_literacy'],
+    expected?: string
+  ) {
+    const responses = data
+      .map((d) => [d.role, d.sustainability_literacy[key]] as const)
+      .filter((x): x is [(typeof x)[0], NonNullable<(typeof x)[1]>] => !!x[1]);
+    const counts: Record<string, number> = {};
+    let sum = 0;
+
+    for (const [role, response] of responses) {
+      counts[`${role}_${response}`] = (counts[`${role}_${response}`] || 0) + 1;
+      sum++;
+    }
+
+    const responseCounts = Object.entries(counts).map(([role_response, count]) => {
+      const [role, response] = role_response.split('_');
+      return [role, response, count] as const;
+    });
+
+    const tidy = responseCounts.map(([role, response, count]) => {
+      return {
+        role,
+        question: key,
+        response,
+        count,
+        percentage: count / sum,
+        percentageWithRole:
+          count /
+          responseCounts.filter(([r, resp]) => r === role).reduce((acc, [, , c]) => acc + c, 0),
+      };
+    });
+
+    if (!expected) return tidy;
+
+    // if expected is defined, return an array of objects similar to tidy,
+    // but instead of the response options, only distinguish between
+    // correct and incorrect responses
+    return tidy.reduce((acc, d) => {
+      const isCorrect = d.response === expected;
+      if (isCorrect) {
+        return [...acc, { ...d, response: 'correct' }];
+      }
+
+      const existingIncorrectRecord = acc.find(
+        (x) => x.role === d.role && x.response === 'incorrect'
+      );
+      if (existingIncorrectRecord) {
+        // merge the count and percetages of the record in this loop iteration
+        // with the existing record for incorrect responses for this role
+        // that is already in the accumulator
+        existingIncorrectRecord.count += d.count;
+        existingIncorrectRecord.percentage += d.percentage;
+        existingIncorrectRecord.percentageWithRole += d.percentageWithRole;
+      } else {
+        // otherwise, add a new record for incorrect responses for this role
+        // to the accumulator
+        acc.push({ ...d, response: 'incorrect' });
+      }
+      return acc;
+    }, [] as typeof tidy);
+  }
+
   $: shiParticipation = getBehaviorShiParticipation(data.surveyData);
 
-  $: console.log(getClimateChangeProblemResponse(data.surveyData, 'future_generations'));
+  $: console.table(getLiteracyReport(data.surveyData));
+  // $: console.table(
+  //   getLiteracyResponse(data.surveyData, 'not_an_SDG').filter((d) => d.role === 'student')
+  // );
 
   function sortByRole(
     a: { role: NonNullable<CleanResponse['role']> },
@@ -293,6 +395,10 @@
     domain: ['student', 'faculty', 'staff'],
     range: [colors.vibrant.blue, colors.vibrant.magenta, colors.vibrant.orange],
   };
+
+  $: literacyReportGroups = Object.values(
+    Object.groupBy(getLiteracyReport(data.surveyData), (item) => item.question)
+  );
 </script>
 
 <PageTitle>
@@ -535,6 +641,47 @@
   </div>
 </div>
 
+<h2>Sustainability literacy</h2>
+<div class="facets max1 integratedHead">
+  {#each [literacyReportGroups[0], ...literacyReportGroups] as group, index}
+    {@const question = group[0].question}
+    {@const showTopAxis = index === 0}
+    {@const showBottomAxis = index === literacyReportGroups.length}
+    {@const useExtraHeight = showBottomAxis}
+    {@const extraHeight = 40}
+    <div class="facet">
+      <PlotContainer
+        fullWidth
+        plot="{{
+          title: index > 0 ? question : '',
+          color: { ...roleLegendSpec, legend: showTopAxis },
+          marginTop: showTopAxis ? extraHeight : 0,
+          marginLeft: 70,
+          marginBottom: showBottomAxis ? extraHeight : 0,
+          height: useExtraHeight ? 40 + extraHeight : 40,
+          x: {
+            label: index === 0 ? 'Percentage of respondents' : '',
+            labelArrow: index === 0 ? 'right' : 'none',
+            domain: [0, 1],
+            grid: true,
+          },
+          y: { label: '' },
+          marks: [
+            Plot.barX(index > 0 ? group : [], {
+              x: 'percentage',
+              y: 'response',
+              fill: 'role',
+              sort: sortByRole,
+              tip: true,
+            }),
+            index === 0 ? Plot.axisX({ anchor: 'top' }) : null,
+          ].filter((x) => !!x),
+        }}"
+      />
+    </div>
+  {/each}
+</div>
+
 <style>
   .facets {
     display: grid;
@@ -544,6 +691,12 @@
     margin: 16px 10px;
     gap: 1px;
     background: #dedede;
+  }
+  .facets.max1 {
+    grid-template-columns: 1fr;
+  }
+  .facets.integratedHead .facet {
+    padding: 6px 16px;
   }
   @media (prefers-color-scheme: dark) {
     .facets {
@@ -564,6 +717,15 @@
 
   .facets :global(figure > h2) {
     font-size: 22px;
+  }
+  .facets.smallHead :global(figure > h2) {
+    font-size: 18px;
+  }
+  .facets.integratedHead :global(figure > h2) {
+    font-size: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    margin-bottom: 6px;
   }
 
   h2 {
