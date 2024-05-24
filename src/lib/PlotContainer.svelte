@@ -13,5 +13,5 @@
 </script>
 
 <div bind:clientWidth="{clientWidth}">
-  <div bind:this="{div}" role="img"></div>
+  <div bind:this="{div}" role="img"><div style="height: {plot.height || 300}px;"></div></div>
 </div>
