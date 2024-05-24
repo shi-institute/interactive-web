@@ -377,11 +377,6 @@
 
   $: shiParticipation = getBehaviorShiParticipation(data.surveyData);
 
-  $: console.table(getLiteracyReport(data.surveyData));
-  // $: console.table(
-  //   getLiteracyResponse(data.surveyData, 'not_an_SDG').filter((d) => d.role === 'student')
-  // );
-
   function sortByRole(
     a: { role: NonNullable<CleanResponse['role']> },
     b: { role: NonNullable<CleanResponse['role']> }
