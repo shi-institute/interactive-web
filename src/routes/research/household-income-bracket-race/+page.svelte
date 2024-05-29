@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
   import PlotContainer from '$lib/PlotContainer.svelte';
   import { opWonkOptionsStore } from '$stores/opWonkOptionsStore';
   import { Button } from 'fluent-svelte';
@@ -174,6 +175,31 @@
   {/if}
 </div>
 
+<div class="prompt">
+  {#if browser}
+    <p>
+      Want to adjust the way the figure looks? Click or tap the <Button
+        variant="hyperlink"
+        style="padding-left: 0; padding-right: 0;"
+        on:click="{() => ($isPanelWrapperOpen = true)}"
+      >
+        Options
+      </Button> button on the bottom-right side of your screen.
+    </p>
+    {#if !$opWonkOptionsStore.compare}
+      <p>
+        Or, <Button
+          variant="hyperlink"
+          style="padding-left: 0; padding-right: 0;"
+          on:click="{() => ($opWonkOptionsStore.compare = true)}"
+        >
+          Compare with another municipality
+        </Button>.
+      </p>
+    {/if}
+  {/if}
+</div>
+
 <style>
   .header {
     position: relative;
@@ -242,8 +268,20 @@
   @media (max-width: 1200px) {
     .figure:nth-of-type(2) {
       border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
       padding-top: var(--padding);
+      padding-bottom: var(--padding);
       margin-top: var(--padding);
     }
+  }
+
+  .prompt {
+    font-family: var(--fds-font-family-text);
+    font-size: var(--fds-body-font-size);
+    text-align: center;
+    margin: 30px 20px 60px 20px;
+  }
+  .prompt p {
+    margin: 0;
   }
 </style>

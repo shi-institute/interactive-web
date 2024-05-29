@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import { colors } from '$lib/colors';
+import { shiLogoB64 } from '$lib/shiLogoB64';
 import { opWonkOptionsStore } from '$stores/opWonkOptionsStore';
 import * as Plot from '@observablehq/plot';
 import { html } from 'htl';
