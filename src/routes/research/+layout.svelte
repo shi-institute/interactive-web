@@ -114,4 +114,8 @@
       --fds-accent-light-2: 260, 70%, 78%;
     }
   }
+
+  :global(input.toggle-switch) {
+    flex-shrink: 0;
+  }
 </style>
