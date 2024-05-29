@@ -6,6 +6,7 @@
   import FloatingSidebar from './FloatingSidebar.svelte';
   import Legend from './Legend.svelte';
   import SubtitleSelect from './SubtitleSelect.svelte';
+  import { isPanelWrapperOpen } from './isPanelWrapperOpen';
 
   export let data;
   $: ({ acsYearsUnique, citiesUnique } = data);
@@ -65,7 +66,7 @@
             fill="#ffffff"
           ></path>
         </svg>
-        Stop compare
+        Stop comparing
       </Button>
     {:else}
       <Button on:click="{() => ($opWonkOptionsStore.compare = true)}">
@@ -88,6 +89,21 @@
         Compare
       </Button>
     {/if}
+    <Button on:click="{() => ($isPanelWrapperOpen = !$isPanelWrapperOpen)}">
+      <svg
+        width="16"
+        height="16"
+        fill="none"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8.75 13.5a3.251 3.251 0 0 1 3.163 2.498L21.25 16a.75.75 0 0 1 .102 1.493l-.102.007h-9.337a3.251 3.251 0 0 1-6.326 0H2.75a.75.75 0 0 1-.102-1.493L2.75 16h2.837a3.251 3.251 0 0 1 3.163-2.5Zm0 1.5a1.75 1.75 0 0 0-1.652 1.172l-.021.063-.039.148a1.756 1.756 0 0 0 .02.815l.04.13.025.069a1.75 1.75 0 0 0 3.28-.069l.04-.13-.018.06a1.75 1.75 0 0 0 .048-.815l-.03-.137-.02-.07-.047-.134A1.75 1.75 0 0 0 8.75 15Zm6.5-11a3.251 3.251 0 0 1 3.163 2.5h2.837a.75.75 0 0 1 .102 1.493L21.25 8h-2.837a3.251 3.251 0 0 1-6.326 0H2.75a.75.75 0 0 1-.102-1.493L2.75 6.5l9.337-.002A3.251 3.251 0 0 1 15.25 4Zm0 1.5a1.75 1.75 0 0 0-1.652 1.173l-.021.062-.038.148a1.757 1.757 0 0 0 .019.815l.04.13.025.069a1.75 1.75 0 0 0 3.28-.068l.04-.131-.018.06a1.75 1.75 0 0 0 .048-.815l-.03-.137-.02-.07-.047-.134A1.75 1.75 0 0 0 15.25 5.5Z"
+          fill="#ffffff"
+        ></path>
+      </svg>
+      Options
+    </Button>
   </div>
 </div>
 
@@ -179,12 +195,17 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 140px;
+    width: 150px;
     justify-content: right;
     gap: 6px;
     position: absolute;
     top: 20px;
     right: 20px;
+  }
+  @media (max-width: 700px) {
+    .buttons {
+      display: none;
+    }
   }
 
   .buttons svg {
