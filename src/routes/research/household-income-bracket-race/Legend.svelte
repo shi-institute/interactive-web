@@ -12,7 +12,7 @@
 
 <div class="dashes">
   {#if $opWonkOptionsStore.showMedianHouseholdIncome}
-    {#each [$opWonkOptionsStore.medianHouseholdIncomeMode.ami ? 'Area' : null, $opWonkOptionsStore.medianHouseholdIncomeMode.black_ami ? 'Black' : null, $opWonkOptionsStore.medianHouseholdIncomeMode.white_ami ? 'White' : null].filter(Boolean) as item, index}
+    {#each [$opWonkOptionsStore['medianHouseholdIncomeMode.ami'] ? 'Area' : null, $opWonkOptionsStore['medianHouseholdIncomeMode.black_ami'] ? 'Black' : null, $opWonkOptionsStore['medianHouseholdIncomeMode.white_ami'] ? 'White' : null].filter(Boolean) as item, index}
       <span
         class="dash"
         style="--color: {item === 'Black'

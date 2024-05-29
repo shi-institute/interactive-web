@@ -1,7 +1,7 @@
 <script lang="ts">
   import { appSettings, basemapNames } from '$stores/appSettings';
   import { opWonkOptionsStore } from '$stores/opWonkOptionsStore';
-  import { ComboBox, RadioButton, TextBlock, ToggleSwitch } from 'fluent-svelte';
+  import { ComboBox, InfoBar, RadioButton, TextBlock, ToggleSwitch } from 'fluent-svelte';
 
   export let pageTitleElemVisibleHeight: number;
   export let noBorderLeft = false;
@@ -27,7 +27,7 @@
         </ToggleSwitch>
       </div>
       {#if $opWonkOptionsStore.labelBracketValues}
-        <div class="sub">
+        <div class="sub-opts">
           <RadioButton
             bind:group="{$opWonkOptionsStore.bracketValuesLabelMode}"
             value="total_household"
@@ -55,19 +55,23 @@
         </ToggleSwitch>
       </div>
       {#if $opWonkOptionsStore.showMedianHouseholdIncome}
-        <div class="sub">
+        <div class="sub-opts">
           <div>
-            <ToggleSwitch bind:checked="{$opWonkOptionsStore.medianHouseholdIncomeMode.ami}">
+            <ToggleSwitch bind:checked="{$opWonkOptionsStore['medianHouseholdIncomeMode.ami']}">
               Whole area
             </ToggleSwitch>
           </div>
           <div>
-            <ToggleSwitch bind:checked="{$opWonkOptionsStore.medianHouseholdIncomeMode.black_ami}">
+            <ToggleSwitch
+              bind:checked="{$opWonkOptionsStore['medianHouseholdIncomeMode.black_ami']}"
+            >
               Black
             </ToggleSwitch>
           </div>
           <div>
-            <ToggleSwitch bind:checked="{$opWonkOptionsStore.medianHouseholdIncomeMode.white_ami}">
+            <ToggleSwitch
+              bind:checked="{$opWonkOptionsStore['medianHouseholdIncomeMode.white_ami']}"
+            >
               White
             </ToggleSwitch>
           </div>
@@ -85,9 +89,16 @@
       </div>
       <div>
         <ToggleSwitch bind:checked="{$opWonkOptionsStore.useSameScaleWhenComparing}">
-          When comparing places, use the same income scale
+          When comparing places, use the same x-axis scale
         </ToggleSwitch>
       </div>
+      {#if $opWonkOptionsStore.useSameScaleWhenComparing}
+        <div class="sub">
+          <TextBlock variant="caption">
+            This option is affected by the income bracket label mode
+          </TextBlock>
+        </div>
+      {/if}
     </div>
   </div>
 </aside>
@@ -130,10 +141,14 @@
     max-width: 280px;
   }
 
-  .sub {
+  .sub-opts {
     border: 1px solid var(--fds-surface-stroke-default);
     margin-left: 48px;
     padding-left: 10px;
     border-radius: var(--fds-control-corner-radius);
+  }
+
+  .sub {
+    margin-left: 48px;
   }
 </style>

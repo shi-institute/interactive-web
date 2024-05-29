@@ -9,11 +9,9 @@ interface OpWonkOptions {
   compare: boolean;
   consolidate: boolean;
   showMedianHouseholdIncome: boolean;
-  medianHouseholdIncomeMode: {
-    ami: boolean;
-    black_ami: boolean;
-    white_ami: boolean;
-  };
+  'medianHouseholdIncomeMode.ami': boolean;
+  'medianHouseholdIncomeMode.black_ami': boolean;
+  'medianHouseholdIncomeMode.white_ami': boolean;
   labelBracketValues: boolean;
   bracketValuesLabelMode: 'total_household' | 'percent_of_place_households';
   useSameScaleWhenComparing: boolean;
@@ -28,11 +26,9 @@ export const opWonkOptionsStore = storage<OpWonkOptions>('opWonkOptions', {
   compare: false,
   consolidate: false,
   showMedianHouseholdIncome: true,
-  medianHouseholdIncomeMode: {
-    ami: true,
-    black_ami: false,
-    white_ami: false,
-  },
+  'medianHouseholdIncomeMode.ami': true,
+  'medianHouseholdIncomeMode.black_ami': false,
+  'medianHouseholdIncomeMode.white_ami': false,
   labelBracketValues: true,
   bracketValuesLabelMode: 'total_household',
   useSameScaleWhenComparing: false,

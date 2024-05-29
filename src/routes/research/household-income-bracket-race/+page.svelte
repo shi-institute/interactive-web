@@ -1,13 +1,45 @@
-<script>
-  import { colors } from '$lib/colors';
+<script lang="ts">
+  import PlotContainer from '$lib/PlotContainer.svelte';
   import { opWonkOptionsStore } from '$stores/opWonkOptionsStore';
   import { Button } from 'fluent-svelte';
+  import type { PageData } from './$types';
   import FloatingSidebar from './FloatingSidebar.svelte';
   import Legend from './Legend.svelte';
   import SubtitleSelect from './SubtitleSelect.svelte';
 
   export let data;
-  $: ({ tidyDataAllYears, acsYearsUnique, citiesUnique } = data);
+  $: ({ acsYearsUnique, citiesUnique } = data);
+
+  function getForcedDomain(data: PageData) {
+    // if we are not comparing AND wnating to use the same scale, return undefined
+    if (!$opWonkOptionsStore.compare || !$opWonkOptionsStore.useSameScaleWhenComparing)
+      return undefined;
+
+    // use the correct data function based on if consolidated brackets mode is enabled
+    const dataFunc = $opWonkOptionsStore.consolidate ? data.getRegroupedData : data.getData;
+
+    // get the data for both plots that are being compared side-by-side
+    const combinedData = [
+      ...dataFunc($opWonkOptionsStore.yearsACS, $opWonkOptionsStore.city),
+      ...dataFunc($opWonkOptionsStore.yearsACS, $opWonkOptionsStore.city2),
+    ];
+
+    // figure out the largest number of households in the largest bracket
+    // across both plots
+    const maxHouseholds = Math.max(
+      ...combinedData.map((item) => {
+        if ($opWonkOptionsStore.bracketValuesLabelMode === 'percent_of_place_households') {
+          return item.householdsShare * 100;
+        }
+        return item.households;
+      })
+    );
+
+    // construct a domain based on the maxHouseholds
+    const domain = [-1 * maxHouseholds, maxHouseholds];
+
+    return domain;
+  }
 </script>
 
 <FloatingSidebar />
@@ -66,6 +98,27 @@
       &nbsp;·&nbsp;&nbsp;
       <SubtitleSelect options="{acsYearsUnique}" bind:value="{$opWonkOptionsStore.yearsACS}" />
       <Legend />
+      <PlotContainer
+        plot="{data.generatePlotOptions($opWonkOptionsStore.yearsACS, $opWonkOptionsStore.city, {
+          // width: $opWonkOptionsStore.fullWidthMode ? width : 800,
+          height: $opWonkOptionsStore.consolidate ? 252 : 400,
+          consolidate: $opWonkOptionsStore.consolidate,
+          labelBracketValues: $opWonkOptionsStore.labelBracketValues,
+          showPercentOfHouseholds:
+            $opWonkOptionsStore.bracketValuesLabelMode === 'percent_of_place_households',
+          showAreaMedianHouseholdIncome:
+            $opWonkOptionsStore.showMedianHouseholdIncome &&
+            $opWonkOptionsStore['medianHouseholdIncomeMode.ami'],
+          showBlackMedianHouseholdIncome:
+            $opWonkOptionsStore.showMedianHouseholdIncome &&
+            $opWonkOptionsStore['medianHouseholdIncomeMode.black_ami'],
+          showWhiteMedianHouseholdIncome:
+            $opWonkOptionsStore.showMedianHouseholdIncome &&
+            $opWonkOptionsStore['medianHouseholdIncomeMode.white_ami'],
+          xAxisDomain: getForcedDomain(data),
+        })}"
+        fullWidth
+      />
     </div>
   </div>
   {#if $opWonkOptionsStore.compare}
@@ -80,6 +133,27 @@
         />
         <Legend />
       </div>
+      <PlotContainer
+        plot="{data.generatePlotOptions($opWonkOptionsStore.yearsACS, $opWonkOptionsStore.city2, {
+          // width: $opWonkOptionsStore.fullWidthMode ? width : 800,
+          height: $opWonkOptionsStore.consolidate ? 252 : 400,
+          consolidate: $opWonkOptionsStore.consolidate,
+          labelBracketValues: $opWonkOptionsStore.labelBracketValues,
+          showPercentOfHouseholds:
+            $opWonkOptionsStore.bracketValuesLabelMode === 'percent_of_place_households',
+          showAreaMedianHouseholdIncome:
+            $opWonkOptionsStore.showMedianHouseholdIncome &&
+            $opWonkOptionsStore['medianHouseholdIncomeMode.ami'],
+          showBlackMedianHouseholdIncome:
+            $opWonkOptionsStore.showMedianHouseholdIncome &&
+            $opWonkOptionsStore['medianHouseholdIncomeMode.black_ami'],
+          showWhiteMedianHouseholdIncome:
+            $opWonkOptionsStore.showMedianHouseholdIncome &&
+            $opWonkOptionsStore['medianHouseholdIncomeMode.white_ami'],
+          xAxisDomain: getForcedDomain(data),
+        })}"
+        fullWidth
+      />
     </div>
   {/if}
 </div>
@@ -131,7 +205,7 @@
   }
 
   .figure {
-    min-height: 400px;
+    min-height: 300px;
     flex-grow: 1;
     --border-color: var(--fds-surface-stroke-default);
     --padding: 30px;
