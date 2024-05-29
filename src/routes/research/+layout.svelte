@@ -112,6 +112,7 @@
     }
     :global(:root) {
       --fds-accent-light-2: 260, 70%, 78%;
+      --fds-accent-light-3: 260, 70%, 78%;
     }
   }
 
