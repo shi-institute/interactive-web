@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
   import { colors } from '$lib/colors';
   import { opWonkOptionsStore } from '$stores/opWonkOptionsStore';
 </script>
@@ -19,6 +20,10 @@
           ? colors.vibrant.blue
           : item === 'White'
           ? colors.vibrant.orange
+          : browser &&
+            window?.matchMedia &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? '#aaa'
           : '#777'};"
       >
         - - -

@@ -403,7 +403,13 @@ export const load = (async ({ data }) => {
                   )
                 : []),
               ...(showAreaMedianHouseholdIncome
-                ? createMedianIncomeLineMarks(pmhi, placeMedianHouseholdIncome, '#777')
+                ? createMedianIncomeLineMarks(
+                    pmhi,
+                    placeMedianHouseholdIncome,
+                    window?.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+                      ? '#aaa'
+                      : '#777'
+                  )
                 : []),
             ],
             x: { type: 'band', axis: null },
