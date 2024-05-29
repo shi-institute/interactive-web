@@ -118,6 +118,12 @@
     transform: translateX(0);
     opacity: 1;
   }
+  @media (max-width: 500px) {
+    .floating-sidebar-wrapper {
+      width: 100%;
+      inset: 0;
+    }
+  }
 
   .floating-sidebar-wrapper :global(.close-icon) {
     position: absolute;
@@ -138,6 +144,7 @@
     transition: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     transform: translateX(0);
     opacity: 1;
+    z-index: 99;
   }
   .open-icon-wrapper.open {
     transform: translateX(40px);

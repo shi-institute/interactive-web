@@ -10,7 +10,7 @@
 <aside class:noBorderLeft="{noBorderLeft}">
   <div class="sticky-wrapper" style="--pageTitleElemVisibleHeight: {pageTitleElemVisibleHeight}px;">
     <div class="wrapper-internal">
-      <TextBlock variant="bodyStrong" style="padding: 24px 0 0px 0;">Options</TextBlock>
+      <TextBlock variant="subtitle" style="padding: 24px 0 0px 0;">Options</TextBlock>
 
       <TextBlock variant="body" class="cdrz-info-sidebar--field-title">Income brackets</TextBlock>
       <TextBlock variant="caption" class="cdrz-info-sidebar--field-caption">
@@ -138,7 +138,7 @@
   }
 
   .wrapper-internal {
-    max-width: 280px;
+    max-width: 100%;
   }
 
   .sub-opts {
