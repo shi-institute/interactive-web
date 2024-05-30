@@ -319,7 +319,10 @@ export const load = (async ({ data }) => {
               : shiLogoB64Black,
           r: 15,
           preserveAspectRatio: 'xMidYMin slice',
-          opacity: 0.8,
+          opacity: () =>
+            window?.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 0.3
+              : 0.8,
           tip: true,
           href: () => 'https://www.furman.edu/shi-institute/sustainability-research/',
           target: '_blank',
