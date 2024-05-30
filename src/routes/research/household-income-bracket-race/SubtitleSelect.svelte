@@ -6,27 +6,30 @@
   let width = 1200;
 
   function updateSelectWidth(select: HTMLSelectElement) {
-    if (select?.options && select.selectedIndex > -1) {
-      const option = select.options[select.selectedIndex];
-      const span = document.createElement('span');
+    if (select?.options) {
+      const option = Array.from(select.options).find((opt) => opt.getAttribute('value') === value);
+      if (option) {
+        const span = document.createElement('span');
 
-      span.textContent = option.textContent;
+        span.textContent = option.textContent;
 
-      const ostyles = getComputedStyle(option);
-      span.style.fontFamily = ostyles.fontFamily;
-      span.style.fontStyle = ostyles.fontStyle;
-      span.style.fontWeight = ostyles.fontWeight;
-      span.style.fontSize = ostyles.fontSize;
+        const ostyles = getComputedStyle(option);
+        span.style.fontFamily = ostyles.fontFamily;
+        span.style.fontStyle = ostyles.fontStyle;
+        span.style.fontWeight = ostyles.fontWeight;
+        span.style.fontSize = ostyles.fontSize;
 
-      document.body.appendChild(span);
-      select.style.width = span.offsetWidth + (disabled ? 0 : 20) + 'px';
-      document.body.removeChild(span);
+        document.body.appendChild(span);
+        select.style.width = span.offsetWidth + (disabled ? 0 : 20) + 'px';
+        document.body.removeChild(span);
+      }
     }
   }
 
   let selectElem: HTMLSelectElement;
   $: if (selectElem) {
     disabled; // also re-run when disabled status changes
+    value; // also re-run when value changes
     updateSelectWidth(selectElem);
   }
 </script>
@@ -36,12 +39,7 @@
 {#if disabled}
   <span class="displayed-option-disabled">{value}</span>
 {:else}
-  <select
-    bind:this="{selectElem}"
-    bind:value="{value}"
-    on:change="{(evt) => updateSelectWidth(evt.target)}"
-    disabled="{disabled}"
-  >
+  <select bind:this="{selectElem}" bind:value="{value}" disabled="{disabled}">
     {#each options as option}
       <option value="{option}">{option}</option>
     {/each}

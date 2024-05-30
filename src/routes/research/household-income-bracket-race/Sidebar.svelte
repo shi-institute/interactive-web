@@ -1,6 +1,14 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import { opWonkOptionsStore } from '$stores/opWonkOptionsStore';
-  import { Button, ProgressRing, RadioButton, TextBlock, ToggleSwitch } from 'fluent-svelte';
+  import {
+    Button,
+    InfoBar,
+    ProgressRing,
+    RadioButton,
+    TextBlock,
+    ToggleSwitch,
+  } from 'fluent-svelte';
 
   export let pageTitleElemVisibleHeight: number;
   export let noBorderLeft = false;
@@ -80,6 +88,25 @@
         </div>
       {/if}
 
+      <TextBlock variant="body" class="cdrz-info-sidebar--field-title">Place and time</TextBlock>
+      <InfoBar
+        message="You can also change these options with the dropdown menus above the figure."
+        closable="{false}"
+        class="cdrz-info-sidebar--notice"
+      />
+
+      <select bind:value="{$opWonkOptionsStore.city}">
+        {#each $page.data.citiesUnique as city}
+          <option value="{city}">{city}</option>
+        {/each}
+      </select>
+
+      <select bind:value="{$opWonkOptionsStore.yearsACS}">
+        {#each $page.data.acsYearsUnique as yearRange}
+          <option value="{yearRange}">{yearRange}</option>
+        {/each}
+      </select>
+
       <TextBlock variant="body" class="cdrz-info-sidebar--field-title">Compare</TextBlock>
       <TextBlock variant="caption" class="cdrz-info-sidebar--field-caption">
         Choose display options for comparing cities
@@ -88,6 +115,16 @@
         <ToggleSwitch bind:checked="{$opWonkOptionsStore.compare}">
           Show two cities side-by-side
         </ToggleSwitch>
+        {#if $opWonkOptionsStore.compare}
+          <div class="sub-opts" style="padding: 0 10px 10px 10px; margin-bottom: 10px;">
+            <TextBlock variant="body" class="cdrz-info-sidebar--field-title">City 2</TextBlock>
+            <select bind:value="{$opWonkOptionsStore.city2}">
+              {#each $page.data.citiesUnique as city}
+                <option value="{city}">{city}</option>
+              {/each}
+            </select>
+          </div>
+        {/if}
       </div>
       <div>
         <ToggleSwitch bind:checked="{$opWonkOptionsStore.useSameScaleWhenComparing}">
@@ -165,9 +202,10 @@
   .sticky-wrapper {
     position: sticky;
     top: 0;
-    height: calc(100vh - var(--headerVisibleHeight) - var(--pageTitleElemVisibleHeight));
+    height: calc(100vh - 40px);
     overflow: auto;
     padding: 0 20px;
+    box-sizing: border-box;
   }
 
   .wrapper-internal {
@@ -183,5 +221,52 @@
 
   .sub {
     margin-left: 48px;
+  }
+
+  :global(.cdrz-info-sidebar--notice p) {
+    font-size: 12px !important;
+    line-height: 1.2 !important;
+  }
+
+  select {
+    align-items: center;
+    border: none;
+    border-radius: var(--fds-control-corner-radius);
+    box-sizing: border-box;
+    cursor: default;
+    display: inline-flex;
+    font-family: var(--fds-font-family-text);
+    font-size: var(--fds-body-font-size);
+    font-weight: 400;
+    justify-content: center;
+    line-height: 20px;
+    outline: none;
+    padding-block: 4px 6px;
+    padding-inline: 11px;
+    position: relative;
+    text-decoration: none;
+    transition: var(--fds-control-faster-duration) ease background;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-clip: padding-box;
+    background-color: var(--fds-control-fill-default);
+    border: 1px solid;
+    border-color: var(--fds-control-border-default);
+    color: var(--fds-text-primary);
+    width: 100%;
+    margin-top: 4px;
+  }
+  select:hover {
+    background-color: var(--fds-control-fill-secondary);
+  }
+  select:active {
+    background-color: var(--fds-control-fill-tertiary);
+    border-color: var(--fds-control-stroke-default);
+    color: var(--fds-text-secondary);
+  }
+  option {
+    background-color: var(--fds-solid-background-tertiary);
   }
 </style>
