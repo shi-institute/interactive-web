@@ -17,6 +17,7 @@
   }
 
   export let handleExport: (() => Promise<void>) | undefined = undefined;
+  export let isEmbedded = false;
 </script>
 
 {#if open}
@@ -38,25 +39,27 @@
   </div>
 {/if}
 
-<div class="open-icon-wrapper" class:open="{$isPanelWrapperOpen}">
-  <Tooltip text="Open page options" alignment="end">
-    <Button on:click="{() => ($isPanelWrapperOpen = true)}" class="expand-button">
-      <svg
-        width="16"
-        height="16"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-        style="margin: 0 4px 0 -2px;"
-      >
-        <path
-          d="M15.707 4.293a1 1 0 0 1 0 1.414L9.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414l-7-7a1 1 0 0 1 0-1.414l7-7a1 1 0 0 1 1.414 0Z"
-        ></path>
-      </svg>
-      Options
-    </Button>
-  </Tooltip>
-</div>
+{#if !isEmbedded}
+  <div class="open-icon-wrapper" class:open="{$isPanelWrapperOpen}">
+    <Tooltip text="Open page options" alignment="end">
+      <Button on:click="{() => ($isPanelWrapperOpen = true)}" class="expand-button">
+        <svg
+          width="16"
+          height="16"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          style="margin: 0 4px 0 -2px;"
+        >
+          <path
+            d="M15.707 4.293a1 1 0 0 1 0 1.414L9.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414l-7-7a1 1 0 0 1 0-1.414l7-7a1 1 0 0 1 1.414 0Z"
+          ></path>
+        </svg>
+        Options
+      </Button>
+    </Tooltip>
+  </div>
+{/if}
 
 {#if open}
   <!-- svelte-ignore a11y-click-events-have-key-events -->

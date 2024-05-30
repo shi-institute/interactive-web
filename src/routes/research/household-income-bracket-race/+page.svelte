@@ -1,5 +1,6 @@
 <script lang="ts">
   import { browser } from '$app/environment';
+  import { page } from '$app/stores';
   import PlotContainer from '$lib/PlotContainer.svelte';
   import { opWonkOptionsStore } from '$stores/opWonkOptionsStore';
   import { Button } from 'fluent-svelte';
@@ -11,7 +12,7 @@
   import { isPanelWrapperOpen } from './isPanelWrapperOpen';
 
   export let data;
-  $: ({ acsYearsUnique, citiesUnique } = data);
+  $: ({ acsYearsUnique, citiesUnique, isEmbedded } = data);
 
   function getForcedDomain(data: PageData) {
     // if we are not comparing AND wnating to use the same scale, return undefined
@@ -78,69 +79,71 @@
   }
 </script>
 
-<FloatingSidebar handleExport="{downloadFigures}" />
+<FloatingSidebar handleExport="{downloadFigures}" isEmbedded="{isEmbedded}" />
 
 <div class="exportable" bind:this="{exportElem}">
   <div class="header">
     <h1>Households by income bracket and race</h1>
-    <div class="buttons" data-html2canvas-ignore>
-      {#if $opWonkOptionsStore.compare}
-        <Button on:click="{() => ($opWonkOptionsStore.compare = false)}">
+    {#if !isEmbedded}
+      <div class="buttons" data-html2canvas-ignore>
+        {#if $opWonkOptionsStore.compare}
+          <Button on:click="{() => ($opWonkOptionsStore.compare = false)}">
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2 6.25A2.25 2.25 0 0 1 4.25 4h15.5A2.25 2.25 0 0 1 22 6.25v11.5A2.25 2.25 0 0 1 19.75 20H4.25A2.25 2.25 0 0 1 2 17.75V6.25Zm2.25-.75a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h15.5a.75.75 0 0 0 .75-.75V6.25a.75.75 0 0 0-.75-.75H4.25Z"
+                fill="#ffffff"
+              ></path>
+              <path
+                d="M8.22 8.215a.75.75 0 0 1 1.06 0l2.72 2.72 2.725-2.716a.75.75 0 0 1 1.06 1.062l-2.724 2.715 2.724 2.724a.75.75 0 1 1-1.06 1.06L12 13.057 9.28 15.78a.75.75 0 0 1-1.06-1.06l2.72-2.724-2.72-2.72a.75.75 0 0 1 0-1.06Z"
+                fill="#ffffff"
+              ></path>
+            </svg>
+            Stop comparing
+          </Button>
+        {:else}
+          <Button on:click="{() => ($opWonkOptionsStore.compare = true)}">
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8.31 10.248a.75.75 0 1 0-1.12-.997l-2 2.25a.75.75 0 0 0 0 .997l2 2.25a.75.75 0 1 0 1.12-.996l-.89-1.002h9.16l-.89 1.002a.75.75 0 1 0 1.12.996l2-2.25.01-.012a.747.747 0 0 0-.012-.987L16.81 9.251a.75.75 0 1 0-1.12.997l.89 1.002H7.42l.89-1.002Z"
+                fill="currentColor"
+              ></path>
+              <path
+                d="M12.754 4.001v.002h7.498c.966 0 1.75.784 1.75 1.75v12.495a1.75 1.75 0 0 1-1.75 1.75h-8.998v-.002H3.757a1.75 1.75 0 0 1-1.75-1.75V5.751c0-.967.783-1.75 1.75-1.75h8.997Zm7.498 1.502h-7.498V10.5h-1.5V5.5H3.757a.25.25 0 0 0-.25.25v12.495c0 .138.112.25.25.25h7.497V13.5h1.5v4.998h7.498a.25.25 0 0 0 .25-.25V5.754a.25.25 0 0 0-.25-.25Z"
+                fill="currentColor"
+              ></path>
+            </svg>
+            Compare
+          </Button>
+        {/if}
+        <Button on:click="{() => ($isPanelWrapperOpen = !$isPanelWrapperOpen)}">
           <svg
-            width="20"
-            height="20"
+            width="16"
+            height="16"
             fill="none"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M2 6.25A2.25 2.25 0 0 1 4.25 4h15.5A2.25 2.25 0 0 1 22 6.25v11.5A2.25 2.25 0 0 1 19.75 20H4.25A2.25 2.25 0 0 1 2 17.75V6.25Zm2.25-.75a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h15.5a.75.75 0 0 0 .75-.75V6.25a.75.75 0 0 0-.75-.75H4.25Z"
-              fill="#ffffff"
-            ></path>
-            <path
-              d="M8.22 8.215a.75.75 0 0 1 1.06 0l2.72 2.72 2.725-2.716a.75.75 0 0 1 1.06 1.062l-2.724 2.715 2.724 2.724a.75.75 0 1 1-1.06 1.06L12 13.057 9.28 15.78a.75.75 0 0 1-1.06-1.06l2.72-2.724-2.72-2.72a.75.75 0 0 1 0-1.06Z"
-              fill="#ffffff"
-            ></path>
-          </svg>
-          Stop comparing
-        </Button>
-      {:else}
-        <Button on:click="{() => ($opWonkOptionsStore.compare = true)}">
-          <svg
-            width="20"
-            height="20"
-            fill="none"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8.31 10.248a.75.75 0 1 0-1.12-.997l-2 2.25a.75.75 0 0 0 0 .997l2 2.25a.75.75 0 1 0 1.12-.996l-.89-1.002h9.16l-.89 1.002a.75.75 0 1 0 1.12.996l2-2.25.01-.012a.747.747 0 0 0-.012-.987L16.81 9.251a.75.75 0 1 0-1.12.997l.89 1.002H7.42l.89-1.002Z"
-              fill="currentColor"
-            ></path>
-            <path
-              d="M12.754 4.001v.002h7.498c.966 0 1.75.784 1.75 1.75v12.495a1.75 1.75 0 0 1-1.75 1.75h-8.998v-.002H3.757a1.75 1.75 0 0 1-1.75-1.75V5.751c0-.967.783-1.75 1.75-1.75h8.997Zm7.498 1.502h-7.498V10.5h-1.5V5.5H3.757a.25.25 0 0 0-.25.25v12.495c0 .138.112.25.25.25h7.497V13.5h1.5v4.998h7.498a.25.25 0 0 0 .25-.25V5.754a.25.25 0 0 0-.25-.25Z"
+              d="M8.75 13.5a3.251 3.251 0 0 1 3.163 2.498L21.25 16a.75.75 0 0 1 .102 1.493l-.102.007h-9.337a3.251 3.251 0 0 1-6.326 0H2.75a.75.75 0 0 1-.102-1.493L2.75 16h2.837a3.251 3.251 0 0 1 3.163-2.5Zm0 1.5a1.75 1.75 0 0 0-1.652 1.172l-.021.063-.039.148a1.756 1.756 0 0 0 .02.815l.04.13.025.069a1.75 1.75 0 0 0 3.28-.069l.04-.13-.018.06a1.75 1.75 0 0 0 .048-.815l-.03-.137-.02-.07-.047-.134A1.75 1.75 0 0 0 8.75 15Zm6.5-11a3.251 3.251 0 0 1 3.163 2.5h2.837a.75.75 0 0 1 .102 1.493L21.25 8h-2.837a3.251 3.251 0 0 1-6.326 0H2.75a.75.75 0 0 1-.102-1.493L2.75 6.5l9.337-.002A3.251 3.251 0 0 1 15.25 4Zm0 1.5a1.75 1.75 0 0 0-1.652 1.173l-.021.062-.038.148a1.757 1.757 0 0 0 .019.815l.04.13.025.069a1.75 1.75 0 0 0 3.28-.068l.04-.131-.018.06a1.75 1.75 0 0 0 .048-.815l-.03-.137-.02-.07-.047-.134A1.75 1.75 0 0 0 15.25 5.5Z"
               fill="currentColor"
             ></path>
           </svg>
-          Compare
+          Options
         </Button>
-      {/if}
-      <Button on:click="{() => ($isPanelWrapperOpen = !$isPanelWrapperOpen)}">
-        <svg
-          width="16"
-          height="16"
-          fill="none"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M8.75 13.5a3.251 3.251 0 0 1 3.163 2.498L21.25 16a.75.75 0 0 1 .102 1.493l-.102.007h-9.337a3.251 3.251 0 0 1-6.326 0H2.75a.75.75 0 0 1-.102-1.493L2.75 16h2.837a3.251 3.251 0 0 1 3.163-2.5Zm0 1.5a1.75 1.75 0 0 0-1.652 1.172l-.021.063-.039.148a1.756 1.756 0 0 0 .02.815l.04.13.025.069a1.75 1.75 0 0 0 3.28-.069l.04-.13-.018.06a1.75 1.75 0 0 0 .048-.815l-.03-.137-.02-.07-.047-.134A1.75 1.75 0 0 0 8.75 15Zm6.5-11a3.251 3.251 0 0 1 3.163 2.5h2.837a.75.75 0 0 1 .102 1.493L21.25 8h-2.837a3.251 3.251 0 0 1-6.326 0H2.75a.75.75 0 0 1-.102-1.493L2.75 6.5l9.337-.002A3.251 3.251 0 0 1 15.25 4Zm0 1.5a1.75 1.75 0 0 0-1.652 1.173l-.021.062-.038.148a1.757 1.757 0 0 0 .019.815l.04.13.025.069a1.75 1.75 0 0 0 3.28-.068l.04-.131-.018.06a1.75 1.75 0 0 0 .048-.815l-.03-.137-.02-.07-.047-.134A1.75 1.75 0 0 0 15.25 5.5Z"
-            fill="currentColor"
-          ></path>
-        </svg>
-        Options
-      </Button>
-    </div>
+      </div>
+    {/if}
   </div>
 
   <div class="figures" class:exporting="{exporting}" style="--exportWidth: {exportWidth}px;">
@@ -225,30 +228,57 @@
   </div>
 </div>
 
-<div class="prompt">
-  {#if browser}
-    <p>
-      Want to adjust the way the figure looks? Click or tap the <Button
+{#if isEmbedded}
+  <br />
+  <br />
+  <div class="embed-bar">
+    <div>Shi Applied Research</div>
+    <div>
+      <Button
         variant="hyperlink"
-        style="padding-left: 0; padding-right: 0;"
-        on:click="{() => ($isPanelWrapperOpen = true)}"
+        style="padding: 2px 10px; font-size: 12px"
+        href="{$page.url.pathname}"
+        target="_blank"
+      >
+        Open in new tab
+      </Button>
+      <Button
+        variant="hyperlink"
+        style="padding: 2px 10px; font-size: 12px"
+        on:click="{() => ($isPanelWrapperOpen = !$isPanelWrapperOpen)}"
       >
         Options
-      </Button> button on the bottom-right side of your screen.
-    </p>
-    {#if !$opWonkOptionsStore.compare}
+      </Button>
+    </div>
+  </div>
+{/if}
+
+{#if !isEmbedded}
+  <div class="prompt">
+    {#if browser}
       <p>
-        Or, <Button
+        Want to adjust the way the figure looks? Click or tap the <Button
           variant="hyperlink"
           style="padding-left: 0; padding-right: 0;"
-          on:click="{() => ($opWonkOptionsStore.compare = true)}"
+          on:click="{() => ($isPanelWrapperOpen = true)}"
         >
-          Compare with another municipality
-        </Button>.
+          Options
+        </Button> button on the bottom-right side of your screen.
       </p>
+      {#if !$opWonkOptionsStore.compare}
+        <p>
+          Or, <Button
+            variant="hyperlink"
+            style="padding-left: 0; padding-right: 0;"
+            on:click="{() => ($opWonkOptionsStore.compare = true)}"
+          >
+            Compare with another municipality
+          </Button>.
+        </p>
+      {/if}
     {/if}
-  {/if}
-</div>
+  </div>
+{/if}
 
 <style>
   .header {
@@ -337,5 +367,20 @@
 
   .figures.exporting {
     width: var(--exportWidth);
+  }
+
+  .embed-bar {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: var(--fds-solid-background-tertiary);
+    border-top: 1px solid var(--fds-surface-stroke-default);
+    padding: 0px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--fds-text-tertiary);
   }
 </style>

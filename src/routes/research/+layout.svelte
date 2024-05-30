@@ -4,6 +4,8 @@
   import 'leaflet/dist/leaflet.css';
   import { onDestroy, onMount } from 'svelte';
 
+  export let data;
+
   let headerVisibleHeight = 30;
   let headerElem: HTMLElement;
 
@@ -34,21 +36,23 @@
   }
 </script>
 
-<header bind:this="{headerElem}">
-  <nav>
-    <ul>
-      <a href="https://www.furman.edu/shi-institute/sustainability-research/">
-        Shi Applied Research
-      </a>
-      <a href="/research">All Visualizations</a>
-      {#if dev}
-        <a href="/research/sitemap">Sitemap</a>
-      {/if}
-    </ul>
-  </nav>
-  <div class="title"></div>
-  <div class="meta"></div>
-</header>
+{#if !data.isEmbedded}
+  <header bind:this="{headerElem}">
+    <nav>
+      <ul>
+        <a href="https://www.furman.edu/shi-institute/sustainability-research/">
+          Shi Applied Research
+        </a>
+        <a href="/research">All Visualizations</a>
+        {#if dev}
+          <a href="/research/sitemap">Sitemap</a>
+        {/if}
+      </ul>
+    </nav>
+    <div class="title"></div>
+    <div class="meta"></div>
+  </header>
+{/if}
 
 <main style="--headerVisibleHeight: {headerVisibleHeight}px;">
   <slot />

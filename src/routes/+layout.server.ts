@@ -3,7 +3,7 @@ import type { LayoutServerLoad } from './$types';
 
 import 'groupby-polyfill/lib/polyfill.js';
 
-export const load = (async ({ locals }) => {
+export const load = (async ({ locals, url }) => {
   // handle authentication
   const { counter = 0, protectedPass = '' } = locals.session.data;
   const authenticated = protectedPass === PROTECTED_PAGE_PASSWORD;
@@ -14,5 +14,5 @@ export const load = (async ({ locals }) => {
     authenticated: authenticated,
   });
 
-  return { session: locals.session.data };
+  return { session: locals.session.data, isEmbedded: url.searchParams.get('embedded') === '1' };
 }) satisfies LayoutServerLoad;
