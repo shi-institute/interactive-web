@@ -453,7 +453,6 @@ export const load = (async ({ data }) => {
         frameAnchor: 'left',
         textAnchor: 'start',
         fontWeight: 500,
-        fontFamily: 'JetBrains Mono',
         monospace: true,
         fontSize: 12,
         fill: color,
