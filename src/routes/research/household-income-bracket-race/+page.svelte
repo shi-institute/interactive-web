@@ -159,24 +159,25 @@
         />
         <Legend />
         <PlotContainer
-          plot="{data.generatePlotOptions($opWonkOptionsStore.yearsACS, $opWonkOptionsStore.city, {
-            // width: $opWonkOptionsStore.fullWidthMode ? width : 800,
-            height: $opWonkOptionsStore.consolidate ? 252 : 400,
-            consolidate: $opWonkOptionsStore.consolidate,
-            labelBracketValues: $opWonkOptionsStore.labelBracketValues,
-            showPercentOfHouseholds:
-              $opWonkOptionsStore.bracketValuesLabelMode === 'percent_of_place_households',
-            showAreaMedianHouseholdIncome:
-              $opWonkOptionsStore.showMedianHouseholdIncome &&
-              $opWonkOptionsStore['medianHouseholdIncomeMode.ami'],
-            showBlackMedianHouseholdIncome:
-              $opWonkOptionsStore.showMedianHouseholdIncome &&
-              $opWonkOptionsStore['medianHouseholdIncomeMode.black_ami'],
-            showWhiteMedianHouseholdIncome:
-              $opWonkOptionsStore.showMedianHouseholdIncome &&
-              $opWonkOptionsStore['medianHouseholdIncomeMode.white_ami'],
-            xAxisDomain: getForcedDomain(data),
-          })}"
+          plot="{(width) =>
+            data.generatePlotOptions($opWonkOptionsStore.yearsACS, $opWonkOptionsStore.city, {
+              width,
+              height: $opWonkOptionsStore.consolidate ? 252 : 400,
+              consolidate: $opWonkOptionsStore.consolidate,
+              labelBracketValues: $opWonkOptionsStore.labelBracketValues,
+              showPercentOfHouseholds:
+                $opWonkOptionsStore.bracketValuesLabelMode === 'percent_of_place_households',
+              showAreaMedianHouseholdIncome:
+                $opWonkOptionsStore.showMedianHouseholdIncome &&
+                $opWonkOptionsStore['medianHouseholdIncomeMode.ami'],
+              showBlackMedianHouseholdIncome:
+                $opWonkOptionsStore.showMedianHouseholdIncome &&
+                $opWonkOptionsStore['medianHouseholdIncomeMode.black_ami'],
+              showWhiteMedianHouseholdIncome:
+                $opWonkOptionsStore.showMedianHouseholdIncome &&
+                $opWonkOptionsStore['medianHouseholdIncomeMode.white_ami'],
+              xAxisDomain: getForcedDomain(data),
+            })}"
           fullWidth
         />
       </div>
@@ -198,24 +199,25 @@
           <Legend />
         </div>
         <PlotContainer
-          plot="{data.generatePlotOptions($opWonkOptionsStore.yearsACS, $opWonkOptionsStore.city2, {
-            // width: $opWonkOptionsStore.fullWidthMode ? width : 800,
-            height: $opWonkOptionsStore.consolidate ? 252 : 400,
-            consolidate: $opWonkOptionsStore.consolidate,
-            labelBracketValues: $opWonkOptionsStore.labelBracketValues,
-            showPercentOfHouseholds:
-              $opWonkOptionsStore.bracketValuesLabelMode === 'percent_of_place_households',
-            showAreaMedianHouseholdIncome:
-              $opWonkOptionsStore.showMedianHouseholdIncome &&
-              $opWonkOptionsStore['medianHouseholdIncomeMode.ami'],
-            showBlackMedianHouseholdIncome:
-              $opWonkOptionsStore.showMedianHouseholdIncome &&
-              $opWonkOptionsStore['medianHouseholdIncomeMode.black_ami'],
-            showWhiteMedianHouseholdIncome:
-              $opWonkOptionsStore.showMedianHouseholdIncome &&
-              $opWonkOptionsStore['medianHouseholdIncomeMode.white_ami'],
-            xAxisDomain: getForcedDomain(data),
-          })}"
+          plot="{(width) =>
+            data.generatePlotOptions($opWonkOptionsStore.yearsACS, $opWonkOptionsStore.city2, {
+              width,
+              height: $opWonkOptionsStore.consolidate ? 252 : 400,
+              consolidate: $opWonkOptionsStore.consolidate,
+              labelBracketValues: $opWonkOptionsStore.labelBracketValues,
+              showPercentOfHouseholds:
+                $opWonkOptionsStore.bracketValuesLabelMode === 'percent_of_place_households',
+              showAreaMedianHouseholdIncome:
+                $opWonkOptionsStore.showMedianHouseholdIncome &&
+                $opWonkOptionsStore['medianHouseholdIncomeMode.ami'],
+              showBlackMedianHouseholdIncome:
+                $opWonkOptionsStore.showMedianHouseholdIncome &&
+                $opWonkOptionsStore['medianHouseholdIncomeMode.black_ami'],
+              showWhiteMedianHouseholdIncome:
+                $opWonkOptionsStore.showMedianHouseholdIncome &&
+                $opWonkOptionsStore['medianHouseholdIncomeMode.white_ami'],
+              xAxisDomain: getForcedDomain(data),
+            })}"
           fullWidth
         />
       </div>

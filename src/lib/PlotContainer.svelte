@@ -2,7 +2,7 @@
   import { browser } from '$app/environment';
   import * as Plot from '@observablehq/plot';
 
-  export let plot: Plot.PlotOptions;
+  export let plot: Plot.PlotOptions | ((width: number) => Plot.PlotOptions);
   export let fullWidth = false;
 
   let clientWidth: number | undefined;
@@ -10,7 +10,13 @@
   $: {
     if (browser) {
       div?.firstChild?.remove(); // remove old chart if it exists
-      const plotNode = Plot.plot({ ...plot, width: fullWidth ? clientWidth : plot.width || 640 });
+
+      const plotOptions = typeof plot === 'function' ? plot(clientWidth || 640) : plot;
+
+      const plotNode = Plot.plot({
+        ...plotOptions,
+        width: fullWidth ? clientWidth : plotOptions.width || 640,
+      });
       const plotStyleNode = plotNode.querySelector('style');
       if (plotStyleNode)
         plotStyleNode.innerHTML += `
