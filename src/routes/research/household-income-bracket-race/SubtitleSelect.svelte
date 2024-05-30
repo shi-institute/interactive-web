@@ -19,37 +19,47 @@
       span.style.fontSize = ostyles.fontSize;
 
       document.body.appendChild(span);
-      select.style.width = span.offsetWidth + 20 + 'px';
+      select.style.width = span.offsetWidth + (disabled ? 0 : 20) + 'px';
       document.body.removeChild(span);
     }
   }
 
   let selectElem: HTMLSelectElement;
-  $: if (selectElem) updateSelectWidth(selectElem);
+  $: if (selectElem) {
+    disabled; // also re-run when disabled status changes
+    updateSelectWidth(selectElem);
+  }
 </script>
 
 <svelte:window bind:innerWidth="{width}" />
 
-<select
-  bind:this="{selectElem}"
-  bind:value="{value}"
-  on:change="{(evt) => updateSelectWidth(evt.target)}"
-  disabled="{disabled}"
->
-  {#each options as option}
-    <option value="{option}">{option}</option>
-  {/each}
-</select>
-<span style="margin-left: -20px;">{disabled ? '' : '▾'}</span>
+{#if disabled}
+  <span class="displayed-option-disabled">{value}</span>
+{:else}
+  <select
+    bind:this="{selectElem}"
+    bind:value="{value}"
+    on:change="{(evt) => updateSelectWidth(evt.target)}"
+    disabled="{disabled}"
+  >
+    {#each options as option}
+      <option value="{option}">{option}</option>
+    {/each}
+  </select>
+  <span style="margin-left: -20px;">▾</span>
+{/if}
 
 <style>
-  select {
+  select,
+  .displayed-option-disabled {
     appearance: none;
     border: none;
     background: none;
     padding: 0;
     user-select: none;
     color: inherit;
+    opacity: 1;
+    display: inline-block;
 
     font-weight: 400;
     font-size: 16px;

@@ -38,6 +38,7 @@
 		"d3": "^7.8.5",
 		"groupby-polyfill": "^1.0.0",
 		"htl": "^0.3.1",
+		"html2canvas": "^1.4.1",
 		"luxon": "^3.4.3",
 		"svelte-kit-cookie-session": "^4.0.0",
 		"svelte-leafletjs": "^0.10.0",

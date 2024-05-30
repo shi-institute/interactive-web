@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { Button, IconButton, Tooltip } from 'fluent-svelte';
   import Sidebar from './Sidebar.svelte';
   import { isPanelWrapperOpen } from './isPanelWrapperOpen';
@@ -15,6 +15,8 @@
       open = $isPanelWrapperOpen;
     }
   }
+
+  export let handleExport: (() => Promise<void>) | undefined = undefined;
 </script>
 
 {#if open}
@@ -32,7 +34,7 @@
         ></path>
       </svg>
     </IconButton>
-    <Sidebar pageTitleElemVisibleHeight="{2}" noBorderLeft />
+    <Sidebar pageTitleElemVisibleHeight="{2}" noBorderLeft handleExport="{handleExport}" />
   </div>
 {/if}
 
