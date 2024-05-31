@@ -3,6 +3,7 @@
   import { page } from '$app/stores';
   import PlotContainer from '$lib/PlotContainer.svelte';
   import { opWonkOptionsStore } from '$stores/opWonkOptionsStore';
+  import { downloadElement } from '$utils/downloadElement';
   import { Button } from 'fluent-svelte';
   import html2canvas from 'html2canvas';
   import type { PageData } from './$types';
@@ -50,35 +51,8 @@
   $: exportWidth = $opWonkOptionsStore.compare ? 1280 : 680;
   async function downloadFigures() {
     exporting = true;
-
-    const mainPageAreaElem = document.querySelector('#pageArea main');
-    const pageBackgroundColor = mainPageAreaElem
-      ? getComputedStyle(mainPageAreaElem).backgroundColor
-      : 'white';
-
-    // wait 1 second so there is time for the plot to rerender at the export width
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    const canvas = await html2canvas(exportElem, {
-      windowWidth: exportWidth,
-      backgroundColor: pageBackgroundColor,
-      scale: 4,
-    });
-
+    await downloadElement(exportElem, exportWidth, 'Household_Income_Bracket_By_Race.png');
     exporting = false;
-
-    const downloadLink = document.createElement('a');
-    downloadLink.setAttribute(
-      'download',
-      'ShiAppliedResearch_Household_Income_Bracket_By_Race.png'
-    );
-    canvas.toBlob((blob) => {
-      if (!blob) return;
-      const url = URL.createObjectURL(blob);
-      downloadLink.setAttribute('href', url);
-      downloadLink.click();
-      URL.revokeObjectURL(url);
-    });
   }
 </script>
 
