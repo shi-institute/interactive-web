@@ -68,7 +68,10 @@
     exporting = false;
 
     const downloadLink = document.createElement('a');
-    downloadLink.setAttribute('download', 'CanvasAsImage.png');
+    downloadLink.setAttribute(
+      'download',
+      'ShiAppliedResearch_Household_Income_Bracket_By_Race.png'
+    );
     canvas.toBlob((blob) => {
       if (!blob) return;
       const url = URL.createObjectURL(blob);
