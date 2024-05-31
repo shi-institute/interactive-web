@@ -226,6 +226,13 @@
       </div>
     {/if}
   </div>
+
+  <!-- svelte-ignore a11y-structure -->
+  {#if exporting}
+    <figcaption class="export-credit" style="--exportWidth: {exportWidth}px;">
+      Created by the Applied Research team at the Shi Insitiute for Sustainable Communities.
+    </figcaption>
+  {/if}
 </div>
 
 {#if isEmbedded}
@@ -382,5 +389,11 @@
     align-items: center;
     font-size: 12px;
     color: var(--fds-text-tertiary);
+  }
+
+  .export-credit {
+    width: var(--exportWidth);
+    font-style: italic;
+    padding: 0 20px 12px 20px;
   }
 </style>
