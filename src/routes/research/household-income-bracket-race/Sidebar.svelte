@@ -15,6 +15,7 @@
   export let handleExport: (() => Promise<void>) | undefined = undefined;
 
   let exportLoading = false;
+  let copyLoading = false;
 </script>
 
 <aside class:noBorderLeft="{noBorderLeft}">
@@ -140,34 +141,77 @@
       {/if}
 
       {#if handleExport}
-        <TextBlock variant="body" class="cdrz-info-sidebar--field-title">Export</TextBlock>
-        <Button
-          on:click="{async () => {
-            exportLoading = true;
-            await handleExport();
-            exportLoading = false;
-          }}"
-          style="width: 166px; height: 32px; margin: 8px 0;"
-        >
-          {#if exportLoading}
-            <ProgressRing style="--fds-accent-default: currentColor;" size="{16}" />
-          {:else}
-            <svg
-              width="16"
-              height="16"
-              fill="none"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              style="margin: 0 12px 0 0;"
-            >
-              <path
-                d="M18.25 20.5a.75.75 0 1 1 0 1.5l-13 .004a.75.75 0 1 1 0-1.5l13-.004ZM11.648 2.012l.102-.007a.75.75 0 0 1 .743.648l.007.102-.001 13.685 3.722-3.72a.75.75 0 0 1 .976-.073l.085.073a.75.75 0 0 1 .072.976l-.073.084-4.997 4.997a.75.75 0 0 1-.976.073l-.085-.073-5.003-4.996a.75.75 0 0 1 .976-1.134l.084.072 3.719 3.714L11 2.755a.75.75 0 0 1 .648-.743l.102-.007-.102.007Z"
-                fill="currentColor"
-              ></path>
-            </svg>
-            Download as PNG
-          {/if}
-        </Button>
+        <TextBlock variant="body" class="cdrz-info-sidebar--field-title">
+          Export and share
+        </TextBlock>
+        <div>
+          <Button
+            on:click="{async () => {
+              exportLoading = true;
+              await handleExport();
+              exportLoading = false;
+            }}"
+            style="width: 166px; height: 32px; margin: 8px 0;"
+          >
+            {#if exportLoading}
+              <ProgressRing style="--fds-accent-default: currentColor;" size="{16}" />
+            {:else}
+              <svg
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                style="margin: 0 12px 0 0;"
+              >
+                <path
+                  d="M18.25 20.5a.75.75 0 1 1 0 1.5l-13 .004a.75.75 0 1 1 0-1.5l13-.004ZM11.648 2.012l.102-.007a.75.75 0 0 1 .743.648l.007.102-.001 13.685 3.722-3.72a.75.75 0 0 1 .976-.073l.085.073a.75.75 0 0 1 .072.976l-.073.084-4.997 4.997a.75.75 0 0 1-.976.073l-.085-.073-5.003-4.996a.75.75 0 0 1 .976-1.134l.084.072 3.719 3.714L11 2.755a.75.75 0 0 1 .648-.743l.102-.007-.102.007Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+              Download as PNG
+            {/if}
+          </Button>
+        </div>
+        <div>
+          <Button
+            style="width: 166px; height: 32px; margin-bottom: 30px;"
+            on:click="{() => {
+              copyLoading = true;
+              navigator.clipboard
+                .writeText(
+                  `<iframe src="${$page.url.origin}${$page.url.pathname}?embedded=1" frameborder="0" width="100%" height="620"></iframe>`
+                )
+                .catch((err) => {
+                  console.error('Failed to copy: ', err);
+                })
+                .finally(() => {
+                  setTimeout(() => {
+                    copyLoading = false;
+                  }, 400);
+                });
+            }}"
+          >
+            {#if copyLoading}
+              <ProgressRing style="--fds-accent-default: currentColor;" size="{16}" />
+            {:else}
+              <svg
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                style="margin: 0 12px 0 0;"
+              >
+                <path
+                  d="M5.503 4.627 5.5 6.75v10.504a3.25 3.25 0 0 0 3.25 3.25h8.616a2.251 2.251 0 0 1-2.122 1.5H8.75A4.75 4.75 0 0 1 4 17.254V6.75c0-.98.627-1.815 1.503-2.123ZM17.75 2A2.25 2.25 0 0 1 20 4.25v13a2.25 2.25 0 0 1-2.25 2.25h-9a2.25 2.25 0 0 1-2.25-2.25v-13A2.25 2.25 0 0 1 8.75 2h9Zm0 1.5h-9a.75.75 0 0 0-.75.75v13c0 .414.336.75.75.75h9a.75.75 0 0 0 .75-.75v-13a.75.75 0 0 0-.75-.75Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+              Copy embed code
+            {/if}
+          </Button>
+        </div>
       {/if}
     </div>
   </div>
