@@ -186,7 +186,7 @@
       </div>
     </div>
     {#if $opWonkOptionsStore.compare}
-      <div class="figure">
+      <div class="figure" class:isEmbedded="{isEmbedded}">
         <div class="subtitle">
           <SubtitleSelect
             options="{citiesUnique}"
@@ -360,6 +360,9 @@
       padding-bottom: var(--padding);
       margin-top: var(--padding);
     }
+  }
+  .figure:nth-of-type(2).isEmbedded {
+    border-bottom: none;
   }
 
   .prompt {
