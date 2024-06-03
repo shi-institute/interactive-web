@@ -19,10 +19,15 @@
   let exporting = false;
   let width = 970;
   let resetBorders = false;
-  function download(elem = exportElem, width: number, _resetBorders = false) {
+  function download(
+    elem = exportElem,
+    width: number,
+    _resetBorders = false,
+    name = 'ACS_Differences_Gvl'
+  ) {
     exporting = true;
     if (_resetBorders) resetBorders = true;
-    downloadElement(elem, width + 20, 'Racial_Income_Gap_Median_Ratio').finally(() => {
+    downloadElement(elem, width + 20, name).finally(() => {
       exporting = false;
       resetBorders = false;
     });
@@ -99,7 +104,7 @@
       <Button
         disabled="{exporting}"
         variant="hyperlink"
-        on:click="{() => download(fiveYearElem, 360, true)}"
+        on:click="{() => download(fiveYearElem, 360, true, 'ACS_CV_Gvl_5est')}"
       >
         Only download five-year estimates figure
       </Button>
@@ -108,7 +113,7 @@
       <Button
         disabled="{exporting}"
         variant="hyperlink"
-        on:click="{() => download(oneYearElem, 360, true)}"
+        on:click="{() => download(oneYearElem, 360, true, 'ACS_CV_Gvl_1est')}"
       >
         Only download one-year estimates figure
       </Button>
@@ -117,7 +122,7 @@
       <Button
         disabled="{exporting}"
         variant="hyperlink"
-        on:click="{() => download(cvElem, 640, true)}"
+        on:click="{() => download(cvElem, 640, true, 'ACS_CV_Gvl_CV')}"
       >
         Only download coefficient of variation figure
       </Button>
