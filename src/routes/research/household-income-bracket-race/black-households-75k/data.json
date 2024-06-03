@@ -1,0 +1,92 @@
+[
+  {
+    "municipality": "Boiling Springs",
+    "race": "black",
+    "type": "Above $75,000",
+    "totalHouseholds": 506,
+    "count": 338,
+    "fraction": 0.668
+  },
+  {
+    "municipality": "Boiling Springs",
+    "race": "black",
+    "type": "Income below $75,000",
+    "totalHouseholds": 506,
+    "count": 168
+  },
+  {
+    "municipality": "Fountain Inn",
+    "race": "black",
+    "type": "Above $75,000",
+    "totalHouseholds": 1030,
+    "count": 599,
+    "fraction": 0.582
+  },
+  {
+    "municipality": "Fountain Inn",
+    "race": "black",
+    "type": "Income below $75,000",
+    "totalHouseholds": 1030,
+    "count": 431
+  },
+  {
+    "municipality": "Simpsonville",
+    "race": "black",
+    "type": "Above $75,000",
+    "totalHouseholds": 1933,
+    "count": 863,
+    "fraction": 0.446
+  },
+  {
+    "municipality": "Simpsonville",
+    "race": "black",
+    "type": "Income below $75,000",
+    "totalHouseholds": 1933,
+    "count": 1070
+  },
+  {
+    "municipality": "Mauldin",
+    "race": "black",
+    "type": "Above $75,000",
+    "totalHouseholds": 2752,
+    "count": 1122,
+    "fraction": 0.408
+  },
+  {
+    "municipality": "Mauldin",
+    "race": "black",
+    "type": "Income below $75,000",
+    "totalHouseholds": 2752,
+    "count": 1630
+  },
+  {
+    "municipality": "Greer",
+    "race": "black",
+    "type": "Above $75,000",
+    "totalHouseholds": 2538,
+    "count": 715,
+    "fraction": 0.282
+  },
+  {
+    "municipality": "Greer",
+    "race": "black",
+    "type": "Income below $75,000",
+    "totalHouseholds": 2538,
+    "count": 1823
+  },
+  {
+    "municipality": "Greenville",
+    "race": "black",
+    "type": "Above $75,000",
+    "totalHouseholds": 7610,
+    "count": 1038,
+    "fraction": 0.136
+  },
+  {
+    "municipality": "Greenville",
+    "race": "black",
+    "type": "Income below $75,000",
+    "totalHouseholds": 7610,
+    "count": 6572
+  }
+]

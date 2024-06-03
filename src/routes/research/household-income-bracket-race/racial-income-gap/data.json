@@ -1,0 +1,106 @@
+[
+  {
+    "municipality": "Greenville\nSC",
+    "race": "black",
+    "medianHouseholdIncome": 29897,
+    "index": 0
+  },
+  {
+    "municipality": "Greenville\nSC",
+    "race": "white",
+    "medianHouseholdIncome": 80735,
+    "whiteBlackIncomeRatio": 2.7,
+    "index": 0
+  },
+  {
+    "municipality": "Richmond\nVA",
+    "race": "black",
+    "medianHouseholdIncome": 39537,
+    "index": 1
+  },
+  {
+    "municipality": "Richmond\nVA",
+    "race": "white",
+    "medianHouseholdIncome": 83282,
+    "whiteBlackIncomeRatio": 2.11,
+    "index": 1
+  },
+  {
+    "municipality": "Birmingham\nAL",
+    "race": "black",
+    "medianHouseholdIncome": 35177,
+    "index": 2
+  },
+  {
+    "municipality": "Birmingham\nAL",
+    "race": "white",
+    "medianHouseholdIncome": 68200,
+    "whiteBlackIncomeRatio": 1.94,
+    "index": 2
+  },
+  {
+    "municipality": "Huntsville\nAL",
+    "race": "black",
+    "medianHouseholdIncome": 43224,
+    "index": 3
+  },
+  {
+    "municipality": "Huntsville\nAL",
+    "race": "white",
+    "medianHouseholdIncome": 82385,
+    "whiteBlackIncomeRatio": 1.91,
+    "index": 3
+  },
+  {
+    "municipality": "Winston-Salem\nNC",
+    "race": "black",
+    "medianHouseholdIncome": 36885,
+    "index": 4
+  },
+  {
+    "municipality": "Winston-Salem\nNC",
+    "race": "white",
+    "medianHouseholdIncome": 68561,
+    "whiteBlackIncomeRatio": 1.86,
+    "index": 4
+  },
+  {
+    "municipality": "Chattanooga\nTN",
+    "race": "black",
+    "medianHouseholdIncome": 38848,
+    "index": 5
+  },
+  {
+    "municipality": "Chattanooga\nTN",
+    "race": "white",
+    "medianHouseholdIncome": 70810,
+    "whiteBlackIncomeRatio": 1.82,
+    "index": 5
+  },
+  {
+    "municipality": "Greensboro\nNC",
+    "race": "black",
+    "medianHouseholdIncome": 45003,
+    "index": 6
+  },
+  {
+    "municipality": "Greensboro\nNC",
+    "race": "white",
+    "medianHouseholdIncome": 71779,
+    "whiteBlackIncomeRatio": 1.59,
+    "index": 6
+  },
+  {
+    "municipality": "Knoxville\nTN",
+    "race": "black",
+    "medianHouseholdIncome": 34019,
+    "index": 7
+  },
+  {
+    "municipality": "Knoxville\nTN",
+    "race": "white",
+    "medianHouseholdIncome": 52981,
+    "whiteBlackIncomeRatio": 1.56,
+    "index": 7
+  }
+]

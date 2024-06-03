@@ -1,8 +1,10 @@
 <script lang="ts">
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
+  import EmbedBar from '$lib/EmbedBar.svelte';
   import PlotContainer from '$lib/PlotContainer.svelte';
   import { opWonkOptionsStore } from '$stores/opWonkOptionsStore';
+  import { downloadElement } from '$utils/downloadElement';
   import { Button } from 'fluent-svelte';
   import html2canvas from 'html2canvas';
   import type { PageData } from './$types';
@@ -50,35 +52,8 @@
   $: exportWidth = $opWonkOptionsStore.compare ? 1280 : 680;
   async function downloadFigures() {
     exporting = true;
-
-    const mainPageAreaElem = document.querySelector('#pageArea main');
-    const pageBackgroundColor = mainPageAreaElem
-      ? getComputedStyle(mainPageAreaElem).backgroundColor
-      : 'white';
-
-    // wait 1 second so there is time for the plot to rerender at the export width
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    const canvas = await html2canvas(exportElem, {
-      windowWidth: exportWidth,
-      backgroundColor: pageBackgroundColor,
-      scale: 4,
-    });
-
+    await downloadElement(exportElem, exportWidth, 'Household_Income_Bracket_By_Race.png');
     exporting = false;
-
-    const downloadLink = document.createElement('a');
-    downloadLink.setAttribute(
-      'download',
-      'ShiAppliedResearch_Household_Income_Bracket_By_Race.png'
-    );
-    canvas.toBlob((blob) => {
-      if (!blob) return;
-      const url = URL.createObjectURL(blob);
-      downloadLink.setAttribute('href', url);
-      downloadLink.click();
-      URL.revokeObjectURL(url);
-    });
   }
 </script>
 
@@ -239,28 +214,9 @@
 </div>
 
 {#if isEmbedded}
-  <br />
-  <br />
-  <div class="embed-bar">
-    <div>Shi Applied Research</div>
-    <div>
-      <Button
-        variant="hyperlink"
-        style="padding: 2px 10px; font-size: 12px"
-        href="{$page.url.pathname}"
-        target="_blank"
-      >
-        Open in new tab
-      </Button>
-      <Button
-        variant="hyperlink"
-        style="padding: 2px 10px; font-size: 12px"
-        on:click="{() => ($isPanelWrapperOpen = !$isPanelWrapperOpen)}"
-      >
-        Options
-      </Button>
-    </div>
-  </div>
+  <EmbedBar
+    actions="{[{ label: 'Options', onClick: () => ($isPanelWrapperOpen = !$isPanelWrapperOpen) }]}"
+  />
 {/if}
 
 {#if !isEmbedded}
@@ -380,21 +336,6 @@
 
   .figures.exporting {
     width: var(--exportWidth);
-  }
-
-  .embed-bar {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background-color: var(--fds-solid-background-tertiary);
-    border-top: 1px solid var(--fds-surface-stroke-default);
-    padding: 0px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    color: var(--fds-text-tertiary);
   }
 
   .export-credit {
