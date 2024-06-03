@@ -1,4 +1,5 @@
 import { colors } from '$lib/colors';
+import { shiLogoB64Black, shiLogoB64White } from '$lib/shiLogoB64';
 import * as Plot from '@observablehq/plot';
 import type { PageData } from './$types';
 
@@ -26,6 +27,26 @@ export function getPlotOptionsRaceACS(
       domain: [0.05, 0.79],
     },
     marks: [
+      Plot.image([{}], {
+        frameAnchor: 'top-right',
+        dy: 15,
+        dx: -15,
+        src: () =>
+          window?.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? shiLogoB64White
+            : shiLogoB64Black,
+        r: 15,
+        preserveAspectRatio: 'xMidYMin slice',
+        opacity: () =>
+          window?.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 0.3
+            : 0.8,
+        tip: true,
+        href: () => 'https://www.furman.edu/shi-institute/sustainability-research/',
+        target: '_blank',
+        title:
+          'This figure was created by The Shi Institute for Sustainable Communities at Furman University',
+      }),
       /* -------------------- */
       // WHITE
       // series label
@@ -39,7 +60,7 @@ export function getPlotOptionsRaceACS(
                 text: ['■'],
                 lineAnchor: 'top',
                 textAnchor: 'start',
-                dy: 30,
+                dy: 45,
                 dx: 8,
                 fill: colors.vibrant.orange,
                 fontSize: 24,
@@ -53,7 +74,7 @@ export function getPlotOptionsRaceACS(
                 text: ['Percent white population'],
                 lineAnchor: 'top',
                 textAnchor: 'start',
-                dy: 35,
+                dy: 50,
                 dx: 28,
               })
             ),
@@ -65,7 +86,7 @@ export function getPlotOptionsRaceACS(
                 text: ['■'],
                 lineAnchor: 'top',
                 textAnchor: 'start',
-                dy: 50,
+                dy: 65,
                 dx: 8,
                 fill: colors.vibrant.orange,
                 fontSize: 24,
@@ -80,7 +101,7 @@ export function getPlotOptionsRaceACS(
                 text: ['Margin of error'],
                 lineAnchor: 'top',
                 textAnchor: 'start',
-                dy: 55,
+                dy: 70,
                 dx: 28,
                 opacity: 0.7,
               })
@@ -93,6 +114,7 @@ export function getPlotOptionsRaceACS(
         y1: (d) => d.whiteFraction + d.whiteFractionMOE,
         y2: (d) => d.whiteFraction - d.whiteFractionMOE,
         fill: colors.vibrant.orange + '22',
+        dy: 15,
       }),
       // upper error line
       Plot.line(data, {
@@ -100,6 +122,7 @@ export function getPlotOptionsRaceACS(
         y: (d) => d.whiteFraction + d.whiteFractionMOE,
         stroke: '#ccc',
         strokeWidth: 0.5,
+        dy: 15,
       }),
       // lower error line
       Plot.line(data, {
@@ -107,6 +130,7 @@ export function getPlotOptionsRaceACS(
         y: (d) => d.whiteFraction - d.whiteFractionMOE,
         stroke: '#ccc',
         strokeWidth: 0.5,
+        dy: 15,
       }),
       // value line
       Plot.line(data, {
@@ -114,13 +138,14 @@ export function getPlotOptionsRaceACS(
         y: 'whiteFraction',
         stroke: colors.vibrant.orange,
         strokeWidth: 2,
+        dy: 15,
       }),
       // year percent labels
       Plot.text(data, {
         x: 'year',
         y: 'whiteFraction',
         text: (d) => `${(d.whiteFraction * 100).toFixed(1)}%`,
-        dy: -6,
+        dy: 9,
         lineAnchor: 'bottom',
         textAnchor: 'middle',
       }),
@@ -129,6 +154,7 @@ export function getPlotOptionsRaceACS(
         y: 'whiteFraction',
         strokeWidth: 0,
         fill: colors.vibrant.orange,
+        dy: 15,
       }),
 
       /* -------------------- */
