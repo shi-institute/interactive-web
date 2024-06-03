@@ -2,9 +2,12 @@ import html2canvas from 'html2canvas';
 
 export async function downloadElement(elem: HTMLElement, exportWidth: number, fileName: string) {
   const mainPageAreaElem = document.querySelector('#pageArea main');
-  const pageBackgroundColor = mainPageAreaElem
-    ? getComputedStyle(mainPageAreaElem).backgroundColor
-    : 'white';
+  const pageBackgroundColor =
+    mainPageAreaElem &&
+    window?.matchMedia &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? getComputedStyle(mainPageAreaElem).backgroundColor
+      : 'white';
 
   // wait 1 second so there is time for the plot to rerender at the export width
   await new Promise((resolve) => setTimeout(resolve, 1000));
