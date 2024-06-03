@@ -49,6 +49,7 @@
             x: 'municipality',
             y: (d) => (d.type === 'Income below $75,000' ? 0.05 : 0.95),
             text: (d) => `${(d.fraction * 100).toFixed(1)}%`,
+            fill: 'white',
           }),
         ],
       }}"
