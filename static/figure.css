@@ -54,15 +54,16 @@ figcaption {
 }
 
 /* legend swatches */
-figure > div[class^='plot-'][class*='-swatches'] {
-  font-family: 'JetBrains Mono', monospace;
+figure > div[class^='plot-'][class*='-swatches'],
+figure > svg[class^='plot-'][class*='-ramp'] text {
+  font-family: 'JetBrains Mono', 'JetBrains Mono Embedded', monospace;
   font-weight: 500;
   font-size: 12px;
 }
 
 /* figure */
 figure > svg {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'JetBrains Mono', 'JetBrains Mono Embedded', monospace;
   font-weight: 500;
   font-size: 12px;
 }

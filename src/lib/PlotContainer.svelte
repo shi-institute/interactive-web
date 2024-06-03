@@ -34,12 +34,11 @@
   font-display: swap;
   src: url('${embeddedFont}');
 }
-svg.${svgNode.classList[0]} {
-  font-family: 'JetBrains Mono', 'JetBrains Mono Embedded', monospace;
-  font-weight: 500;
-  font-size: 12px;
-}
 `;
+        if (Array.from(svgNode.classList).some((className) => className.includes('-ramp'))) {
+          svgNode.setAttribute('preserveAspectRatio', 'xMinYMid meet');
+          svgNode.setAttribute('width', `${parseInt(svgNode.getAttribute('width') || '240') + 20}`);
+        }
       }
 
       div?.append(plotNode);
