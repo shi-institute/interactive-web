@@ -2,6 +2,9 @@
   import { browser } from '$app/environment';
   import { colors } from '$lib/colors';
   import { opWonkOptionsStore } from '$stores/opWonkOptionsStore';
+
+  $: isAlone = !$opWonkOptionsStore.compare;
+  $: isCity = isAlone ? !$opWonkOptionsStore.city.split(',')[0].endsWith('CDP') : undefined;
 </script>
 
 <div class="swatches">
@@ -13,7 +16,7 @@
 
 <div class="dashes">
   {#if $opWonkOptionsStore.showMedianHouseholdIncome}
-    {#each [$opWonkOptionsStore['medianHouseholdIncomeMode.ami'] ? 'Area' : null, $opWonkOptionsStore['medianHouseholdIncomeMode.black_ami'] ? 'Black' : null, $opWonkOptionsStore['medianHouseholdIncomeMode.white_ami'] ? 'White' : null].filter(Boolean) as item, index}
+    {#each [$opWonkOptionsStore['medianHouseholdIncomeMode.ami'] ? (isCity ? 'City' : 'Municipality') : null, $opWonkOptionsStore['medianHouseholdIncomeMode.black_ami'] ? 'Black' : null, $opWonkOptionsStore['medianHouseholdIncomeMode.white_ami'] ? 'White' : null].filter(Boolean) as item, index}
       <span
         class="dash"
         style="--color: {item === 'Black'

@@ -69,21 +69,21 @@
         <div class="sub-opts">
           <div>
             <ToggleSwitch bind:checked="{$opWonkOptionsStore['medianHouseholdIncomeMode.ami']}">
-              Whole area
+              Whole municipality
             </ToggleSwitch>
           </div>
           <div>
             <ToggleSwitch
               bind:checked="{$opWonkOptionsStore['medianHouseholdIncomeMode.black_ami']}"
             >
-              Black
+              Black households
             </ToggleSwitch>
           </div>
           <div>
             <ToggleSwitch
               bind:checked="{$opWonkOptionsStore['medianHouseholdIncomeMode.white_ami']}"
             >
-              White
+              White households
             </ToggleSwitch>
           </div>
         </div>
@@ -110,15 +110,17 @@
 
       <TextBlock variant="body" class="cdrz-info-sidebar--field-title">Compare</TextBlock>
       <TextBlock variant="caption" class="cdrz-info-sidebar--field-caption">
-        Choose display options for comparing cities
+        Choose display options for comparing municipalities
       </TextBlock>
       <div>
         <ToggleSwitch bind:checked="{$opWonkOptionsStore.compare}">
-          Show two cities side-by-side
+          Show two municipalities side-by-side
         </ToggleSwitch>
         {#if $opWonkOptionsStore.compare}
           <div class="sub-opts" style="padding: 0 10px 10px 10px; margin-bottom: 10px;">
-            <TextBlock variant="body" class="cdrz-info-sidebar--field-title">City 2</TextBlock>
+            <TextBlock variant="body" class="cdrz-info-sidebar--field-title">
+              Municipality 2
+            </TextBlock>
             <select bind:value="{$opWonkOptionsStore.city2}">
               {#each $page.data.citiesUnique as city}
                 <option value="{city}">{city}</option>
@@ -129,7 +131,7 @@
       </div>
       <div>
         <ToggleSwitch bind:checked="{$opWonkOptionsStore.useSameScaleWhenComparing}">
-          When comparing places, use the same x-axis scale
+          When comparing municipalities, use the same x-axis scale
         </ToggleSwitch>
       </div>
       {#if $opWonkOptionsStore.useSameScaleWhenComparing}
