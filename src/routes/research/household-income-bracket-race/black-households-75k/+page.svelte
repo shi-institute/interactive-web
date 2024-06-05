@@ -9,6 +9,12 @@
   import { html } from 'htl';
 
   export let data;
+  $: figureData = data.tidy
+    .filter((d) => d.type === 'Above $75,000')
+    .map((d) => ({
+      ...d,
+      municipality: d.municipality.replaceAll(' ', ' '),
+    }));
 
   let exportElem: HTMLElement;
   let exporting = false;
@@ -30,24 +36,23 @@
         caption: html`
           <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>
         `,
-        marginTop: 0,
+        marginTop: 8,
         marginRight: 0,
         marginBottom: 40,
-        marginLeft: 0,
+        marginLeft: 36,
         x: { label: 'Municipality' },
-        y: { axis: null },
-        color: {
-          legend: true,
-          domain: ['Income below $75,000', 'Above $75,000'],
-          range: [colors.vibrant.maroon, colors.vibrant.teal],
-        },
+        y: { label: '', labelArrow: 'none', domain: [0, 1], tickFormat: '.0%', grid: true },
         width,
         height: 300,
         marks: [
-          Plot.barY(data.tidy, { x: 'municipality', y: 'fraction', fill: 'type', reverse: true }),
-          Plot.textY(data.tidy, {
+          Plot.barY(figureData, {
             x: 'municipality',
-            y: (d) => (d.type === 'Income below $75,000' ? 0.05 : 0.95),
+            y: 'fraction',
+            fill: colors.vibrant.maroon,
+          }),
+          Plot.textY(figureData, {
+            x: 'municipality',
+            y: () => 0.05,
             text: (d) => `${(d.fraction * 100).toFixed(1)}%`,
             fill: 'white',
           }),
@@ -101,6 +106,9 @@
     font-size: 23px !important;
   }
   .plot :global([aria-label='x-axis tick label']) {
+    letter-spacing: -0.8px;
+  }
+  .plot :global([aria-label='x-axis tick label'] > text:first-of-type) {
     letter-spacing: -0.8px;
   }
   .plot :global(figure > svg) {
