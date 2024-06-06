@@ -1,5 +1,4 @@
 import { colors } from '$lib/colors';
-import { shiLogoB64Black, shiLogoB64White } from '$lib/shiLogoB64';
 import * as Plot from '@observablehq/plot';
 import type { PageData } from './$types';
 
@@ -27,26 +26,6 @@ export function getPlotOptionsRaceACS(
       domain: [0.05, 0.79],
     },
     marks: [
-      Plot.image([{}], {
-        frameAnchor: 'top-right',
-        dy: 15,
-        dx: -15,
-        src: () =>
-          window?.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-            ? shiLogoB64White
-            : shiLogoB64Black,
-        r: 15,
-        preserveAspectRatio: 'xMidYMin slice',
-        opacity: () =>
-          window?.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-            ? 0.3
-            : 0.8,
-        tip: true,
-        href: () => 'https://www.furman.edu/shi-institute/sustainability-research/',
-        target: '_blank',
-        title:
-          'This figure was created by The Shi Institute for Sustainable Communities at Furman University',
-      }),
       /* -------------------- */
       // WHITE
       // series label
