@@ -18,7 +18,7 @@
 
   let exportElem: HTMLElement;
   let exporting = false;
-  let width = 580;
+  let width = 640;
   function download() {
     exporting = true;
     downloadElement(exportElem, width + 20, 'Percent_Black_Households_75k_Income').finally(
