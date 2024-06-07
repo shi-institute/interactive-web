@@ -141,7 +141,7 @@
         variant="hyperlink"
         on:click="{() => {
           oneAndFiveYearOnly = true;
-          download(exportElem, 860, false, 'ACS_CV_Gvl_1est').finally(() => {
+          download(exportElem, 860, false, 'ACS_CV_Gvl_5est_1est').finally(() => {
             oneAndFiveYearOnly = false;
           });
         }}"
