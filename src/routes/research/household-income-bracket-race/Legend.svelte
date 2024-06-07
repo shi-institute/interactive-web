@@ -7,34 +7,36 @@
   $: isCity = isAlone ? !$opWonkOptionsStore.city.split(',')[0].endsWith('CDP') : undefined;
 </script>
 
-<div class="swatches">
-  <span class="swatch" style="--color: {colors.vibrant.blue}">■</span>
-  &nbsp;Black&nbsp;&nbsp;
-  <span class="swatch" style="--color: {colors.vibrant.orange}">■</span>
-  &nbsp;White
-</div>
+<div class="legend">
+  <div class="swatches">
+    <span class="swatch" style="--color: {colors.vibrant.blue}">■</span>
+    &nbsp;Black&nbsp;&nbsp;
+    <span class="swatch" style="--color: {colors.vibrant.orange}">■</span>
+    &nbsp;White
+  </div>
 
-<div class="dashes">
-  {#if $opWonkOptionsStore.showMedianHouseholdIncome}
-    {#each [$opWonkOptionsStore['medianHouseholdIncomeMode.ami'] ? (isCity ? 'City' : 'Municipality') : null, $opWonkOptionsStore['medianHouseholdIncomeMode.black_ami'] ? 'Black' : null, $opWonkOptionsStore['medianHouseholdIncomeMode.white_ami'] ? 'White' : null].filter(Boolean) as item, index}
-      <span
-        class="dash"
-        style="--color: {item === 'Black'
-          ? colors.vibrant.blue
-          : item === 'White'
-          ? colors.vibrant.orange
-          : browser &&
-            window?.matchMedia &&
-            window.matchMedia('(prefers-color-scheme: dark)').matches
-          ? '#aaa'
-          : '#777'};"
-      >
-        - - -
-      </span>
-      {item}
-      {index === 0 ? 'Median Household Income' : ''}&nbsp;&nbsp;
-    {/each}
-  {/if}
+  <div class="dashes">
+    {#if $opWonkOptionsStore.showMedianHouseholdIncome}
+      {#each [$opWonkOptionsStore['medianHouseholdIncomeMode.ami'] ? (isCity ? 'City' : 'Municipality') : null, $opWonkOptionsStore['medianHouseholdIncomeMode.black_ami'] ? 'Black' : null, $opWonkOptionsStore['medianHouseholdIncomeMode.white_ami'] ? 'White' : null].filter(Boolean) as item, index}
+        <span
+          class="dash"
+          style="--color: {item === 'Black'
+            ? colors.vibrant.blue
+            : item === 'White'
+            ? colors.vibrant.orange
+            : browser &&
+              window?.matchMedia &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? '#aaa'
+            : '#777'};"
+        >
+          - - -
+        </span>
+        {item}
+        {index === 0 ? 'Median Household Income' : ''}&nbsp;&nbsp;
+      {/each}
+    {/if}
+  </div>
 </div>
 
 <style>
@@ -62,5 +64,9 @@
     font-weight: 600;
     color: var(--color);
     margin-right: 2px;
+  }
+
+  .legend {
+    margin: 6px 0 10px 0;
   }
 </style>
