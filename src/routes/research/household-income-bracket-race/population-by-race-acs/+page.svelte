@@ -62,7 +62,7 @@
           400,
           undefined,
           resetBorders || true,
-          exportingSingle
+          exportingSingle || oneAndFiveYearOnly
         )}"
         fullWidth
       />
