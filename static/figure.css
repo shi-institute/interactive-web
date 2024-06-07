@@ -19,6 +19,10 @@ figure > h6 {
   margin-top: 0;
   margin-bottom: 0.25rem;
 }
+figure > h1,
+figure > h2 {
+  color: #212121;
+}
 @media (prefers-color-scheme: dark) {
   figure > h1,
   figure > h2,
@@ -28,6 +32,10 @@ figure > h6 {
   figure > h5,
   figure > h6 {
     color: #ddd;
+  }
+  figure > h1,
+  figure > h2 {
+    color: #e0e0e0;
   }
 }
 
