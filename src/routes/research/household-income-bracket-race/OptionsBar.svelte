@@ -92,8 +92,7 @@
     align-items: flex-end;
     justify-content: flex-start;
     padding: 10px;
-    background-color: #212121;
-    border-bottom: 1px solid #3d3d3d;
+    border-bottom: 1px solid var(--fds-surface-stroke-default);
     gap: 10px;
   }
   .button-bar > div {
