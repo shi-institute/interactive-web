@@ -1,5 +1,6 @@
 import { colors } from '$lib/colors';
 import * as Plot from '@observablehq/plot';
+import { html } from 'htl';
 import type { PageData } from './$types';
 
 export function getPlotOptionsRaceACS(
@@ -12,7 +13,9 @@ export function getPlotOptionsRaceACS(
 ) {
   return {
     title: titlePrefix + ' estimates',
-    subtitle: 'City of Greenville, SC',
+    subtitle: html`
+      <h3>City of Greenville, SC &nbsp;·&nbsp; 2016-2022</h3>
+    `,
     caption: showCaption ? 'Data: US Census Bureau American Community Survey' : undefined,
     marginLeft: 20,
     marginRight: 20,

@@ -9,6 +9,7 @@ figure img {
 figure > h1,
 figure > h2,
 figure > h3,
+figure > span > h3,
 figure > h4,
 figure > h5,
 figure > h6 {
@@ -22,6 +23,7 @@ figure > h6 {
   figure > h1,
   figure > h2,
   figure > h3,
+  figure > span > h3,
   figure > h4,
   figure > h5,
   figure > h6 {
@@ -39,7 +41,8 @@ figure > h2 {
 }
 
 /* subheading */
-figure > h3 {
+figure > h3,
+figure > span > h3 {
   font-family: Lato, sans-serif;
   font-weight: 400;
   font-size: 16px;

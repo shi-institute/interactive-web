@@ -2,11 +2,8 @@
   import { browser } from '$app/environment';
   import EmbedBar from '$lib/EmbedBar.svelte';
   import PlotContainer from '$lib/PlotContainer.svelte';
-  import { colors } from '$lib/colors.js';
   import { downloadElement } from '$utils/downloadElement.js';
-  import * as Plot from '@observablehq/plot';
   import { Button, ProgressRing } from 'fluent-svelte';
-  import { html } from 'htl';
   import { getPlotOptionsCV } from './getPlotOptionsCV.js';
   import { getPlotOptionsRaceACS } from './getPlotOptionsRaceACS.js';
 
@@ -17,18 +14,24 @@
   let oneYearElem: HTMLElement;
   let cvElem: HTMLElement;
   let exporting = false;
-  let width = 970;
+  let exportingSingle = false;
+  let oneAndFiveYearOnly = false;
+  let width = 0;
   let resetBorders = false;
   function download(
     elem = exportElem,
-    width: number,
+    _width: number,
     _resetBorders = false,
-    name = 'ACS_Differences_Gvl'
+    name = 'ACS_Differences_Gvl',
+    _exportingSingle = false
   ) {
     exporting = true;
+    width = _width;
     if (_resetBorders) resetBorders = true;
-    downloadElement(elem, width + 20, name).finally(() => {
+    if (_exportingSingle) exportingSingle = true;
+    return downloadElement(elem, width + 20, name).finally(() => {
       exporting = false;
+      exportingSingle = false;
       resetBorders = false;
     });
   }
@@ -38,39 +41,53 @@
   class="plot"
   bind:this="{exportElem}"
   class:exporting="{exporting}"
-  style="--width: {width}px;"
+  class:exportingSingle="{exportingSingle}"
+  style="{`--width: ${width}px;`}"
   class:resetBorders="{resetBorders}"
 >
+  <div class="header">
+    <h1>Discrepencies in 1-year and 5-year population by race estimates</h1>
+  </div>
+
   {#if browser}
-    <div class="five-year" bind:this="{fiveYearElem}">
+    <div
+      class="five-year"
+      bind:this="{fiveYearElem}"
+      class:oneAndFiveYearOnly="{oneAndFiveYearOnly}"
+    >
       <PlotContainer
         plot="{getPlotOptionsRaceACS(
           data.est5,
-          'Five-year',
+          (exportingSingle ? 'Population by race: ' : '') + 'Five-year',
           400,
           undefined,
           resetBorders || true,
-          false
+          exportingSingle
         )}"
-        fullWidth="{!exporting}"
+        fullWidth
       />
     </div>
-    <div class="one-year" bind:this="{oneYearElem}">
+    <div class="one-year" bind:this="{oneYearElem}" class:oneAndFiveYearOnly="{oneAndFiveYearOnly}">
       <PlotContainer
         plot="{getPlotOptionsRaceACS(
           data.est1,
-          'One-year',
+          (exportingSingle ? 'Population by race: ' : '') + 'One-year',
           400,
           undefined,
           resetBorders || false,
-          false
+          exportingSingle
         )}"
-        fullWidth="{!exporting}"
+        fullWidth
       />
     </div>
-    <div class="cv" bind:this="{cvElem}">
-      <PlotContainer plot="{getPlotOptionsCV(data.cv)}" fullWidth="{!exporting}" />
-    </div>
+    {#if !oneAndFiveYearOnly}
+      <div class="cv" bind:this="{cvElem}">
+        <PlotContainer
+          plot="{getPlotOptionsCV(data.cv, exportingSingle ? 'Population by race: ' : '')}"
+          fullWidth
+        />
+      </div>
+    {/if}
   {/if}
 </div>
 
@@ -78,7 +95,7 @@
   <div class="controls">
     <Button
       disabled="{exporting}"
-      on:click="{() => download(exportElem, width)}"
+      on:click="{() => download(exportElem, 840)}"
       style="width: 166px; height: 32px; margin: 8px 0;"
     >
       {#if exporting}
@@ -104,7 +121,7 @@
       <Button
         disabled="{exporting}"
         variant="hyperlink"
-        on:click="{() => download(fiveYearElem, 360, true, 'ACS_CV_Gvl_5est')}"
+        on:click="{() => download(fiveYearElem, 640, true, 'ACS_CV_Gvl_5est', true)}"
       >
         Only download five-year estimates figure
       </Button>
@@ -113,7 +130,7 @@
       <Button
         disabled="{exporting}"
         variant="hyperlink"
-        on:click="{() => download(oneYearElem, 360, true, 'ACS_CV_Gvl_1est')}"
+        on:click="{() => download(oneYearElem, 640, true, 'ACS_CV_Gvl_1est', true)}"
       >
         Only download one-year estimates figure
       </Button>
@@ -122,7 +139,21 @@
       <Button
         disabled="{exporting}"
         variant="hyperlink"
-        on:click="{() => download(cvElem, 640, true, 'ACS_CV_Gvl_CV')}"
+        on:click="{() => {
+          oneAndFiveYearOnly = true;
+          download(exportElem, 860, false, 'ACS_CV_Gvl_1est').finally(() => {
+            oneAndFiveYearOnly = false;
+          });
+        }}"
+      >
+        Only download combined five-year and one-year estimates figure
+      </Button>
+    </div>
+    <div>
+      <Button
+        disabled="{exporting}"
+        variant="hyperlink"
+        on:click="{() => download(cvElem, 640, true, 'ACS_CV_Gvl_CV', true)}"
       >
         Only download coefficient of variation figure
       </Button>
@@ -135,6 +166,21 @@
 {/if}
 
 <style>
+  .header {
+    position: relative;
+    grid-area: header;
+  }
+  h1 {
+    font-weight: 600;
+    font-size: 24px;
+    font-variant: lining-nums;
+    margin: 0;
+    padding: 0 0 20px 0;
+  }
+  .plot:not(.exportingSingle) :global(h2) {
+    font-size: 22px;
+  }
+
   .controls {
     padding: 20px;
     padding-top: 0;
@@ -142,9 +188,10 @@
   .plot {
     display: grid;
     grid-template-columns: minmax(230px, 430px) minmax(230px, 430px);
-    grid-template-rows: auto auto;
+    grid-template-rows: auto auto auto;
     max-width: 970px;
     grid-template-areas:
+      'header     header  '
       'five-year  one-year'
       'cv         cv';
     padding: 20px;
@@ -153,16 +200,24 @@
     width: var(--width);
     padding: 30px;
   }
+  .plot.exportingSingle {
+    display: block;
+  }
   .plot .five-year {
     grid-area: five-year;
     border-right: 1px solid var(--fds-surface-stroke-default);
     padding-right: 30px;
-    padding-bottom: 30px;
   }
   .plot .one-year {
     grid-area: one-year;
     padding-left: 30px;
+  }
+  .plot :where(.five-year, .one-year) {
     padding-bottom: 30px;
+    container-type: inline-size;
+  }
+  .plot :where(.five-year, .one-year).oneAndFiveYearOnly {
+    padding-bottom: 0;
   }
   .plot .cv {
     grid-area: cv;
@@ -182,21 +237,14 @@
     .plot .cv {
       padding-top: 20px;
     }
-    .plot
-      :where(.five-year, .one-year)
-      :global(
-        g[aria-label='text']:not([text-anchor='start'])
-          > text:not(:first-of-type):not(:last-of-type)
-      ) {
-      display: none;
-    }
   }
 
   @media (max-width: 500px) {
     .plot {
       grid-template-columns: 1fr;
-      grid-template-rows: auto auto auto;
+      grid-template-rows: auto auto auto auto;
       grid-template-areas:
+        'header'
         'five-year'
         'one-year'
         'cv';
@@ -218,5 +266,16 @@
     border: none;
     margin: 0;
     padding: 20px;
+  }
+
+  @container (max-width: 320px) {
+    .plot
+      :where(.five-year, .one-year)
+      :global(
+        g[aria-label='text']:not([text-anchor='start'])
+          > text:not(:first-of-type):not(:last-of-type)
+      ) {
+      display: none;
+    }
   }
 </style>

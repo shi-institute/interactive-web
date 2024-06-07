@@ -3,11 +3,11 @@ import * as Plot from '@observablehq/plot';
 import { html } from 'htl';
 import type { PageData } from './$types';
 
-export function getPlotOptionsCV(data: PageData['cv']) {
+export function getPlotOptionsCV(data: PageData['cv'], titlePrefix = '') {
   const domainX = ['White (1-year)', 'Black (1-year)', 'White (5-year)', 'Black (5-year)'];
 
   return {
-    title: 'Coefficient of variation',
+    title: `${titlePrefix}Coefficient of variation`,
     subtitle: 'One-year vs. five-year estimates for race in City of Greenville, SC',
     caption: html`
       Lower coefficients of variation (CVs) are better. Larger CVs indicate higher sampling error
