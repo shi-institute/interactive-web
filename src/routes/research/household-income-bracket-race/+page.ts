@@ -1,6 +1,5 @@
 import { browser } from '$app/environment';
 import { colors } from '$lib/colors';
-import { shiLogoB64Black, shiLogoB64White } from '$lib/shiLogoB64';
 import { opWonkOptionsStore } from '$stores/opWonkOptionsStore';
 import * as Plot from '@observablehq/plot';
 import { html } from 'htl';
@@ -308,28 +307,6 @@ export const load = (async ({ data }) => {
       marginLeft,
       height,
       marks: [
-        // shi logo watermark
-        Plot.image([{}], {
-          frameAnchor: 'top-right',
-          dy: 0,
-          dx: -15,
-          src: () =>
-            window?.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-              ? shiLogoB64White
-              : shiLogoB64Black,
-          r: 15,
-          preserveAspectRatio: 'xMidYMin slice',
-          opacity: () =>
-            window?.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-              ? 0.3
-              : 0.8,
-          tip: true,
-          href: () => 'https://www.furman.edu/shi-institute/sustainability-research/',
-          target: '_blank',
-          title:
-            'This figure was created by The Shi Institute for Sustainable Communities at Furman University',
-        }),
-
         // Plot.frame({ stroke: '#ccc' }),
 
         Plot.barX(plotData, {

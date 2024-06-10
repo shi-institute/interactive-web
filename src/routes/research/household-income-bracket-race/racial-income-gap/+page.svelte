@@ -3,7 +3,6 @@
   import EmbedBar from '$lib/EmbedBar.svelte';
   import PlotContainer from '$lib/PlotContainer.svelte';
   import { colors } from '$lib/colors.js';
-  import { shiLogoB64Black, shiLogoB64White } from '$lib/shiLogoB64.js';
   import { downloadElement } from '$utils/downloadElement.js';
   import * as Plot from '@observablehq/plot';
   import { Button, ProgressRing } from 'fluent-svelte';
@@ -60,26 +59,6 @@
             x: 'municipality',
             y: 'whiteBlackIncomeRatio',
             fill: 'whiteBlackIncomeRatio',
-          }),
-          Plot.image([{}], {
-            frameAnchor: 'top-right',
-            dy: 0,
-            dx: -15,
-            src: () =>
-              window?.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-                ? shiLogoB64White
-                : shiLogoB64Black,
-            r: 15,
-            preserveAspectRatio: 'xMidYMin slice',
-            opacity: () =>
-              window?.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-                ? 0.3
-                : 0.8,
-            tip: true,
-            href: () => 'https://www.furman.edu/shi-institute/sustainability-research/',
-            target: '_blank',
-            title:
-              'This figure was created by The Shi Institute for Sustainable Communities at Furman University',
           }),
         ],
       }}"
