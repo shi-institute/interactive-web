@@ -4,13 +4,16 @@ import { html } from 'htl';
 import type { PageData } from './$types';
 
 export function getPlotOptionsRaceACS(
-  data: PageData['est1'] | PageData['est5'],
+  _data: PageData['est1'] | PageData['est5'],
   titlePrefix = '',
   width = 640,
   height = 380,
   showLegend = true,
-  showCaption = true
+  showCaption = true,
+  alone = false
 ) {
+  const data = _data.filter((d) => d.variant === (alone ? 'alone' : 'aloneOrCombined'));
+
   return {
     title: titlePrefix + ' estimates',
     subtitle: html`
@@ -53,7 +56,11 @@ export function getPlotOptionsRaceACS(
               Plot.selectFirst({
                 x: 'year',
                 y: 'whiteFraction',
-                text: ['Percent white population'],
+                text: [
+                  alone
+                    ? 'Percent white alone population'
+                    : 'Percent white or partially white population',
+                ],
                 lineAnchor: 'top',
                 textAnchor: 'start',
                 dy: 50,
@@ -163,7 +170,11 @@ export function getPlotOptionsRaceACS(
               Plot.selectFirst({
                 x: 'year',
                 y: 'blackFraction',
-                text: ['Percent Black population'],
+                text: [
+                  alone
+                    ? 'Percent Black alone population'
+                    : 'Percent Black or partially Black population',
+                ],
                 lineAnchor: 'top',
                 textAnchor: 'start',
                 dy: 47,

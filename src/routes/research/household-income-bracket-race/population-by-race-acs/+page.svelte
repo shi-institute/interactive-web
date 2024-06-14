@@ -3,7 +3,7 @@
   import EmbedBar from '$lib/EmbedBar.svelte';
   import PlotContainer from '$lib/PlotContainer.svelte';
   import { downloadElement } from '$utils/downloadElement.js';
-  import { Button, ProgressRing } from 'fluent-svelte';
+  import { Button, ProgressRing, ToggleSwitch } from 'fluent-svelte';
   import { getPlotOptionsCV } from './getPlotOptionsCV.js';
   import { getPlotOptionsRaceACS } from './getPlotOptionsRaceACS.js';
 
@@ -35,7 +35,17 @@
       resetBorders = false;
     });
   }
+
+  let useAloneOrCombined = false;
+  $: alone = !useAloneOrCombined;
+  $: variant = alone ? 'alone' : 'aloneOrCombined';
 </script>
+
+<div class="options">
+  <ToggleSwitch bind:checked="{useAloneOrCombined}">
+    Include people who selected more than one race
+  </ToggleSwitch>
+</div>
 
 <div
   class="plot"
@@ -62,7 +72,8 @@
           400,
           undefined,
           resetBorders || true,
-          exportingSingle || oneAndFiveYearOnly
+          exportingSingle || oneAndFiveYearOnly,
+          alone
         )}"
         fullWidth
       />
@@ -75,7 +86,8 @@
           400,
           undefined,
           resetBorders || false,
-          exportingSingle
+          exportingSingle,
+          alone
         )}"
         fullWidth
       />
@@ -83,7 +95,7 @@
     {#if !oneAndFiveYearOnly}
       <div class="cv" bind:this="{cvElem}">
         <PlotContainer
-          plot="{getPlotOptionsCV(data.cv, exportingSingle ? 'Population by race: ' : '')}"
+          plot="{getPlotOptionsCV(data.cv, exportingSingle ? 'Population by race: ' : '', alone)}"
           fullWidth
         />
       </div>
@@ -277,5 +289,24 @@
       ) {
       display: none;
     }
+  }
+
+  /* ensure that long form swatches (e.g. White or partially white
+     appear evently on two lines (two on each line)                */
+  .cv :global(div[class*='-swatches-wrap']) {
+    max-width: 800px;
+    gap: 6px 0;
+    padding: 8.5px 0;
+    min-height: unset;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 10px;
+    border-bottom: 1px solid var(--fds-surface-stroke-default);
+    gap: 10px;
   }
 </style>

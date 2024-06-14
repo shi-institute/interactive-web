@@ -14,7 +14,8 @@
     "whiteFractionMOE": 0.04634651370704465,
     "total": 67447,
     "totalMOE": 30,
-    "totalVarianceCoefficient": 0.027039130082686113
+    "totalVarianceCoefficient": 0.027039130082686113,
+    "variant": "alone"
   },
   {
     "GISJOIN": "G45030850",
@@ -31,7 +32,8 @@
     "whiteFractionMOE": 0.04882417008976475,
     "total": 68223,
     "totalMOE": 31,
-    "totalVarianceCoefficient": 0.027622626976872334
+    "totalVarianceCoefficient": 0.027622626976872334,
+    "variant": "alone"
   },
   {
     "GISJOIN": "G45030850",
@@ -48,7 +50,8 @@
     "whiteFractionMOE": 0.04081544303634244,
     "total": 68543,
     "totalMOE": 69,
-    "totalVarianceCoefficient": 0.06119558343492317
+    "totalVarianceCoefficient": 0.06119558343492317,
+    "variant": "alone"
   },
   {
     "GISJOIN": "G45030850",
@@ -65,7 +68,8 @@
     "whiteFractionMOE": 0.041707804516181696,
     "total": 70633,
     "totalMOE": 26,
-    "totalVarianceCoefficient": 0.022376893413305482
+    "totalVarianceCoefficient": 0.022376893413305482,
+    "variant": "alone"
   },
   {
     "GISJOIN": "G45030850",
@@ -82,7 +86,8 @@
     "whiteFractionMOE": 0.03901173644558827,
     "total": 72103,
     "totalMOE": 42,
-    "totalVarianceCoefficient": 0.035410336454262684
+    "totalVarianceCoefficient": 0.035410336454262684,
+    "variant": "alone"
   },
   {
     "GISJOIN": "G45030850",
@@ -99,6 +104,115 @@
     "whiteFractionMOE": 0.054168829368581854,
     "total": 72310,
     "totalMOE": 29,
-    "totalVarianceCoefficient": 0.02438000184111048
+    "totalVarianceCoefficient": 0.02438000184111048,
+    "variant": "alone"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2016-01-01T05:00:00.000Z",
+    "black": 18307,
+    "blackMOE": 2919,
+    "blackVarianceCoefficient": 9.692839269713131,
+    "blackFraction": 0.2714279360090145,
+    "blackFractionMOE": 0.043278257629744465,
+    "white": 46560,
+    "whiteMOE": 3087,
+    "whiteVarianceCoefficient": 4.03048914235578,
+    "whiteFraction": 0.6903198066630095,
+    "whiteFractionMOE": 0.04576824073030414,
+    "total": 67447,
+    "totalMOE": 30,
+    "totalVarianceCoefficient": 0.027039130082686113,
+    "variant": "aloneOrCombined"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2017-01-01T05:00:00.000Z",
+    "black": 16858,
+    "blackMOE": 3130,
+    "blackVarianceCoefficient": 11.286840445545323,
+    "blackFraction": 0.2471014174105507,
+    "blackFractionMOE": 0.04587881838287173,
+    "white": 48205,
+    "whiteMOE": 3342,
+    "whiteVarianceCoefficient": 4.214523269887439,
+    "whiteFraction": 0.70657989241165,
+    "whiteFractionMOE": 0.04898536004325004,
+    "total": 68223,
+    "totalMOE": 31,
+    "totalVarianceCoefficient": 0.027622626976872334,
+    "variant": "aloneOrCombined"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2018-01-01T05:00:00.000Z",
+    "black": 18815,
+    "blackMOE": 2906,
+    "blackVarianceCoefficient": 9.389132870284735,
+    "blackFraction": 0.27449921946807115,
+    "blackFractionMOE": 0.04239584312386606,
+    "white": 47226,
+    "whiteMOE": 2801,
+    "whiteVarianceCoefficient": 3.605504515118855,
+    "whiteFraction": 0.6889981471485053,
+    "whiteFractionMOE": 0.040858972026004796,
+    "total": 68543,
+    "totalMOE": 69,
+    "totalVarianceCoefficient": 0.06119558343492317,
+    "variant": "aloneOrCombined"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2019-01-01T05:00:00.000Z",
+    "black": 17272,
+    "blackMOE": 2499,
+    "blackVarianceCoefficient": 8.795443122801139,
+    "blackFraction": 0.2445315928815143,
+    "blackFractionMOE": 0.03537994864119092,
+    "white": 49503,
+    "whiteMOE": 2824,
+    "whiteVarianceCoefficient": 3.4679056324424042,
+    "whiteFraction": 0.7008480455311257,
+    "whiteFractionMOE": 0.0399804795193679,
+    "total": 70633,
+    "totalMOE": 26,
+    "totalVarianceCoefficient": 0.022376893413305482,
+    "variant": "aloneOrCombined"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2021-01-01T05:00:00.000Z",
+    "black": 17978,
+    "blackMOE": 2842,
+    "blackVarianceCoefficient": 9.609854124307962,
+    "blackFraction": 0.24933775293677102,
+    "blackFractionMOE": 0.03941556809022025,
+    "white": 53143,
+    "whiteMOE": 2732,
+    "whiteVarianceCoefficient": 3.1251345869752005,
+    "whiteFraction": 0.7370428414906454,
+    "whiteFractionMOE": 0.03788780795640275,
+    "total": 72103,
+    "totalMOE": 42,
+    "totalVarianceCoefficient": 0.035410336454262684,
+    "variant": "aloneOrCombined"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2022-01-01T05:00:00.000Z",
+    "black": 14632,
+    "blackMOE": 3689,
+    "blackVarianceCoefficient": 15.326361341507393,
+    "blackFraction": 0.20235098879822985,
+    "blackFractionMOE": 0.051016392375500465,
+    "white": 54287,
+    "whiteMOE": 3698,
+    "whiteVarianceCoefficient": 4.140999348111745,
+    "whiteFraction": 0.7507536993500208,
+    "whiteFractionMOE": 0.05114003469625599,
+    "total": 72310,
+    "totalMOE": 29,
+    "totalVarianceCoefficient": 0.02438000184111048,
+    "variant": "aloneOrCombined"
   }
 ]

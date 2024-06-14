@@ -5,7 +5,7 @@
     "race": "black",
     "type": "1-year",
     "varianceCoefficient": 9.856406356972554,
-    "group": "Black (1-year)"
+    "group": "Black alone (1-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -13,7 +13,7 @@
     "race": "white",
     "type": "1-year",
     "varianceCoefficient": 4.139464463737079,
-    "group": "White (1-year)"
+    "group": "White alone (1-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -21,7 +21,7 @@
     "race": "black",
     "type": "1-year",
     "varianceCoefficient": 11.788567845442751,
-    "group": "Black (1-year)"
+    "group": "Black alone (1-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -29,7 +29,7 @@
     "race": "white",
     "type": "1-year",
     "varianceCoefficient": 4.302673095401927,
-    "group": "White (1-year)"
+    "group": "White alone (1-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -37,7 +37,7 @@
     "race": "black",
     "type": "1-year",
     "varianceCoefficient": 9.863311444437766,
-    "group": "Black (1-year)"
+    "group": "Black alone (1-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -45,7 +45,7 @@
     "race": "white",
     "type": "1-year",
     "varianceCoefficient": 3.6790791099310947,
-    "group": "White (1-year)"
+    "group": "White alone (1-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -53,7 +53,7 @@
     "race": "black",
     "type": "1-year",
     "varianceCoefficient": 8.64341048268711,
-    "group": "Black (1-year)"
+    "group": "Black alone (1-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -61,7 +61,7 @@
     "race": "white",
     "type": "1-year",
     "varianceCoefficient": 3.743090101299123,
-    "group": "White (1-year)"
+    "group": "White alone (1-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -69,7 +69,7 @@
     "race": "black",
     "type": "1-year",
     "varianceCoefficient": 10.398090015344483,
-    "group": "Black (1-year)"
+    "group": "Black alone (1-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -77,7 +77,7 @@
     "race": "white",
     "type": "1-year",
     "varianceCoefficient": 3.5909920099470347,
-    "group": "White (1-year)"
+    "group": "White alone (1-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -85,7 +85,7 @@
     "race": "black",
     "type": "1-year",
     "varianceCoefficient": 16.17429890462809,
-    "group": "Black (1-year)"
+    "group": "Black alone (1-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -93,7 +93,7 @@
     "race": "white",
     "type": "1-year",
     "varianceCoefficient": 4.733812479269932,
-    "group": "White (1-year)"
+    "group": "White alone (1-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -101,7 +101,7 @@
     "race": "black",
     "type": "5-year",
     "varianceCoefficient": 3.3393800134181717,
-    "group": "Black (5-year)"
+    "group": "Black alone (5-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -109,7 +109,7 @@
     "race": "white",
     "type": "5-year",
     "varianceCoefficient": 1.4347642081491319,
-    "group": "White (5-year)"
+    "group": "White alone (5-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -117,7 +117,7 @@
     "race": "black",
     "type": "5-year",
     "varianceCoefficient": 3.5813223894612487,
-    "group": "Black (5-year)"
+    "group": "Black alone (5-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -125,7 +125,7 @@
     "race": "white",
     "type": "5-year",
     "varianceCoefficient": 1.3724524540304217,
-    "group": "White (5-year)"
+    "group": "White alone (5-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -133,7 +133,7 @@
     "race": "black",
     "type": "5-year",
     "varianceCoefficient": 3.483149369055443,
-    "group": "Black (5-year)"
+    "group": "Black alone (5-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -141,7 +141,7 @@
     "race": "white",
     "type": "5-year",
     "varianceCoefficient": 1.4085288441391466,
-    "group": "White (5-year)"
+    "group": "White alone (5-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -149,7 +149,7 @@
     "race": "black",
     "type": "5-year",
     "varianceCoefficient": 3.7475833003524155,
-    "group": "Black (5-year)"
+    "group": "Black alone (5-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -157,7 +157,7 @@
     "race": "white",
     "type": "5-year",
     "varianceCoefficient": 1.2850826446465375,
-    "group": "White (5-year)"
+    "group": "White alone (5-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -165,7 +165,7 @@
     "race": "black",
     "type": "5-year",
     "varianceCoefficient": 4.1745629484506255,
-    "group": "Black (5-year)"
+    "group": "Black alone (5-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -173,7 +173,7 @@
     "race": "white",
     "type": "5-year",
     "varianceCoefficient": 1.584174755883341,
-    "group": "White (5-year)"
+    "group": "White alone (5-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -181,7 +181,7 @@
     "race": "black",
     "type": "5-year",
     "varianceCoefficient": 3.535496554298302,
-    "group": "Black (5-year)"
+    "group": "Black alone (5-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -189,7 +189,7 @@
     "race": "white",
     "type": "5-year",
     "varianceCoefficient": 1.3111426190568223,
-    "group": "White (5-year)"
+    "group": "White alone (5-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -197,7 +197,7 @@
     "race": "black",
     "type": "5-year",
     "varianceCoefficient": 3.7312468532931464,
-    "group": "Black (5-year)"
+    "group": "Black alone (5-year)"
   },
   {
     "GISJOIN": "G45030850",
@@ -205,6 +205,214 @@
     "race": "white",
     "type": "5-year",
     "varianceCoefficient": 1.4388080802602041,
-    "group": "White (5-year)"
+    "group": "White alone (5-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2016-01-01T05:00:00.000Z",
+    "race": "black",
+    "type": "1-year",
+    "varianceCoefficient": 9.692839269713131,
+    "group": "Black or partially Black (1-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2016-01-01T05:00:00.000Z",
+    "race": "white",
+    "type": "1-year",
+    "varianceCoefficient": 4.03048914235578,
+    "group": "White or partially white (1-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2017-01-01T05:00:00.000Z",
+    "race": "black",
+    "type": "1-year",
+    "varianceCoefficient": 11.286840445545323,
+    "group": "Black or partially Black (1-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2017-01-01T05:00:00.000Z",
+    "race": "white",
+    "type": "1-year",
+    "varianceCoefficient": 4.214523269887439,
+    "group": "White or partially white (1-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2018-01-01T05:00:00.000Z",
+    "race": "black",
+    "type": "1-year",
+    "varianceCoefficient": 9.389132870284735,
+    "group": "Black or partially Black (1-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2018-01-01T05:00:00.000Z",
+    "race": "white",
+    "type": "1-year",
+    "varianceCoefficient": 3.605504515118855,
+    "group": "White or partially white (1-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2019-01-01T05:00:00.000Z",
+    "race": "black",
+    "type": "1-year",
+    "varianceCoefficient": 8.795443122801139,
+    "group": "Black or partially Black (1-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2019-01-01T05:00:00.000Z",
+    "race": "white",
+    "type": "1-year",
+    "varianceCoefficient": 3.4679056324424042,
+    "group": "White or partially white (1-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2021-01-01T05:00:00.000Z",
+    "race": "black",
+    "type": "1-year",
+    "varianceCoefficient": 9.609854124307962,
+    "group": "Black or partially Black (1-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2021-01-01T05:00:00.000Z",
+    "race": "white",
+    "type": "1-year",
+    "varianceCoefficient": 3.1251345869752005,
+    "group": "White or partially white (1-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2022-01-01T05:00:00.000Z",
+    "race": "black",
+    "type": "1-year",
+    "varianceCoefficient": 15.326361341507393,
+    "group": "Black or partially Black (1-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2022-01-01T05:00:00.000Z",
+    "race": "white",
+    "type": "1-year",
+    "varianceCoefficient": 4.140999348111745,
+    "group": "White or partially white (1-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2016-01-01T05:00:00.000Z",
+    "race": "black",
+    "type": "5-year",
+    "varianceCoefficient": 3.4380192300568053,
+    "group": "Black or partially Black (5-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2016-01-01T05:00:00.000Z",
+    "race": "white",
+    "type": "5-year",
+    "varianceCoefficient": 1.4009754379135086,
+    "group": "White or partially white (5-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2017-01-01T05:00:00.000Z",
+    "race": "black",
+    "type": "5-year",
+    "varianceCoefficient": 3.4793607794341463,
+    "group": "Black or partially Black (5-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2017-01-01T05:00:00.000Z",
+    "race": "white",
+    "type": "5-year",
+    "varianceCoefficient": 1.3364950215560447,
+    "group": "White or partially white (5-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2018-01-01T05:00:00.000Z",
+    "race": "black",
+    "type": "5-year",
+    "varianceCoefficient": 3.378586387661569,
+    "group": "Black or partially Black (5-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2018-01-01T05:00:00.000Z",
+    "race": "white",
+    "type": "5-year",
+    "varianceCoefficient": 1.3691443580525062,
+    "group": "White or partially white (5-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2019-01-01T05:00:00.000Z",
+    "race": "black",
+    "type": "5-year",
+    "varianceCoefficient": 3.725711972436404,
+    "group": "Black or partially Black (5-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2019-01-01T05:00:00.000Z",
+    "race": "white",
+    "type": "5-year",
+    "varianceCoefficient": 1.2236800207988108,
+    "group": "White or partially white (5-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2020-01-01T05:00:00.000Z",
+    "race": "black",
+    "type": "5-year",
+    "varianceCoefficient": 4.1142829249413575,
+    "group": "Black or partially Black (5-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2020-01-01T05:00:00.000Z",
+    "race": "white",
+    "type": "5-year",
+    "varianceCoefficient": 1.557342459042489,
+    "group": "White or partially white (5-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2021-01-01T05:00:00.000Z",
+    "race": "black",
+    "type": "5-year",
+    "varianceCoefficient": 3.405086002590157,
+    "group": "Black or partially Black (5-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2021-01-01T05:00:00.000Z",
+    "race": "white",
+    "type": "5-year",
+    "varianceCoefficient": 1.2539348292329462,
+    "group": "White or partially white (5-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2022-01-01T05:00:00.000Z",
+    "race": "black",
+    "type": "5-year",
+    "varianceCoefficient": 3.568529365023688,
+    "group": "Black or partially Black (5-year)"
+  },
+  {
+    "GISJOIN": "G45030850",
+    "year": "2022-01-01T05:00:00.000Z",
+    "race": "white",
+    "type": "5-year",
+    "varianceCoefficient": 1.2164945012131978,
+    "group": "White or partially white (5-year)"
   }
 ]
