@@ -3,8 +3,20 @@ import * as Plot from '@observablehq/plot';
 import { html } from 'htl';
 import type { PageData } from './$types';
 
-export function getPlotOptionsCV(data: PageData['cv'], titlePrefix = '') {
-  const domainX = ['White (1-year)', 'Black (1-year)', 'White (5-year)', 'Black (5-year)'];
+export function getPlotOptionsCV(data: PageData['cv'], titlePrefix = '', alone = false) {
+  const domainX = alone
+    ? [
+        'White alone (1-year)',
+        'Black alone (1-year)',
+        'White alone (5-year)',
+        'Black alone (5-year)',
+      ]
+    : [
+        'White or partially white (1-year)',
+        'Black or partially Black (1-year)',
+        'White or partially white (5-year)',
+        'Black or partially Black (5-year)',
+      ];
 
   return {
     title: `${titlePrefix}Coefficient of variation`,
