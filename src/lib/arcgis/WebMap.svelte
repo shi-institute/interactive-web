@@ -8,7 +8,7 @@
   import Legend from '@arcgis/core/widgets/Legend';
   import Print from '@arcgis/core/widgets/Print';
   import TimeSlider from '@arcgis/core/widgets/TimeSlider.js';
-  import { error } from '@sveltejs/kit';
+  import sanitizeHtml from 'sanitize-html';
   import { createEventDispatcher, onMount } from 'svelte';
 
   import * as timeUtils from '@arcgis/core/support/timeUtils.js';
@@ -357,7 +357,14 @@
           <div id="info-content">
             <img id="item-thumbnail" alt="webmap thumbnail" src="{itemThumbnailUrl}" />
             <div id="item-description">
-              {itemDescription || 'No description available'}
+              {@html sanitizeHtml(itemDescription, {
+                allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'font']),
+                allowedAttributes: {
+                  a: ['href', 'name', 'target'],
+                  font: ['style', 'color', 'face', 'size'],
+                  div: ['style'],
+                },
+              }) || 'No description available'}
             </div>
             <calcite-label layout="inline">
               <b>Rating:</b>

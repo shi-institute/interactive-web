@@ -16,6 +16,7 @@
     "@sveltejs/kit": "^1.20.4",
     "@types/d3": "^7.4.3",
     "@types/luxon": "^3.3.4",
+    "@types/sanitize-html": "^2.13.0",
     "@types/svelte-leafletjs": "^0.8.3",
     "@typescript-eslint/eslint-plugin": "^8.2.0",
     "@typescript-eslint/parser": "^8.2.0",
@@ -41,6 +42,7 @@
     "htl": "^0.3.1",
     "html2canvas": "^1.4.1",
     "luxon": "^3.4.3",
+    "sanitize-html": "^2.13.0",
     "svelte-kit-cookie-session": "^4.0.0",
     "svelte-leafletjs": "^0.10.0",
     "svelte-maplibre": "^0.7.6"
