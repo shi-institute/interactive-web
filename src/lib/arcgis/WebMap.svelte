@@ -1,5 +1,6 @@
 <script lang="ts">
   import { notEmpty } from '$utils/notEmpty';
+  import * as timeUtils from '@arcgis/core/support/timeUtils.js';
   import MapView from '@arcgis/core/views/MapView';
   import WebMap from '@arcgis/core/WebMap';
   import BasemapGallery from '@arcgis/core/widgets/BasemapGallery';
@@ -10,8 +11,8 @@
   import TimeSlider from '@arcgis/core/widgets/TimeSlider.js';
   import sanitizeHtml from 'sanitize-html';
   import { createEventDispatcher, onMount } from 'svelte';
-
-  import * as timeUtils from '@arcgis/core/support/timeUtils.js';
+  import { writable, type Writable } from 'svelte/store';
+  import type { WebMapOptions } from './WebMap';
 
   /**
    * Props for the WebMap component.
@@ -52,6 +53,11 @@
    * `bind:view={yourMapViewVariable}`.
    */
   export let view: MapView | undefined = undefined;
+
+  export let options: Writable<WebMapOptions> = writable({
+    expanded: { left: false, right: false },
+    activeWidget: { left: null, right: null },
+  });
 
   export let actions: {
     id: string;
@@ -107,7 +113,6 @@
   let mapViewContainer: HTMLDivElement;
   let leftActionBar: HTMLElement;
   let rightActionBar: HTMLElement;
-  let activeWidget: { left: string | null; right: string | null } = { left: null, right: null };
 
   let itemDescription = '';
   let itemThumbnailUrl = '';
@@ -134,12 +139,12 @@
         if (target.tagName !== 'CALCITE-ACTION') return;
 
         // hide the currently active widget/panel
-        if (activeWidget[bar]) {
+        if ($options.activeWidget[bar]) {
           const activeWidgetPanelElem = document.querySelector(
-            `[data-panel-id=${activeWidget[bar]}]`
+            `[data-panel-id=${$options.activeWidget[bar]}]`
           ) as HTMLElement | undefined;
           const activeWidgetButtonElem = document.querySelector(
-            `[data-action-id=${activeWidget[bar]}]`
+            `[data-action-id=${$options.activeWidget[bar]}]`
           ) as (HTMLElement & { active?: boolean }) | undefined;
           if (activeWidgetPanelElem && activeWidgetButtonElem) {
             activeWidgetButtonElem.active = false;
@@ -149,7 +154,7 @@
 
         const nextWidget = target.dataset.actionId ?? null;
         // activate the clicked widget/panel
-        if (nextWidget !== activeWidget[bar]) {
+        if (nextWidget !== $options.activeWidget[bar]) {
           const nextWidgetPanelElem = document.querySelector(`[data-panel-id=${nextWidget}]`) as
             | HTMLElement
             | undefined;
@@ -159,16 +164,16 @@
           if (nextWidgetPanelElem && nextWidgetButtonElem) {
             nextWidgetButtonElem.active = true;
             nextWidgetPanelElem.hidden = false;
-            activeWidget[bar] = nextWidget;
+            $options.activeWidget[bar] = nextWidget;
           } else {
             console.error(`Could not find the element with the data-action-id of ${nextWidget}`);
-            activeWidget[bar] = null;
+            $options.activeWidget[bar] = null;
           }
         }
         // if the clicked widget was the one that was active, then there is no active widget
         // because we closed it earlier
         else {
-          activeWidget[bar] = null;
+          $options.activeWidget[bar] = null;
         }
       };
 
@@ -249,6 +254,36 @@
         view.ui.add(timeSlider, 'manual');
       }
     })();
+
+    view.when(() => {
+      // unhide the shell panels if their ids are in $options.activeWidget.left/right
+      if ($options.activeWidget.left) {
+        customElements.whenDefined('calcite-shell-panel').then(() => {
+          customElements.whenDefined('calcite-shell-panel').then(() => {
+            const shellPanels = document.querySelectorAll(
+              'calcite-shell-panel'
+            ) as NodeListOf<HTMLElement>;
+
+            shellPanels.forEach((shellPanel) => {
+              if (shellPanel) {
+                const panels = shellPanel.querySelectorAll(
+                  'calcite-panel'
+                ) as NodeListOf<HTMLElement>;
+
+                panels.forEach((panel) => {
+                  if (
+                    panel.getAttribute('data-panel-id') === $options.activeWidget.left ||
+                    panel.getAttribute('data-panel-id') === $options.activeWidget.right
+                  ) {
+                    panel.hidden = false;
+                  }
+                });
+              }
+            });
+          });
+        });
+      }
+    });
   });
 
   let prefersDarkMode = false;
@@ -278,6 +313,8 @@
       esriUI.classList.add('calcite-mode-auto');
     }
   });
+
+  $: console.log($options);
 </script>
 
 <svelte:head>
@@ -307,9 +344,15 @@
         position="start"
         display-mode="docked"
         resizable
-        collapsed="{!activeWidget.left}"
+        collapsed="{!$options.activeWidget.left}"
       >
-        <calcite-action-bar slot="action-bar" bind:this="{leftActionBar}" class="calcite-mode-dark">
+        <calcite-action-bar
+          slot="action-bar"
+          bind:this="{leftActionBar}"
+          class="calcite-mode-dark"
+          expanded="{$options.expanded.left}"
+          on:calciteActionBarToggle="{() => ($options.expanded.left = !$options.expanded.left)}"
+        >
           {#each allActions.filter(({ group, side }) => group !== 'end' && side !== 'right') as { id, icon, text }}
             <calcite-action
               data-action-id="{id}"
@@ -317,9 +360,11 @@
               text="{text}"
               id="{id}-action-button"
             ></calcite-action>
-            <calcite-tooltip reference-element="{id}-action-button" placement="right-middle">
-              <span>{text}</span>
-            </calcite-tooltip>
+            {#if !$options.expanded.left}
+              <calcite-tooltip reference-element="{id}-action-button" placement="right-middle">
+                <span>{text}</span>
+              </calcite-tooltip>
+            {/if}
           {/each}
           <calcite-action-group slot="actions-end">
             {#each allActions.filter(({ group, side }) => group === 'end' && side !== 'right') as { id, icon, text }}
@@ -401,9 +446,14 @@
         position="end"
         display-mode="docked"
         resizable
-        collapsed="{!activeWidget.right}"
+        collapsed="{!$options.activeWidget.right}"
       >
-        <calcite-action-bar slot="action-bar" bind:this="{rightActionBar}">
+        <calcite-action-bar
+          slot="action-bar"
+          bind:this="{rightActionBar}"
+          expanded="{$options.expanded.right}"
+          on:calciteActionBarToggle="{() => ($options.expanded.right = !$options.expanded.right)}"
+        >
           {#each allActions.filter(({ group, side }) => group !== 'end' && side === 'right') as { id, icon, text }}
             <calcite-action
               data-action-id="{id}"
@@ -411,9 +461,11 @@
               text="{text}"
               id="{id}-action-button"
             ></calcite-action>
-            <calcite-tooltip reference-element="{id}-action-button" placement="left-middle">
-              <span>{text}</span>
-            </calcite-tooltip>
+            {#if !$options.expanded.right}
+              <calcite-tooltip reference-element="{id}-action-button" placement="left-middle">
+                <span>{text}</span>
+              </calcite-tooltip>
+            {/if}
           {/each}
           <calcite-action-group slot="actions-end">
             {#each allActions.filter(({ group, side }) => group === 'end' && side === 'right') as { id, icon, text }}
