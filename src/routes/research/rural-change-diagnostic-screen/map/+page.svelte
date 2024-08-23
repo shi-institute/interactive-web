@@ -1,5 +1,6 @@
 <script lang="ts">
   import WebMap from '$lib/arcgis/WebMap.svelte';
+  import { sageDSTOptionsStore } from '$stores/sageDstOptionsStore';
   import { isEsriFeatureLayer } from '$utils/isEsriFeatureLayer';
   import FeatureFilter from '@arcgis/core/layers/support/FeatureFilter.js';
   import CustomContent from '@arcgis/core/popup/content/CustomContent.js';
@@ -131,6 +132,7 @@
     { id: 'filter', text: 'Filter', icon: 'filter', side: 'right' },
     { id: 'compare', text: 'Compare', icon: 'compare', side: 'right' },
   ]}"
+  options="{sageDSTOptionsStore}"
   on:ready="{onMapReady}"
 >
   <svelte:fragment slot="sidebar--right-panels">
