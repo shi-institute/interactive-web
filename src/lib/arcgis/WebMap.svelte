@@ -250,6 +250,34 @@
       }
     })();
   });
+
+  let prefersDarkMode = false;
+  onMount(() => {
+    const darkModePreference = window.matchMedia('(prefers-color-scheme: dark)');
+    if (darkModePreference.matches) prefersDarkMode = true;
+    else prefersDarkMode = false;
+
+    const listener = (e: MediaQueryListEvent) => {
+      if (e.matches) prefersDarkMode = true;
+      else prefersDarkMode = false;
+    };
+
+    darkModePreference.addEventListener('change', listener);
+
+    return () => {
+      darkModePreference.removeEventListener('change', listener);
+    };
+  });
+
+  // remove the light mode class from the esri-ui div
+  // and set it to auto theme mode
+  onMount(() => {
+    const esriUI = mapViewContainer.querySelector('.calcite-mode-light');
+    if (esriUI) {
+      esriUI.classList.remove('calcite-mode-light');
+      esriUI.classList.add('calcite-mode-auto');
+    }
+  });
 </script>
 
 <svelte:head>
@@ -257,11 +285,14 @@
   </script>
   <link rel="stylesheet" href="https://js.arcgis.com/calcite-components/2.11.1/calcite.css" />
   <script src="https://js.arcgis.com/4.30/"></script>
-  <link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css" />
+  <link
+    rel="stylesheet"
+    href="https://js.arcgis.com/4.30/esri/themes/{prefersDarkMode ? 'dark' : 'light'}/main.css"
+  />
 </svelte:head>
 
 {#if shell}
-  <calcite-shell>
+  <calcite-shell class="calcite-mode-auto">
     {#if shell.header}
       <calcite-navigation slot="header">
         <calcite-navigation-logo
