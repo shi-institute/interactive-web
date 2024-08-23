@@ -281,9 +281,6 @@
 </script>
 
 <svelte:head>
-  <script src="https://js.arcgis.com/calcite-components/2.11.1/calcite.esm.js" type="module">
-  </script>
-  <link rel="stylesheet" href="https://js.arcgis.com/calcite-components/2.11.1/calcite.css" />
   <script src="https://js.arcgis.com/4.30/"></script>
   <link
     rel="stylesheet"
@@ -449,7 +446,7 @@
 <style>
   calcite-shell {
     position: relative;
-    height: calc(100vh - var(--headerVisibleHeight));
+    /* height: calc(100vh - var(--headerVisibleHeight)); */
   }
 
   div.web-map {
