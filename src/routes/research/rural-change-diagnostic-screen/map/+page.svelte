@@ -74,7 +74,7 @@
           props: {
             ...attrs,
             q_diff: parseFloat(attrs.q_diff) / 100,
-            year: new Date(attrs.Year_two_Converted).getFullYear(),
+            year: new Date(attrs.Year_two_Converted).getUTCFullYear(),
             series: await zctaTimeSeriesLayer
               .queryFeatures({
                 where: `ZCTA5 = '${attrs.ZCTA5}'`,
