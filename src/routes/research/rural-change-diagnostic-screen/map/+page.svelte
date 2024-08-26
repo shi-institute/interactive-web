@@ -73,6 +73,7 @@
           target: div,
           props: {
             ...attrs,
+            q_diff: parseFloat(attrs.q_diff) / 100,
             year: new Date(attrs.Year_two_Converted).getFullYear(),
             series: await zctaTimeSeriesLayer
               .queryFeatures({

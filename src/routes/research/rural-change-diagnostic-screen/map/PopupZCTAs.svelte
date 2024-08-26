@@ -25,6 +25,7 @@
     ['avg_hh_inc', 'Average household income', '$,.0f'],
     ['median_house_value', 'Median house value', '$,.0f'],
     ['County', 'County'],
+    ['q_diff', 'Quantile Difference', '.0%'],
     // ['ZCTA5', 'Zip code tabulation area (2020)'],
   ];
 
@@ -109,7 +110,7 @@
       height: 300,
       color: { legend: true },
       x: { type: 'linear', label: 'Year', tickFormat: 'd' },
-      y: { type: 'linear', domain: [0, 1], label: 'Quantile' },
+      y: { type: 'linear', domain: [0, 1], label: 'Quantile', tickFormat: '.0%' },
       marginTop: 30,
       marginRight: 14,
       marginBottom: 40,
@@ -118,7 +119,7 @@
           x: 'year',
           y: 'data',
           stroke: 'Type',
-          tip: { format: { x: 'd' } },
+          tip: { format: { x: 'd', y: '.0%' } },
         }),
       ],
     }}"
