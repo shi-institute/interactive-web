@@ -112,21 +112,43 @@
     actions: { print: false, bookmarks: false },
     timeSlider: {
       inheritPropertiesFromWebMap: true,
-      // mode: 'instant',
-      // tickConfigs: [
-      //   {
-      //     mode: 'position',
-      //     values: Array.from({ length: 12 }, (_, i) =>
-      //       new Date(`${2013 + i}-01-01T00:00:00.000-05:00`).getTime()
-      //     ),
-      //     labelsVisible: true,
-      //     labelFormatFunction: (value) => {
-      //       const date = new Date(value);
-      //       return date.toISOString().split('T')[0];
-      //       return `'${date.getUTCFullYear() - 2000}`;
-      //     },
-      //   },
-      // ],
+      mode: 'instant',
+      // mode: 'time-window',
+      // fullTimeExtent: {
+      //   start: new Date('2013-12-31T00:00:00.000').getTime(),
+      //   end: new Date('2021-02-01T00:01:00.000').getTime(),
+      // },
+
+      // format the time slider min, max, and time window labels
+      labelFormatFunction: (value, type, element) => {
+        if (!element) return;
+
+        // since we are using the 'instant' mode, the window
+        // will always be two of the same dates
+        if (Array.isArray(value)) {
+          element.innerText = `Areas of Interest (ZCTAs)\n${new Date(value[0]).getUTCFullYear()}`;
+          element.style.textAlign = 'center';
+          return;
+        }
+
+        element.innerText = `${new Date(value).getUTCFullYear()}`;
+      },
+
+      // show ticks for every year
+      tickConfigs: [
+        {
+          mode: 'position',
+          values: Array.from({ length: 12 }, (_, i) =>
+            new Date(`${2013 + i}-01-01T00:00:00.000-05:00`).getTime()
+          ),
+          labelsVisible: true,
+          // only show the year as a number
+          labelFormatFunction: (value) => {
+            const date = new Date(value);
+            return `${date.getUTCFullYear()}`;
+          },
+        },
+      ],
     },
   }}"
   actions="{[
