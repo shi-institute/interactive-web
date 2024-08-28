@@ -116,7 +116,7 @@
 <style>
   calcite-shell {
     position: relative;
-    /* height: calc(100vh - var(--headerVisibleHeight)); */
+    height: calc(100vh - var(--headerVisibleHeight));
   }
 
   calcite-navigation-logo {
