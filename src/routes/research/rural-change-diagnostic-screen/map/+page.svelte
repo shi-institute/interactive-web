@@ -138,8 +138,8 @@
       tickConfigs: [
         {
           mode: 'position',
-          values: Array.from({ length: 12 }, (_, i) =>
-            new Date(`${2013 + i}-01-01T00:00:00.000-05:00`).getTime()
+          values: Array.from({ length: 9 }, (_, i) =>
+            new Date(`${2014 + i}-01-01T00:00:00.000-05:00`).getTime()
           ),
           labelsVisible: true,
           // only show the year as a number
