@@ -45,6 +45,7 @@
     "sanitize-html": "^2.13.0",
     "svelte-kit-cookie-session": "^4.0.0",
     "svelte-leafletjs": "^0.10.0",
-    "svelte-maplibre": "^0.7.6"
+    "svelte-maplibre": "^0.7.6",
+    "zod": "^3.23.8"
   }
 }

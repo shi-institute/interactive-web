@@ -4,6 +4,7 @@
   import { isEsriFeatureLayer } from '$utils/isEsriFeatureLayer';
   import FeatureFilter from '@arcgis/core/layers/support/FeatureFilter.js';
   import CustomContent from '@arcgis/core/popup/content/CustomContent.js';
+  import ComparePanel from './ComparePanel.svelte';
   import PopupZCTAs from './PopupZCTAs.svelte';
 
   const ZCTA_TIME_SERIES_LAYER_ID = '1915220f14c-layer-20';
@@ -21,6 +22,7 @@
   let quantileDiffAtLeast = 10;
   let zctaTimeSeriesLayerView: __esri.FeatureLayerView | undefined = undefined;
   let zctaLayersViews: __esri.FeatureLayerView[] = [];
+  let zctaList: (string | number)[] = [];
 
   // filter the layer by the q_diff value
   $: if (zctaTimeSeriesLayerView) {
@@ -29,6 +31,16 @@
     zctaLayersViews.forEach((layerView) => {
       layerView.filter = filter;
     });
+
+    // get a list of zip codes
+    zctaTimeSeriesLayerView.layer
+      .queryFeatures({
+        where: filter.where,
+        outFields: ['ZCTA5'],
+        returnGeometry: false,
+      })
+      .then((featureSet) => featureSet.features.map((graphic) => graphic.attributes.ZCTA5))
+      .then((data) => (zctaList = Array.from(new Set(data))));
   }
 
   async function onMapReady(evt: CustomEvent<{ map: __esri.WebMap; view: __esri.MapView }>) {
@@ -59,8 +71,6 @@
 
     // customize the popup title
     zctaTimeSeriesLayer.popupTemplate.title = 'ZCTA: {BASENAME}';
-
-    evt.detail.view.popup.when;
 
     // add custom content in front of the existing popup content
     const customContentWidget = new CustomContent({
@@ -95,12 +105,7 @@
         return div;
       },
     });
-    zctaTimeSeriesLayer.popupTemplate.content = [
-      customContentWidget,
-      // ...(Array.isArray(zctaTimeSeriesLayer.popupTemplate.content)
-      //   ? zctaTimeSeriesLayer.popupTemplate.content
-      //   : []),
-    ];
+    zctaTimeSeriesLayer.popupTemplate.content = [customContentWidget];
   }
 </script>
 
@@ -113,11 +118,6 @@
     timeSlider: {
       inheritPropertiesFromWebMap: true,
       mode: 'instant',
-      // mode: 'time-window',
-      // fullTimeExtent: {
-      //   start: new Date('2013-12-31T00:00:00.000').getTime(),
-      //   end: new Date('2021-02-01T00:01:00.000').getTime(),
-      // },
 
       // format the time slider min, max, and time window labels
       labelFormatFunction: (value, type, element) => {
@@ -181,22 +181,17 @@
       </div>
     </calcite-panel>
     <calcite-panel heading="Compare multiple ZCTAs" height-scale="l" data-panel-id="compare" hidden>
-      <div id="compare-container">
-        <calcite-notice open>
-          <div slot="title">Compare</div>
-          <div slot="message">
-            Select up to 10 ZCTAs to compare their housing value and income quantiles.
-          </div>
-          <calcite-link slot="link" title="my action">Learn more about the quantiles</calcite-link>
-        </calcite-notice>
-      </div>
+      {#if zctaTimeSeriesLayerView}
+        <ComparePanel zctaList="{zctaList}" zctaTimeSeriesLayerView="{zctaTimeSeriesLayerView}" />
+      {:else}
+        <calcite-loader active></calcite-loader>
+      {/if}
     </calcite-panel>
   </svelte:fragment>
 </WebMap>
 
 <style>
-  #filter-container,
-  #compare-container {
+  #filter-container {
     padding: var(--calcite-internal-panel-default-padding);
   }
 </style>
