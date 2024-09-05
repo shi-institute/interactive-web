@@ -138,7 +138,7 @@
       tickConfigs: [
         {
           mode: 'position',
-          values: Array.from({ length: 9 }, (_, i) =>
+          values: Array.from({ length: 8 }, (_, i) =>
             new Date(`${2014 + i}-01-01T00:00:00.000-05:00`).getTime()
           ),
           labelsVisible: true,
