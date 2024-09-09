@@ -69,8 +69,6 @@
       { year, type: 'income', data: rest.income_quantile, ZCTA: ZCTA5 },
     ];
   });
-
-  $: console.log(seriesTidyQuantiles);
 </script>
 
 <div id="compare-container">
@@ -101,9 +99,11 @@
       <div slot="message">{dataErrorMessage}</div>
     </calcite-alert>
   {:else if seriesTidyQuantiles.length > 0}
-    <div class="plot-container">
+    <div class="plot-wrapper">
       <PlotContainer
         fullWidth
+        enablePopup
+        plotClass="{'zcta-quantile-compare-plot'}"
         plot="{{
           subtitle: html`
             <span class="line-legend">
@@ -143,7 +143,12 @@
             ),
           ],
         }}"
-      />
+      >
+        <svelte:fragment slot="popup-before">
+          <h2 style="margin: 0;">House value and income quantiles over time</h2>
+          <div style="margin-bottom: 10px;">Multiple ZCTAs, 2014-2021</div>
+        </svelte:fragment>
+      </PlotContainer>
     </div>
   {/if}
 </div>
@@ -153,23 +158,23 @@
     padding: var(--calcite-internal-panel-default-padding);
   }
 
-  .plot-container {
+  .plot-wrapper {
     margin-bottom: 24px;
   }
-  .plot-container :global(svg) {
+  :global(.zcta-quantile-compare-plot svg) {
     background-color: transparent;
   }
-  .plot-container :global(.line-legend) {
+  :global(.zcta-quantile-compare-plot .line-legend) {
     font-family: 'JetBrains Mono', 'JetBrains Mono Embedded', monospace;
     font-weight: 500;
     font-size: 12px;
   }
-  .plot-container :global(.line-legend .line) {
+  :global(.zcta-quantile-compare-plot .line-legend .line) {
     font-family: 'Lato', sans-serif;
     font-weight: 500;
     font-size: 12px;
   }
-  .plot-container :global(.line-legend .solid) {
+  :global(.zcta-quantile-compare-plot .line-legend .solid) {
     letter-spacing: -0.2em;
   }
 </style>

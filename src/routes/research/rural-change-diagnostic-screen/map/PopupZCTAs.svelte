@@ -106,6 +106,7 @@
 <div class="plot-container">
   <PlotContainer
     fullWidth
+    enablePopup
     plot="{{
       height: 300,
       color: { legend: true },
@@ -123,7 +124,9 @@
         }),
       ],
     }}"
-  />
+  >
+    <h2 slot="popup-before" style="margin: 0;">House value and income quantiles over time</h2>
+  </PlotContainer>
 </div>
 
 <h3>House value and income over time</h3>
@@ -153,6 +156,7 @@
 <div class="plot-container">
   <PlotContainer
     fullWidth
+    enablePopup
     plot="{{
       height: 300,
       color: { legend: true },
@@ -176,7 +180,9 @@
         }),
       ],
     }}"
-  />
+  >
+    <h2 slot="popup-before" style="margin: 0;">House value and income over time</h2>
+  </PlotContainer>
 </div>
 
 <h3>All data ({year})</h3>
