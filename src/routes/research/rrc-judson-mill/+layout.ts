@@ -1,11 +1,17 @@
 import type { LayoutLoad } from './$types';
 import data from './data.json';
 
+export const ssr = false;
+
 export const load = (async () => {
   const tidyPerecentPopulationByRace = Object.entries(data.percentPopulationByRace).flatMap(
     ([race, decadalData]) => {
       return Object.entries(decadalData).map(([decade, percent]) => {
-        return { year: new Date(decade), race, percent };
+        return {
+          year: new Date(decade),
+          race: race === '2+ races' ? 'Two or more' : race,
+          percent,
+        };
       });
     }
   );
