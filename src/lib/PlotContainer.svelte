@@ -4,7 +4,7 @@
   import * as Plot from '@observablehq/plot';
   import { ProgressRing } from 'fluent-svelte';
   import Popout from 'svelte-popout';
-  import { PlotNodeManager } from './PlotNodeManager';
+  import { type PlotNode, PlotNodeManager } from './PlotNodeManager';
 
   export let plot: Plot.PlotOptions | ((width: number) => Plot.PlotOptions);
   export let fullWidth = false;
@@ -12,18 +12,19 @@
   export let plotClass = '';
   export let popupWidth = 900;
   export let popupHeight = 500;
+  export let plotNode: PlotNode | undefined = undefined;
 
   let clientWidth: number | undefined;
   let div: HTMLDivElement;
   $: plotOptions = typeof plot === 'function' ? plot(clientWidth || 640) : plot;
   $: {
     if (browser && div) {
-      new PlotNodeManager()
+      plotNode = new PlotNodeManager()
         .setOptions({
           ...plotOptions,
           width: fullWidth ? clientWidth : plotOptions.width || 640,
         })
-        .render(div);
+        .render(div).node;
     }
   }
 

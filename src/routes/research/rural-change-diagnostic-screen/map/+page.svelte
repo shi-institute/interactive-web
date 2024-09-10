@@ -4,6 +4,7 @@
   import { isEsriFeatureLayer } from '$utils/isEsriFeatureLayer';
   import FeatureFilter from '@arcgis/core/layers/support/FeatureFilter.js';
   import CustomContent from '@arcgis/core/popup/content/CustomContent.js';
+  import UniqueValueRenderer from '@arcgis/core/renderers/UniqueValueRenderer.js';
   import ComparePanel from './ComparePanel.svelte';
   import PopupZCTAs from './PopupZCTAs.svelte';
 
@@ -21,12 +22,27 @@
 
   let quantileDiffAtLeast = 10;
   let zctaTimeSeriesLayerView: __esri.FeatureLayerView | undefined = undefined;
+  let originalZctaTimeSeriesRenderer: __esri.Renderer | undefined = undefined;
   let zctaLayersViews: __esri.FeatureLayerView[] = [];
   let zctaList: (string | number)[] = [];
 
-  // filter the layer by the q_diff value
+  let zctaSelection: string[] = [];
+  $: zctaHighlightFilterWhere =
+    $sageDSTOptionsStore.activeWidget.right === 'compare' && zctaSelection.length > 0
+      ? zctaSelection.map((pair) => `ZCTA5 = ${pair[0]}`).join(' OR ')
+      : '';
+
   $: if (zctaTimeSeriesLayerView) {
-    const filter = new FeatureFilter({ where: `q_diff >= ${quantileDiffAtLeast}` });
+    // outline the selected comparison ZCTAs
+    if (zctaHighlightFilterWhere) {
+    }
+
+    // filter the visible layer
+    // if there is a comparison filter, use it; otherwise, use the quantile difference threshold
+    const quantileFilterWhere = `q_diff >= ${quantileDiffAtLeast}`;
+    const filter = new FeatureFilter({
+      where: zctaHighlightFilterWhere || quantileFilterWhere,
+    });
     zctaTimeSeriesLayerView.filter = filter;
     zctaLayersViews.forEach((layerView) => {
       layerView.filter = filter;
@@ -35,12 +51,35 @@
     // get a list of zip codes
     zctaTimeSeriesLayerView.layer
       .queryFeatures({
-        where: filter.where,
+        where: quantileFilterWhere,
         outFields: ['ZCTA5'],
         returnGeometry: false,
       })
       .then((featureSet) => featureSet.features.map((graphic) => graphic.attributes.ZCTA5))
       .then((data) => (zctaList = Array.from(new Set(data))));
+
+    // if there is a comparison filter, highlight the selected ZCTAs
+    if (originalZctaTimeSeriesRenderer) {
+      if (zctaHighlightFilterWhere) {
+        console.log(originalZctaTimeSeriesRenderer);
+        zctaTimeSeriesLayerView.layer.renderer = new UniqueValueRenderer({
+          field: 'ZCTA5',
+          uniqueValueInfos: zctaSelection.map(([zcta, color]) => ({
+            value: zcta,
+            symbol: {
+              type: 'simple-fill',
+              color: color + '80',
+              outline: {
+                color: color,
+                width: 2,
+              },
+            },
+          })),
+        });
+      } else {
+        zctaTimeSeriesLayerView.layer.renderer = originalZctaTimeSeriesRenderer;
+      }
+    }
   }
 
   async function onMapReady(evt: CustomEvent<{ map: __esri.WebMap; view: __esri.MapView }>) {
@@ -49,6 +88,7 @@
       (layer) => layer.id === ZCTA_TIME_SERIES_LAYER_ID
     );
     if (!isEsriFeatureLayer(zctaTimeSeriesLayer)) return;
+    originalZctaTimeSeriesRenderer = zctaTimeSeriesLayer.renderer;
 
     const zctaLayers = evt.detail.map.allLayers.filter(
       (layer) => ZCTA_LAYER_IDS.includes(layer.id) && isEsriFeatureLayer(layer)
@@ -182,7 +222,11 @@
     </calcite-panel>
     <calcite-panel heading="Compare multiple ZCTAs" height-scale="l" data-panel-id="compare" hidden>
       {#if zctaTimeSeriesLayerView}
-        <ComparePanel zctaList="{zctaList}" zctaTimeSeriesLayerView="{zctaTimeSeriesLayerView}" />
+        <ComparePanel
+          zctaList="{zctaList}"
+          zctaTimeSeriesLayerView="{zctaTimeSeriesLayerView}"
+          bind:zctaSelection="{zctaSelection}"
+        />
       {:else}
         <calcite-loader active></calcite-loader>
       {/if}

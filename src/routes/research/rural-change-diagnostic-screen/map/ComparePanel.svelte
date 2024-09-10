@@ -1,5 +1,6 @@
 <script lang="ts">
   import PlotContainer from '$lib/PlotContainer.svelte';
+  import { type PlotNode } from '$lib/PlotNodeManager';
   import { getZodSchemaFieldsShallow } from '$utils/getZodSchemaFields';
   import * as Plot from '@observablehq/plot';
   import { html } from 'htl';
@@ -17,6 +18,9 @@
   ) {
     if (Array.isArray(evt.target.value)) {
       selectedZCTAs = evt.target.value.map((v) => v.toString());
+    } else if (evt.target.value === '') {
+      selectedZCTAs = [];
+      return;
     } else {
       selectedZCTAs = [`${evt.target.value}`];
     }
@@ -32,7 +36,7 @@
     Year_two_Converted: z.string(),
   });
   let data: z.infer<typeof attrsSchema>[] = [];
-  function handleZCTAsChange() {
+  function handleZCTAsChange(selectedZCTAs: string[]) {
     if (selectedZCTAs.length === 0) {
       data = [];
       return;
@@ -43,24 +47,41 @@
 
     zctaTimeSeriesLayerView.layer
       .queryFeatures({
-        where: 'ZCTA5 in (' + selectedZCTAs.join(',') + ')',
+        where: selectedZCTAs.map((zcta) => `ZCTA5 = ${zcta}`).join(' OR '),
         outFields: getZodSchemaFieldsShallow(attrsSchema),
       })
       .then((featureSet) => featureSet.features.map((graphic) => ({ ...graphic.attributes })))
       .then((attrs) => attrsSchema.array().parse(attrs))
       .then((attrs) => (data = attrs))
       .catch((error) => {
-        console.error(error.issues);
+        console.error(error.issues || error);
         dataErrorMessage = 'Error loading data (see console)';
       })
       .finally(() => {
         loading = false;
       });
   }
-  $: {
-    selectedZCTAs;
-    handleZCTAsChange();
-  }
+  $: handleZCTAsChange(selectedZCTAs);
+
+  // get the colors for each ZCTA from the plot
+  // and expose them paired with their ZCTAs as zctaSelection
+  let plotNode: PlotNode;
+  $: plotColorScale = (() => {
+    const scale = plotNode?.scale?.('color');
+    if (scale?.range && scale?.domain) {
+      return { range: Array.from(scale.range), domain: Array.from(scale.domain) };
+    }
+  })();
+  export let zctaSelection: [string, string][] = [];
+  let showColorsOnMap = true;
+  $: zctaSelection = (() => {
+    if (selectedZCTAs.length === 0) return [];
+    if (!plotColorScale) return [];
+    if (!showColorsOnMap) return [];
+    return plotColorScale.domain.map((zcta, index) => {
+      return [zcta, plotColorScale.range[index % (plotColorScale.range.length - 1)]];
+    });
+  })();
 
   $: seriesTidyQuantiles = data.flatMap(({ Year_two_Converted, ZCTA5, ...rest }) => {
     const year = new Date(Year_two_Converted).getUTCFullYear();
@@ -92,6 +113,24 @@
     </calcite-combobox>
   </calcite-label>
 
+  <calcite-label>
+    <span>
+      Show figure colors and selection on the map
+      <br />
+      <i style="opacity: 0.7;">This will hide ZCTAs you have not selected</i>
+    </span>
+    <div class="switch">
+      <span>Off</span>
+      <calcite-switch
+        checked="{showColorsOnMap}"
+        on:calciteSwitchChange="{(evt) => {
+          showColorsOnMap = evt.target.checked;
+        }}"
+      ></calcite-switch>
+      <span>On</span>
+    </div>
+  </calcite-label>
+
   {#if loading}
     <calcite-loader type="indeterminate" label="Loading data"></calcite-loader>
   {:else if dataErrorMessage}
@@ -103,6 +142,7 @@
       <PlotContainer
         fullWidth
         enablePopup
+        bind:plotNode="{plotNode}"
         plotClass="{'zcta-quantile-compare-plot'}"
         plot="{{
           subtitle: html`
