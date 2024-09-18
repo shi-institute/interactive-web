@@ -280,7 +280,7 @@
         // since we are using the 'instant' mode, the window
         // will always be two of the same dates
         if (Array.isArray(value)) {
-          element.innerText = `Areas of Interest (ZCTAs)\n${new Date(value[0]).getUTCFullYear()}`;
+          element.innerText = `Areas of Interest\n${new Date(value[0]).getUTCFullYear()}`;
           element.style.textAlign = 'center';
           return;
         }
