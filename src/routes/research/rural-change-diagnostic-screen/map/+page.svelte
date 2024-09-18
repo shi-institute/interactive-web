@@ -20,10 +20,25 @@
     '1914c956a53-layer-8', // 2021
   ];
 
+  const TRACT_TIME_SERIES_LAYER_ID = '19201440858-layer-18';
+  const TRACT_LAYER_IDS = [
+    '1920144085a-layer-19', // 2021_rural
+    '1920144085b-layer-20', // 2020_rural
+    '1920144085d-layer-21', // 2019_rural
+    '1920144085e-layer-22', // 2018_rural
+    '19201440860-layer-23', // 2017_rural
+    '19201440861-layer-24', // 2016_rural
+    '19201440862-layer-25', // 2015_rural
+    '19201440864-layer-26', // 2014_rural
+  ];
+
   let quantileDiffAtLeast = 10;
   let zctaTimeSeriesLayerView: __esri.FeatureLayerView | undefined = undefined;
+  let tractTimeSeriesLayerView: __esri.FeatureLayerView | undefined = undefined;
   let originalZctaTimeSeriesRenderer: __esri.Renderer | undefined = undefined;
+  let originalTractTimeSeriesRenderer: __esri.Renderer | undefined = undefined;
   let zctaLayersViews: __esri.FeatureLayerView[] = [];
+  let tractLayersViews: __esri.FeatureLayerView[] = [];
   let zctaList: (string | number)[] = [];
 
   let zctaSelection: string[] = [];
@@ -33,10 +48,6 @@
       : '';
 
   $: if (zctaTimeSeriesLayerView) {
-    // outline the selected comparison ZCTAs
-    if (zctaHighlightFilterWhere) {
-    }
-
     // filter the visible layer
     // if there is a comparison filter, use it; otherwise, use the quantile difference threshold
     const quantileFilterWhere = `q_diff >= ${quantileDiffAtLeast}`;
@@ -82,8 +93,22 @@
     }
   }
 
-  async function onMapReady(evt: CustomEvent<{ map: __esri.WebMap; view: __esri.MapView }>) {
-    // console.log(evt.detail.map.allLayers.map((layer) => ({ title: layer.title, id: layer.id })));
+  $: if (tractTimeSeriesLayerView) {
+    // filter the visible layer
+    // if there is a comparison filter, use it; otherwise, use the quantile difference threshold
+    const quantileFilterWhere = `quantile__difference >= ${quantileDiffAtLeast / 100}`;
+    const filter = new FeatureFilter({
+      where: quantileFilterWhere,
+    });
+    tractTimeSeriesLayerView.filter = filter;
+    tractLayersViews.forEach((layerView) => {
+      layerView.filter = filter;
+    });
+  }
+
+  async function handleMapReadyForZCTAs(
+    evt: CustomEvent<{ map: __esri.WebMap; view: __esri.MapView }>
+  ) {
     const zctaTimeSeriesLayer = evt.detail.map.allLayers.find(
       (layer) => layer.id === ZCTA_TIME_SERIES_LAYER_ID
     );
@@ -146,6 +171,44 @@
       },
     });
     zctaTimeSeriesLayer.popupTemplate.content = [customContentWidget];
+  }
+
+  async function handleMapReadyForTracts(
+    evt: CustomEvent<{ map: __esri.WebMap; view: __esri.MapView }>
+  ) {
+    const tractTimeSeriesLayer = evt.detail.map.allLayers.find(
+      (layer) => layer.id === TRACT_TIME_SERIES_LAYER_ID
+    );
+    if (!isEsriFeatureLayer(tractTimeSeriesLayer)) return;
+    originalTractTimeSeriesRenderer = tractTimeSeriesLayer.renderer;
+
+    const tractLayers = evt.detail.map.allLayers.filter(
+      (layer) => TRACT_LAYER_IDS.includes(layer.id) && isEsriFeatureLayer(layer)
+    ) as __esri.Collection<__esri.FeatureLayer>;
+
+    // ignore the filter set on the layer on the server side
+    // (likely inherited from the web map filter)
+    // so that we can control the filter in this app
+    // read about filtering at https://developers.arcgis.com/javascript/latest/query-filter/
+    tractTimeSeriesLayer.definitionExpression = '';
+    tractLayers.forEach((layer) => {
+      layer.definitionExpression = '';
+    });
+
+    // get the layers' views
+    tractTimeSeriesLayerView = await evt.detail.view.whenLayerView(tractTimeSeriesLayer);
+    tractLayersViews = await Promise.all(
+      tractLayers.map((layer) => evt.detail.view.whenLayerView(layer))
+    );
+  }
+
+  async function onMapReady(evt: CustomEvent<{ map: __esri.WebMap; view: __esri.MapView }>) {
+    console.log(
+      Array.from(evt.detail.map.allLayers.map((layer) => ({ title: layer.title, id: layer.id })))
+    );
+
+    await handleMapReadyForZCTAs(evt);
+    await handleMapReadyForTracts(evt);
   }
 </script>
 
