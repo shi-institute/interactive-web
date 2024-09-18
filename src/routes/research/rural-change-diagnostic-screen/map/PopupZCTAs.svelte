@@ -25,6 +25,7 @@
     ['avg_hh_inc', 'Average household income', '$,.0f'],
     ['median_house_value', 'Median house value', '$,.0f'],
     ['County', 'County'],
+    ['zcta', 'ZCTA'],
     ['q_diff', 'Quantile Difference', '.0%'],
     // ['ZCTA5', 'Zip code tabulation area (2020)'],
   ];
@@ -74,11 +75,13 @@
   <tbody>
     {#each frontTablePropsLabels as [key, label, formatStr]}
       {@const value = $$props[key]}
-      {@const formatter = formatStr ? format(formatStr) : undefined}
-      <tr>
-        <th class="esri-feature-fields__field-header">{label}</th>
-        <td class="esri-feature-fields__field-data">{formatter ? formatter(value) : value}</td>
-      </tr>
+      {#if value}
+        {@const formatter = formatStr ? format(formatStr) : undefined}
+        <tr>
+          <th class="esri-feature-fields__field-header">{label}</th>
+          <td class="esri-feature-fields__field-data">{formatter ? formatter(value) : value}</td>
+        </tr>
+      {/if}
     {/each}
   </tbody>
 </table>

@@ -200,6 +200,57 @@
     tractLayersViews = await Promise.all(
       tractLayers.map((layer) => evt.detail.view.whenLayerView(layer))
     );
+
+    // customize the popup title
+    tractTimeSeriesLayer.popupTemplate.title = 'Tract: {GISJOIN}';
+
+    // add custom content in front of the existing popup content
+    const customContentWidget = new CustomContent({
+      outFields: ['*'],
+      creator: async (evt) => {
+        if (!evt) return '';
+        const attrs: Record<string, never> = evt.graphic.attributes || {};
+        const div = document.createElement('div');
+        console.log(attrs);
+        new PopupZCTAs({
+          target: div,
+          props: {
+            ...attrs,
+            q_diff: parseFloat(attrs.q_diff) / 100,
+            year: attrs.year,
+            avg_hh_inc: attrs.average_household_income,
+            series: await tractTimeSeriesLayer
+              .queryFeatures({
+                where: `GISJOIN = '${attrs.GISJOIN}'`,
+                outFields: [
+                  'quantile__house_value',
+                  'quantile__income',
+                  'average_household_income',
+                  'median_house_value',
+                  'quantile__difference',
+                  'year',
+                ],
+              })
+              .then((featureSet) =>
+                featureSet.features
+                  .map((graphic) => ({ ...graphic.attributes }))
+                  .map((attrs) => {
+                    return {
+                      hvalue_quantile: attrs.quantile__house_value,
+                      income_quantile: attrs.quantile__income,
+                      avg_hh_inc: attrs.average_household_income,
+                      median_house_value: attrs.median_house_value,
+                      q_diff: attrs.quantile__difference,
+                      Year_two_Converted: `${attrs.year}-01-01`,
+                    };
+                  })
+              ),
+          },
+        });
+        return div;
+      },
+    });
+    tractTimeSeriesLayer.popupTemplate.content = [customContentWidget];
   }
 
   async function onMapReady(evt: CustomEvent<{ map: __esri.WebMap; view: __esri.MapView }>) {
