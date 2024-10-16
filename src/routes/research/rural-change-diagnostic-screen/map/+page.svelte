@@ -40,12 +40,52 @@
   let zctaLayersViews: __esri.FeatureLayerView[] = [];
   let tractLayersViews: __esri.FeatureLayerView[] = [];
   let zctaList: (string | number)[] = [];
+  let tractList: (string | number)[] = [];
+  let zctaGroup: __esri.GroupLayer | undefined = undefined;
+  let tractGroup: __esri.GroupLayer | undefined = undefined;
 
-  let zctaSelection: string[] = [];
+  function getSelection(arr: [string, string][], mode: 'ZCTA' | 'Tract') {
+    return arr
+      .filter(([name]) => name.endsWith(`(${mode})`))
+      .map(([name, hexColor]) => [name.replace(` (${mode})`, ''), hexColor]);
+  }
+
+  let selection: [string, string][] = [];
   $: zctaHighlightFilterWhere =
-    $sageDSTOptionsStore.activeWidget.right === 'compare' && zctaSelection.length > 0
-      ? zctaSelection.map((pair) => `ZCTA5 = ${pair[0]}`).join(' OR ')
+    $sageDSTOptionsStore.activeWidget.right === 'compare' && selection.length > 0
+      ? getSelection(selection, 'ZCTA')
+          .map(([zcta]) => `ZCTA5 = ${zcta}`)
+          .join(' OR ')
       : '';
+  $: tractHighlightFilterWhere =
+    $sageDSTOptionsStore.activeWidget.right === 'compare' && selection.length > 0
+      ? getSelection(selection, 'Tract')
+          .map(([tract]) => `GISJOIN = 'G${tract}'`)
+          .join(' OR ')
+      : '';
+
+  // if there is a selection, show the ZCTA and Tract groups
+  // and revert back to the previous visilibity when the selection is cleared
+  $: selectionExists = selection.length > 0;
+  let previousZctaGroupVisible = false;
+  let previousTractGroupVisible = true;
+  function triggerGroupVisibilityForSelection(selectionExists: boolean) {
+    if (tractGroup) {
+      tractGroup.set('visible', true);
+    }
+    if (zctaGroup && tractGroup) {
+      previousZctaGroupVisible = zctaGroup.visible || false;
+      previousTractGroupVisible = tractGroup.visible || false;
+      if (selectionExists) {
+        zctaGroup.set('visible', true);
+        tractGroup.set('visible', true);
+      } else {
+        zctaGroup.set('visible', previousZctaGroupVisible);
+        tractGroup.set('visible', previousTractGroupVisible);
+      }
+    }
+  }
+  $: triggerGroupVisibilityForSelection(selectionExists);
 
   $: if (zctaTimeSeriesLayerView) {
     // filter the visible layer
@@ -71,11 +111,10 @@
 
     // if there is a comparison filter, highlight the selected ZCTAs
     if (originalZctaTimeSeriesRenderer) {
-      if (zctaHighlightFilterWhere) {
-        console.log(originalZctaTimeSeriesRenderer);
+      if (zctaHighlightFilterWhere || tractHighlightFilterWhere) {
         zctaTimeSeriesLayerView.layer.renderer = new UniqueValueRenderer({
           field: 'ZCTA5',
-          uniqueValueInfos: zctaSelection.map(([zcta, color]) => ({
+          uniqueValueInfos: getSelection(selection, 'ZCTA').map(([zcta, color]) => ({
             value: zcta,
             symbol: {
               type: 'simple-fill',
@@ -98,12 +137,46 @@
     // if there is a comparison filter, use it; otherwise, use the quantile difference threshold
     const quantileFilterWhere = `quantile__difference >= ${quantileDiffAtLeast / 100}`;
     const filter = new FeatureFilter({
-      where: quantileFilterWhere,
+      where: tractHighlightFilterWhere || quantileFilterWhere,
     });
     tractTimeSeriesLayerView.filter = filter;
     tractLayersViews.forEach((layerView) => {
       layerView.filter = filter;
     });
+
+    // get a list of tracts
+    tractTimeSeriesLayerView.layer
+      .queryFeatures({
+        where: quantileFilterWhere,
+        outFields: ['GISJOIN'],
+        returnGeometry: false,
+      })
+      .then((featureSet) =>
+        featureSet.features.map((graphic) => graphic.attributes.GISJOIN.slice(1))
+      )
+      .then((data) => (tractList = Array.from(new Set(data))));
+
+    // if there is a comparison filter, highlight the selected tracts
+    if (originalTractTimeSeriesRenderer) {
+      if (zctaHighlightFilterWhere || tractHighlightFilterWhere) {
+        tractTimeSeriesLayerView.layer.renderer = new UniqueValueRenderer({
+          field: 'GISJOIN',
+          uniqueValueInfos: getSelection(selection, 'Tract').map(([tract, color]) => ({
+            value: `G${tract}`,
+            symbol: {
+              type: 'simple-fill',
+              color: color + '80',
+              outline: {
+                color: color,
+                width: 2,
+              },
+            },
+          })),
+        });
+      } else {
+        tractTimeSeriesLayerView.layer.renderer = originalTractTimeSeriesRenderer;
+      }
+    }
   }
 
   async function handleMapReadyForZCTAs(
@@ -258,8 +331,18 @@
       Array.from(evt.detail.map.allLayers.map((layer) => ({ title: layer.title, id: layer.id })))
     );
 
+    console.log(evt.detail.map.layers.filter((layer) => layer.type === 'group'));
+
     await handleMapReadyForZCTAs(evt);
     await handleMapReadyForTracts(evt);
+
+    const groupLayers = evt.detail.map.layers.filter((layer) => layer.type === 'group');
+    zctaGroup = groupLayers.find((layer) => layer.title.endsWith(' (ZCTAs)')) as
+      | __esri.GroupLayer
+      | undefined;
+    tractGroup = groupLayers.find((layer) => layer.title.endsWith(' (Tracts)')) as
+      | __esri.GroupLayer
+      | undefined;
   }
 </script>
 
@@ -334,12 +417,14 @@
         </calcite-notice>
       </div>
     </calcite-panel>
-    <calcite-panel heading="Compare multiple ZCTAs" height-scale="l" data-panel-id="compare" hidden>
-      {#if zctaTimeSeriesLayerView}
+    <calcite-panel heading="Compare multiple AOIs" height-scale="l" data-panel-id="compare" hidden>
+      {#if zctaTimeSeriesLayerView && tractTimeSeriesLayerView}
         <ComparePanel
+          tractList="{tractList}"
+          tractTimeSeriesLayerView="{tractTimeSeriesLayerView}"
           zctaList="{zctaList}"
           zctaTimeSeriesLayerView="{zctaTimeSeriesLayerView}"
-          bind:zctaSelection="{zctaSelection}"
+          bind:selection="{selection}"
         />
       {:else}
         <calcite-loader active></calcite-loader>

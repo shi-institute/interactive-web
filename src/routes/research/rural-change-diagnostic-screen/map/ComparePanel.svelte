@@ -8,60 +8,130 @@
 
   export let zctaTimeSeriesLayerView: __esri.FeatureLayerView;
   export let zctaList: (string | number)[] = [];
+  export let tractTimeSeriesLayerView: __esri.FeatureLayerView;
+  export let tractList: (string | number)[] = [];
 
   let loading = false;
   let dataErrorMessage = '';
 
   let selectedZCTAs: string[] = [];
+  let selectedTracts: string[] = [];
   function handleComboboxChange(
     evt: Event & { target?: { value: (string | number)[] | (string | number) } }
   ) {
     if (Array.isArray(evt.target.value)) {
-      selectedZCTAs = evt.target.value.map((v) => v.toString());
+      const values = evt.target.value.map((v) => v.toString());
+      selectedZCTAs = values.filter((v) => v.length === 5);
+      selectedTracts = values.filter((v) => v.length !== 5);
     } else if (evt.target.value === '') {
       selectedZCTAs = [];
+      selectedTracts = [];
       return;
     } else {
-      selectedZCTAs = [`${evt.target.value}`];
+      const value = `${evt.target.value}`;
+      if (value.length === 5) {
+        selectedZCTAs = [value];
+        selectedTracts = [];
+      } else {
+        selectedTracts = [value];
+        selectedZCTAs = [];
+      }
     }
   }
 
-  const attrsSchema = z.object({
-    ZCTA5: z.string(),
-    hvalue_quantile: z.number().nullable(),
-    income_quantile: z.number().nullable(),
-    avg_hh_inc: z.number().nullable(),
-    median_house_value: z.number().nullable(),
-    q_diff: z.number().nullable(),
-    Year_two_Converted: z.string(),
-  });
-  let data: z.infer<typeof attrsSchema>[] = [];
-  function handleZCTAsChange(selectedZCTAs: string[]) {
-    if (selectedZCTAs.length === 0) {
+  const zctaAttrsSchema = z
+    .object({
+      ZCTA5: z.string().default(''),
+      hvalue_quantile: z.number().nullable(),
+      income_quantile: z.number().nullable(),
+      avg_hh_inc: z.number().nullable(),
+      median_house_value: z.number().nullable(),
+      q_diff: z.number().nullable(),
+      Year_two_Converted: z.string(),
+    })
+    .transform(({ ZCTA5, ...attrs }) => ({
+      ...attrs,
+      label: `${ZCTA5} (ZCTA)`,
+    }));
+  const tracrAttrsSchema = z
+    .object({
+      GISJOIN: z.string().default(''),
+      quantile__house_value: z.number().nullable(),
+      quantile__income: z.number().nullable(),
+      average_household_income: z.number().nullable(),
+      median_house_value: z.number().nullable(),
+      q_diff: z.number().nullable(),
+      year: z.number(),
+    })
+    .transform(
+      ({
+        GISJOIN,
+        quantile__house_value,
+        quantile__income,
+        year,
+        average_household_income,
+        ...attrs
+      }) => ({
+        ...attrs,
+        hvalue_quantile: quantile__house_value,
+        income_quantile: quantile__income,
+        Year_two_Converted: new Date(year, 0, 1).toISOString(),
+        avg_hh_inc: average_household_income,
+        label: `${GISJOIN.slice(1)} (Tract)`,
+      })
+    );
+  let data: z.infer<typeof zctaAttrsSchema>[] = [];
+  function handleSelectionChange(selectedZCTAs: string[], selectedTracts: string[]) {
+    if (selectedZCTAs.length === 0 && selectedTracts.length === 0) {
       data = [];
       return;
     }
 
     loading = true;
     dataErrorMessage = '';
+    let promises: Promise<typeof data>[] = [];
 
-    zctaTimeSeriesLayerView.layer
-      .queryFeatures({
-        where: selectedZCTAs.map((zcta) => `ZCTA5 = ${zcta}`).join(' OR '),
-        outFields: getZodSchemaFieldsShallow(attrsSchema),
-      })
-      .then((featureSet) => featureSet.features.map((graphic) => ({ ...graphic.attributes })))
-      .then((attrs) => attrsSchema.array().parse(attrs))
-      .then((attrs) => (data = attrs))
-      .catch((error) => {
-        console.error(error.issues || error);
-        dataErrorMessage = 'Error loading data (see console)';
+    if (selectedZCTAs.length > 0) {
+      const zctaData = zctaTimeSeriesLayerView.layer
+        .queryFeatures({
+          where: selectedZCTAs.map((zcta) => `ZCTA5 = ${zcta}`).join(' OR '),
+          outFields: getZodSchemaFieldsShallow(zctaAttrsSchema),
+        })
+        .then((featureSet) => featureSet.features.map((graphic) => ({ ...graphic.attributes })))
+        .then((attrs) => zctaAttrsSchema.array().parse(attrs))
+        .catch((error) => {
+          console.error(error.issues || error);
+          dataErrorMessage = 'Error loading ZCTA data (see console)';
+          return [];
+        });
+      promises.push(zctaData);
+    }
+
+    if (selectedTracts.length > 0) {
+      const tractData = tractTimeSeriesLayerView.layer
+        .queryFeatures({
+          where: selectedTracts.map((tract) => `GISJOIN = 'G${tract}'`).join(' OR '),
+          outFields: getZodSchemaFieldsShallow(tracrAttrsSchema),
+        })
+        .then((featureSet) => featureSet.features.map((graphic) => ({ ...graphic.attributes })))
+        .then((attrs) => tracrAttrsSchema.array().parse(attrs))
+        .catch((error) => {
+          console.error(error.issues || error);
+          dataErrorMessage = 'Error loading ZCTA data (see console)';
+          return [];
+        });
+      promises.push(tractData);
+    }
+
+    Promise.all(promises)
+      .then((results) => {
+        data = results.flat();
       })
       .finally(() => {
         loading = false;
       });
   }
-  $: handleZCTAsChange(selectedZCTAs);
+  $: handleSelectionChange(selectedZCTAs, selectedTracts);
 
   // get the colors for each ZCTA from the plot
   // and expose them paired with their ZCTAs as zctaSelection
@@ -72,10 +142,10 @@
       return { range: Array.from(scale.range), domain: Array.from(scale.domain) };
     }
   })();
-  export let zctaSelection: [string, string][] = [];
+  export let selection: [string, string][] = [];
   let showColorsOnMap = true;
-  $: zctaSelection = (() => {
-    if (selectedZCTAs.length === 0) return [];
+  $: selection = (() => {
+    if (selectedZCTAs.length === 0 && selectedTracts.length === 0) return [];
     if (!plotColorScale) return [];
     if (!showColorsOnMap) return [];
     return plotColorScale.domain.map((zcta, index) => {
@@ -83,11 +153,11 @@
     });
   })();
 
-  $: seriesTidyQuantiles = data.flatMap(({ Year_two_Converted, ZCTA5, ...rest }) => {
+  $: seriesTidyQuantiles = data.flatMap(({ Year_two_Converted, label, ...rest }) => {
     const year = new Date(Year_two_Converted).getUTCFullYear();
     return [
-      { year, type: 'house', data: rest.hvalue_quantile, ZCTA: ZCTA5 },
-      { year, type: 'income', data: rest.income_quantile, ZCTA: ZCTA5 },
+      { year, type: 'house', data: rest.hvalue_quantile, ZCTA: label },
+      { year, type: 'income', data: rest.income_quantile, ZCTA: label },
     ];
   });
 </script>
@@ -95,29 +165,34 @@
 <div id="compare-container">
   <calcite-notice open>
     <div slot="title">Compare</div>
-    <div slot="message">Select ZCTAs to compare their housing value and income quantiles.</div>
+    <div slot="message">
+      Select areas of interest (AOIs) to compare their housing value and income quantiles.
+    </div>
     <calcite-link slot="link" title="my action">Learn more about the quantiles</calcite-link>
   </calcite-notice>
 
   <br />
 
   <calcite-label>
-    ZCTAs to compare
+    AOIs to compare
     <calcite-combobox
       placeholder="Select a field"
       on:calciteComboboxChange="{handleComboboxChange}"
     >
+      {#each tractList as tract}
+        <calcite-combobox-item value="{tract}" text-label="{tract} (Tract)"></calcite-combobox-item>
+      {/each}
       {#each zctaList as zcta}
-        <calcite-combobox-item value="{zcta}" text-label="{zcta}"></calcite-combobox-item>
+        <calcite-combobox-item value="{zcta}" text-label="{zcta} (ZCTA)"></calcite-combobox-item>
       {/each}
     </calcite-combobox>
   </calcite-label>
 
   <calcite-label>
     <span>
-      Show figure colors and selection on the map
+      Show selection on the map
       <br />
-      <i style="opacity: 0.7;">This will hide ZCTAs you have not selected</i>
+      <i style="opacity: 0.7;">This will hide AOIs you have not selected</i>
     </span>
     <div class="switch">
       <span>Off</span>
@@ -155,7 +230,7 @@
             </span>
           `,
           height: 300,
-          color: { legend: true, type: 'ordinal', tickFormat: 'd', scheme: 'category10' },
+          color: { legend: true, scheme: 'category10' },
           x: { type: 'linear', label: 'Year', tickFormat: 'd' },
           y: { type: 'linear', domain: [0, 1], label: 'Quantile', tickFormat: '.0%' },
           marginTop: 30,
