@@ -63,6 +63,10 @@ figcaption {
   font-size: 14px;
   color: #838383;
 }
+figcaption,
+figcaption > * {
+  white-space: break-spaces;
+}
 
 /* legend swatches */
 figure > div[class^='plot-'][class*='-swatches'],
