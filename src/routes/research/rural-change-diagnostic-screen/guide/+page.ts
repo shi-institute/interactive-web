@@ -1,15 +1,22 @@
+import { dev } from '$app/environment';
+import frontmatter from 'front-matter';
 import type { PageLoad } from './$types';
 
 export const load = (async ({ url }) => {
-  const pages = import.meta.glob('./**/*.md');
+  const pages = import.meta.glob('./**/*.svx');
   const docsPageData = Object.entries(pages).map(async ([path]) => {
-    const { html, attributes }: { html: string; attributes: Record<string, unknown> } =
-      await import(`./${path}`.replace('./', ''));
+    console.log(path.replace(url.pathname, ''));
+
+    const attributes = await fetch(
+      (dev ? '/src/routes' : '') + url.pathname + path.replace('./', '/')
+    )
+      .then((res) => res.text())
+      .then((text) => frontmatter(text))
+      .then(({ attributes }) => attributes);
 
     return {
-      html,
       attributes,
-      pathname: path.slice(1).replace('.md', '').replace('/[...rest]', url.pathname),
+      pathname: url.pathname + path.slice(1).replace('/+page.svx', ''),
     };
   });
 
