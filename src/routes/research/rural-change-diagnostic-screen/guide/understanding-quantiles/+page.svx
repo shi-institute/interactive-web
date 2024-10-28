@@ -1,0 +1,52 @@
+---
+title: Understanding quantiles
+---
+
+<script lang="ts">
+  import * as Plot from '@observablehq/plot';
+  import PlotContainer from '$lib/PlotContainer.svelte';
+
+  // generate sample quantile data
+  const data = [1, 1, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8, 9, 10, 10, 10, 10];
+
+</script>
+
+## What is a quantile?
+
+Quantiles are evenly-divided ranges of values from a broader range of data.
+Each quantile has the same width (e.g., 0-10, 10-20, …, 90-100), but each quantile
+may have a different amount of values that fit in the quantile for the given dataset.
+
+<PlotContainer plot={{
+    marks: [
+        Plot.barY(data, { x: d => `${d * 10 - 10}-${d * 10}`, y: 1, fill: "steelBlue" })
+    ],
+    x: { label: "Quantiles" },
+    y: { label: "Count" },
+    height: 150,
+  }}
+  fullWidth
+/>
+
+## The two datasets
+
+We separately compare urban and rural ZCTAs within their respective South Carolina regions:
+Lowcountry, Midlands, Pee Dee, and Upstate. For each region, we calculate weighted ranks
+for the urban ZCTAs and weighted ranks for the rural ZCTAs. We convert these into
+quantiles on a 0-100 scale.
+
+<aside class="note">
+  Quantiles with a range of 0 to 100 are often called <i>percentiles</i>.
+</aside>
+
+We show the difference between the housing value quantile and the income quantile.
+An area of interest that is not gentrifying should have a similar rank/quantile
+for housing value and income. Read more about this at https://doi.org/10.1177/00420980231173846.
+
+<aside class="note">
+  On our web tool, you may see an attribute or setting called <i>threshold</i>.
+  This is the same as the <i>quantile difference</i>.
+</aside>
+
+Our methods can be reviewed in more detail at the
+[quantiles methods](/research/rural-change-diagnostic-screen/guide/understanding-quantiles/methods) page.
