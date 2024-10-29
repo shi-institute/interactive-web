@@ -1,0 +1,48 @@
+---
+title: Comparison of FHFA Data to Local Greenville, SC Sales Data
+---
+<script>
+  import scatter from './scatter.png';
+  import box from './box.png';
+</script>
+# Overview
+The research team obtained Greenville sales data to analyze the extent to which FHFA sales data (derived from the Housing Price Index) aligns with local sales data. Local sales data is available at the parcel level for the study years 2014-2021. The methods are outlined below.
+1. **Extract Arms Length Sales**: The original dataset contained all sales, including commercial sales, mobile home sales, family transfers, and other non-arms-length transactions. In order to analyze sales that represented market transactions, only records that met the following criteria were included:
+    - The SALETYPE attribute = "CASH (LAND AND BUILDING)" OR "CASH AND ASSUMPTION OF MORTGAGE (LAND AND BUILDING WITH CURRENT BALANCE)" OR "CASH AND OTHER CONSIDERATION" OR "CONTRACT SALE."
+    - The SQFEET attribute was greater than 0.
+    - The SALEPRICE attribute was greater than $1,000.
+    - The PROPTYPE attribute was RESIDENTIAL (excluding mobile homes).
+2. **Handle Multiple Sales**: For parcels that sold multiple times in a given year, the median of the sales prices was calculated.
+3. **Join Tabular Data to Spatial Files**: For each year, the tabular sales data for Greenville was joined to the parcel shapefile for each year (2014-2021) based on parcel ID. Parcel shapefiles were not available for every year in the study period. In those cases, the sales data was joined with parcel shapefiles from the nearest, subsequent year. 99.7% of sales were successfully joined to parcel shapefiles for the study period.
+4. **Aggregate Sales Data**: The FHFA data was determined at both the ZCTA and census tract level. In order to compare the Greenville sales data at the same scale, the median sales price for all parcels in a given tract and ZCTA was calculated.
+5. **Comparing FHFA and Local Sales Data**: The FHFA and Greenville sales data were joined based on census tract ID and ZCTA. Because Greenville County only intersects 24 ZCTAs, the number of ZCTAs was insufficient for comparison and was instead made at the census tract level. Greenville County contains 123 census tracts. Scatter and box plots were created to compare the FHFA and Greenville sales data, which are discussed below.
+
+# Results
+The scatter plot below shows the relationship between FHFA and Greenville sales data at the census tract level for 2020. The plot shows a strong positive relationship between the two datasets, with a correlation coefficient of 0.83. The plot is indicative of trends in other years. The mean of the correlation coefficients for the years 2014-2021 is 0.80, with a range of 0.68 to 0.85. 
+
+<!-- ![Comparison of FHFA and Greenville Sales (2020)]({scatter}) -->
+
+<figure>
+  <img src={scatter} alt="Comparison of FHFA and Greenville Sales (2020)" />
+  <figcaption>Comparison of FHFA and Greenville Sales (2020)</figcaption>
+</figure>
+
+The box plot shows the distribution of the FHFA and Greenville sales data for 2020. The calculated sales value from the FHFA (based on the reported Housing Price Index (HPI)) is $192,800 versus $239,900 for Greenville sales. This trend is consistent across study years, with Greenville sales data consistently higher than FHFA data. This difference may be explained by the fact that the process converts the FHFA Housing Price Index (HPI) to sales price baselined on self-reported housing values reported in the 2020 decennial census. The self-reported values may underestimate the true market value of the property.
+
+<figure>
+  <img src={box} alt="Distribution of FHFA and Greenville Sales (2020)" />
+  <figcaption>Distribution of FHFA and Greenville Sales (2020)</figcaption>
+</figure>
+
+<style>
+ figure img {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  figure:has(> img) {
+    text-align: center;
+  }
+</style>
+  
