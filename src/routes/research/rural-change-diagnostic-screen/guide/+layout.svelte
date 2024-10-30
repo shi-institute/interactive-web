@@ -148,4 +148,8 @@
     font-size: 18px;
     margin-bottom: 0;
   }
+
+  article :global(h4) {
+    margin-bottom: 0;
+  }
 </style>
