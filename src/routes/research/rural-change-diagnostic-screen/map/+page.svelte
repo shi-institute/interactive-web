@@ -8,6 +8,8 @@
   import ComparePanel from './ComparePanel.svelte';
   import PopupZCTAs from './PopupZCTAs.svelte';
 
+  export let data;
+
   const ZCTA_TIME_SERIES_LAYER_ID = '1915220f14c-layer-20';
   const ZCTA_LAYER_IDS = [
     '19151a24efa-layer-9', // 2014
@@ -217,6 +219,11 @@
         if (!evt) return '';
         const attrs: Record<string, never> = evt.graphic.attributes || {};
         const div = document.createElement('div');
+
+        const migrationAndServiceWorkerData = data.migrationAndServiceWorkerData.zcta.filter(
+          (zcta) => zcta.ZCTA5 === attrs.ZCTA5 || zcta.ZCTA5 === 'MEDIAN'
+        );
+
         new PopupZCTAs({
           target: div,
           props: {
@@ -238,6 +245,25 @@
               .then((featureSet) =>
                 featureSet.features.map((graphic) => ({ ...graphic.attributes }))
               ),
+            migrationAndServiceWorkerData: (migrationAndServiceWorkerData || []).map(
+              ({
+                migration__different_county_fraction,
+                migration__different_state_fraction,
+                service_worker_fraction,
+                year,
+                ZCTA5,
+              }) => {
+                return {
+                  migration__different_county_fraction:
+                    migration__different_county_fraction || undefined,
+                  migration__different_state_fraction:
+                    migration__different_state_fraction || undefined,
+                  service_worker_fraction: service_worker_fraction || undefined,
+                  year,
+                  id: ZCTA5 === 'MEDIAN' ? 'Median\n(all ZCTAs)' : 'This ZCTA',
+                };
+              }
+            ),
           },
         });
         return div;
@@ -284,7 +310,11 @@
         if (!evt) return '';
         const attrs: Record<string, never> = evt.graphic.attributes || {};
         const div = document.createElement('div');
-        console.log(attrs);
+
+        const migrationAndServiceWorkerData = data.migrationAndServiceWorkerData.tract.filter(
+          (tract) => tract.GISJOIN?.slice(1) == attrs.GEOID_y || tract.GISJOIN === 'MEDIAN'
+        );
+
         new PopupZCTAs({
           target: div,
           props: {
@@ -318,6 +348,25 @@
                     };
                   })
               ),
+            migrationAndServiceWorkerData: (migrationAndServiceWorkerData || []).map(
+              ({
+                migration__different_county_fraction,
+                migration__different_state_fraction,
+                service_worker_fraction,
+                year,
+                GISJOIN,
+              }) => {
+                return {
+                  migration__different_county_fraction:
+                    migration__different_county_fraction || undefined,
+                  migration__different_state_fraction:
+                    migration__different_state_fraction || undefined,
+                  service_worker_fraction: service_worker_fraction || undefined,
+                  year,
+                  id: GISJOIN === 'MEDIAN' ? 'Median\n(all tracts)' : 'This Tract',
+                };
+              }
+            ),
           },
         });
         return div;

@@ -1,8 +1,11 @@
 <script lang="ts">
+  import { colors } from '$lib/colors';
   import PlotContainer from '$lib/PlotContainer.svelte';
   import { adjustForInflation } from '$utils/adjustForInflation';
   import * as Plot from '@observablehq/plot';
+  import * as d3 from 'd3';
   import { format } from 'd3-format';
+  import { html } from 'htl';
 
   format('.2s')(1000); // "1k"
 
@@ -14,6 +17,13 @@
     median_house_value: number;
     q_diff: string;
     Year_two_Converted: string; // ISO date without time
+  }[];
+  export let migrationAndServiceWorkerData: {
+    migration__different_county_fraction: number | undefined;
+    migration__different_state_fraction: number | undefined;
+    service_worker_fraction: number | undefined;
+    year: string;
+    id: string;
   }[];
 
   let showAllData = false;
@@ -66,10 +76,6 @@
 </script>
 
 <h3>Year {year}</h3>
-<p>
-  Custom content can be used to display information in a popup. This can include text, images,
-  charts, and more.
-</p>
 
 <table class="esri-widget__table" summary="List of attributes and values">
   <tbody>
@@ -185,6 +191,139 @@
     }}"
   >
     <h2 slot="popup-before" style="margin: 0;">House value and income over time</h2>
+  </PlotContainer>
+</div>
+
+<h3>Migration from a different county in South Carolina</h3>
+
+<div class="plot-container">
+  <PlotContainer
+    fullWidth
+    enablePopup
+    plot="{{
+      marginLeft: 45,
+      marginTop: 45,
+      marginBottom: 40,
+      color: { legend: true, range: [colors.vibrant.maroon, '#999'], reverse: true },
+      y: { label: 'Percent of population', tickFormat: '.2p' },
+      fx: { label: '' },
+      x: { label: '', reverse: true },
+      width: 300,
+      caption: 'Data: US Census ACS',
+      marks: [
+        Plot.frame({ strokeOpacity: 0.1 }),
+        Plot.barY(migrationAndServiceWorkerData, {
+          fx: 'year',
+          x: 'id',
+          y: 'migration__different_county_fraction',
+          fill: 'id',
+          tip: true,
+        }),
+        Plot.text(migrationAndServiceWorkerData, {
+          fx: 'year',
+          x: 'id',
+          y: 'migration__different_county_fraction',
+          text: (d) => d3.format('.2p')(d.migration__different_county_fraction),
+          dy: 10,
+          fill: 'white',
+          stroke: 'black',
+          strokeOpacity: 0.14,
+        }),
+        Plot.ruleY([0]),
+      ],
+    }}"
+  >
+    <h2 slot="popup-before" style="margin: 0;">
+      Migration from a different county in South Carolina
+    </h2>
+  </PlotContainer>
+</div>
+
+<h3>Migration from outside South Carolina</h3>
+
+<div class="plot-container">
+  <PlotContainer
+    fullWidth
+    enablePopup
+    plot="{{
+      marginLeft: 45,
+      marginTop: 45,
+      marginBottom: 40,
+      color: { legend: true, range: [colors.vibrant.magenta, '#999'], reverse: true },
+      y: { label: 'Percent of population', tickFormat: '.2p' },
+      fx: { label: '' },
+      x: { label: '', reverse: true },
+      width: 300,
+      caption: 'Data: US Census ACS',
+      marks: [
+        Plot.frame({ strokeOpacity: 0.1 }),
+        Plot.barY(migrationAndServiceWorkerData, {
+          fx: 'year',
+          x: 'id',
+          y: 'migration__different_state_fraction',
+          fill: 'id',
+          tip: true,
+        }),
+        Plot.text(migrationAndServiceWorkerData, {
+          fx: 'year',
+          x: 'id',
+          y: 'migration__different_state_fraction',
+          text: (d) => d3.format('.2p')(d.migration__different_state_fraction),
+          dy: 10,
+          fill: 'white',
+          stroke: 'black',
+          strokeOpacity: 0.14,
+        }),
+        Plot.ruleY([0]),
+      ],
+    }}"
+  >
+    <h2 slot="popup-before" style="margin: 0;">Migration from outside South Carolina</h2>
+  </PlotContainer>
+</div>
+
+<h3>Percent of workers who are in the service industry</h3>
+
+<div class="plot-container">
+  <PlotContainer
+    fullWidth
+    enablePopup
+    plot="{{
+      marginLeft: 45,
+      marginTop: 45,
+      marginBottom: 40,
+      color: { legend: true, range: [colors.vibrant.teal, '#999'], reverse: true },
+      y: { label: 'Percent of working population', tickFormat: '.2p' },
+      fx: { label: '' },
+      x: { label: '', reverse: true },
+      width: 300,
+      caption: 'Data: US Census ACS',
+      marks: [
+        Plot.frame({ strokeOpacity: 0.1 }),
+        Plot.barY(migrationAndServiceWorkerData, {
+          fx: 'year',
+          x: 'id',
+          y: 'service_worker_fraction',
+          fill: 'id',
+          tip: true,
+        }),
+        Plot.text(migrationAndServiceWorkerData, {
+          fx: 'year',
+          x: 'id',
+          y: 'service_worker_fraction',
+          text: (d) => d3.format('.2p')(d.service_worker_fraction),
+          dy: 10,
+          fill: 'white',
+          stroke: 'black',
+          strokeOpacity: 0.14,
+        }),
+        Plot.ruleY([0]),
+      ],
+    }}"
+  >
+    <h2 slot="popup-before" style="margin: 0;">
+      Percent of workers who are in the service industry
+    </h2>
   </PlotContainer>
 </div>
 
