@@ -516,4 +516,9 @@
     right: 5%;
     bottom: 20px;
   }
+
+  /* force docked popup to be larger */
+  .web-map :global(.esri-popup--is-docked .esri-popup__main-container) {
+    width: 480px;
+  }
 </style>
