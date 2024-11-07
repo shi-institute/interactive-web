@@ -168,7 +168,9 @@
     <div slot="message">
       Select areas of interest (AOIs) to compare their housing value and income quantiles.
     </div>
-    <calcite-link slot="link" title="my action">Learn more about the quantiles</calcite-link>
+    <calcite-link slot="link" href="guide/understanding-quantiles">
+      Learn more about the quantiles
+    </calcite-link>
   </calcite-notice>
 
   <br />

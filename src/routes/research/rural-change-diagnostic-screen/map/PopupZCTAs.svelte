@@ -112,6 +112,9 @@
   than 50% of the other housing values in the region. Use the next figure with dollar amounts to
   inform your interpretation.
 </p>
+<p>
+  <a href="guide/interpreting-quantile-plots">Read more about the quantiles</a>
+</p>
 <div class="plot-container">
   <PlotContainer
     fullWidth
@@ -196,6 +199,10 @@
 
 <h3>Migration from a different county in South Carolina</h3>
 
+<p>
+  <a href="guide/migration-service">Read about geographic mobility data</a>
+</p>
+
 <div class="plot-container">
   <PlotContainer
     fullWidth
@@ -241,6 +248,10 @@
 
 <h3>Migration from outside South Carolina</h3>
 
+<p>
+  <a href="guide/migration-service">Read about geographic mobility data</a>
+</p>
+
 <div class="plot-container">
   <PlotContainer
     fullWidth
@@ -283,6 +294,10 @@
 </div>
 
 <h3>Percent of workers who are in the service industry</h3>
+
+<p>
+  <a href="guide/migration-service">Read about service worker data</a>
+</p>
 
 <div class="plot-container">
   <PlotContainer

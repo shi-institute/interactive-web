@@ -376,12 +376,6 @@
   }
 
   async function onMapReady(evt: CustomEvent<{ map: __esri.WebMap; view: __esri.MapView }>) {
-    console.log(
-      Array.from(evt.detail.map.allLayers.map((layer) => ({ title: layer.title, id: layer.id })))
-    );
-
-    console.log(evt.detail.map.layers.filter((layer) => layer.type === 'group'));
-
     await handleMapReadyForZCTAs(evt);
     await handleMapReadyForTracts(evt);
 
@@ -447,6 +441,22 @@
   <svelte:fragment slot="sidebar--right-panels">
     <calcite-panel heading="Filter" height-scale="l" data-panel-id="filter" hidden>
       <div id="filter-container">
+        <calcite-notice open>
+          <div slot="title">How do you pick a threshold?</div>
+          <div slot="message">
+            A larger threshold will only show tracts or ZCTAs that are more at risk of redevelopment
+            or gentrification.
+          </div>
+          <calcite-link slot="link" href="guide/understanding-quantiles">
+            Read more about quantiles
+          </calcite-link>
+          <calcite-link slot="link" href="guide/understanding-quantiles">
+            Read more interpretation
+          </calcite-link>
+        </calcite-notice>
+
+        <br />
+
         <calcite-label>
           Threshold
           <calcite-input-number
@@ -458,12 +468,6 @@
             }}"
           ></calcite-input-number>
         </calcite-label>
-
-        <calcite-notice open>
-          <div slot="title">How do you pick a threshold?</div>
-          <div slot="message">Explain what the quantiles mean and give advice</div>
-          <calcite-link slot="link" title="my action">Read more</calcite-link>
-        </calcite-notice>
       </div>
     </calcite-panel>
     <calcite-panel heading="Compare multiple AOIs" height-scale="l" data-panel-id="compare" hidden>
