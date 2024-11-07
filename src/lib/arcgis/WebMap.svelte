@@ -313,8 +313,6 @@
       esriUI.classList.add('calcite-mode-auto');
     }
   });
-
-  $: console.log($options);
 </script>
 
 <svelte:head>
@@ -327,6 +325,7 @@
 
 {#if shell}
   <calcite-shell class="calcite-mode-auto">
+
     {#if shell.header}
       <calcite-navigation slot="header">
         <calcite-navigation-logo
@@ -408,12 +407,6 @@
                 },
               }) || 'No description available'}
             </div>
-            <calcite-label layout="inline">
-              <b>Rating:</b>
-              <calcite-rating id="item-rating" read-only>
-                {itemRating}
-              </calcite-rating>
-            </calcite-label>
             <calcite-button
               href="{itemPageUrl}"
               target="_blank"
