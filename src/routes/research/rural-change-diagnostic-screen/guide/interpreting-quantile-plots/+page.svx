@@ -56,13 +56,13 @@ and the income quantile and (2) the quantiles are low.
 
 In this example, the study area is in the lowest quantile for both housing value and income compared to other study areas in the region.
 
-<QuantilesPlot data={data.archetypes.notGentrified} maxWidth={400} height={200} disableTip />
+<QuantilesPlot data={data.archetypes.notGentrified} maxWidth={400} height={200} disableTip useGenericTime />
 
 ### Unclear status (higher income area)
 
 In this case, the housing and income values are both high. This could be a case where (1) there was a gap in the past (prior to 2014) but it has closed (gentrified), or (2) the area has been consistently high in both housing value and income.
 
-<QuantilesPlot data={data.archetypes.gentrified} maxWidth={400} height={200} disableTip />
+<QuantilesPlot data={data.archetypes.gentrified} maxWidth={400} height={200} disableTip useGenericTime />
 
 ### Recently gentrified
 
@@ -70,13 +70,13 @@ The area is recently gentrified when the gap has closed and th quantiles are bot
 When an area has recently gentrified, the income quantile may overshoot the housing value
 quantile for a few years.
 
-<QuantilesPlot data={data.archetypes.gentrifiedRecent} maxWidth={400} height={200} disableTip />
+<QuantilesPlot data={data.archetypes.gentrifiedRecent} maxWidth={400} height={200} disableTip useGenericTime />
 
 ### Persistent gap
 
 When the housing value quantile is higher than the income quantile, this indicates that housing costs are outpacing income compared to other areas in the region. If future incomes rise to meet housing values, this may indicate that the area is gentrifying. However, the future trajectory is unknown. If the area provides natural amenites (e.g., lakefront property, access to national state parks, etc.), it may indicate the existence of second homes owned by residents outside of the study area. For example, incomes are derived from a household's primary residence (e.g., NY), whereas the housing value indicates the value of the second home in the study area (e.g., lakefront property in SC). It is possible that the gap closes more slowly in rural areas, compared to urban areas. However, future research is needed to determine the rate of change in rural communities. 
 
-<QuantilesPlot data={data.archetypes.transition} maxWidth={400} height={200} disableTip />
+<QuantilesPlot data={data.archetypes.transition} maxWidth={400} height={200} disableTip useGenericTime />
 
 ### Area to watch
 
@@ -88,7 +88,7 @@ of housing value increase. Because of this, these are areas to watch in the more
 trend continues long enough, the area may become a desirable location for new residents due to the
 relative affordability. The declining value of housing may indicate the market is signaling that the area is becoming less desirable for some reason compared to other areas in the region. Reviewing graphs of actual dollar values (median house value and average household income) may provide additional insights. A deeper, local dive may be needed to understand detailed underlying causes for this quantile decrease.
 
-<QuantilesPlot data={data.archetypes.slowerHousingValueIncrease} maxWidth={400} height={200} disableTip />
+<QuantilesPlot data={data.archetypes.slowerHousingValueIncrease} maxWidth={400} height={200} disableTip useGenericTime />
 
 ## Examples
 

@@ -6,6 +6,7 @@
   export let maxWidth: number = 0;
   export let disableTip: boolean = false;
   export let height = 300;
+  export let useGenericTime = false
 </script>
 
 <div class="plot-container" style="--maxWidth: {maxWidth ? `${maxWidth}px` : '100%'};">
@@ -15,11 +16,11 @@
     plot="{{
       height,
       color: { legend: true },
-      x: { type: 'linear', label: 'Year', tickFormat: 'd' },
+      x: { type: 'linear', label: useGenericTime ? 'Time' : 'Year', tickFormat: 'd', ticks: useGenericTime ? [] : undefined },
       y: { type: 'linear', domain: [0, 1], label: 'Quantile', tickFormat: '.0%' },
       marginTop: 30,
       marginRight: 14,
-      marginBottom: 40,
+      marginBottom: useGenericTime ? 10 : 40,
       marks: [
         Plot.lineY(data, {
           x: 'year',

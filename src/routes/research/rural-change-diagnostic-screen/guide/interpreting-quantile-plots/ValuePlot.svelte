@@ -6,6 +6,7 @@
   export let maxWidth: number = 0;
   export let disableTip: boolean = false;
   export let height = 300;
+  export let useGenericTime = false
 
   let maxUSD = data.reduce((acc, { data }) => Math.max(acc, data), 0);
 </script>
@@ -17,7 +18,7 @@
     plot="{{
       height,
       color: { legend: true },
-      x: { type: 'linear', label: 'Year', tickFormat: 'd' },
+      x: { type: 'linear', label: useGenericTime ? 'Time' : 'Year', tickFormat: 'd', ticks: useGenericTime ? [] : undefined },
       y: {
         type: 'linear',
         label: `US Dollars (inflation-adjusted to 2020)`,
@@ -26,7 +27,7 @@
       },
       marginTop: 30,
       marginRight: 14,
-      marginBottom: 40,
+      marginBottom: useGenericTime ? 10 : 40,
       marginLeft: 40,
       marks: [
         Plot.lineY(data, {
