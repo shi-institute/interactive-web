@@ -63,8 +63,11 @@ figcaption {
   font-size: 14px;
   color: #838383;
 }
-figcaption,
-figcaption > * {
+figcaption:not(:has(> span)),
+figcaption > span {
+  white-space: pre-line;
+}
+figcaption > span > * {
   white-space: break-spaces;
 }
 

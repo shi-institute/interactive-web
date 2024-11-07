@@ -3,46 +3,106 @@ title: Data for additional context (parks, geographic mobility, and service indu
 short_title: Data for additional context
 ---
 
-<script>
-  import service from './service.png';
-  import mobility from './mobility.png';
+<script lang="ts">
+  import MigrationServicePlot from './MigrationServicePlot.svelte';
 </script>
 
-# Overview
+## Overview
 
-The pop-ups and map layers in the interactive screening tool provide additional data to help contextualize rural change.
+The pop-ups and map layers in the interactive screening tool provide additional
+data to help contextualize rural change.
 
-- **Parks:** The parks layer can be toggled off and on using the layers pane in the diagnostic screening tool to show local, state, and national parks.  The data is provided by [ESRI using TomTom data](https://www.arcgis.com/home/item.html?id=e49e181ac82c46edac3ae601ebb3ef2d) as its source.
+- **Parks:** The parks layer can be toggled off and on using the layers pane
+in the diagnostic screening toolto show local, state, and national parks.
+The data is provided by
+[ESRI using TomTom data](https://www.arcgis.com/home/item.html?id=e49e181ac82c46edac3ae601ebb3ef2d)
+as its source.
 
-- **Service Sector Jobs:** When clicking on an area of interest (ZCTA or census tract), the pop-up will include bar graphs that show the percentage of employees working in the arts, entertainment, recreation, accommodation, and food services sector. This data is shown for two time periods (2013-2017 and 2018-2022) based on data from the Amercian Community Survey 5-year estimates.
+- **Service Sector Jobs:** When clicking on an area of interest (ZCTA or census
+tract), the pop-up will include bar graphs that show the percentage of employees
+working in the arts, entertainment, recreation, accommodation, and food services
+sector. This data is shown for two time periods (2013-2017 and 2018-2022) based
+on data from the Amercian Community Survey 5-year estimates.
 
-- **Geographic Mobility:** Pop-ups also include bar graphs that show the percentage of residents in the study area who moved from a different state or a different county within South Carolina. This data is shown for two different time periods (2013-2017 and 2018-2022) based on data from the Amercian Community Survey 5-year estimates.
+- **Geographic Mobility:** Pop-ups also include bar graphs that show the percentage
+of residents in the study area who moved from a different state or a different county
+within South Carolina. This data is shown for two different time periods (2013-2017
+and 2018-2022) based on data from the Amercian Community Survey 5-year estimates.
 
-# Why is this information important?
+## Why is this information important?
 
-- **Parks:** Natural amenties, such as parks, can act as a draw for potential in-movers, increasing the demand for housing and commercial development. This market pressure can drive up housing prices. Wealthier residents who have the means to move and afford more expensive housing, can perpetuate this cycle of upward pressure. Rural character, coupled with access to parks, can be particularly atrractive to retirees as well as higher-income earners who may have the flexibility to work remotely (Nelson et al., 2010). A [report from the National Institute for Transportation and Communities](https://extension.usu.edu/gnar/research/NITC-RR-1475-Rural_Gentrification_and_the_Spillover_Effect.pdf) notes that "COVID-19 has expedited amenity migration and resulted in the 'Zoom Town' phenomenon of remote workers relocating from high-income urban areas to rural towns and cities." The proximity of parks and other recreational opportunities may be an important factor in areas undergoing development pressure in rural areas.
+- **Parks:** Natural amenties, such as parks, can act as a draw for potential
+in-movers, increasing the demand for housing and commercial development.
+This market pressure can drive up housing prices. Wealthier residents who
+have the means to move and afford more expensive housing, can perpetuate
+this cycle of upward pressure. Rural character, coupled with access to parks,
+can be particularly atrractive to retirees as well as higher-income earners
+who may have the flexibility to work remotely (Nelson et al., 2010). A
+[report from the National Institute for Transportation and Communities](https://extension.usu.edu/gnar/research/NITC-RR-1475-Rural_Gentrification_and_the_Spillover_Effect.pdf)
+notes that "COVID-19 has expedited amenity migration and resulted in the 'Zoom Town'
+phenomenon of remote workers relocating from high-income urban areas to rural town 
+and cities." The proximity of parks and other recreational opportunities may be an
+important factor in areas undergoing development pressure in rural areas.
 
-- **Service Sector Jobs:** As wealthier in-movers arrive in rural areas, the demand for low-wage service workers may increase to support the shifting local economy (Sherman, 2023). The percentage of residents working in the service sector, or shifts in this sector, can be indicative of rural change that includes upward pressure on housing prices and displacement of long-term residents. The bar graph below shows the percentage of workers in the service industry for ZCTA 29001 in South Carolina for two time periods (2013-2017 and 2018-2022), compared to the state median of all the ZCTAs in South Carolina. In this case, the percentage of service workers rose from 3.5% to 6.9% between the two different time periods, compared with a state median of 5.0% for both time periods. It is important to note that the census indicates where these service workers reside. A drop in percentage does not necessarily mean that the demand for service workers has decreased in a particular ZCTA. The drop could also indicate that service workers can no longer afford housing in the ZCTA and reside in nearby ZCTAs. Therefore it is important to consider the broader context of the region, including changes in nearby ZCTAs (and local context), when interpreting these data.
+- **Service Sector Jobs:** As wealthier in-movers arrive in rural areas, the
+demand for low-wage service workers may increase to support the shifting local
+economy (Sherman, 2023). The percentage of residents working in the service
+sector, or shifts in this sector, can be indicative of rural change that includes
+upward pressure on housing prices and displacement of long-term residents.
+The bar graph below shows the percentage of workers in the service industry
+for ZCTA 29001 in South Carolina for two time periods (2013-2017 and 2018-2022),
+compared to the state median of all the ZCTAs in South Carolina. In this case,
+the percentage of service workers rose from 3.5% to 6.9% between the two
+different time periods, compared with a state median of 5.0% for both time
+periods. It is important to note that the census indicates where these service
+workers reside. A drop in percentage does not necessarily mean that the demand
+for service workers has decreased in a particular ZCTA. The drop could also
+indicate that service workers can no longer afford housing in the ZCTA and
+reside in nearby ZCTAs. Therefore it is important to consider the broader
+context of the region, including changes in nearby ZCTAs (and local context),
+when interpreting these data.
 
-<figure>
-  <img src={service} alt="Percent of workers in the service industry (29001)" />
-  <figcaption>Percent of workers in the service industry (29001)</figcaption>
-</figure>
+<MigrationServicePlot
+  mode="serviceWorkers"
+  caption="Percent of workers in the service industry (ZCTA 29001). "
+/>
 
-- **Geographic Mobility:** The percentage of residents who have moved from a different state or county can also be indicative of rural change and development pressure (Nelson et al., 2010). The bar graph below shows the percentage of residents who moved to ZCTA 29001 from states other than South Carolina for two different time periods (2013-2017 and 2018-2022), compared to the state median of all the ZCTAs in South Carolina. In this case, the percentage of in-movers from out of state for ZCTA 29001 was 4.4% during the 2013-2017 time period. This was significantly higher than the median for all the ZCTAs in the state (1.6%) during the same period. This percentage dropped to 0.41% during the 2018-2022 time period and was lower than the state median of 1.8%. It's *possible* that an influx of out-of-state residents was partly responsible for the subsequent increase in demand for more service workers in the ZCTA. However, this is by no means conclusive. It should be noted that the 29001 ZCTA did not meet the threshold (set at 10%) for a divergence in quantiles of housing value and income, which is used as a signal for rural development pressure in this study. Other dynamics may be at play in this case.
+- **Geographic Mobility:** The percentage of residents who have moved from a
+different state or county can also be indicative of rural change and development
+pressure (Nelson et al., 2010). The bar graph below shows the percentage of
+residents who moved to ZCTA 29001 from states other than South Carolina for
+two different time periods (2013-2017 and 2018-2022), compared to the state
+median of all the ZCTAs in South Carolina. In this case, the percentage of
+in-movers from out of state for ZCTA 29001 was 4.4% during the 2013-2017 time
+period. This was significantly higher than the median for all the ZCTAs in the
+state (1.6%) during the same period. This percentage dropped to 0.41% during
+the 2018-2022 time period and was lower than the state median of 1.8%. It's
+*possible* that an influx of out-of-state residents was partly responsible
+for the subsequent increase in demand for more service workers in the ZCTA.
+However, this is by no means conclusive. It should be noted that the 29001
+ZCTA did not meet the threshold (set at 10%) for a divergence in quantiles
+of housing value and income, which is used as a signal for rural development
+pressure in this study. Other dynamics may be at play in this case.
 
-<figure>
-  <img src={mobility} alt="Percent moving from outside the state to ZCTA 29001 in the previous year" />
-  <figcaption>Percent moving from outside the state to ZCTA 29001 in the previous year</figcaption>
-</figure><br/>
+<MigrationServicePlot
+  mode="migrationDiffCounty"
+  caption="Percent moving from outside the state to ZCTA 29001 in the previous year. "
+/>
+<br />
 
-In isolation, these indicators may not conclusively signal rural gentrification or development pressure. However, when considered in conjunction with the divergence of housing value and income quantiles (as well as local context), they can provide a more nuanced understanding of the dynamics at play in rural areas.
+In isolation, these indicators may not conclusively signal rural gentrification
+or development pressure. However, when considered in conjunction with the
+divergence of housing value and income quantiles (as well as local context),
+they can provide a more nuanced understanding of the dynamics at play in rural
+areas.
 
-# References
+## References
 
-Nelson, P. B., Oberg, A., & Nelson, L. (2010). Rural gentrification and linked migration in the United States. *Journal of rural studies*, 26(4), 343-352.
+Nelson, P. B., Oberg, A., & Nelson, L. (2010). Rural gentrification and linked
+migration in the United States. *Journal of rural studies*, 26(4), 343-352.
 
-Sherman, J. (2023). “Please don't take this”: Rural gentrification, symbolic capital, and housing insecurity. *Social Problems*, 70(2), 491-510.
+Sherman, J. (2023). “Please don't take this”: Rural gentrification, symbolic capital,
+and housing insecurity. *Social Problems*, 70(2), 491-510.
 
 <style>
  figure img {
