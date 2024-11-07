@@ -24,7 +24,7 @@ export const load = (async ({ url }) => {
         }
 
         return {
-          attributes: value.metadata,
+          attributes: value.metadata as Record<string, unknown>,
           pathname: pathname + path.slice(1).replace('/+page.svx', ''),
         };
       })

@@ -25,9 +25,11 @@
         </a>
       </li>
       {#each data.docsPageData as { pathname, attributes }}
-        {#if hasKey(attributes, 'title')}
+        {#if attributes.title || attributes.short_title}
           <li>
-            <a href="{pathname}"><span class="title">{attributes.title}</span></a>
+            <a href="{pathname}">
+              <span class="title">{attributes.short_title || attributes.title}</span>
+            </a>
           </li>
         {/if}
       {/each}

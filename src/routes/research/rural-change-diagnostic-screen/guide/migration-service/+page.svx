@@ -1,5 +1,6 @@
 ---
 title: Data for additional context (parks, geographic mobility, and service industry employment)
+short_title: Data for additional context
 ---
 
 <script>
