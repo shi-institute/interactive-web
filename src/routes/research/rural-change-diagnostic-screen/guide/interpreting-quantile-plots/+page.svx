@@ -134,6 +134,12 @@ that the quantiles are low indicate that it has likely not gentrified.
     display: flex;
     gap: 1rem;
   }
+  .pre-list {
+    margin-bottom: 0;
+  }
+  .pre-list + ol {
+    margin-top: 0;
+  }
 </style>
 
  ### Unclear status (higher income area)
@@ -153,7 +159,7 @@ However, data prior to 2014 would be needed to confirm gentrification status.
   <ValuesPlot data={data.examples[29676].values} height={200} />
 </div>
 
-### Persistent gap: high housing value quantile, low income quantile
+### Persistent gap: higher housing value quantile, low income quantile
 
 This example shows ZCTA 29527, which is located inland from Myrtle Beach
 and to the east of Little Pee Dee River. In this ZCTA, the housing value
@@ -161,12 +167,18 @@ quantile remains consistently higher than the income quantile. This
 indicates that the cost of owning a home in this ZCTA does not match the
 average income in this area.
 
-This ZCTA is in a transition period where it is preparing to gentrify.
-The cost of housing in ZTCA 29627 has already increased (and continues
-to increase) in anticipation of the gentrification, but incomes have
-remained flat. In the long-term, we would expect the income quantile to
-increase as gentrification occurs, with gentrification completing as the
-income quantile meets to the housing value quantile.
+<p class="pre-list">There are two possibilities for what this means:</p>
+
+1. This ZCTA is in a transition period where it is preparing to gentrify.
+   The cost of housing in ZTCA 29627 has already increased (and continues
+   to increase) in anticipation of the gentrification, but incomes have
+   remained flat. In the long-term, we would expect the income quantile to
+   increase as gentrification occurs, with gentrification completing as the
+   income quantile meets to the housing value quantile.
+2. In this ZCTA, there is a high share of homeowners who primarily live in
+   a different area. They are from higher-income areas and can afford the
+   higher house prices. Their incomes do not contribute to the income data
+   for the ZCTA because their tax filing address is different.
 
 <div class="dual-column">
   <QuantilesPlot data={data.examples[29527].quantiles} height={200} />
