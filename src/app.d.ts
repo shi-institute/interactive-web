@@ -1,9 +1,10 @@
 import type { Session } from 'svelte-kit-cookie-session';
+import type { scopePasswords } from './passwords';
 
 type SessionData = {
-  authenticated: boolean;
-  protectedPass: string;
   counter: number;
+  scopeGuesses: Record<keyof typeof scopePasswords, string>;
+  authScopes: Record<keyof typeof scopePasswords, boolean>;
 };
 
 // See https://kit.svelte.dev/docs/types#app

@@ -1,13 +1,18 @@
 import { PRIVATE_DATA_REPO_ACCESS_TOKEN } from '$env/static/private';
-import { redirect } from '@sveltejs/kit';
+import { _ensureAuthentication } from '../authenticate/+page.server';
 import type { PageServerLoad } from './$types';
 import { toCleanData } from './toCleanData';
 
 export const load = (async ({ fetch, parent, url }) => {
   const { session } = await parent();
 
-  if (session.authenticated !== true) {
-    throw redirect(302, `/basic-login?from=${encodeURIComponent(url.href)}`);
+  if (session.authScopes.susSurvey2024 !== true) {
+    _ensureAuthentication({
+      session,
+      url,
+      scope: 'sus_survey_2024',
+      appName: '2024 Sustainability Survey Results',
+    });
   }
 
   const surveyData = fetch(

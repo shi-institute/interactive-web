@@ -1,17 +1,17 @@
-import { PROTECTED_PAGE_PASSWORD } from '$env/static/private';
-import type { LayoutServerLoad } from './$types';
-
 import 'groupby-polyfill/lib/polyfill.js';
+import type { LayoutServerLoad } from './$types';
+import { _calculateAuthScopes } from './research/authenticate/+page.server';
 
 export const load = (async ({ locals, url }) => {
-  // handle authentication
-  const { counter = 0, protectedPass = '' } = locals.session.data;
-  const authenticated = protectedPass === PROTECTED_PAGE_PASSWORD;
+  const { counter = 0 } = locals.session.data;
+
+  // an object of scopes and whether they are authenticated
+  const authScopes = _calculateAuthScopes(locals);
 
   await locals.session.set({
     ...locals.session.data,
     counter: counter + 1,
-    authenticated: authenticated,
+    authScopes,
   });
 
   return { session: locals.session.data, isEmbedded: url.searchParams.get('embedded') === '1' };
