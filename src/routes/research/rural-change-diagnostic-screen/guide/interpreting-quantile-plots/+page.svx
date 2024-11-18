@@ -1,0 +1,210 @@
+---
+title: Interpreting quantile plots
+---
+
+<script lang="ts">
+  import QuantilesPlot from './QuantilePlot.svelte';
+  import ValuesPlot from './ValuePlot.svelte';
+
+  export let data;
+</script>
+
+## An indicator of gentrification
+
+The dynamic between the housing value quantile and the income quantile is considered
+an early indicator of gentrification. Because housing values are
+often set in anticipation of the future, they are a leading indicator of future income
+increases due to gentrification (Bunten et al. 2023).
+
+Gentrification is commonly defined in the urban context as the situation where poorer
+urban areas change character and become more expensive as wealthier people move in
+and attract new business, housing, and development.
+During this process, the previous inhabitants of the neighborhood may be displaced
+because they can no longer afford to live there.
+
+In the rural context, gentrification looks different.
+In many cases, it will present itself as widescale development of new subdivisions,
+roads, factories, and other new structures that replace what was
+previously agricultural or forestry land.
+
+## Dual-quantile time series plots
+
+In the dual-quantile time series plots, we show the housing value quantile and the income quantile.
+A gap where the housing value quantile is greater than the income quantile indicates gentrification.
+-	If the gap is small, there is little to no gentrification in process.
+-	If the gap is recently opened, gentrification is in the early stages.
+-	If the gap is closing, gentrification is in the late stages.
+
+<aside class="note">
+  Quantiles are not the same as dollar amounts.
+  They are a way to compare values within regions of the state. They are essentially grouped rankings.
+  For example, a housing value quantile of 0.5 means that the housing value is higher than
+  50% of the other housing values in the region. If the income quantile is 0.8,
+  the income is higher than 80% of the other incomes in the region.<br/><br/>
+
+  Our team defined regions based on traditional divisions in South Carolina,
+  including the Upstate, Midlands, Pee Dee, and Lowcountry. The regions are
+  grouped based on similarities in geography, economy, and culture.
+  Study areas (ZCTAs and census tracts) were assigned to and compared
+  within these regions, as well as their urban and rural status according
+  to their relationship to urban areas defined by the U.S. Census Bureau.
+  
+</aside>
+
+## Archetypes
+
+We have identified five different quantile archetypes. Read below to understand what each archetype means.
+
+### Not gentrified
+
+The area is not gentrified when (1) there is no gap between the housing value quantile
+and the income quantile and (2) the quantiles are low.
+
+In this example, the study area is in the lowest quantile for both housing value and
+income compared to other study areas in the region.
+
+<QuantilesPlot data={data.archetypes.notGentrified} maxWidth={400} height={200} disableTip useGenericTime />
+
+### Unclear status (higher income area)
+
+In this case, the housing and income values are both high. This could be a case where
+(1) there was a gap in the past (prior to 2014) but it has closed (gentrified), or
+(2) the area has been consistently high in both housing value and income.
+
+<QuantilesPlot data={data.archetypes.gentrified} maxWidth={400} height={200} disableTip useGenericTime />
+
+### Recently gentrified
+
+The area is recently gentrified when the gap has closed and th quantiles are both high.
+When an area has recently gentrified, the income quantile may overshoot the housing value
+quantile for a few years.
+
+<QuantilesPlot data={data.archetypes.gentrifiedRecent} maxWidth={400} height={200} disableTip useGenericTime />
+
+### Persistent gap
+
+When the housing value quantile is higher than the income quantile, this indicates that housing
+costs are outpacing income compared to other areas in the region. If future incomes rise to meet
+housing values, this may indicate that the area is gentrifying. However, the future trajectory
+is unknown. If the area provides natural amenites (e.g., lakefront property, access to national
+state parks, etc.), it may indicate the existence of second homes owned by residents outside
+of the study area. For example, incomes are derived from a household's primary residence
+(e.g., NY), whereas the housing value indicates the value of the second home in the study
+area (e.g., lakefront property in SC). It is possible that the gap closes more slowly in
+rural areas, compared to urban areas. However, future research is needed to determine the
+rate of change in rural communities. 
+
+<QuantilesPlot data={data.archetypes.transition} maxWidth={400} height={200} disableTip useGenericTime />
+
+### Area to watch
+
+Due to the nationwide housing shortage, many areas are experiencing rapid increases in housing value.
+If all house values increased at the same rate across the region, there would be no visible change in
+the housing value quantiles. However, some areas do not see the same rate of increase in housing value.
+These areas show a decrease in the housing value quantile because they are experiencing lower rates
+of housing value increase. Because of this, these are areas to watch in the more distant future. If the
+trend continues long enough, the area may become a desirable location for new residents due to the
+relative affordability. The declining value of housing may indicate the market is signaling that the
+area is becoming less desirable for some reason compared to other areas in the region. Reviewing graphs
+of actual dollar values (median house value and average household income) may provide additional insights.
+A deeper, local dive may be needed to understand detailed underlying causes for this quantile decrease.
+
+<QuantilesPlot data={data.archetypes.slowerHousingValueIncrease} maxWidth={400} height={200} disableTip useGenericTime />
+
+## Examples
+
+### Not gentrified
+
+When the quantiles are both low (left graph), it indicates an area that has lower housing values
+and lower average income in comparison to other areas in the same region. The graph on
+the right shows the values of the incomes and housing in the area, rather than the rank.
+The cost of housing aligns well with the lower income for the area.
+ZCTA 29325, located in Laurens County and containing Clinton, has persistently low
+housing value and income quantiles. The lack of a gap in the housing value quantile
+and the income quantile indicates that this ZCTA is not gentrifying, and the fact
+that the quantiles are low indicate that it has likely not gentrified.
+
+<div class="dual-column">
+  <QuantilesPlot data={data.examples[29325].quantiles} height={200} />
+  <ValuesPlot data={data.examples[29325].values} height={200} />
+</div>
+
+<style>
+  .dual-column {
+    display: flex;
+    gap: 1rem;
+  }
+  .pre-list {
+    margin-bottom: 0;
+  }
+  .pre-list + ol {
+    margin-top: 0;
+  }
+</style>
+
+ ### Unclear status (higher income area)
+
+When the quantiles are both high, it indicates an area that has higher housing
+values and higher income. This is a more expensive area, but the average income
+still aligns well with the cost of the housing.
+
+This example is ZCTA 29676. Housing values are expensive for South Carolina,
+and the average income for residents of ZCTA 29676 is near twice the statewide
+median income. It is possible that the area showed a gap prior to the study period
+and that incomes  subsequently overshot housing (a characteristic of later gentrification).
+However, data prior to 2014 would be needed to confirm gentrification status. 
+
+<div class="dual-column">
+  <QuantilesPlot data={data.examples[29676].quantiles} height={200} />
+  <ValuesPlot data={data.examples[29676].values} height={200} />
+</div>
+
+### Persistent gap: higher housing value quantile, low income quantile
+
+This example shows ZCTA 29527, which is located inland from Myrtle Beach
+and to the east of Little Pee Dee River. In this ZCTA, the housing value
+quantile remains consistently higher than the income quantile. This
+indicates that the cost of owning a home in this ZCTA does not match the
+average income in this area.
+
+<p class="pre-list">There are two possibilities for what this means:</p>
+
+1. This ZCTA is in a transition period where it is preparing to gentrify.
+   The cost of housing in ZTCA 29627 has already increased (and continues
+   to increase) in anticipation of the gentrification, but incomes have
+   remained flat. In the long-term, we would expect the income quantile to
+   increase as gentrification occurs, with gentrification completing as the
+   income quantile meets to the housing value quantile.
+2. In this ZCTA, there is a high share of homeowners who primarily live in
+   a different area. They are from higher-income areas and can afford the
+   higher house prices. Their incomes do not contribute to the income data
+   for the ZCTA because their tax filing address is different.
+
+<div class="dual-column">
+  <QuantilesPlot data={data.examples[29527].quantiles} height={200} />
+  <ValuesPlot data={data.examples[29527].values} height={200} />
+</div>
+
+### House quantile decrease
+
+This example shows ZCTA 29541, which is directly south of Florence.
+The housing value quantile decreases over time while the income quantile
+remains consistent. This may make you think that housing values decreased,
+but the figure showing the dollar amounts reveals that this is not the case.
+Instead, we see that housing values and incomes both remain steady.
+
+The reason the housing value quantile decreased is because most ZCTAs in
+the region saw an increase in housing value, but ZCTA 29541 did not.
+Relative to the rest of the region, this ZCTA now has some of the most
+affordable housing.
+
+<div class="dual-column">
+  <QuantilesPlot data={data.examples[29541].quantiles} height={200} />
+  <ValuesPlot data={data.examples[29541].values} height={200} />
+</div>
+
+## References
+
+Bunten, devin michelle, Preis, B., & Aron-Dine, S. (2024).
+Re-measuring gentrification. Urban Studies, 61(1), 20-39.
+https://doi.org/10.1177/00420980231173846
