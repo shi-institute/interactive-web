@@ -10,28 +10,28 @@
 
   export let data;
 
-  const ZCTA_TIME_SERIES_LAYER_ID = '1915220f14c-layer-20';
+  const ZCTA_TIME_SERIES_LAYER_ID = 'zcta_time_series';
   const ZCTA_LAYER_IDS = [
-    '19151a24efa-layer-9', // 2014
-    '19151a25b19-layer-10', // 2015
-    '19151a260b7-layer-11', // 2016
-    '19151a26574-layer-12', // 2017
-    '19151a26979-layer-13', // 2018
-    '19151a27a36-layer-14', // 2019
-    '191527c4adf-layer-16', // 2020
-    '1914c956a53-layer-8', // 2021
+    'zcta_2014',
+    'zcta_2015',
+    'zcta_2016',
+    'zcta_2017',
+    'zcta_2018',
+    'zcta_2019',
+    'zcta_2020',
+    'zcta_2021',
   ];
 
-  const TRACT_TIME_SERIES_LAYER_ID = '19201440858-layer-18';
+  const TRACT_TIME_SERIES_LAYER_ID = 'tract_time_series';
   const TRACT_LAYER_IDS = [
-    '1920144085a-layer-19', // 2021_rural
-    '1920144085b-layer-20', // 2020_rural
-    '1920144085d-layer-21', // 2019_rural
-    '1920144085e-layer-22', // 2018_rural
-    '19201440860-layer-23', // 2017_rural
-    '19201440861-layer-24', // 2016_rural
-    '19201440862-layer-25', // 2015_rural
-    '19201440864-layer-26', // 2014_rural
+    'tract_2021',
+    'tract_2020',
+    'tract_2019',
+    'tract_2018',
+    'tract_2017',
+    'tract_2016',
+    'tract_2015',
+    'tract_2014',
   ];
 
   let quantileDiffAtLeast = 10;
@@ -56,13 +56,13 @@
   $: zctaHighlightFilterWhere =
     $sageDSTOptionsStore.activeWidget.right === 'compare' && selection.length > 0
       ? getSelection(selection, 'ZCTA')
-          .map(([zcta]) => `ZCTA5 = ${zcta}`)
+          .map(([zcta]) => `zcta5 = '${zcta}'`)
           .join(' OR ')
       : '';
   $: tractHighlightFilterWhere =
     $sageDSTOptionsStore.activeWidget.right === 'compare' && selection.length > 0
       ? getSelection(selection, 'Tract')
-          .map(([tract]) => `GISJOIN = 'G${tract}'`)
+          .map(([tract]) => `gisjoin = 'G${tract}'`)
           .join(' OR ')
       : '';
 
@@ -105,17 +105,17 @@
     zctaTimeSeriesLayerView.layer
       .queryFeatures({
         where: quantileFilterWhere,
-        outFields: ['ZCTA5'],
+        outFields: ['zcta5'],
         returnGeometry: false,
       })
-      .then((featureSet) => featureSet.features.map((graphic) => graphic.attributes.ZCTA5))
+      .then((featureSet) => featureSet.features.map((graphic) => graphic.attributes.zcta5))
       .then((data) => (zctaList = Array.from(new Set(data))));
 
     // if there is a comparison filter, highlight the selected ZCTAs
     if (originalZctaTimeSeriesRenderer) {
       if (zctaHighlightFilterWhere || tractHighlightFilterWhere) {
         zctaTimeSeriesLayerView.layer.renderer = new UniqueValueRenderer({
-          field: 'ZCTA5',
+          field: 'zcta5',
           uniqueValueInfos: getSelection(selection, 'ZCTA').map(([zcta, color]) => ({
             value: zcta,
             symbol: {
@@ -150,11 +150,11 @@
     tractTimeSeriesLayerView.layer
       .queryFeatures({
         where: quantileFilterWhere,
-        outFields: ['GISJOIN'],
+        outFields: ['gisjoin'],
         returnGeometry: false,
       })
       .then((featureSet) =>
-        featureSet.features.map((graphic) => graphic.attributes.GISJOIN.slice(1))
+        featureSet.features.map((graphic) => graphic.attributes.gisjoin.slice(1))
       )
       .then((data) => (tractList = Array.from(new Set(data))));
 
@@ -162,7 +162,7 @@
     if (originalTractTimeSeriesRenderer) {
       if (zctaHighlightFilterWhere || tractHighlightFilterWhere) {
         tractTimeSeriesLayerView.layer.renderer = new UniqueValueRenderer({
-          field: 'GISJOIN',
+          field: 'gisjoin',
           uniqueValueInfos: getSelection(selection, 'Tract').map(([tract, color]) => ({
             value: `G${tract}`,
             symbol: {
@@ -221,7 +221,7 @@
         const div = document.createElement('div');
 
         const migrationAndServiceWorkerData = data.migrationAndServiceWorkerData.zcta.filter(
-          (zcta) => zcta.ZCTA5 === attrs.ZCTA5 || zcta.ZCTA5 === 'MEDIAN'
+          (zcta) => zcta.ZCTA5 === attrs.zcta5 || zcta.ZCTA5 === 'MEDIAN'
         );
 
         new PopupZCTAs({
@@ -229,17 +229,17 @@
           props: {
             ...attrs,
             q_diff: parseFloat(attrs.q_diff) / 100,
-            year: new Date(attrs.Year_two_Converted).getUTCFullYear(),
+            year: new Date(attrs.year_two_converted).getUTCFullYear(),
             series: await zctaTimeSeriesLayer
               .queryFeatures({
-                where: `ZCTA5 = '${attrs.ZCTA5}'`,
+                where: `zcta5 = '${attrs.zcta5}'`,
                 outFields: [
                   'hvalue_quantile',
                   'income_quantile',
                   'avg_hh_inc',
                   'median_house_value',
                   'q_diff',
-                  'Year_two_Converted',
+                  'year_two_converted',
                 ],
               })
               .then((featureSet) =>
@@ -301,7 +301,7 @@
     );
 
     // customize the popup title
-    tractTimeSeriesLayer.popupTemplate.title = 'Tract: {GISJOIN}';
+    tractTimeSeriesLayer.popupTemplate.title = 'Tract: {gisjoin}';
 
     // add custom content in front of the existing popup content
     const customContentWidget = new CustomContent({
@@ -324,7 +324,7 @@
             avg_hh_inc: attrs.average_household_income,
             series: await tractTimeSeriesLayer
               .queryFeatures({
-                where: `GISJOIN = '${attrs.GISJOIN}'`,
+                where: `gisjoin = '${attrs.gisjoin}'`,
                 outFields: [
                   'quantile__house_value',
                   'quantile__income',
@@ -344,7 +344,7 @@
                       avg_hh_inc: attrs.average_household_income,
                       median_house_value: attrs.median_house_value,
                       q_diff: attrs.quantile__difference,
-                      Year_two_Converted: `${attrs.year}-01-01`,
+                      year_two_converted: `${attrs.year}-01-01`,
                     };
                   })
               ),
@@ -391,7 +391,11 @@
 
 <WebMap
   webMapProps="{{
-    portalItem: { id: '4d1ec76f5ac2438d827c945b23c772e4' },
+    portalItem: {
+      id: '31b40c17e0db476ab82de47c6ab16533',
+      portal: { url: 'https://gis.furman.edu/portal' },
+      apiKey: data.token,
+    },
   }}"
   shell="{{
     actions: { print: false, bookmarks: false },
@@ -406,7 +410,7 @@
         // since we are using the 'instant' mode, the window
         // will always be two of the same dates
         if (Array.isArray(value)) {
-          element.innerText = `Areas of Interest\n${new Date(value[0]).getUTCFullYear()}`;
+          element.innerText = `Areas of interest\n${new Date(value[0]).getUTCFullYear()}`;
           element.style.textAlign = 'center';
           return;
         }

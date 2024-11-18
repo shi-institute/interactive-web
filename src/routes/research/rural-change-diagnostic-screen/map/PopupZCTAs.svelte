@@ -16,7 +16,7 @@
     avg_hh_inc: number;
     median_house_value: number;
     q_diff: string;
-    Year_two_Converted: string; // ISO date without time
+    year_two_converted: string; // ISO date without time
   }[];
   export let migrationAndServiceWorkerData: {
     migration__different_county_fraction: number | undefined;
@@ -40,8 +40,8 @@
     // ['ZCTA5', 'Zip code tabulation area (2020)'],
   ];
 
-  const seriesTidyQuantiles = series.flatMap(({ Year_two_Converted, ...rest }) => {
-    const year = new Date(Year_two_Converted).getUTCFullYear();
+  const seriesTidyQuantiles = series.flatMap(({ year_two_converted, ...rest }) => {
+    const year = new Date(year_two_converted).getUTCFullYear();
     return [
       { year, Type: 'Housing value (quantile)', data: rest.hvalue_quantile },
       { year, Type: 'Income (quantile)', data: rest.income_quantile },
@@ -50,16 +50,16 @@
 
   let adjustDataForInflation = true;
   let maxUSD = Math.max(
-    ...series.flatMap(({ Year_two_Converted, median_house_value, avg_hh_inc }) => {
-      const year = new Date(Year_two_Converted).getUTCFullYear();
+    ...series.flatMap(({ year_two_converted, median_house_value, avg_hh_inc }) => {
+      const year = new Date(year_two_converted).getUTCFullYear();
       return [
         adjustForInflation(median_house_value, year, 2020),
         adjustForInflation(avg_hh_inc, year, 2020),
       ];
     })
   );
-  $: seriesTidyUSD = series.flatMap(({ Year_two_Converted, ...rest }) => {
-    const year = new Date(Year_two_Converted).getUTCFullYear();
+  $: seriesTidyUSD = series.flatMap(({ year_two_converted, ...rest }) => {
+    const year = new Date(year_two_converted).getUTCFullYear();
 
     const medianHouseValue = adjustDataForInflation
       ? adjustForInflation(rest.median_house_value, year, 2020)

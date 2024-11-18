@@ -41,21 +41,21 @@
 
   const zctaAttrsSchema = z
     .object({
-      ZCTA5: z.string().default(''),
+      zcta5: z.string().default(''),
       hvalue_quantile: z.number().nullable(),
       income_quantile: z.number().nullable(),
       avg_hh_inc: z.number().nullable(),
       median_house_value: z.number().nullable(),
       q_diff: z.number().nullable(),
-      Year_two_Converted: z.string(),
+      year_two_converted: z.string(),
     })
-    .transform(({ ZCTA5, ...attrs }) => ({
+    .transform(({ zcta5, ...attrs }) => ({
       ...attrs,
-      label: `${ZCTA5} (ZCTA)`,
+      label: `${zcta5} (ZCTA)`,
     }));
   const tracrAttrsSchema = z
     .object({
-      GISJOIN: z.string().default(''),
+      gisjoin: z.string().default(''),
       quantile__house_value: z.number().nullable(),
       quantile__income: z.number().nullable(),
       average_household_income: z.number().nullable(),
@@ -65,7 +65,7 @@
     })
     .transform(
       ({
-        GISJOIN,
+        gisjoin,
         quantile__house_value,
         quantile__income,
         year,
@@ -75,9 +75,9 @@
         ...attrs,
         hvalue_quantile: quantile__house_value,
         income_quantile: quantile__income,
-        Year_two_Converted: new Date(year, 0, 1).toISOString(),
+        year_two_converted: new Date(year, 0, 1).toISOString(),
         avg_hh_inc: average_household_income,
-        label: `${GISJOIN.slice(1)} (Tract)`,
+        label: `${gisjoin.slice(1)} (Tract)`,
       })
     );
   let data: z.infer<typeof zctaAttrsSchema>[] = [];
@@ -94,7 +94,7 @@
     if (selectedZCTAs.length > 0) {
       const zctaData = zctaTimeSeriesLayerView.layer
         .queryFeatures({
-          where: selectedZCTAs.map((zcta) => `ZCTA5 = ${zcta}`).join(' OR '),
+          where: selectedZCTAs.map((zcta) => `zcta5 = '${zcta}'`).join(' OR '),
           outFields: getZodSchemaFieldsShallow(zctaAttrsSchema),
         })
         .then((featureSet) => featureSet.features.map((graphic) => ({ ...graphic.attributes })))
@@ -110,7 +110,7 @@
     if (selectedTracts.length > 0) {
       const tractData = tractTimeSeriesLayerView.layer
         .queryFeatures({
-          where: selectedTracts.map((tract) => `GISJOIN = 'G${tract}'`).join(' OR '),
+          where: selectedTracts.map((tract) => `gisjoin = 'G${tract}'`).join(' OR '),
           outFields: getZodSchemaFieldsShallow(tracrAttrsSchema),
         })
         .then((featureSet) => featureSet.features.map((graphic) => ({ ...graphic.attributes })))
@@ -153,11 +153,11 @@
     });
   })();
 
-  $: seriesTidyQuantiles = data.flatMap(({ Year_two_Converted, label, ...rest }) => {
-    const year = new Date(Year_two_Converted).getUTCFullYear();
+  $: seriesTidyQuantiles = data.flatMap(({ year_two_converted, label, ...rest }) => {
+    const year = new Date(year_two_converted).getUTCFullYear();
     return [
-      { year, type: 'house', data: rest.hvalue_quantile, ZCTA: label },
-      { year, type: 'income', data: rest.income_quantile, ZCTA: label },
+      { year, type: 'house', data: rest.hvalue_quantile, label },
+      { year, type: 'income', data: rest.income_quantile, label },
     ];
   });
 </script>
@@ -244,7 +244,7 @@
               {
                 x: 'year',
                 y: 'data',
-                stroke: 'ZCTA',
+                stroke: 'label',
                 tip: { format: { x: 'd', y: '.0%' } },
               }
             ),
@@ -253,7 +253,7 @@
               {
                 x: 'year',
                 y: 'data',
-                stroke: 'ZCTA',
+                stroke: 'label',
                 strokeDasharray: '5,5',
                 tip: { format: { x: 'd', y: '.0%' } },
               }

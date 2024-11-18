@@ -1,5 +1,6 @@
 <script lang="ts">
   import { notEmpty } from '$utils/notEmpty';
+  import esriConfig from '@arcgis/core/config.js';
   import * as timeUtils from '@arcgis/core/support/timeUtils.js';
   import MapView from '@arcgis/core/views/MapView';
   import WebMap from '@arcgis/core/WebMap';
@@ -120,12 +121,29 @@
   let itemPageUrl = '';
 
   onMount(() => {
+    if (webMapProps.portalItem?.portal?.url) {
+      esriConfig.portalUrl = webMapProps.portalItem.portal.url;
+    }
+
     map = new WebMap(webMapProps);
     view = new MapView({
       map,
       container: mapViewContainer,
       ...mapViewProps,
     });
+
+    if (webMapProps.portalItem?.apiKey) {
+      const apiKey = webMapProps.portalItem.apiKey;
+      const apiKeyPortal = new URL(esriConfig.portalUrl).origin;
+      map.when(() => {
+        // set the apiKey on all layers that are from the same portal
+        map?.allLayers.forEach((layer) => {
+          if (typeof layer.url === 'string' && layer.url.startsWith(apiKeyPortal)) {
+            layer.apiKey = apiKey;
+          }
+        });
+      });
+    }
 
     view.when(() => {
       /**
@@ -231,10 +249,12 @@
       container: 'legend-container',
     });
 
-    const print = new Print({
-      view,
-      container: 'print-container',
-    });
+    if (shell && shell.actions?.print !== false) {
+      new Print({
+        view,
+        container: 'print-container',
+      });
+    }
 
     (async () => {
       if (shell && shell.timeSlider) {
@@ -325,7 +345,6 @@
 
 {#if shell}
   <calcite-shell class="calcite-mode-auto">
-
     {#if shell.header}
       <calcite-navigation slot="header">
         <calcite-navigation-logo
