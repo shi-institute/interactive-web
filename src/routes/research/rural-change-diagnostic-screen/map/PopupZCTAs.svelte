@@ -150,7 +150,14 @@
       ],
     }}"
   >
-    <h2 slot="popup-before" style="margin: 0;">House value and income quantiles over time</h2>
+    <svelte:fragment slot="popup-before">
+      <h2 style="margin: 0;">House value and income quantiles over time</h2>
+      {#if $$props.geoid_y}
+        <div>Tract {$$props.geoid_y}</div>
+      {:else}
+        <div>ZCTA {$$props.zcta5}</div>
+      {/if}
+    </svelte:fragment>
   </PlotContainer>
 </div>
 
@@ -206,7 +213,14 @@
       ],
     }}"
   >
-    <h2 slot="popup-before" style="margin: 0;">House value and income over time</h2>
+    <svelte:fragment slot="popup-before">
+      <h2 style="margin: 0;">House value and income over time</h2>
+      {#if $$props.geoid_y}
+        <div>Tract {$$props.geoid_y}</div>
+      {:else}
+        <div>ZCTA {$$props.zcta5}</div>
+      {/if}
+    </svelte:fragment>
   </PlotContainer>
 </div>
 
@@ -257,9 +271,14 @@
       ],
     }}"
   >
-    <h2 slot="popup-before" style="margin: 0;">
-      Migration from a different county in South Carolina
-    </h2>
+    <svelte:fragment slot="popup-before">
+      <h2 style="margin: 0;">Migration from a different county in South Carolina</h2>
+      {#if $$props.geoid_y}
+        <div>Tract {$$props.geoid_y}</div>
+      {:else}
+        <div>ZCTA {$$props.zcta5}</div>
+      {/if}
+    </svelte:fragment>
   </PlotContainer>
 </div>
 
@@ -310,7 +329,14 @@
       ],
     }}"
   >
-    <h2 slot="popup-before" style="margin: 0;">Migration from outside South Carolina</h2>
+    <svelte:fragment slot="popup-before">
+      <h2 style="margin: 0;">Migration from outside South Carolina</h2>
+      {#if $$props.geoid_y}
+        <div>Tract {$$props.geoid_y}</div>
+      {:else}
+        <div>ZCTA {$$props.zcta5}</div>
+      {/if}
+    </svelte:fragment>
   </PlotContainer>
 </div>
 
@@ -361,9 +387,14 @@
       ],
     }}"
   >
-    <h2 slot="popup-before" style="margin: 0;">
-      Percent of workers who are in the service industry
-    </h2>
+    <svelte:fragment slot="popup-before">
+      <h2 style="margin: 0;">Percent of workers who are in the service industry</h2>
+      {#if $$props.geoid_y}
+        <div>Tract {$$props.geoid_y}</div>
+      {:else}
+        <div>ZCTA {$$props.zcta5}</div>
+      {/if}
+    </svelte:fragment>
   </PlotContainer>
 </div>
 

@@ -301,7 +301,7 @@
     );
 
     // customize the popup title
-    tractTimeSeriesLayer.popupTemplate.title = 'Tract: {gisjoin}';
+    // tractTimeSeriesLayer.popupTemplate.title = 'Tract: {geoid_y}';
 
     // add custom content in front of the existing popup content
     const customContentWidget = new CustomContent({
