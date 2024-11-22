@@ -312,7 +312,7 @@
         const div = document.createElement('div');
 
         const migrationAndServiceWorkerData = data.migrationAndServiceWorkerData.tract.filter(
-          (tract) => tract.GISJOIN?.slice(1) == attrs.GEOID_y || tract.GISJOIN === 'MEDIAN'
+          (tract) => tract.GISJOIN?.slice(1) == attrs.geoid_y || tract.GISJOIN === 'MEDIAN'
         );
 
         new PopupZCTAs({
