@@ -67,7 +67,7 @@ export function generateTokenSafe(
   username: string,
   password: string,
   referer: string,
-  expiration = 6
+  expiration = 60
 ) {
   return generateToken(username, password, referer, expiration)
     .then((data) => {
