@@ -21,12 +21,9 @@ export function getPlotOptionsCV(data: PageData['cv'], titlePrefix = '', alone =
   return {
     title: `${titlePrefix}Coefficient of variation`,
     subtitle: 'One-year vs. five-year estimates for race in City of Greenville, SC',
-    caption: html`
-      Lower coefficients of variation (CVs) are better. Larger CVs indicate higher sampling error
-      associated with the data and lower reliability.
-      <br />
-      <i>Data: US Census Bureau American Community Survey</i>
-    `,
+    // prettier-ignore
+    caption: html`Lower coefficients of variation (CVs) are better. Larger CVs indicate higher sampling error associated with the data and lower reliability.
+      <i>Data: US Census Bureau American Community Survey</i>`,
     width: 860,
     height: 350,
     marginBottom: 40,

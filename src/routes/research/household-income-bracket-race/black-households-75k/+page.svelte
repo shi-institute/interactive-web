@@ -33,9 +33,8 @@
       plot="{{
         title: 'Percentage of Black households that earn over $75k',
         subtitle: 'In 2022',
-        caption: html`
-          <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>
-        `,
+        // prettier-ignore
+        caption: html`<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
         marginTop: 8,
         marginRight: 0,
         marginBottom: 40,
