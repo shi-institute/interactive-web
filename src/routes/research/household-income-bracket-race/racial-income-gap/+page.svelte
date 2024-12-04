@@ -32,12 +32,9 @@
       plot="{{
         title: 'Racial income gap: Median household income comparison',
         subtitle: 'Between white and Black households, 2022',
-        caption: html`
-          A larger ratio indicates a larger income gap between white and Black households.
-          <br />
-          The income ratio is calculated as the median household income of white households divided
-          by the median household income of Black households.
-          <br />
+        // prettier-ignore
+        caption: html`A larger ratio indicates a larger income gap between white and Black households.
+          The income ratio is calculated as the median household income of white households divided by the median household income of Black households.
           <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>
         `,
         marginTop: 15,

@@ -253,7 +253,7 @@ export const load = (async ({ data }) => {
     return {
       caption: browser
         ? html`
-            <div style="padding-right: 6px; padding-top: 8px;">
+            <div style="padding-right: 6px; padding-top: 8px; white-space: normal;">
               In ${city}, there were
               <span
                 style="text-shadow: 0px 0px 2px rgba(0,0,0,0.1); font-weight: 500; color: ${colors
