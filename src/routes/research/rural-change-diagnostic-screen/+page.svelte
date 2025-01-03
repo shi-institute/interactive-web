@@ -35,7 +35,7 @@
     <calcite-tile
       icon="article"
       heading="Read the research brief"
-      description="Coming soon"
+      description=""
       scale="l"
       href="/research/rural-change-diagnostic-screen/brief"
       on:click="{handleClick}"
