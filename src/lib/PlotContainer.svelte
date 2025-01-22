@@ -13,19 +13,56 @@
   export let popupWidth = 900;
   export let popupHeight = 500;
   export let plotNode: PlotNode | undefined = undefined;
+  export let boxSizing: 'border-box' | 'content-box' = 'content-box';
+
+  let slotBeforeHeight = 0;
+  let slotAfterHeight = 0;
 
   let clientWidth: number | undefined;
   let div: HTMLDivElement;
   $: plotOptions = typeof plot === 'function' ? plot(clientWidth || 640) : plot;
   $: {
     if (browser && div) {
+      const plotHeight =
+        boxSizing === 'border-box'
+          ? calculatePlotHeightInBorderBoxMode(slotBeforeHeight, slotAfterHeight, plotOptions)
+          : plotOptions.height;
+
       plotNode = new PlotNodeManager()
         .setOptions({
           ...plotOptions,
           width: fullWidth ? clientWidth : plotOptions.width || 640,
+          height: plotHeight,
         })
         .render(div).node;
     }
+  }
+
+  function calculatePlotHeightInBorderBoxMode(
+    slotBeforeHeight: number,
+    slotAfterHeight: number,
+    plotOptions: Plot.PlotOptions
+  ) {
+    if (!plotOptions.height) {
+      return undefined;
+    }
+
+    // read the height of slots before and after the plot
+    const slotsHeight = slotBeforeHeight + slotAfterHeight;
+
+    // create a version of the plot that has no height so we can measure
+    // the height over everything besides the plot (captions, titles, etc.)
+    const tempPlotManager = new PlotNodeManager()
+      .setOptions({
+        ...plotOptions,
+        width: 0,
+        height: 0,
+      })
+      .render(div);
+    tempPlotManager.node.style.visibility = 'hidden';
+    const metaHeight = tempPlotManager.node.clientHeight;
+
+    return plotOptions.height - metaHeight - slotsHeight;
   }
 
   let popupOpen = false;
@@ -81,7 +118,7 @@
     }
   }
 
-  function openInPopupWindow() {
+  export function openInPopupWindow() {
     popupOpen = true;
   }
   function handlePopupClose() {
@@ -124,21 +161,27 @@
   </Popout>
 {/if}
 
-<slot name="main-before" />
-<slot name="before" />
-<div bind:clientWidth="{clientWidth}">
-  <div bind:this="{div}" role="img" class="{plotClass}">
-    <div
-      style="height: {(typeof plot === 'function' ? plot(clientWidth || 640) : plot).height ||
-        300}px;"
-    ></div>
+<div class="plot-container">
+  <div class="slots" bind:clientHeight="{slotBeforeHeight}">
+    <slot name="main-before" />
+    <slot name="before" />
+  </div>
+  <div bind:clientWidth="{clientWidth}">
+    <div bind:this="{div}" role="img" class="{plotClass}">
+      <div
+        style="height: {(typeof plot === 'function' ? plot(clientWidth || 640) : plot).height ||
+          300}px;"
+      ></div>
+    </div>
+  </div>
+  <div class="slots" bind:clientHeight="{slotAfterHeight}">
+    {#if enablePopup}
+      <button class="popup-button" on:click="{openInPopupWindow}">Open in popup</button>
+    {/if}
+    <slot name="after" />
+    <slot name="main-after" />
   </div>
 </div>
-{#if enablePopup}
-  <button class="popup-button" on:click="{openInPopupWindow}">Open in popup</button>
-{/if}
-<slot name="after" />
-<slot name="main-after" />
 
 <style>
   .popup-button {

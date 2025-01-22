@@ -10,8 +10,6 @@
   export let actionStyle = 'padding: 2px 10px; font-size: 12px;';
 </script>
 
-<br />
-<br />
 <div class="embed-bar">
   <div>Shi Applied Research</div>
   <div>
