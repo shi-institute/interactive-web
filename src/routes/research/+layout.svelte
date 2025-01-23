@@ -52,6 +52,12 @@
     <div class="title"></div>
     <div class="meta"></div>
   </header>
+{:else}
+  <style>
+    #pageArea {
+      --header-height: 0px;
+    }
+  </style>
 {/if}
 
 <main style="--headerVisibleHeight: {headerVisibleHeight}px;">

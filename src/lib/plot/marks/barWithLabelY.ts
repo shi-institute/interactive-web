@@ -11,7 +11,7 @@ interface PlotWithLabelYOptions
 }
 
 function barWithLabelY(
-  data: Record<string, unknown>[],
+  data: readonly Record<string, unknown>[] | Record<string, unknown>[],
   { labelFormat = '.1f', labelFill, ...options }: PlotWithLabelYOptions
 ) {
   const barMark = Plot.barY(data, { ...options });
