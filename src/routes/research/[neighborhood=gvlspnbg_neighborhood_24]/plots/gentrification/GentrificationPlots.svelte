@@ -1,6 +1,7 @@
 <script lang="ts">
   import { browser } from '$app/environment';
   import PlotContainer from '$lib/PlotContainer.svelte';
+  import { notEmpty } from '$utils/notEmpty';
   import * as Plot from '@observablehq/plot';
   import { html } from 'htl';
   import type { PageData } from './$types';
@@ -10,11 +11,18 @@
 
   let width = 0;
 
-  $: gentrificationData = data.filter(
+  // get all gentriification data for the neighborhood
+  $: _gentrificationData = data.filter(
     ({ neighborhoods }) =>
       neighborhoods &&
       neighborhoods.map((n) => n.toLowerCase()).includes(neighborhood.toLowerCase())
   );
+
+  //  remove tracts with less than 10 data points
+  $: gentrificationData = Object.entries(Object.groupBy(_gentrificationData, (d) => d.Tract))
+    .filter(([, series]) => series && series.length > 10)
+    .flatMap(([, series]) => series)
+    .filter(notEmpty);
 
   $: gentrificationFigures = browser
     ? Object.entries(Object.groupBy(gentrificationData, (d) => d.Tract)).map(
