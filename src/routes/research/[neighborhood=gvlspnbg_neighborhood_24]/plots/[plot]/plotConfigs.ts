@@ -290,6 +290,32 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       ],
     };
   },
+  poverty__below_poverty_household_fraction(neighborhood, data) {
+    return {
+      title: 'Households below the poverty line',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      x: { label: 'Survey period' },
+      y: {
+        label: 'Percent of households',
+        tickFormat: '.0%',
+        domain: [0, 1],
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 40,
+      marks: [
+        barWithLabelY(data, {
+          x: 'year',
+          y: 'poverty__below_poverty_household_fraction',
+          labelFormat: '.1%',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
+        }),
+      ],
+    };
+  },
   internet__broadband__total(neighborhood, data) {
     return {
       title: 'Households with access to broadband internet',
