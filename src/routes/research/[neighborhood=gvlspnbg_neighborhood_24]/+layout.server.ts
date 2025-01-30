@@ -21,8 +21,12 @@ export const load = (async ({ params }) => {
     // if the cache is not expired, return the cached data
     if (!expired) {
       return {
-        neighborhoodsData: cachedData.get('neighborhoodsData'),
-        gentrificationData: cachedData.get('gentrificationData'),
+        neighborhoodsData: deepFreeze(
+          cachedData.get('neighborhoodsData') as z.infer<typeof neighborhoodDataSchema>[]
+        ),
+        gentrificationData: deepFreeze(
+          cachedData.get('gentrificationData') as z.infer<typeof gentrificationDataSchema>[]
+        ),
         neighborhood,
       };
     }
