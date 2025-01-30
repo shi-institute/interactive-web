@@ -1,3 +1,4 @@
+import { colors } from '$lib/colors';
 import { barWithLabelY } from '$lib/plot/marks';
 import { capitalize } from '$utils/capitalize';
 import * as Plot from '@observablehq/plot';
@@ -25,6 +26,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'year',
           y: 'median_household_income',
           labelFormat: '$,.0f',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
         }),
       ],
     };
@@ -56,6 +59,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
                 x: 'year',
                 y: 'median_household_income__white',
                 labelFormat: '$,.0f',
+                fill: colors.vibrant.teal,
+                labelFill: 'black',
               }),
             ],
       };
@@ -88,6 +93,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
                 x: 'year',
                 y: 'median_household_income__black',
                 labelFormat: '$,.0f',
+                fill: colors.vibrant.teal,
+                labelFill: 'black',
               }),
             ],
       };
@@ -120,6 +127,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
                 x: 'year',
                 y: 'median_household_income__hispanic',
                 labelFormat: '$,.0f',
+                fill: colors.vibrant.teal,
+                labelFill: 'black',
               }),
             ],
       };
@@ -128,7 +137,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
   population__total(neighborhood, data) {
     return {
       title: 'Total Population',
-      subtitle: `${capitalize(neighborhood)} neighborhood, 2009-2023`,
+      subtitle: `${neighborhood} neighborhood, 2009-2023`,
       caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
@@ -144,6 +153,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'year',
           y: 'population__total',
           labelFormat: '.0f',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
         }),
       ],
     };
@@ -189,6 +200,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
             x: 'year',
             y: 'education__high_school_or_higher_percent',
             labelFormat: '.1%',
+            fill: colors.vibrant.teal,
+            labelFill: 'black',
           }
         ),
       ],
@@ -229,6 +242,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
             x: 'year',
             y: 'education__some_college_or_higher_percent',
             labelFormat: '.1%',
+            fill: colors.vibrant.teal,
+            labelFill: 'black',
           }
         ),
       ],
@@ -268,6 +283,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
             x: 'year',
             y: 'education__college_degree_percent',
             labelFormat: '.1%',
+            fill: colors.vibrant.teal,
+            labelFill: 'black',
           }
         ),
       ],
@@ -292,6 +309,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'year',
           y: 'internet__broadband__total',
           labelFormat: '.0f',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
         }),
       ],
     };
@@ -316,6 +335,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'year',
           y: 'internet__broadband__white_percent',
           labelFormat: '.1%',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
         }),
       ],
     };
@@ -340,6 +361,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'year',
           y: 'internet__broadband__black_percent',
           labelFormat: '.1%',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
         }),
       ],
     };
@@ -364,6 +387,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'year',
           y: 'internet__broadband__hispanic_percent',
           labelFormat: '.1%',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
         }),
       ],
     };
@@ -398,6 +423,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
             x: 'year',
             y: 'has_computer__total__percent',
             labelFormat: '.1%',
+            fill: colors.vibrant.teal,
+            labelFill: 'black',
           }
         ),
       ],
@@ -423,6 +450,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'year',
           y: 'has_computer__white_percent',
           labelFormat: '.1%',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
         }),
       ],
     };
@@ -447,6 +476,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'year',
           y: 'has_computer__black_percent',
           labelFormat: '.1%',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
         }),
       ],
     };
@@ -471,6 +502,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'year',
           y: 'has_computer__hispanic_percent',
           labelFormat: '.1%',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
         }),
       ],
     };
@@ -495,6 +528,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'year',
           y: 'industry__service_fraction',
           labelFormat: '.1%',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
         }),
       ],
     };
@@ -519,6 +554,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'year',
           y: 'food_stamps__received_fraction',
           labelFormat: '.1%',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
         }),
       ],
     };
@@ -543,6 +580,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'year',
           y: 'geographic_mobility__different_county_same_state_fraction',
           labelFormat: '.1%',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
         }),
       ],
     };
@@ -567,6 +606,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'year',
           y: 'geographic_mobility__different_state_fraction',
           labelFormat: '.1%',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
         }),
       ],
     };
@@ -591,6 +632,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'year',
           y: 'population__children_living_with_grandparent_householder_fraction',
           labelFormat: '.1%',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
         }),
       ],
     };
@@ -615,6 +658,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'year',
           y: 'household_vehicles__none_fraction',
           labelFormat: '.1%',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
         }),
       ],
     };
