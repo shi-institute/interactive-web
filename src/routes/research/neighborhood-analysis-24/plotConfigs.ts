@@ -1,8 +1,8 @@
 import { colors } from '$lib/colors';
 import { barWithLabelY } from '$lib/plot/marks';
-import { capitalize } from '$utils/capitalize';
 import * as Plot from '@observablehq/plot';
-import type { PageData } from './$types';
+import type { PageData } from './[neighborhood=gvlspnbg_neighborhood_24]/plots/[plot]/$types';
+import { calcProportionMOE } from './calcProportionMOE';
 
 export const plotConfigs: Record<string, PlotConfigFunction> = {
   median_household_income(neighborhood, data) {
@@ -25,6 +25,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         barWithLabelY(data, {
           x: 'year',
           y: 'median_household_income',
+          yErrorMargin: 'Mmedian_household_income',
           labelFormat: '$,.0f',
           fill: colors.vibrant.teal,
           labelFill: 'black',
@@ -58,6 +59,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
               barWithLabelY(data, {
                 x: 'year',
                 y: 'median_household_income__white',
+                yErrorMargin: 'Mmedian_household_income__white',
                 labelFormat: '$,.0f',
                 fill: colors.vibrant.teal,
                 labelFill: 'black',
@@ -92,6 +94,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
               barWithLabelY(data, {
                 x: 'year',
                 y: 'median_household_income__black',
+                yErrorMargin: 'Mmedian_household_income__black',
                 labelFormat: '$,.0f',
                 fill: colors.vibrant.teal,
                 labelFill: 'black',
@@ -126,6 +129,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
               barWithLabelY(data, {
                 x: 'year',
                 y: 'median_household_income__hispanic',
+                yErrorMargin: 'Mmedian_household_income__hispanic',
                 labelFormat: '$,.0f',
                 fill: colors.vibrant.teal,
                 labelFill: 'black',
@@ -152,6 +156,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         barWithLabelY(data, {
           x: 'year',
           y: 'population__total',
+          yErrorMargin: 'Mpopulation__total',
           labelFormat: '.0f',
           fill: colors.vibrant.teal,
           labelFill: 'black',
@@ -181,24 +186,40 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
               d['education__regular_high_school_diploma'] +
               d['education__ged_or_alternative_credential'];
 
-            const education__high_school_or_higher =
-              d['education__regular_high_school_diploma'] +
-              d['education__ged_or_alternative_credential'] +
-              d['education__some_college_no_degree'] +
-              d['education__associates_degree'] +
-              d['education__bachelors_degree'] +
-              d['education__masters_degree'] +
-              d['education__professional_school_degree'] +
-              d['education__doctorate_degree'];
+            const educationHighSchoolOrHigherFields = [
+              'education__regular_high_school_diploma',
+              'education__ged_or_alternative_credential',
+              'education__some_college_no_degree',
+              'education__associates_degree',
+              'education__bachelors_degree',
+              'education__masters_degree',
+              'education__professional_school_degree',
+              'education__doctorate_degree',
+            ];
+
+            const education__high_school_or_higher = educationHighSchoolOrHigherFields
+              .map((field) => d[field])
+              .reduce((a, b) => a + b, 0);
 
             const education__high_school_or_higher_percent =
               education__high_school_or_higher / d['population__total'];
 
-            return { education__high_school_or_higher_percent, ...d };
+            const Meducation__high_school_or_higher_percent = calcProportionMOE(
+              d,
+              educationHighSchoolOrHigherFields,
+              'population__total'
+            );
+
+            return {
+              education__high_school_or_higher_percent,
+              Meducation__high_school_or_higher_percent,
+              ...d,
+            };
           }),
           {
             x: 'year',
             y: 'education__high_school_or_higher_percent',
+            yErrorMargin: 'Meducation__high_school_or_higher_percent',
             labelFormat: '.1%',
             fill: colors.vibrant.teal,
             labelFill: 'black',
@@ -225,22 +246,38 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marks: [
         barWithLabelY(
           data.map((d) => {
-            const education__some_college_or_higher =
-              d['education__some_college_no_degree'] +
-              d['education__associates_degree'] +
-              d['education__bachelors_degree'] +
-              d['education__masters_degree'] +
-              d['education__professional_school_degree'] +
-              d['education__doctorate_degree'];
+            const educationSomeCollegeOrHigherFields = [
+              'education__some_college_no_degree',
+              'education__associates_degree',
+              'education__bachelors_degree',
+              'education__masters_degree',
+              'education__professional_school_degree',
+              'education__doctorate_degree',
+            ];
+
+            const education__some_college_or_higher = educationSomeCollegeOrHigherFields
+              .map((field) => d[field])
+              .reduce((a, b) => a + b, 0);
 
             const education__some_college_or_higher_percent =
               education__some_college_or_higher / d['population__total'];
 
-            return { education__some_college_or_higher_percent, ...d };
+            const Meducation__some_college_or_higher_percent = calcProportionMOE(
+              d,
+              educationSomeCollegeOrHigherFields,
+              'population__total'
+            );
+
+            return {
+              education__some_college_or_higher_percent,
+              Meducation__some_college_or_higher_percent,
+              ...d,
+            };
           }),
           {
             x: 'year',
             y: 'education__some_college_or_higher_percent',
+            yErrorMargin: 'Meducation__some_college_or_higher_percent',
             labelFormat: '.1%',
             fill: colors.vibrant.teal,
             labelFill: 'black',
@@ -267,21 +304,37 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marks: [
         barWithLabelY(
           data.map((d) => {
-            const education__college_degree =
-              d['education__associates_degree'] +
-              d['education__bachelors_degree'] +
-              d['education__masters_degree'] +
-              d['education__professional_school_degree'] +
-              d['education__doctorate_degree'];
+            const educationCollegeDegreeFields = [
+              'education__associates_degree',
+              'education__bachelors_degree',
+              'education__masters_degree',
+              'education__professional_school_degree',
+              'education__doctorate_degree',
+            ];
+
+            const education__college_degree = educationCollegeDegreeFields
+              .map((field) => d[field])
+              .reduce((a, b) => a + b, 0);
 
             const education__college_degree_percent =
               education__college_degree / d['population__total'];
 
-            return { education__college_degree_percent, ...d };
+            const Meducation__college_degree_percent = calcProportionMOE(
+              d,
+              educationCollegeDegreeFields,
+              'population__total'
+            );
+
+            return {
+              education__college_degree_percent,
+              Meducation__college_degree_percent,
+              ...d,
+            };
           }),
           {
             x: 'year',
             y: 'education__college_degree_percent',
+            yErrorMargin: 'Meducation__college_degree_percent',
             labelFormat: '.1%',
             fill: colors.vibrant.teal,
             labelFill: 'black',
@@ -309,6 +362,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         barWithLabelY(data, {
           x: 'year',
           y: 'poverty__below_poverty_household_fraction',
+          yErrorMargin: 'Mpoverty__below_poverty_household_fraction',
           labelFormat: '.1%',
           fill: colors.vibrant.teal,
           labelFill: 'black',
@@ -323,8 +377,9 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
-        label: 'Households with internet',
-        tickFormat: (d) => d.toLocaleString(),
+        label: 'Percent households',
+        tickFormat: '.0%',
+        domain: [0, 1],
       },
       marginTop: 30,
       marginRight: 0,
@@ -333,8 +388,9 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marks: [
         barWithLabelY(data, {
           x: 'year',
-          y: 'internet__broadband__total',
-          labelFormat: '.0f',
+          y: 'internet__broadband__total_percent',
+          yErrorMargin: 'Minternet__broadband__total_percent',
+          labelFormat: '.0%',
           fill: colors.vibrant.teal,
           labelFill: 'black',
         }),
@@ -360,6 +416,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         barWithLabelY(data, {
           x: 'year',
           y: 'internet__broadband__white_percent',
+          yErrorMargin: 'Minternet__broadband__white_percent',
           labelFormat: '.1%',
           fill: colors.vibrant.teal,
           labelFill: 'black',
@@ -386,6 +443,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         barWithLabelY(data, {
           x: 'year',
           y: 'internet__broadband__black_percent',
+          yErrorMargin: 'Minternet__broadband__black_percent',
           labelFormat: '.1%',
           fill: colors.vibrant.teal,
           labelFill: 'black',
@@ -412,6 +470,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         barWithLabelY(data, {
           x: 'year',
           y: 'internet__broadband__hispanic_percent',
+          yErrorMargin: 'Minternet__broadband__hispanic_percent',
           labelFormat: '.1%',
           fill: colors.vibrant.teal,
           labelFill: 'black',
@@ -443,11 +502,22 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
             const has_computer__total__percent =
               has_computer__total / (has_computer__total + no_computer__total);
 
-            return { has_computer__total__percent, ...d };
+            const Mhas_computer__total__percent = calcProportionMOE(
+              d,
+              ['has_computer__total', 'no_computer__total'],
+              'population__total'
+            );
+
+            return {
+              has_computer__total__percent,
+              Mhas_computer__total__percent,
+              ...d,
+            };
           }),
           {
             x: 'year',
             y: 'has_computer__total__percent',
+            yErrorMargin: 'Mhas_computer__total__percent',
             labelFormat: '.1%',
             fill: colors.vibrant.teal,
             labelFill: 'black',
@@ -475,6 +545,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         barWithLabelY(data, {
           x: 'year',
           y: 'has_computer__white_percent',
+          yErrorMargin: 'Mhas_computer__white_percent',
           labelFormat: '.1%',
           fill: colors.vibrant.teal,
           labelFill: 'black',
@@ -501,6 +572,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         barWithLabelY(data, {
           x: 'year',
           y: 'has_computer__black_percent',
+          yErrorMargin: 'Mhas_computer__black_percent',
           labelFormat: '.1%',
           fill: colors.vibrant.teal,
           labelFill: 'black',
@@ -527,6 +599,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         barWithLabelY(data, {
           x: 'year',
           y: 'has_computer__hispanic_percent',
+          yErrorMargin: 'Mhas_computer__hispanic_percent',
           labelFormat: '.1%',
           fill: colors.vibrant.teal,
           labelFill: 'black',
@@ -553,6 +626,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         barWithLabelY(data, {
           x: 'year',
           y: 'industry__service_fraction',
+          yErrorMargin: 'Mindustry__service_fraction',
           labelFormat: '.1%',
           fill: colors.vibrant.teal,
           labelFill: 'black',
@@ -579,6 +653,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         barWithLabelY(data, {
           x: 'year',
           y: 'food_stamps__received_fraction',
+          yErrorMargin: 'Mfood_stamps__received_fraction',
           labelFormat: '.1%',
           fill: colors.vibrant.teal,
           labelFill: 'black',
@@ -605,6 +680,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         barWithLabelY(data, {
           x: 'year',
           y: 'geographic_mobility__different_county_same_state_fraction',
+          yErrorMargin: 'Mgeographic_mobility__different_county_same_state_fraction',
           labelFormat: '.1%',
           fill: colors.vibrant.teal,
           labelFill: 'black',
@@ -631,6 +707,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         barWithLabelY(data, {
           x: 'year',
           y: 'geographic_mobility__different_state_fraction',
+          yErrorMargin: 'Mgeographic_mobility__different_state_fraction',
           labelFormat: '.1%',
           fill: colors.vibrant.teal,
           labelFill: 'black',
@@ -657,6 +734,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         barWithLabelY(data, {
           x: 'year',
           y: 'population__children_living_with_grandparent_householder_fraction',
+          yErrorMargin: 'Mpopulation__children_living_with_grandparent_householder_fraction',
           labelFormat: '.1%',
           fill: colors.vibrant.teal,
           labelFill: 'black',
@@ -683,6 +761,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         barWithLabelY(data, {
           x: 'year',
           y: 'household_vehicles__none_fraction',
+          yErrorMargin: 'Mhousehold_vehicles__none_fraction',
           labelFormat: '.1%',
           fill: colors.vibrant.teal,
           labelFill: 'black',
@@ -694,5 +773,5 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
 
 type PlotConfigFunction = (
   neighborhood: string,
-  data: PageData['neighborhoodsData']
+  data: PageData['neighborhoodsData'] | PageData['tractsData']
 ) => Plot.PlotOptions;

@@ -2,7 +2,7 @@
   import { page } from '$app/stores';
   import PageTitle from '$lib/PageTitle.svelte';
   import { Button } from 'fluent-svelte';
-  import { plotConfigs } from './[plot]/plotConfigs';
+  import { plotConfigs } from '../../plotConfigs';
 
   export let data;
 
@@ -17,15 +17,28 @@
 
 <PageTitle>
   Index of plots
-  <svelte:fragment slot="caption">{data.neighborhood} neighborhood</svelte:fragment>
+  <svelte:fragment slot="caption">
+    {#if data.neighborhood}
+      {data.neighborhood} neighborhood
+    {:else}
+      Tract {data.tract}
+    {/if}
+  </svelte:fragment>
 </PageTitle>
 
 <ul>
   {#each plots.sort(([a], [b]) => a.localeCompare(b)) as [title, key]}
-    <li><a href="/research/{$page.params.neighborhood}/plots/{key}">{title}</a></li>
+    <li>
+      <a href="/research/neighborhood-analysis-24/{$page.params.neighborhood}/plots/{key}">
+        {title}
+      </a>
+    </li>
   {/each}
 </ul>
 
-<Button style="margin: 0 20px;" href="/research/{$page.params.neighborhood}/plots/all">
+<Button
+  style="margin: 0 20px;"
+  href="/research/neighborhood-analysis-24/{$page.params.neighborhood}/plots/all"
+>
   View all plots
 </Button>

@@ -4,22 +4,14 @@
   import { notEmpty } from '$utils/notEmpty';
   import * as Plot from '@observablehq/plot';
   import { html } from 'htl';
-  import type { PageData } from './$types';
+  import type { LayoutData } from './$types';
 
-  export let data: PageData['gentrificationData'];
-  export let neighborhood: string;
+  export let data: LayoutData['gentrificationData'];
 
   let width = 0;
 
-  // get all gentriification data for the neighborhood
-  $: _gentrificationData = data.filter(
-    ({ neighborhoods }) =>
-      neighborhoods &&
-      neighborhoods.map((n) => n.toLowerCase()).includes(neighborhood.toLowerCase())
-  );
-
   //  remove tracts with less than 10 data points
-  $: gentrificationData = Object.entries(Object.groupBy(_gentrificationData, (d) => d.Tract))
+  $: gentrificationData = Object.entries(Object.groupBy(data, (d) => d.Tract))
     .filter(([, series]) => series && series.length > 10)
     .flatMap(([, series]) => series)
     .filter(notEmpty);
@@ -128,7 +120,7 @@
 <svelte:window bind:innerWidth="{width}" />
 
 {#if gentrificationFigures.length === 0}
-  <p style="margin: 20px;">No gentrification data available for this neighborhood.</p>
+  <p style="margin: 20px;">No gentrification data available.</p>
 {/if}
 
 {#each gentrificationFigures as { quantilePlotConfig, usdPlotConfig, tract, tractNeighborhoods }, i}
