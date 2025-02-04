@@ -1,11 +1,23 @@
 import { colors } from '$lib/colors';
 import { barWithLabelY } from '$lib/plot/marks';
+import { notEmpty } from '$utils/notEmpty';
 import * as Plot from '@observablehq/plot';
 import type { PageData } from './[neighborhood=gvlspnbg_neighborhood_24]/plots/[plot]/$types';
 import { calcProportionMOE } from './calcProportionMOE';
 
 export const plotConfigs: Record<string, PlotConfigFunction> = {
   median_household_income(neighborhood, data) {
+    const max = Math.max(
+      ...data.flatMap((d) =>
+        [
+          d.median_household_income,
+          d.median_household_income__black,
+          d.median_household_income__white,
+          d.median_household_income__hispanic,
+        ].filter(notEmpty)
+      )
+    );
+
     return {
       title: 'Median household income',
       subtitle: `${neighborhood}, 2009-2023`,
@@ -16,6 +28,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         tickFormat: (d) => {
           return `$${d / 1000}k`;
         },
+        domain: [0, max],
       },
       marginTop: 30,
       marginRight: 0,
@@ -34,109 +47,139 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     };
   },
   median_household_income__white(neighborhood, data) {
-    {
-      const noData =
-        data.map((d) => d.median_household_income__white).filter((x) => !!x).length === 0;
+    const max = Math.max(
+      ...data.flatMap((d) =>
+        [
+          d.median_household_income,
+          d.median_household_income__black,
+          d.median_household_income__white,
+          d.median_household_income__hispanic,
+        ].filter(notEmpty)
+      )
+    );
 
-      return {
-        title: 'Median household income (White householder)',
-        subtitle: `${neighborhood}, 2009-2023`,
-        caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
-        x: { label: 'Survey period' },
-        y: {
-          label: 'Median household income',
-          tickFormat: (d) => {
-            return `$${d / 1000}k`;
-          },
+    const noData =
+      data.map((d) => d.median_household_income__white).filter((x) => !!x).length === 0;
+
+    return {
+      title: 'Median household income (White householder)',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      x: { label: 'Survey period' },
+      y: {
+        label: 'Median household income',
+        tickFormat: (d) => {
+          return `$${d / 1000}k`;
         },
-        marginTop: 30,
-        marginRight: 0,
-        marginBottom: 36,
-        marginLeft: 40,
-        marks: noData
-          ? [Plot.text(['No data'], { x: 0, y: 0 })]
-          : [
-              barWithLabelY(data, {
-                x: 'year',
-                y: 'median_household_income__white',
-                yErrorMargin: 'Mmedian_household_income__white',
-                labelFormat: '$,.0f',
-                fill: colors.vibrant.teal,
-                labelFill: 'black',
-              }),
-            ],
-      };
-    }
+        domain: noData ? undefined : [0, max],
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 40,
+      marks: noData
+        ? [Plot.text(['No data'], { x: 0, y: 0 })]
+        : [
+            barWithLabelY(data, {
+              x: 'year',
+              y: 'median_household_income__white',
+              yErrorMargin: 'Mmedian_household_income__white',
+              labelFormat: '$,.0f',
+              fill: colors.vibrant.teal,
+              labelFill: 'black',
+            }),
+          ],
+    };
   },
   median_household_income__black(neighborhood, data) {
-    {
-      const noData =
-        data.map((d) => d.median_household_income__black).filter((x) => !!x).length === 0;
+    const max = Math.max(
+      ...data.flatMap((d) =>
+        [
+          d.median_household_income,
+          d.median_household_income__black,
+          d.median_household_income__white,
+          d.median_household_income__hispanic,
+        ].filter(notEmpty)
+      )
+    );
 
-      return {
-        title: 'Median household income (Black householder)',
-        subtitle: `${neighborhood}, 2009-2023`,
-        caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
-        x: { label: 'Survey period' },
-        y: {
-          label: 'Median household income',
-          tickFormat: (d) => {
-            return `$${d / 1000}k`;
-          },
+    const noData =
+      data.map((d) => d.median_household_income__black).filter((x) => !!x).length === 0;
+
+    return {
+      title: 'Median household income (Black householder)',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      x: { label: 'Survey period' },
+      y: {
+        label: 'Median household income',
+        tickFormat: (d) => {
+          return `$${d / 1000}k`;
         },
-        marginTop: 30,
-        marginRight: 0,
-        marginBottom: 36,
-        marginLeft: 40,
-        marks: noData
-          ? [Plot.text(['No data'], { x: 0, y: 0 })]
-          : [
-              barWithLabelY(data, {
-                x: 'year',
-                y: 'median_household_income__black',
-                yErrorMargin: 'Mmedian_household_income__black',
-                labelFormat: '$,.0f',
-                fill: colors.vibrant.teal,
-                labelFill: 'black',
-              }),
-            ],
-      };
-    }
+        domain: noData ? undefined : [0, max],
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 40,
+      marks: noData
+        ? [Plot.text(['No data'], { x: 0, y: 0 })]
+        : [
+            barWithLabelY(data, {
+              x: 'year',
+              y: 'median_household_income__black',
+              yErrorMargin: 'Mmedian_household_income__black',
+              labelFormat: '$,.0f',
+              fill: colors.vibrant.teal,
+              labelFill: 'black',
+            }),
+          ],
+    };
   },
   median_household_income__hispanic(neighborhood, data) {
-    {
-      const noData =
-        data.map((d) => d.median_household_income__hispanic).filter((x) => !!x).length === 0;
+    const max = Math.max(
+      ...data.flatMap((d) =>
+        [
+          d.median_household_income,
+          d.median_household_income__black,
+          d.median_household_income__white,
+          d.median_household_income__hispanic,
+        ].filter(notEmpty)
+      )
+    );
 
-      return {
-        title: 'Median household income (Hispanic or Latino householder)',
-        subtitle: `${neighborhood}, 2009-2023`,
-        caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
-        x: { label: 'Survey period' },
-        y: {
-          label: 'Median household income',
-          tickFormat: (d) => {
-            return `$${d / 1000}k`;
-          },
+    const noData =
+      data.map((d) => d.median_household_income__hispanic).filter((x) => !!x).length === 0;
+
+    return {
+      title: 'Median household income (Hispanic or Latino householder)',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      x: { label: 'Survey period' },
+      y: {
+        label: 'Median household income',
+        tickFormat: (d) => {
+          return `$${d / 1000}k`;
         },
-        marginTop: 30,
-        marginRight: 0,
-        marginBottom: 36,
-        marginLeft: 40,
-        marks: noData
-          ? [Plot.text(['No data'], { x: 0, y: 0 })]
-          : [
-              barWithLabelY(data, {
-                x: 'year',
-                y: 'median_household_income__hispanic',
-                yErrorMargin: 'Mmedian_household_income__hispanic',
-                labelFormat: '$,.0f',
-                fill: colors.vibrant.teal,
-                labelFill: 'black',
-              }),
-            ],
-      };
-    }
+        domain: noData ? undefined : [0, max],
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 40,
+      marks: noData
+        ? [Plot.text(['No data'], { x: 0, y: 0 })]
+        : [
+            barWithLabelY(data, {
+              x: 'year',
+              y: 'median_household_income__hispanic',
+              yErrorMargin: 'Mmedian_household_income__hispanic',
+              labelFormat: '$,.0f',
+              fill: colors.vibrant.teal,
+              labelFill: 'black',
+            }),
+          ],
+    };
   },
   population__total(neighborhood, data) {
     return {
