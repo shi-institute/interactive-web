@@ -713,7 +713,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       y: {
         label: 'Percent',
         tickFormat: '.0%',
-        domain: [0, 1],
+        domain: [0, 0.2],
       },
       marginTop: 30,
       marginRight: 0,
@@ -729,6 +729,16 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           labelFill: 'black',
         }),
       ],
+      style: `
+        g[aria-label='y-axis tick label'] {
+          text:last-child {
+            fill: hsl(0, 100.00%, 50%);
+            @media (prefers-color-scheme: dark) {
+              fill:hsl(0, 100.00%, 75%);
+            }
+          }
+        }
+      `,
     };
   },
   geographic_mobility__different_state_fraction(neighborhood, data) {
@@ -740,7 +750,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       y: {
         label: 'Percent',
         tickFormat: '.0%',
-        domain: [0, 1],
+        domain: [0, 0.2],
       },
       marginTop: 30,
       marginRight: 0,
@@ -756,6 +766,16 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           labelFill: 'black',
         }),
       ],
+      style: `
+        g[aria-label='y-axis tick label'] {
+          text:last-child {
+            fill: hsl(0, 100.00%, 50%);
+            @media (prefers-color-scheme: dark) {
+              fill:hsl(0, 100.00%, 75%);
+            }
+          }
+        }
+      `,
     };
   },
   population__children_living_with_grandparent_householder_fraction(neighborhood, data) {
@@ -767,7 +787,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       y: {
         label: 'Percent grandparents caring for their grandchildren',
         tickFormat: '.0%',
-        domain: [0, 1],
+        domain: [0, 0.2],
       },
       marginTop: 30,
       marginRight: 0,
@@ -783,6 +803,16 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           labelFill: 'black',
         }),
       ],
+      style: `
+        g[aria-label='y-axis tick label'] {
+          text:last-child {
+            fill: hsl(0, 100.00%, 50%);
+            @media (prefers-color-scheme: dark) {
+              fill:hsl(0, 100.00%, 75%);
+            }
+          }
+        }
+      `,
     };
   },
   household_vehicles__none_fraction(neighborhood, data) {

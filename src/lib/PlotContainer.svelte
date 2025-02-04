@@ -15,6 +15,15 @@
   export let plotNode: PlotNode | undefined = undefined;
   export let boxSizing: 'border-box' | 'content-box' = 'content-box';
 
+  $: randomClass = 'c' + Math.random().toString(36).substring(7);
+  $: customPlotCss = (async () => {
+    return `
+      .${randomClass} figure {
+        ${(typeof plot === 'function' ? plot(0) : plot).style}
+      }
+    `;
+  })();
+
   let slotBeforeHeight = 0;
   let slotAfterHeight = 0;
 
@@ -147,7 +156,7 @@
     <div
       bind:clientWidth="{popupClientWidth}"
       bind:clientHeight="{popupClientHeight}"
-      class="plot-container"
+      class="plot-container {randomClass}"
     >
       <div bind:this="{popopPlotDestinationNode}" role="img" class="{plotClass}">
         <div class="wait">
@@ -156,12 +165,15 @@
         </div>
       </div>
     </div>
+    {#await customPlotCss then css}
+      {@html `<` + `style>${css}</style>`}
+    {/await}
     <slot name="after" />
     <slot name="popup-after" />
   </Popout>
 {/if}
 
-<div class="plot-container">
+<div class="plot-container {randomClass}">
   <div class="slots" bind:clientHeight="{slotBeforeHeight}">
     <slot name="main-before" />
     <slot name="before" />
@@ -174,6 +186,9 @@
       ></div>
     </div>
   </div>
+  {#await customPlotCss then css}
+    {@html `<` + `style>${css}</style>`}
+  {/await}
   <div class="slots" bind:clientHeight="{slotAfterHeight}">
     {#if enablePopup}
       <button class="popup-button" on:click="{openInPopupWindow}">Open in popup</button>
