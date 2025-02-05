@@ -856,13 +856,64 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
   },
   insurance_coverage__RACE_BREAKDOWN__with_insurance_fraction(neighborhood, data) {
     const tidyData = getTidyInsuranceData(data);
-    const facetNames = tidyData.map((d) => d.group);
+    const facetNames = tidyData.filter((d) => !!d.fraction).map((d) => d.group);
     const { facetOrder, legendColors, facetColors } = getRaceBreakdownColors(facetNames);
 
     return {
       title: 'With health insurance',
       subtitle: `${neighborhood}, 2009-2023`,
       caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      fx: { label: 'Survey period' },
+      x: { axis: null, domain: facetOrder },
+      y: {
+        label: 'Percent with insurance coverage',
+        tickFormat: '.0%',
+        domain: [0, 1],
+      },
+      color: {
+        legend: true,
+        domain: facetOrder,
+        range: legendColors,
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 40,
+      marks: [
+        barWithLabelY(tidyData, {
+          x: 'group',
+          fx: 'year',
+          y: 'fraction',
+          yErrorMargin: 'moe',
+          labelFormat: '.1%',
+          labelFill: (d) => (d.group === 'Overall' ? '#666' : facetColors.get(d.group)),
+          fill: 'group',
+        }),
+        Plot.ruleY([0]),
+      ],
+    };
+  },
+  tenure__renter_fraction(neighborhood, data) {
+    return getRenterPlotConfig(neighborhood, data, 'Overall');
+  },
+  tenure__black__renter_fraction(neighborhood, data) {
+    return getRenterPlotConfig(neighborhood, data, 'Black');
+  },
+  tenure__white__renter_fraction(neighborhood, data) {
+    return getRenterPlotConfig(neighborhood, data, 'White');
+  },
+  tenure__hispanic__renter_fraction(neighborhood, data) {
+    return getRenterPlotConfig(neighborhood, data, 'Hispanic or Latino');
+  },
+  tenure__RACE_BREAKDOWN__renter_fraction(neighborhood, data) {
+    const tidyData = getTidyRenterData(data);
+    const facetNames = tidyData.filter((d) => !!d.fraction).map((d) => d.group);
+    const { facetOrder, legendColors, facetColors } = getRaceBreakdownColors(facetNames);
+
+    return {
+      title: 'Renters',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `The Census categorizes households into renter-occupied and owner-occupied status. This figure shows the percentage of households that rent instead of own. Overall includes all households. <br /> <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       fx: { label: 'Survey period' },
       x: { axis: null, domain: facetOrder },
       y: {
@@ -902,77 +953,71 @@ type PlotConfigFunction = (neighborhood: string, data: PlotData) => Plot.PlotOpt
 type RaceBreakdownVariant = 'Overall' | 'Black' | 'White' | 'Hispanic or Latino';
 
 function getTidyInsuranceData(data: PlotData) {
-  return data
-    .flatMap(({ year, ...data }) => {
-      function calcFields<T extends typeof data>(d: T, withKey: keyof T, withoutKey: keyof T) {
-        const numerator = d[withKey];
-        if (!numerator || typeof numerator !== 'number') return null;
+  return data.flatMap(({ year, ...data }) => {
+    function calcFields<T extends typeof data>(d: T, withKey: keyof T, withoutKey: keyof T) {
+      const numerator = d[withKey];
+      if (!numerator || typeof numerator !== 'number') return null;
 
-        const denominator = [withKey, withoutKey]
-          .map((key) => d[key])
-          .filter((x) => typeof x === 'number')
-          .reduce((a, b) => a + b, 0);
-        if (!numerator || typeof numerator !== 'number') return null;
+      const denominator = [withKey, withoutKey]
+        .map((key) => d[key])
+        .filter((x) => typeof x === 'number')
+        .reduce((a, b) => a + b, 0);
+      if (!numerator || typeof numerator !== 'number') return null;
 
-        return {
-          fraction: numerator / denominator,
-          moe: calcProportionMOE(
-            d,
-            withKey.toString(),
-            [withKey, withoutKey].map((key) => key.toString())
-          ),
-        };
-      }
+      return {
+        fraction: numerator / denominator,
+        moe: calcProportionMOE(
+          d,
+          withKey.toString(),
+          [withKey, withoutKey].map((key) => key.toString())
+        ),
+      };
+    }
 
-      return [
-        {
-          year,
-          group: 'Overall',
-          ...calcFields(
-            data,
-            'insurance_coverage__with_insurance',
-            'insurance_coverage__without_insurance'
-          ),
-        },
-        {
-          year,
-          group: 'Black',
-          ...calcFields(
-            data,
-            'insurance_coverage__black__with_insurance',
-            'insurance_coverage__black__without_insurance'
-          ),
-        },
-        {
-          year,
-          group: 'White',
-          ...calcFields(
-            data,
-            'insurance_coverage__white__with_insurance',
-            'insurance_coverage__white__without_insurance'
-          ),
-        },
-        {
-          year,
-          group: 'Hispanic or Latino',
-          ...calcFields(
-            data,
-            'insurance_coverage__hispanic__with_insurance',
-            'insurance_coverage__hispanic__without_insurance'
-          ),
-        },
-      ];
-    })
-    .filter(
-      (
-        d
-      ): d is {
-        year: string;
-        group: RaceBreakdownVariant;
-        fraction: number;
-        moe?: number;
-      } => !!d.fraction
-    );
+    return [
+      {
+        year,
+        group: 'Overall',
+        ...calcFields(
+          data,
+          'insurance_coverage__with_insurance',
+          'insurance_coverage__without_insurance'
+        ),
+      },
+      {
+        year,
+        group: 'Black',
+        ...calcFields(
+          data,
+          'insurance_coverage__black__with_insurance',
+          'insurance_coverage__black__without_insurance'
+        ),
+      },
+      {
+        year,
+        group: 'White',
+        ...calcFields(
+          data,
+          'insurance_coverage__white__with_insurance',
+          'insurance_coverage__white__without_insurance'
+        ),
+      },
+      {
+        year,
+        group: 'Hispanic or Latino',
+        ...calcFields(
+          data,
+          'insurance_coverage__hispanic__with_insurance',
+          'insurance_coverage__hispanic__without_insurance'
+        ),
+      },
+    ];
+  }) satisfies {
+    year: string;
+    group: RaceBreakdownVariant;
+    fraction?: number;
+    moe?: number;
+  }[];
 }
 
 function getRaceBreakdownColors(facetNames: RaceBreakdownVariant[]) {
@@ -1012,6 +1057,91 @@ function getHealthInsurancePlotConfig(
     x: { label: 'Survey period' },
     y: {
       label: 'Percent with insurance coverage',
+      tickFormat: '.0%',
+      domain: [0, 1],
+    },
+    marginTop: 30,
+    marginRight: 0,
+    marginBottom: 36,
+    marginLeft: 40,
+    marks: [
+      barWithLabelY(
+        tidyData.filter(({ group }) => group === variant),
+        {
+          x: 'year',
+          y: 'fraction',
+          yErrorMargin: 'moe',
+          labelFormat: '.1%',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
+        }
+      ),
+    ],
+  };
+}
+
+function getTidyRenterData(data: PlotData) {
+  return data.flatMap(({ year, ...data }) => {
+    function calcFields<T extends typeof data>(d: T, renterKey: keyof T, ownerKey: keyof T) {
+      const numerator = d[renterKey];
+      if (!numerator || typeof numerator !== 'number') return null;
+
+      const denominator = [renterKey, ownerKey]
+        .map((key) => d[key])
+        .filter((x) => typeof x === 'number')
+        .reduce((a, b) => a + b, 0);
+      if (!numerator || typeof numerator !== 'number') return null;
+
+      return {
+        fraction: numerator / denominator,
+        moe: calcProportionMOE(
+          d,
+          renterKey.toString(),
+          [renterKey, ownerKey].map((key) => key.toString())
+        ),
+      };
+    }
+
+    return [
+      {
+        year,
+        group: 'Overall',
+        ...calcFields(data, 'tenure__renter', 'tenure__owner'),
+      },
+      {
+        year,
+        group: 'Black',
+        ...calcFields(data, 'tenure__black__renter', 'tenure__black__owner'),
+      },
+      {
+        year,
+        group: 'White',
+        ...calcFields(data, 'tenure__white__renter', 'tenure__white__owner'),
+      },
+      {
+        year,
+        group: 'Hispanic or Latino',
+        ...calcFields(data, 'tenure__hispanic__renter', 'tenure__hispanic__owner'),
+      },
+    ] satisfies {
+      year: string;
+      group: RaceBreakdownVariant;
+      fraction?: number;
+      moe?: number;
+    }[];
+  });
+}
+
+function getRenterPlotConfig(neighborhood: string, data: PlotData, variant: RaceBreakdownVariant) {
+  const tidyData = getTidyRenterData(data);
+
+  return {
+    title: 'Renters' + (variant === 'Overall' ? ' (all households)' : ` (${variant} households)`),
+    subtitle: `${neighborhood}, 2009-2023`,
+    caption: `The Census categorizes households into renter-occupied and owner-occupied status. This figure shows the percentage of households that rent instead of own. <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+    x: { label: 'Survey period' },
+    y: {
+      label: 'Percent households who rent',
       tickFormat: '.0%',
       domain: [0, 1],
     },
