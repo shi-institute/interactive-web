@@ -50,7 +50,8 @@ function barWithLabelY(
 
   const errorBarMark = yErrorMargin
     ? Plot.ruleX(data, {
-        x: 'year',
+        x: options.x,
+        fx: options.fx,
         y1: (d) => {
           const base = d[options.y];
           const errorMargin = d[yErrorMargin];
