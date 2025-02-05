@@ -88,8 +88,10 @@ figure > svg {
 
 @media (prefers-color-scheme: dark) {
   svg[class^='plot-'] {
-    background-color: #212121;
-    color: #e0e0e0;
+    --background-color: #212121;
+    --text-color: #e0e0e0;
+    background-color: var(--background-color);
+    color: var(--text-color);
   }
   g[aria-label='crosshair text'] {
     stroke: #212121;
