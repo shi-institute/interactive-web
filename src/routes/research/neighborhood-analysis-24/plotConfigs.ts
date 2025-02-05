@@ -1,5 +1,6 @@
 import { colors } from '$lib/colors';
 import { barWithLabelY } from '$lib/plot/marks';
+import { hasKey } from '$utils';
 import { notEmpty } from '$utils/notEmpty';
 import * as Plot from '@observablehq/plot';
 import type { PageData } from './[neighborhood=gvlspnbg_neighborhood_24]/plots/[plot]/$types';
@@ -989,6 +990,115 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           yErrorMargin: 'moe',
           labelFormat: '.1%',
           labelFill: (d) => (d.group === 'Overall' ? '#666' : facetColors.get(d.group)),
+          fill: 'group',
+        }),
+        Plot.ruleY([0]),
+      ],
+    };
+  },
+  population__RACE_ETHNICITY_BREAKDOWN(neighborhood, data) {
+    const tidyData = data.flatMap(({ year, ...data }) => {
+      return [
+        {
+          year,
+          group: 'White (not Hispanic or Latino)',
+          amount: data.ethnicity__not_hispanic_or_latino__white,
+          moe:
+            hasKey(data, 'Methnicity__not_hispanic_or_latino__white') &&
+            data.Methnicity__not_hispanic_or_latino__white,
+        },
+        {
+          year,
+          group: 'Black (not Hispanic or Latino)',
+          amount: data.ethnicity__not_hispanic_or_latino__black,
+          moe:
+            hasKey(data, 'Methnicity__not_hispanic_or_latino__black') &&
+            data.Methnicity__not_hispanic_or_latino__black,
+        },
+        {
+          year,
+          group: 'Hispanic or Latino',
+          amount: data.ethnicity__hispanic_or_latino,
+          moe:
+            hasKey(data, 'Methnicity__hispanic_or_latino') && data.Methnicity__hispanic_or_latino,
+        },
+        {
+          year,
+          group: 'Other race (not Hispanic or Latino)',
+          amount:
+            data.ethnicity__not_hispanic_or_latino__other_race +
+            data.ethnicity__not_hispanic_or_latino__amer_indian_alaskan_native +
+            data.ethnicity__not_hispanic_or_latino__asian +
+            data.ethnicity__not_hispanic_or_latino__pacific_islander,
+          moe: Math.sqrt(
+            [
+              'ethnicity__not_hispanic_or_latino__other_race',
+              'ethnicity__not_hispanic_or_latino__amer_indian_alaskan_native',
+              'ethnicity__not_hispanic_or_latino__asian',
+              'ethnicity__not_hispanic_or_latino__pacific_islander',
+            ]
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+        {
+          year,
+          group: 'Two or more races (not Hispanic or Latino)',
+          amount: data.ethnicity__not_hispanic_or_latino__two_or_more_races,
+          moe:
+            hasKey(data, 'ethnicity__not_hispanic_or_latino__two_or_more_races') &&
+            data.ethnicity__not_hispanic_or_latino__two_or_more_races,
+        },
+      ];
+    });
+
+    const facetNames = Array.from(new Set(tidyData.filter((d) => !!d.amount).map((d) => d.group)));
+
+    const facetColors = new Map([
+      ['White (not Hispanic or Latino)', colors.vibrant.orange],
+      ['Black (not Hispanic or Latino)', colors.vibrant.blue],
+      ['Hispanic or Latino', colors.vibrant.teal],
+      ['Other race (not Hispanic or Latino)', colors.vibrant.gray],
+      ['Two or more races (not Hispanic or Latino)', colors.vibrant.magenta],
+    ]);
+
+    for (const [facetName] of facetColors) {
+      if (!facetNames.includes(facetName)) {
+        facetColors.delete(facetName);
+      }
+    }
+
+    const facetOrder = Array.from(facetColors.keys());
+    const legendColors = Array.from(facetColors.values());
+
+    return {
+      title: 'Population breakdown',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      fx: { label: 'Survey period' },
+      x: { axis: null, domain: facetOrder },
+      y: {
+        label: 'Population',
+      },
+      color: {
+        legend: true,
+        domain: facetOrder,
+        range: legendColors,
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 50,
+      marks: [
+        barWithLabelY(tidyData, {
+          x: 'group',
+          fx: 'year',
+          y: 'amount',
+          yErrorMargin: 'moe',
+          labelFormat: '.0f',
           fill: 'group',
         }),
         Plot.ruleY([0]),
