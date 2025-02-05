@@ -912,13 +912,13 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     const { facetOrder, legendColors, facetColors } = getRaceBreakdownColors(facetNames);
 
     return {
-      title: 'Renters',
+      title: 'Renter households',
       subtitle: `${neighborhood}, 2009-2023`,
       caption: `The Census categorizes households into renter-occupied and owner-occupied status. This figure shows the percentage of households that rent instead of own. Overall includes all households. <br /> <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       fx: { label: 'Survey period' },
       x: { axis: null, domain: facetOrder },
       y: {
-        label: 'Percent with insurance coverage',
+        label: 'Percent households who rent',
         tickFormat: '.0%',
         domain: [0, 1],
       },
