@@ -944,6 +944,57 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       ],
     };
   },
+  employment__unemployed_fraction(neighborhood, data) {
+    return getUnemploymentFractionPlotConfig(neighborhood, data, 'Overall');
+  },
+  employment__black__unemployed_fraction(neighborhood, data) {
+    return getUnemploymentFractionPlotConfig(neighborhood, data, 'Black');
+  },
+  employment__white__unemployed_fraction(neighborhood, data) {
+    return getUnemploymentFractionPlotConfig(neighborhood, data, 'White');
+  },
+  employment__hispanic__unemployed_fraction(neighborhood, data) {
+    return getUnemploymentFractionPlotConfig(neighborhood, data, 'Hispanic or Latino');
+  },
+  employment__RACE_BREAKDOWN__unemployed_fraction(neighborhood, data) {
+    const tidyData = getTidyUnemploymentData(data);
+    const facetNames = tidyData.filter((d) => !!d.fraction).map((d) => d.group);
+    const { facetOrder, legendColors, facetColors } = getRaceBreakdownColors(facetNames);
+
+    return {
+      title: 'Unemployment',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      fx: { label: 'Survey period' },
+      x: { axis: null, domain: facetOrder },
+      y: {
+        label: 'Percent unemployed population',
+        tickFormat: '.0%',
+        domain: [0, 1],
+      },
+      color: {
+        legend: true,
+        domain: facetOrder,
+        range: legendColors,
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 40,
+      marks: [
+        barWithLabelY(tidyData, {
+          x: 'group',
+          fx: 'year',
+          y: 'fraction',
+          yErrorMargin: 'moe',
+          labelFormat: '.1%',
+          labelFill: (d) => (d.group === 'Overall' ? '#666' : facetColors.get(d.group)),
+          fill: 'group',
+        }),
+        Plot.ruleY([0]),
+      ],
+    };
+  },
 };
 
 type PlotData = PageData['neighborhoodsData'] | PageData['tractsData'];
@@ -1142,6 +1193,96 @@ function getRenterPlotConfig(neighborhood: string, data: PlotData, variant: Race
     x: { label: 'Survey period' },
     y: {
       label: 'Percent households who rent',
+      tickFormat: '.0%',
+      domain: [0, 1],
+    },
+    marginTop: 30,
+    marginRight: 0,
+    marginBottom: 36,
+    marginLeft: 40,
+    marks: [
+      barWithLabelY(
+        tidyData.filter(({ group }) => group === variant),
+        {
+          x: 'year',
+          y: 'fraction',
+          yErrorMargin: 'moe',
+          labelFormat: '.1%',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
+        }
+      ),
+    ],
+  };
+}
+
+function getTidyUnemploymentData(data: PlotData) {
+  return data.flatMap(({ year, ...data }) => {
+    function calcFields<T extends typeof data>(d: T, employedKey: keyof T, unemployedKey: keyof T) {
+      const numerator = d[unemployedKey];
+      if (!numerator || typeof numerator !== 'number') return null;
+
+      const denominator = [employedKey, unemployedKey]
+        .map((key) => d[key])
+        .filter((x) => typeof x === 'number')
+        .reduce((a, b) => a + b, 0);
+      if (!numerator || typeof numerator !== 'number') return null;
+
+      return {
+        fraction: numerator / denominator,
+        moe: calcProportionMOE(
+          d,
+          unemployedKey.toString(),
+          [employedKey, unemployedKey].map((key) => key.toString())
+        ),
+      };
+    }
+
+    return [
+      {
+        year,
+        group: 'Overall',
+        ...calcFields(data, 'employment__employed', 'employment__unemployed'),
+      },
+      {
+        year,
+        group: 'Black',
+        ...calcFields(data, 'employment__black__employed', 'employment__black__unemployed'),
+      },
+      {
+        year,
+        group: 'White',
+        ...calcFields(data, 'employment__white__employed', 'employment__white__unemployed'),
+      },
+      {
+        year,
+        group: 'Hispanic or Latino',
+        ...calcFields(data, 'employment__hispanic__employed', 'employment__hispanic__unemployed'),
+      },
+    ] satisfies {
+      year: string;
+      group: RaceBreakdownVariant;
+      fraction?: number;
+      moe?: number;
+    }[];
+  });
+}
+
+function getUnemploymentFractionPlotConfig(
+  neighborhood: string,
+  data: PlotData,
+  variant: RaceBreakdownVariant
+) {
+  const tidyData = getTidyUnemploymentData(data);
+
+  return {
+    title:
+      'Unemployment' + (variant === 'Overall' ? ' (all population)' : ` (${variant} population)`),
+    subtitle: `${neighborhood}, 2009-2023`,
+    caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+    x: { label: 'Survey period' },
+    y: {
+      label: 'Percent unemployed population',
       tickFormat: '.0%',
       domain: [0, 1],
     },
