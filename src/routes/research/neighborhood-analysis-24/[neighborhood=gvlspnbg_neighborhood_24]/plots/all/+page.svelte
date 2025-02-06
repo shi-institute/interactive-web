@@ -1,9 +1,11 @@
 <script>
   import { browser } from '$app/environment';
+  import { page } from '$app/stores';
   import PlotContainer from '$lib/PlotContainer.svelte';
+  import { notEmpty } from '$utils/notEmpty';
   import { html } from 'htl';
   import GentrificationPlots from '../../../GentrificationPlots.svelte';
-  import { plotConfigs } from '../../../plotConfigs';
+  import { blockPlotConfigs, plotConfigs } from '../../../plotConfigs';
 
   export let data;
 
@@ -14,12 +16,27 @@
         data.neighborhoodsData.filter(
           ({ neighborhood_name }) =>
             neighborhood_name.toLowerCase() === data.neighborhood.toLowerCase()
-        )
+        ),
+        $page.url
       );
     } else if (data.tract_name) {
       return config(
         data.tract_name,
-        data.tractsData.filter(({ tract_id }) => tract_id === data.tract)
+        data.tractsData.filter(({ tract_id }) => tract_id === data.tract),
+        $page.url
+      );
+    }
+  });
+
+  const blockConfigs = Object.values(blockPlotConfigs).map((config) => {
+    if (data.neighborhood) {
+      return config(
+        data.neighborhood,
+        data.neighborhoodBlocksData.filter(
+          ({ neighborhood_name }) =>
+            neighborhood_name.toLowerCase() === data.neighborhood.toLowerCase()
+        ),
+        $page.url
       );
     }
   });
@@ -31,7 +48,11 @@
   <GentrificationPlots data="{data.tractGentrificationData}" />
 {/if}
 
-{#each configs as plot}
+{#each [...configs, ...blockConfigs]
+  .filter(notEmpty)
+  .sort((a, b) => (a.title && b.title ? a.title
+          .toString()
+          .localeCompare(b.title.toString()) : 1)) as plot}
   <div>
     <PlotContainer
       fullWidth

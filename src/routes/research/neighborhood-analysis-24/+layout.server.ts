@@ -1,6 +1,5 @@
 import { PRIVATE_DATA_REPO_ACCESS_TOKEN } from '$env/static/private';
 import { deepFreeze } from '$utils';
-import { capitalize } from '$utils/capitalize';
 import { fipsToCountyName } from '$utils/fipsToCountyName';
 import { isNumber } from 'is-what';
 import { get, writable } from 'svelte/store';
@@ -16,7 +15,8 @@ export const load = (async ({ params }) => {
   if (
     cachedData.has('neighborhoodsData') &&
     cachedData.has('gentrificationData') &&
-    cachedData.has('tractsData')
+    cachedData.has('tractsData') &&
+    cachedData.has('neighborhoodBlocksData')
   ) {
     const expires = cachedData.get('expires');
     const expired = isNumber(expires) && Date.now() > expires;
@@ -33,6 +33,9 @@ export const load = (async ({ params }) => {
           })[]
         ),
         tractsData: deepFreeze(cachedData.get('tractsData') as z.infer<typeof tractDataSchema>[]),
+        neighborhoodBlocksData: deepFreeze(
+          cachedData.get('neighborhoodBlocksData') as z.infer<typeof neighborhoodBlocksDataSchema>[]
+        ),
       };
     }
   }
@@ -100,15 +103,30 @@ export const load = (async ({ params }) => {
     .then((json) => json.filter((d) => d.population__total !== null))
     .then((json) => z.array(tractDataSchema).parse(json));
 
+  const validNeighborhoodBlocksData = fetch(
+    'https://api.github.com/repos/shi-institute/interactive-web-private-data/contents/northside-24/blocks_data_series.json',
+    {
+      method: 'GET',
+      headers: {
+        Accept: 'application/vnd.github.v3.raw',
+        Authorization: `token ${PRIVATE_DATA_REPO_ACCESS_TOKEN}`,
+      },
+    }
+  )
+    .then((res) => res.json() as Promise<Record<string, unknown>[]>)
+    .then((json) => z.array(neighborhoodBlocksDataSchema).parse(json));
+
   const frozenData = await Promise.all([
     validNeighborhoodsData,
     validGentrificationData,
     validTractsData,
-  ]).then(([neighborhoodsData, gentrificationData, tractsData]) => {
+    validNeighborhoodBlocksData,
+  ]).then(([neighborhoodsData, gentrificationData, tractsData, neighborhoodBlocksData]) => {
     return {
       neighborhoodsData: deepFreeze(neighborhoodsData),
       gentrificationData: deepFreeze(gentrificationData),
       tractsData: deepFreeze(tractsData),
+      neighborhoodBlocksData: deepFreeze(neighborhoodBlocksData),
     };
   });
 
@@ -116,6 +134,7 @@ export const load = (async ({ params }) => {
     c.set('neighborhoodsData', frozenData.neighborhoodsData);
     c.set('gentrificationData', frozenData.gentrificationData);
     c.set('tractsData', frozenData.tractsData);
+    c.set('neighborhoodBlocksData', frozenData.neighborhoodBlocksData);
     c.set('expires', Date.now() + 1000 * 60); // 1 hour
     return c;
   });
@@ -613,5 +632,110 @@ const tractDataSchema = z
       tract_name: fullTractName,
       year: rest.year_range,
       ...rest,
+    };
+  });
+
+const neighborhoodBlocksDataSchema = z
+  .object({
+    neighborhood_name: z.string(),
+    year: z.number(),
+    GISJOIN: z.string(),
+    geometry: z.string(),
+
+    'age__10-14__female': z.number().nullable(),
+    'age__10-14__male': z.number().nullable(),
+    'age__15-17__female': z.number().nullable(),
+    'age__15-17__male': z.number().nullable(),
+    'age__18-19__female': z.number().nullable(),
+    'age__18-19__male': z.number().nullable(),
+    age__20__female: z.number().nullable(),
+    age__20__male: z.number().nullable(),
+    age__21__female: z.number().nullable(),
+    age__21__male: z.number().nullable(),
+    'age__22-24__female': z.number().nullable(),
+    'age__22-24__male': z.number().nullable(),
+    'age__25-29__female': z.number().nullable(),
+    'age__25-29__male': z.number().nullable(),
+    'age__30-34__female': z.number().nullable(),
+    'age__30-34__male': z.number().nullable(),
+    'age__35-39__female': z.number().nullable(),
+    'age__35-39__male': z.number().nullable(),
+    'age__40-44__female': z.number().nullable(),
+    'age__40-44__male': z.number().nullable(),
+    'age__45-49__female': z.number().nullable(),
+    'age__45-49__male': z.number().nullable(),
+    'age__5-9__female': z.number().nullable(),
+    'age__5-9__male': z.number().nullable(),
+    'age__50-54__female': z.number().nullable(),
+    'age__50-54__male': z.number().nullable(),
+    'age__55-59__female': z.number().nullable(),
+    'age__55-59__male': z.number().nullable(),
+    'age__60-61__female': z.number().nullable(),
+    'age__60-61__male': z.number().nullable(),
+    'age__62-64__female': z.number().nullable(),
+    'age__62-64__male': z.number().nullable(),
+    'age__65-66__female': z.number().nullable(),
+    'age__65-66__male': z.number().nullable(),
+    'age__67-69__female': z.number().nullable(),
+    'age__67-69__male': z.number().nullable(),
+    'age__70-74__female': z.number().nullable(),
+    'age__70-74__male': z.number().nullable(),
+    'age__75-79__female': z.number().nullable(),
+    'age__75-79__male': z.number().nullable(),
+    'age__80-84__female': z.number().nullable(),
+    'age__80-84__male': z.number().nullable(),
+    age__85_over__female: z.number().nullable(),
+    age__85_over__male: z.number().nullable(),
+    age__under_5__female: z.number().nullable(),
+    age__under_5__male: z.number().nullable(),
+    ethnicity__hispanic: z.number().nullable(),
+    ethnicity__hispanic_or_latino__amer_indian_alaskan_native: z.number().nullable(),
+    ethnicity__hispanic_or_latino__asian: z.number().nullable(),
+    ethnicity__hispanic_or_latino__black: z.number().nullable(),
+    ethnicity__hispanic_or_latino__other_race: z.number().nullable(),
+    ethnicity__hispanic_or_latino__pacific_islander: z.number().nullable(),
+    ethnicity__hispanic_or_latino__two_or_more_races: z.number().nullable(),
+    ethnicity__hispanic_or_latino__white: z.number().nullable(),
+    ethnicity__not_hispanic_or_latino: z.number().nullable(),
+    ethnicity__not_hispanic_or_latino__amer_indian_alaskan_native: z.number().nullable(),
+    ethnicity__not_hispanic_or_latino__asian: z.number().nullable(),
+    ethnicity__not_hispanic_or_latino__black: z.number().nullable(),
+    ethnicity__not_hispanic_or_latino__other_race: z.number().nullable(),
+    ethnicity__not_hispanic_or_latino__pacific_islander: z.number().nullable(),
+    ethnicity__not_hispanic_or_latino__two_or_more_races: z.number().nullable(),
+    ethnicity__not_hispanic_or_latino__white: z.number().nullable(),
+    female__total: z.number().nullable(),
+    female_total: z.number().nullable(),
+    hispanic__total: z.number().nullable(),
+    households__total: z.number().nullable(),
+    households__with_seniors: z.number().nullable(),
+    households__with_seniors__1_person: z.number().nullable(),
+    households__with_seniors__2_or_more_persons: z.number().nullable(),
+    households__with_seniors__2_or_more_persons__family: z.number().nullable(),
+    households__with_seniors__2_or_more_persons__nonfamily: z.number().nullable(),
+    households__without_seniors: z.number().nullable(),
+    households__without_seniors__1_person: z.number().nullable(),
+    households__without_seniors__2_or_more_persons: z.number().nullable(),
+    households__without_seniors__2_or_more_persons__family: z.number().nullable(),
+    households__without_seniors__2_or_more_persons__nonfamily: z.number().nullable(),
+    housing__owned_mortage_loan: z.number().nullable(),
+    housing__owned_no_loan: z.number().nullable(),
+    housing__owner_occupied: z.number().nullable(),
+    housing__renter_occupied: z.number().nullable(),
+    housing__total_occupied: z.number().nullable(),
+    housing_units__occupied: z.number().nullable(),
+    housing_units__total: z.number().nullable(),
+    housing_units__vacant: z.number().nullable(),
+    index_right: z.number().nullable(),
+    male__total: z.number().nullable(),
+    male_total: z.number().nullable(),
+    not_hispanic__total: z.number().nullable(),
+    population_total: z.number().nullable(),
+  })
+  .transform(({ population_total, year, ...rest }) => {
+    return {
+      ...rest,
+      year: year.toString(),
+      population__total: population_total,
     };
   });

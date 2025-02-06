@@ -1,8 +1,12 @@
+import { browser } from '$app/environment';
+import { page } from '$app/stores';
 import { colors } from '$lib/colors';
 import { barWithLabelY } from '$lib/plot/marks';
 import { hasKey } from '$utils';
 import { notEmpty } from '$utils/notEmpty';
 import * as Plot from '@observablehq/plot';
+import * as d3 from 'd3';
+import { get } from 'svelte/store';
 import type { PageData } from './[neighborhood=gvlspnbg_neighborhood_24]/plots/[plot]/$types';
 import { calcProportionMOE } from './calcProportionMOE';
 
@@ -183,11 +187,13 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     };
   },
   population__total(neighborhood, data) {
+    const maxDigits = Math.max(...data.map((d) => d.population__total?.toString?.()?.length || 0));
+
     return {
       title: 'Total Population',
-      subtitle: `${neighborhood} neighborhood, 2009-2023`,
+      subtitle: `${neighborhood}, 2009-2023`,
       caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
-      x: { label: 'Survey period' },
+      x: { label: 'Survey period', type: 'band' },
       y: {
         label: 'Total Population',
         tickFormat: (d) => d.toLocaleString(),
@@ -195,7 +201,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marginTop: 30,
       marginRight: 0,
       marginBottom: 36,
-      marginLeft: 40,
+      marginLeft: maxDigits > 3 ? 50 : 40,
       marks: [
         barWithLabelY(data, {
           x: 'year',
@@ -1107,9 +1113,522 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
   },
 };
 
-type PlotData = PageData['neighborhoodsData'] | PageData['tractsData'];
+export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
+  population__total(neighborhood, data) {
+    // @ts-expect-error while the data object has different keys, all of the keys
+    // needed for this plot are the same
+    const plotConfig = plotConfigs.population__total(neighborhood, data);
+    plotConfig.subtitle = `${neighborhood} (decennial census)`;
+    if (plotConfig.x) plotConfig.x.label = 'Year';
+    return plotConfig;
+  },
+  population__RACE_ETHNICITY_BREAKDOWN(neighborhood, data) {
+    // @ts-expect-error while the data object has different keys, all of the keys
+    // needed for this plot are the same
+    const plotConfig = plotConfigs.population__RACE_ETHNICITY_BREAKDOWN(neighborhood, data);
+    plotConfig.subtitle = `${neighborhood} (decennial census)`;
+    if (plotConfig.fx) plotConfig.fx.label = 'Year';
+    return plotConfig;
+  },
+  housing_units(neighborhood, data) {
+    const tidyData = data.flatMap((d) => {
+      return [
+        {
+          year: d.year,
+          group: 'Occupied',
+          amount: d.housing_units__occupied,
+        },
+        {
+          year: d.year,
+          group: 'Vacant',
+          amount: d.housing_units__vacant,
+        },
+      ];
+    });
 
-type PlotConfigFunction = (neighborhood: string, data: PlotData) => Plot.PlotOptions;
+    return {
+      title: 'Housing units',
+      subtitle: `${neighborhood} (decennial census)`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      fx: { label: 'Year' },
+      x: { axis: null, domain: ['Occupied', 'Vacant'] },
+      y: {
+        label: 'Total',
+        tickFormat: '.0f',
+      },
+      color: {
+        legend: true,
+        domain: ['Occupied', 'Vacant'],
+        range: [colors.vibrant.teal, colors.vibrant.gray],
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 40,
+      marks: [
+        barWithLabelY(tidyData, {
+          x: 'group',
+          fx: 'year',
+          y: 'amount',
+          yErrorMargin: 'moe',
+          labelFormat: '.0f',
+          fill: 'group',
+          labelFill: 'black',
+        }),
+      ],
+    };
+  },
+  tenure__renter_fraction(neighborhood, data) {
+    const plotConfig = plotConfigs.tenure__renter_fraction(
+      neighborhood,
+      // @ts-expect-error while the data object has different keys, all of the keys
+      // needed for this plot are the same
+      data.map(({ housing__owner_occupied, housing__renter_occupied, year }) => ({
+        tenure__owner: housing__owner_occupied,
+        tenure__renter: housing__renter_occupied,
+        year,
+      }))
+    );
+    plotConfig.subtitle = `${neighborhood} (decennial census)`;
+    if (plotConfig.x) plotConfig.x.label = 'Year';
+    return plotConfig;
+  },
+  population__18_over_under(neighborhood, data) {
+    const tidyData = data.flatMap((d) => {
+      return [
+        {
+          year: d.year,
+          group: 'Under 18',
+          amount:
+            (d['age__under_5__male'] ?? 0) +
+            (d['age__5-9__male'] ?? 0) +
+            (d['age__10-14__male'] ?? 0) +
+            (d['age__15-17__male'] ?? 0) +
+            (d['age__under_5__female'] ?? 0) +
+            (d['age__5-9__female'] ?? 0) +
+            (d['age__10-14__female'] ?? 0) +
+            (d['age__15-17__female'] ?? 0),
+        },
+        {
+          year: d.year,
+          group: 'Over 18',
+          amount:
+            (d.population__total ?? 0) -
+            ((d['age__under_5__male'] ?? 0) +
+              (d['age__5-9__male'] ?? 0) +
+              (d['age__10-14__male'] ?? 0) +
+              (d['age__15-17__male'] ?? 0) +
+              (d['age__under_5__female'] ?? 0) +
+              (d['age__5-9__female'] ?? 0) +
+              (d['age__10-14__female'] ?? 0) +
+              (d['age__15-17__female'] ?? 0)),
+        },
+      ];
+    });
+
+    const maxDigits = Math.max(...tidyData.map((d) => d.amount?.toString?.()?.length || 0));
+
+    return {
+      title: 'Population under and over 18',
+      subtitle: `${neighborhood} (decennial census)`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      fx: { label: 'Year' },
+      x: { axis: null, domain: ['Under 18', 'Over 18'] },
+      y: {
+        label: 'Total',
+        tickFormat: '.0f',
+      },
+      color: {
+        legend: true,
+        domain: ['Under 18', 'Over 18'],
+        range: [colors.vibrant.lightblue, colors.vibrant.blue],
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: maxDigits > 3 ? 50 : 40,
+      marks: [
+        barWithLabelY(tidyData, {
+          x: 'group',
+          fx: 'year',
+          y: 'amount',
+          yErrorMargin: 'moe',
+          labelFormat: '.0f',
+          fill: 'group',
+          labelFill: 'black',
+        }),
+      ],
+    };
+  },
+  age__under_5(neighborhood, data) {
+    const tidyData = data.map((d) => {
+      return {
+        year: d.year,
+        age__under_5: (d.age__under_5__male || 0) + (d.age__under_5__female || 0),
+        // Mage__under_5: (d.Mage__under_5__male || 0) + (d.Mage__under_5__female || 0),
+      };
+    });
+
+    const maxDigits = Math.max(...tidyData.map((d) => d.age__under_5?.toString?.()?.length || 0));
+
+    return {
+      title: 'Children under age 5',
+      subtitle: `${neighborhood} (decennial census)`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      x: { label: 'Survey period', type: 'band' },
+      y: {
+        label: 'Total Population',
+        tickFormat: (d) => d.toLocaleString(),
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: maxDigits > 3 ? 50 : 40,
+      marks: [
+        barWithLabelY(tidyData, {
+          x: 'year',
+          y: 'age__under_5',
+          yErrorMargin: 'Mage__under_5',
+          labelFormat: '.0f',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
+        }),
+      ],
+    };
+  },
+  age__65_over(neighborhood, data) {
+    const tidyData = data.map((d) => {
+      return {
+        year: d.year,
+        age__65_over:
+          (d['age__65-66__male'] || 0) +
+          (d['age__67-69__male'] || 0) +
+          (d['age__70-74__male'] || 0) +
+          (d['age__75-79__male'] || 0) +
+          (d['age__80-84__male'] || 0) +
+          (d['age__85_over__male'] || 0) +
+          (d['age__65-66__female'] || 0) +
+          (d['age__67-69__female'] || 0) +
+          (d['age__70-74__female'] || 0) +
+          (d['age__75-79__female'] || 0) +
+          (d['age__80-84__female'] || 0) +
+          (d['age__85_over__female'] || 0),
+      };
+    });
+
+    const maxDigits = Math.max(...tidyData.map((d) => d.age__65_over?.toString?.()?.length || 0));
+
+    return {
+      title: 'Senior population (65 and over)',
+      subtitle: `${neighborhood} (decennial census)`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      x: { label: 'Survey period', type: 'band' },
+      y: {
+        label: 'Total Population',
+        tickFormat: (d) => d.toLocaleString(),
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: maxDigits > 3 ? 50 : 40,
+      marks: [
+        barWithLabelY(tidyData, {
+          x: 'year',
+          y: 'age__65_over',
+          yErrorMargin: 'Mage__65_over',
+          labelFormat: '.0f',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
+        }),
+      ],
+    };
+  },
+  households__with_seniors__1_person_percent(neighborhood, data) {
+    const tidyData = data.map((d) => {
+      return {
+        year: d.year,
+        households__with_seniors__1_person_percent:
+          (d.households__with_seniors__1_person || 0) / (d.households__total || 0),
+      };
+    });
+
+    return {
+      title: 'Seniors (age 65 and over) living alone',
+      subtitle: `${neighborhood} (decennial census)`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      x: { label: 'Survey period', type: 'band' },
+      y: {
+        label: 'Total Population',
+        tickFormat: '.0%',
+        domain: [0, 0.2],
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 40,
+      marks: [
+        barWithLabelY(tidyData, {
+          x: 'year',
+          y: 'households__with_seniors__1_person_percent',
+          yErrorMargin: 'Mhouseholds__with_seniors__1_person_percent',
+          labelFormat: '.1%',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
+        }),
+      ],
+      style: `
+        g[aria-label='y-axis tick label'] {
+          text:last-child {
+            fill: hsl(0, 100.00%, 50%);
+            @media (prefers-color-scheme: dark) {
+              fill:hsl(0, 100.00%, 75%);
+            }
+          }
+        }
+      `,
+    };
+  },
+  households__with_seniors__1_person(neighborhood, data) {
+    return {
+      title: 'Seniors (age 65 and over) living alone',
+      subtitle: `${neighborhood} (decennial census)`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      x: { label: 'Survey period', type: 'band' },
+      y: {
+        label: 'Total Population',
+        tickFormat: '.0f',
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 40,
+      marks: [
+        barWithLabelY(data, {
+          x: 'year',
+          y: 'households__with_seniors__1_person',
+          yErrorMargin: 'Mhouseholds__with_seniors__1_person',
+          labelFormat: '.0f',
+          fill: colors.vibrant.teal,
+          labelFill: 'black',
+        }),
+      ],
+    };
+  },
+  population_pyramid(neighborhood, data, url) {
+    const year = url.searchParams.get('year') || '2020';
+
+    const tidyData = data
+      .flatMap((d) => {
+        const M = { year: d.year, sex: 'M' };
+        const F = { year: d.year, sex: 'F' };
+
+        return [
+          { ...M, age_start: 0, age_end: 5, population: d.age__under_5__male },
+          { ...M, age_start: 5, age_end: 10, population: d['age__5-9__male'] },
+          { ...M, age_start: 10, age_end: 15, population: d['age__10-14__male'] },
+          {
+            ...M,
+            age_start: 15,
+            age_end: 20,
+            population: (d['age__15-17__male'] || 0) + (d['age__18-19__male'] || 0),
+          },
+          {
+            ...M,
+            age_start: 20,
+            age_end: 25,
+            population:
+              (d['age__20__male'] || 0) + (d['age__21__male'] || 0) + (d['age__22-24__male'] || 0),
+          },
+          { ...M, age_start: 25, age_end: 30, population: d['age__25-29__male'] },
+          { ...M, age_start: 30, age_end: 35, population: d['age__30-34__male'] },
+          { ...M, age_start: 35, age_end: 40, population: d['age__35-39__male'] },
+          { ...M, age_start: 40, age_end: 45, population: d['age__40-44__male'] },
+          { ...M, age_start: 45, age_end: 50, population: d['age__45-49__male'] },
+          { ...M, age_start: 50, age_end: 55, population: d['age__50-54__male'] },
+          { ...M, age_start: 55, age_end: 60, population: d['age__55-59__male'] },
+          {
+            ...M,
+            age_start: 60,
+            age_end: 65,
+            population: (d['age__60-61__male'] || 0) + (d['age__62-64__male'] || 0),
+          },
+          {
+            ...M,
+            age_start: 65,
+            age_end: 70,
+            population: (d['age__65-66__male'] || 0) + (d['age__67-69__male'] || 0),
+          },
+          { ...M, age_start: 70, age_end: 75, population: d['age__70-74__male'] },
+          { ...M, age_start: 75, age_end: 80, population: d['age__75-79__male'] },
+          { ...M, age_start: 80, age_end: 85, population: d['age__80-84__male'] },
+          { ...M, age_start: 85, age_end: null, population: d['age__85_over__male'] },
+          { ...M, age_start: 90, age_end: null, population: null },
+
+          { ...F, age_start: 0, age_end: 5, population: d.age__under_5__female },
+          { ...F, age_start: 5, age_end: 10, population: d['age__5-9__female'] },
+          { ...F, age_start: 10, age_end: 15, population: d['age__10-14__female'] },
+          {
+            ...F,
+            age_start: 15,
+            age_end: 20,
+            population: (d['age__15-17__female'] || 0) + (d['age__18-19__female'] || 0),
+          },
+          {
+            ...F,
+            age_start: 20,
+            age_end: 25,
+            population:
+              (d['age__20__female'] || 0) +
+              (d['age__21__female'] || 0) +
+              (d['age__22-24__female'] || 0),
+          },
+          { ...F, age_start: 25, age_end: 30, population: d['age__25-29__female'] },
+          { ...F, age_start: 30, age_end: 35, population: d['age__30-34__female'] },
+          { ...F, age_start: 35, age_end: 40, population: d['age__35-39__female'] },
+          { ...F, age_start: 40, age_end: 45, population: d['age__40-44__female'] },
+          { ...F, age_start: 45, age_end: 50, population: d['age__45-49__female'] },
+          { ...F, age_start: 50, age_end: 55, population: d['age__50-54__female'] },
+          { ...F, age_start: 55, age_end: 60, population: d['age__55-59__female'] },
+          {
+            ...F,
+            age_start: 60,
+            age_end: 65,
+            population: (d['age__60-61__female'] || 0) + (d['age__62-64__female'] || 0),
+          },
+          {
+            ...F,
+            age_start: 65,
+            age_end: 70,
+            population: (d['age__65-66__female'] || 0) + (d['age__67-69__female'] || 0),
+          },
+          { ...F, age_start: 70, age_end: 75, population: d['age__70-74__female'] },
+          { ...F, age_start: 75, age_end: 80, population: d['age__75-79__female'] },
+          { ...F, age_start: 80, age_end: 85, population: d['age__80-84__female'] },
+          { ...F, age_start: 85, age_end: null, population: d['age__85_over__female'] },
+          { ...F, age_start: 90, age_end: null, population: null },
+        ];
+      })
+      .filter((d) => d.year === year);
+
+    const gap = 20;
+    const labelOffset = 26;
+    const maxPopulation = d3.max(tidyData, (d) => d.population) || 0;
+    const ticks = d3.ticks(0, maxPopulation, 4);
+
+    const yAxis = [
+      Plot.text(d3.range(0, 95, 10), { y: (d) => d }),
+      Plot.text(['or'], { y: 90, dy: 10, fontWeight: 400, opacity: 0.7 }),
+      Plot.text(['more'], { y: 90, dy: 20, fontWeight: 400, opacity: 0.7 }),
+      Plot.text(['Years'], { y: 80, dy: 10, fontWeight: 400 }),
+      Plot.ruleY(d3.range(5, 95, 5), {
+        x1: (d) => (d % 10 == 0 ? 0 : 0.5),
+        x2: 2,
+        dx: gap / 2,
+        strokeWidth: 0.7,
+      }),
+      Plot.ruleY(d3.range(5, 95, 5), {
+        x1: (d) => (d % 10 == 0 ? 0 : -0.5),
+        x2: -2,
+        dx: -gap / 2,
+        strokeWidth: 0.7,
+      }),
+    ];
+
+    const xAxis = [
+      Plot.ruleY([0], { x1: 0, x2: maxPopulation, dx: gap, strokeWidth: 0.5 }),
+      Plot.ruleX(ticks, { x: (d) => d, y: 0, insetBottom: -5, dx: gap }),
+      Plot.text(ticks, { x: (d) => d, y: 0, dx: gap, dy: 12 }),
+
+      Plot.ruleY([0], { x1: 0, x2: -maxPopulation, dx: -gap, strokeWidth: 0.5 }),
+      Plot.ruleX(ticks, { x: (d) => -d, y: 0, insetBottom: -5, dx: -gap }),
+      Plot.text(ticks, { x: (d) => -d, y: 0, dx: -gap, dy: 12 }),
+
+      Plot.text(['← Male'], {
+        x: 0,
+        y: 0,
+        dx: -gap,
+        dy: 25,
+        textAnchor: 'end',
+      }),
+      Plot.text(['Female → '], {
+        x: 0,
+        y: 0,
+        dx: gap,
+        dy: 25,
+        textAnchor: 'start',
+      }),
+    ];
+
+    return {
+      title: 'Population pyramid',
+      subtitle: `${neighborhood}, ${year} (decinnial census)`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      x: {
+        tickFormat: Math.abs,
+        ticks: 5,
+        label: 'Population',
+        axis: null,
+        domain: [-maxPopulation - 0, maxPopulation + 0],
+      },
+      y: { axis: null, domain: [0, 90] },
+      marginTop: 10,
+      marginRight: gap + labelOffset,
+      marginBottom: 36,
+      marginLeft: gap + labelOffset,
+      marks: [
+        yAxis,
+        xAxis,
+        Plot.areaX(tidyData, {
+          y: 'age_start',
+          x: (d) => -d.population,
+          dx: -gap,
+          fill: colors.vibrant.blue,
+          filter: (d) => d.sex === 'M',
+          curve: 'step-before',
+          // curve: 'catmull-rom',
+        }),
+        Plot.areaX(tidyData, {
+          y: 'age_start',
+          x: 'population',
+          dx: gap,
+          fill: colors.vibrant.magenta,
+          filter: (d) => d.sex === 'F',
+          curve: 'step-before',
+        }),
+        Plot.textX(tidyData, {
+          y: (d) => d.age_start + 2.5,
+          x: (d) => -d.population,
+          lineAnchor: 'middle',
+          textAnchor: 'end',
+          dx: -labelOffset,
+          filter: (d) => d.sex === 'M',
+          text: 'population',
+          opacity: 0.5,
+        }),
+        Plot.textX(tidyData, {
+          y: (d) => d.age_start + 2.5,
+          x: (d) => d.population,
+          lineAnchor: 'middle',
+          textAnchor: 'start',
+          dx: labelOffset,
+          filter: (d) => d.sex === 'F',
+          text: 'population',
+          opacity: 0.5,
+        }),
+      ],
+    };
+  },
+};
+
+type PlotData = PageData['neighborhoodsData'] | PageData['tractsData'];
+type BlockPlotData = PageData['neighborhoodBlocksData'];
+
+type PlotConfigFunction = (neighborhood: string, data: PlotData, url: URL) => Plot.PlotOptions;
+type BlockPlotConfigFunction = (
+  neighborhood: string,
+  data: BlockPlotData,
+  url: URL
+) => Plot.PlotOptions;
 
 type RaceBreakdownVariant = 'Overall' | 'Black' | 'White' | 'Hispanic or Latino';
 
