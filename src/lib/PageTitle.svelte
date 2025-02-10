@@ -20,10 +20,10 @@
         0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99, 1, 1,
       ],
     });
-    observer.observe(thisElem);
+    if (thisElem) observer.observe(thisElem);
   });
   onDestroy(() => {
-    observer?.unobserve(thisElem);
+    if (thisElem) observer?.unobserve(thisElem);
     observer?.disconnect();
   });
 
