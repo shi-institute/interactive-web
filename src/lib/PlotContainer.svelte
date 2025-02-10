@@ -127,6 +127,63 @@
     }
   }
 
+  let popupWindow: Window | null = null;
+  function windowInitialised(_popupWindow: Window | null) {
+    popupWindow = _popupWindow;
+  }
+
+  $: plotIsInIframe = browser && window.self !== window.top;
+  $: {
+    // if the webpage containing the PlotContainer element is in an iframe,
+    // we need to listen for resizes on the iframe window because
+    // svelte's bind syntax does not work within iframes for some reason
+    // (as of 2025-02-10, version 4.2.18)
+    if (plotIsInIframe && popupWindow && popopPlotDestinationNode) {
+      const frameDocument = popopPlotDestinationNode.ownerDocument;
+      const plotContainerElem = frameDocument.querySelector('.plot-container');
+      popupWindow.addEventListener('resize', () => {
+        if (plotContainerElem) {
+          popupClientWidth = plotContainerElem.clientWidth;
+          popupClientHeight = plotContainerElem.clientHeight;
+        }
+      });
+    }
+  }
+
+  function waitForAllStyleSheetsToLoad(window: Window | null) {
+    return new Promise((resolve, reject) => {
+      if (!window) {
+        reject('No window');
+        return;
+      }
+      const stylesheets = window.document.body.querySelectorAll('link[rel="stylesheet"]');
+
+      // wait for all stylesheets to load
+      let loadCount = 0;
+      stylesheets.forEach((link) => {
+        link.addEventListener('load', () => {
+          loadCount++;
+          if (loadCount === stylesheets.length) {
+            resolve(true);
+          }
+        });
+      });
+    });
+  }
+
+  // track whether all stylesheets have loaded in the popup window
+  // so we can hide the popup until the styles have loaded
+  // so the initial render does not have unstyled flashes
+  // and the calculated initial height is correct
+  let allStyleSheetsLoaded = false;
+  $: if (popupWindow && popupOpen) {
+    waitForAllStyleSheetsToLoad(popupWindow).then(() => {
+      allStyleSheetsLoaded = true;
+    });
+  } else {
+    allStyleSheetsLoaded = false;
+  }
+
   export function openInPopupWindow() {
     popupOpen = true;
   }
@@ -136,7 +193,13 @@
 </script>
 
 {#if popupOpen}
-  <Popout on:close="{handlePopupClose}" width="{popupWidth}" height="{popupHeight}">
+  <Popout
+    on:close="{handlePopupClose}"
+    width="{popupWidth}"
+    height="{popupHeight}"
+    copyStyles="{false}"
+    windowInitialised="{windowInitialised}"
+  >
     <head>
       <link rel="stylesheet" href="{assets}/global.css" />
     </head>
@@ -151,25 +214,27 @@
         height: 100%;
       }
     </style>
-    <slot name="popup-before" />
-    <slot name="before" />
-    <div
-      bind:clientWidth="{popupClientWidth}"
-      bind:clientHeight="{popupClientHeight}"
-      class="plot-container {randomClass}"
-    >
-      <div bind:this="{popopPlotDestinationNode}" role="img" class="{plotClass}">
-        <div class="wait">
-          <ProgressRing style="--fds-accent-default: currentColor;" />
-          Please wait
+    {#if allStyleSheetsLoaded}
+      <slot name="popup-before" />
+      <slot name="before" />
+      <div
+        bind:clientWidth="{popupClientWidth}"
+        bind:clientHeight="{popupClientHeight}"
+        class="plot-container {randomClass}"
+      >
+        <div bind:this="{popopPlotDestinationNode}" role="img" class="{plotClass}">
+          <div class="wait">
+            <ProgressRing style="--fds-accent-default: currentColor;" />
+            Please wait
+          </div>
         </div>
       </div>
-    </div>
-    {#await customPlotCss then css}
-      {@html `<` + `style>${css}</style>`}
-    {/await}
-    <slot name="after" />
-    <slot name="popup-after" />
+      {#await customPlotCss then css}
+        {@html `<` + `style>${css}</style>`}
+      {/await}
+      <slot name="after" />
+      <slot name="popup-after" />
+    {/if}
   </Popout>
 {/if}
 
