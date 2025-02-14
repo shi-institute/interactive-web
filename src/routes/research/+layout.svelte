@@ -57,6 +57,12 @@
       <ThemeSwitchButton />
     </div>
   </header>
+{:else}
+  <style>
+    #pageArea {
+      --header-height: 0px;
+    }
+  </style>
 {/if}
 
 <main style="--headerVisibleHeight: {headerVisibleHeight}px;">
