@@ -1,5 +1,6 @@
 <script lang="ts">
   import { dev } from '$app/environment';
+  import ThemeSwitchButton from '$lib/ThemeSwitchButton.svelte';
   import 'fluent-svelte/theme.css';
   import 'leaflet/dist/leaflet.css';
   import { onDestroy, onMount } from 'svelte';
@@ -38,19 +39,23 @@
 
 {#if !data.isEmbedded}
   <header bind:this="{headerElem}">
-    <nav>
-      <ul>
-        <a href="https://www.furman.edu/shi-institute/sustainability-research/">
-          Shi Applied Research
-        </a>
-        <a href="/research">All Visualizations</a>
-        {#if dev}
-          <a href="/research/sitemap">Sitemap</a>
-        {/if}
-      </ul>
-    </nav>
-    <div class="title"></div>
-    <div class="meta"></div>
+    <div class="left">
+      <nav>
+        <ul>
+          <a href="https://www.furman.edu/shi-institute/sustainability-research/">
+            Shi Applied Research
+          </a>
+          <a href="/research">All Visualizations</a>
+          {#if dev}
+            <a href="/research/sitemap">Sitemap</a>
+          {/if}
+        </ul>
+      </nav>
+      <div class="title"></div>
+    </div>
+    <div class="meta">
+      <ThemeSwitchButton />
+    </div>
   </header>
 {:else}
   <style>
@@ -73,6 +78,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     padding: 0 10px 0 0;
     font-size: 13px;
     flex-grow: 0;
@@ -92,7 +98,7 @@
     height: var(--height);
     display: inline-flex;
     align-items: center;
-    color: #e0e0e0;
+    color: inherit;
     text-decoration: none;
     padding: 0 10px;
   }

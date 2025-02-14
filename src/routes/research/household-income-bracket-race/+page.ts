@@ -1,6 +1,7 @@
 import { browser } from '$app/environment';
 import { colors } from '$lib/colors';
 import { opWonkOptionsStore } from '$stores/opWonkOptionsStore';
+import { themeMode } from '$stores/themeMode';
 import * as Plot from '@observablehq/plot';
 import { html } from 'htl';
 import { get } from 'svelte/store';
@@ -386,9 +387,7 @@ export const load = (async ({ data }) => {
                 ? createMedianIncomeLineMarks(
                     pmhi,
                     placeMedianHouseholdIncome,
-                    window?.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-                      ? '#aaa'
-                      : '#777'
+                    get(themeMode) === 'dark' ? '#aaa' : '#777'
                   )
                 : []),
             ],
@@ -412,10 +411,7 @@ export const load = (async ({ data }) => {
     return [
       // dotted color background
       Plot.ruleY([y], {
-        stroke:
-          window?.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-            ? '#212121'
-            : '#fff',
+        stroke: get(themeMode) === 'dark' ? '#212121' : '#fff',
         strokeDasharray: '4',
         strokeWidth: 1.2,
       }),
@@ -434,10 +430,7 @@ export const load = (async ({ data }) => {
         monospace: true,
         fontSize: 12,
         fill: color,
-        stroke:
-          window?.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-            ? '#212121'
-            : '#fff',
+        stroke: get(themeMode) === 'dark' ? '#212121' : '#fff',
         strokeWidth: 10,
       }),
     ];

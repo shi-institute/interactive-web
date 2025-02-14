@@ -3,6 +3,7 @@
   import EmbedBar from '$lib/EmbedBar.svelte';
   import PlotContainer from '$lib/PlotContainer.svelte';
   import { opWonkOptionsStore } from '$stores/opWonkOptionsStore';
+  import { themeMode } from '$stores/themeMode';
   import { downloadElement } from '$utils/downloadElement';
   import { Button } from 'fluent-svelte';
   import type { PageData } from './$types';
@@ -82,28 +83,30 @@
           disabled="{exporting}"
         />
         <Legend />
-        <PlotContainer
-          plot="{(width) =>
-            data.generatePlotOptions($opWonkOptionsStore.yearsACS, $opWonkOptionsStore.city, {
-              width,
-              height: $opWonkOptionsStore.consolidate ? 252 : 400,
-              consolidate: $opWonkOptionsStore.consolidate,
-              labelBracketValues: $opWonkOptionsStore.labelBracketValues,
-              showPercentOfHouseholds:
-                $opWonkOptionsStore.bracketValuesLabelMode === 'percent_of_place_households',
-              showAreaMedianHouseholdIncome:
-                $opWonkOptionsStore.showMedianHouseholdIncome &&
-                $opWonkOptionsStore['medianHouseholdIncomeMode.ami'],
-              showBlackMedianHouseholdIncome:
-                $opWonkOptionsStore.showMedianHouseholdIncome &&
-                $opWonkOptionsStore['medianHouseholdIncomeMode.black_ami'],
-              showWhiteMedianHouseholdIncome:
-                $opWonkOptionsStore.showMedianHouseholdIncome &&
-                $opWonkOptionsStore['medianHouseholdIncomeMode.white_ami'],
-              xAxisDomain: getForcedDomain(data),
-            })}"
-          fullWidth
-        />
+        {#key $themeMode}
+          <PlotContainer
+            plot="{(width) =>
+              data.generatePlotOptions($opWonkOptionsStore.yearsACS, $opWonkOptionsStore.city, {
+                width,
+                height: $opWonkOptionsStore.consolidate ? 252 : 400,
+                consolidate: $opWonkOptionsStore.consolidate,
+                labelBracketValues: $opWonkOptionsStore.labelBracketValues,
+                showPercentOfHouseholds:
+                  $opWonkOptionsStore.bracketValuesLabelMode === 'percent_of_place_households',
+                showAreaMedianHouseholdIncome:
+                  $opWonkOptionsStore.showMedianHouseholdIncome &&
+                  $opWonkOptionsStore['medianHouseholdIncomeMode.ami'],
+                showBlackMedianHouseholdIncome:
+                  $opWonkOptionsStore.showMedianHouseholdIncome &&
+                  $opWonkOptionsStore['medianHouseholdIncomeMode.black_ami'],
+                showWhiteMedianHouseholdIncome:
+                  $opWonkOptionsStore.showMedianHouseholdIncome &&
+                  $opWonkOptionsStore['medianHouseholdIncomeMode.white_ami'],
+                xAxisDomain: getForcedDomain(data),
+              })}"
+            fullWidth
+          />
+        {/key}
       </div>
     </div>
     {#if $opWonkOptionsStore.compare}
@@ -122,28 +125,30 @@
           />
           <Legend />
         </div>
-        <PlotContainer
-          plot="{(width) =>
-            data.generatePlotOptions($opWonkOptionsStore.yearsACS, $opWonkOptionsStore.city2, {
-              width,
-              height: $opWonkOptionsStore.consolidate ? 252 : 400,
-              consolidate: $opWonkOptionsStore.consolidate,
-              labelBracketValues: $opWonkOptionsStore.labelBracketValues,
-              showPercentOfHouseholds:
-                $opWonkOptionsStore.bracketValuesLabelMode === 'percent_of_place_households',
-              showAreaMedianHouseholdIncome:
-                $opWonkOptionsStore.showMedianHouseholdIncome &&
-                $opWonkOptionsStore['medianHouseholdIncomeMode.ami'],
-              showBlackMedianHouseholdIncome:
-                $opWonkOptionsStore.showMedianHouseholdIncome &&
-                $opWonkOptionsStore['medianHouseholdIncomeMode.black_ami'],
-              showWhiteMedianHouseholdIncome:
-                $opWonkOptionsStore.showMedianHouseholdIncome &&
-                $opWonkOptionsStore['medianHouseholdIncomeMode.white_ami'],
-              xAxisDomain: getForcedDomain(data),
-            })}"
-          fullWidth
-        />
+        {#key $themeMode}
+          <PlotContainer
+            plot="{(width) =>
+              data.generatePlotOptions($opWonkOptionsStore.yearsACS, $opWonkOptionsStore.city2, {
+                width,
+                height: $opWonkOptionsStore.consolidate ? 252 : 400,
+                consolidate: $opWonkOptionsStore.consolidate,
+                labelBracketValues: $opWonkOptionsStore.labelBracketValues,
+                showPercentOfHouseholds:
+                  $opWonkOptionsStore.bracketValuesLabelMode === 'percent_of_place_households',
+                showAreaMedianHouseholdIncome:
+                  $opWonkOptionsStore.showMedianHouseholdIncome &&
+                  $opWonkOptionsStore['medianHouseholdIncomeMode.ami'],
+                showBlackMedianHouseholdIncome:
+                  $opWonkOptionsStore.showMedianHouseholdIncome &&
+                  $opWonkOptionsStore['medianHouseholdIncomeMode.black_ami'],
+                showWhiteMedianHouseholdIncome:
+                  $opWonkOptionsStore.showMedianHouseholdIncome &&
+                  $opWonkOptionsStore['medianHouseholdIncomeMode.white_ami'],
+                xAxisDomain: getForcedDomain(data),
+              })}"
+            fullWidth
+          />
+        {/key}
       </div>
     {/if}
   </div>
