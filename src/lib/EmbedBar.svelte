@@ -1,18 +1,29 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import selectedThemeMode from '$stores/selectedThemeMode';
   import { hasKey } from '$utils';
-  import { Button } from 'fluent-svelte';
+  import { Button, IconButton } from 'fluent-svelte';
+  import ThemeSwitchButton from './ThemeSwitchButton.svelte';
 
   export let actions: (
     | { href: string; target: string; label: string }
     | { onClick: () => void; label: string }
   )[] = [];
-  export let actionStyle = 'padding: 2px 10px; font-size: 12px;';
+  export let actionStyle = 'padding: 2px 10px; font-size: 12px; color: var(--fds-text-secondary);';
+
+  function toggleTheme() {
+    selectedThemeMode.update((mode) => {
+      if (mode === 'light') return 'dark';
+      if (mode === 'dark') return 'auto';
+      return 'light';
+    });
+  }
 </script>
 
 <div class="embed-bar">
   <div>Shi Applied Research</div>
-  <div>
+  <div style="display: flex; flex-direction: row;">
+    <ThemeSwitchButton style="{actionStyle} min-block-size: 20px;" />
     <Button variant="hyperlink" style="{actionStyle}" href="{$page.url.pathname}" target="_blank">
       Open in new tab
     </Button>
