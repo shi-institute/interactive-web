@@ -21,6 +21,11 @@ declare global {
     }
     // interface Platform {}
   }
+
+  interface Window {
+    // add your own properties here
+    forceColorScheme?: (mode: 'light' | 'dark' | 'auto', _window?: Window) => void;
+  }
 }
 
 export {};
