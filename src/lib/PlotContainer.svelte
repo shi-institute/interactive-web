@@ -1,9 +1,11 @@
 <script lang="ts">
   import { browser } from '$app/environment';
   import { assets } from '$app/paths';
+  import selectedThemeMode from '$stores/selectedThemeMode';
   import * as Plot from '@observablehq/plot';
   import { ProgressRing } from 'fluent-svelte';
   import Popout from 'svelte-popout';
+  import { get } from 'svelte/store';
   import { type PlotNode, PlotNodeManager } from './PlotNodeManager';
 
   export let plot: Plot.PlotOptions | ((width: number) => Plot.PlotOptions);
@@ -128,8 +130,57 @@
   }
 
   let popupWindow: Window | null = null;
+  let allPopupStyleSheetsLoaded = false;
   function windowInitialised(_popupWindow: Window | null) {
+    allPopupStyleSheetsLoaded = false;
     popupWindow = _popupWindow;
+
+    if (popupWindow) {
+      // copy all stylesheets from the parent window to the popup window
+      const parentStylesheets = document.styleSheets;
+      const cssRules = Array.from(parentStylesheets).flatMap((stylesheet) =>
+        Array.from(stylesheet.cssRules)
+      );
+      const parentWindowRules = cssRules.reduce((acc, rule) => acc + rule.cssText, '');
+      const parentWindowStyleElem = popupWindow.document.createElement('style');
+      parentWindowStyleElem.textContent = parentWindowRules;
+      parentWindowStyleElem.onload = updateLoadedCount;
+      popupWindow.document.head.appendChild(parentWindowStyleElem);
+      // load the fonts  into the popup window
+      const fontsCssLink = popupWindow.document.createElement('link');
+      fontsCssLink.rel = 'stylesheet';
+      fontsCssLink.href = `${assets}/fonts.css`;
+      fontsCssLink.onload = updateLoadedCount;
+      popupWindow.document.head.appendChild(fontsCssLink);
+
+      // load the force-color-scheme script into the popup window so we can
+      // se the color scheme to match the parent window
+      const colorSchemeScript = popupWindow.document.createElement('script');
+      colorSchemeScript.src = `${assets}/force-color-scheme.js`;
+      colorSchemeScript.onload = updateLoadedCount;
+      popupWindow.document.head.appendChild(colorSchemeScript);
+
+      // once the resources are loaded, we can set the color scheme
+      let loadedCount = 0;
+      function updateLoadedCount() {
+        loadedCount++;
+        if (loadedCount === 3) {
+          allPopupStyleSheetsLoaded = true;
+          popupWindow?.forceColorScheme?.(get(selectedThemeMode));
+
+          // force the initial plot height to be correct
+          if (plotIsInIframe) {
+            popupWindow?.requestAnimationFrame(() => {
+              const plotContainerElem = popupWindow?.document?.querySelector('.plot-container');
+              if (plotContainerElem) {
+                popupClientWidth = plotContainerElem.clientWidth;
+                popupClientHeight = plotContainerElem.clientHeight;
+              }
+            });
+          }
+        }
+      }
+    }
   }
 
   $: plotIsInIframe = browser && window.self !== window.top;
@@ -150,40 +201,6 @@
     }
   }
 
-  function waitForAllStyleSheetsToLoad(window: Window | null) {
-    return new Promise((resolve, reject) => {
-      if (!window) {
-        reject('No window');
-        return;
-      }
-      const stylesheets = window.document.body.querySelectorAll('link[rel="stylesheet"]');
-
-      // wait for all stylesheets to load
-      let loadCount = 0;
-      stylesheets.forEach((link) => {
-        link.addEventListener('load', () => {
-          loadCount++;
-          if (loadCount === stylesheets.length) {
-            resolve(true);
-          }
-        });
-      });
-    });
-  }
-
-  // track whether all stylesheets have loaded in the popup window
-  // so we can hide the popup until the styles have loaded
-  // so the initial render does not have unstyled flashes
-  // and the calculated initial height is correct
-  let allStyleSheetsLoaded = false;
-  $: if (popupWindow && popupOpen) {
-    waitForAllStyleSheetsToLoad(popupWindow).then(() => {
-      allStyleSheetsLoaded = true;
-    });
-  } else {
-    allStyleSheetsLoaded = false;
-  }
-
   export function openInPopupWindow() {
     popupOpen = true;
   }
@@ -200,9 +217,6 @@
     copyStyles="{false}"
     windowInitialised="{windowInitialised}"
   >
-    <head>
-      <link rel="stylesheet" href="{assets}/global.css" />
-    </head>
     <style>
       body {
         margin: 0;
@@ -214,7 +228,7 @@
         height: 100%;
       }
     </style>
-    {#if allStyleSheetsLoaded}
+    {#if allPopupStyleSheetsLoaded}
       <slot name="popup-before" />
       <slot name="before" />
       <div
@@ -234,6 +248,11 @@
       {/await}
       <slot name="after" />
       <slot name="popup-after" />
+    {:else}
+      <div class="wait nobackground">
+        <ProgressRing style="--fds-accent-default: currentColor;" />
+        Please wait
+      </div>
     {/if}
   </Popout>
 {/if}
@@ -294,5 +313,9 @@
     gap: 16px;
     align-items: center;
     justify-content: center;
+  }
+  .wait.nobackground {
+    backdrop-filter: none;
+    background-color: transparent;
   }
 </style>
