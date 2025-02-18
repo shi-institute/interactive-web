@@ -2,6 +2,7 @@
   import { browser } from '$app/environment';
   import { assets } from '$app/paths';
   import selectedThemeMode from '$stores/selectedThemeMode';
+  import { measureWidth } from '$utils/use';
   import * as Plot from '@observablehq/plot';
   import { ProgressRing } from 'fluent-svelte';
   import Popout from 'svelte-popout';
@@ -262,7 +263,10 @@
     <slot name="main-before" />
     <slot name="before" />
   </div>
-  <div bind:clientWidth="{clientWidth}">
+  <div
+    bind:clientWidth="{clientWidth}"
+    use:measureWidth="{{ callback: (width) => (clientWidth = width) }}"
+  >
     <div bind:this="{div}" role="img" class="{plotClass}">
       <div
         style="height: {(typeof plot === 'function' ? plot(clientWidth || 640) : plot).height ||

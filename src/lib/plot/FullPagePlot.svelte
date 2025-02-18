@@ -4,6 +4,7 @@
   import EmbedBar from '$lib/EmbedBar.svelte';
   import PlotContainer from '$lib/PlotContainer.svelte';
   import { notEmpty } from '$utils/notEmpty';
+  import { measureHeight } from '$utils/use';
   import * as Plot from '@observablehq/plot';
   import { html } from 'htl';
   import { type ComponentProps } from 'svelte';
@@ -22,7 +23,11 @@
 <div class="component-container">
   <div class="plot-container" class:isEmbedded="{$page.data.isEmbedded}">
     <div class="plot-region-wrapper">
-      <div class="height-calc" bind:clientHeight="{plotRegionHeight}"></div>
+      <div
+        class="height-calc"
+        bind:clientHeight="{plotRegionHeight}"
+        use:measureHeight="{{ callback: (height) => (plotRegionHeight = height) }}"
+      ></div>
 
       <div class="plot-region">
         <PlotContainer
