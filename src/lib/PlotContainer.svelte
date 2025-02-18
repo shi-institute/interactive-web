@@ -1,6 +1,7 @@
 <script lang="ts">
   import { browser } from '$app/environment';
   import { assets } from '$app/paths';
+  import { page } from '$app/stores';
   import selectedThemeMode from '$stores/selectedThemeMode';
   import { measureWidth } from '$utils/use';
   import * as Plot from '@observablehq/plot';
@@ -262,11 +263,18 @@
       <div
         style="height: {(typeof plot === 'function' ? plot(clientWidth || 640) : plot).height ||
           300}px;"
-      ></div>
+      >
+        {#if $page.data.isEmbedded}
+          <div class="wait">
+            <ProgressRing style="--fds-accent-default: currentColor;" />
+            Please wait
+          </div>
+        {/if}
+      </div>
     </div>
   </div>
   <div class="slots" bind:clientHeight="{slotAfterHeight}">
-    {#if enablePopup}
+    {#if enablePopup && div && div.childElementCount > 0}
       <button class="popup-button" on:click="{openInPopupWindow}">Open in popup</button>
     {/if}
     <slot name="after" />
