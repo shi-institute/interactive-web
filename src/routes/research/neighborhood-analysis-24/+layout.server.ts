@@ -688,7 +688,7 @@ const neighborhoodBlocksDataSchema = z
     age__85_over__male: z.number().nullable(),
     age__under_5__female: z.number().nullable(),
     age__under_5__male: z.number().nullable(),
-    ethnicity__hispanic: z.number().nullable(),
+    ethnicity__hispanic_or_latino: z.number().nullable(),
     ethnicity__hispanic_or_latino__amer_indian_alaskan_native: z.number().nullable(),
     ethnicity__hispanic_or_latino__asian: z.number().nullable(),
     ethnicity__hispanic_or_latino__black: z.number().nullable(),
@@ -706,7 +706,6 @@ const neighborhoodBlocksDataSchema = z
     ethnicity__not_hispanic_or_latino__white: z.number().nullable(),
     female__total: z.number().nullable(),
     female_total: z.number().nullable(),
-    hispanic__total: z.number().nullable(),
     households__total: z.number().nullable(),
     households__with_seniors: z.number().nullable(),
     households__with_seniors__1_person: z.number().nullable(),
@@ -726,10 +725,8 @@ const neighborhoodBlocksDataSchema = z
     housing_units__occupied: z.number().nullable(),
     housing_units__total: z.number().nullable(),
     housing_units__vacant: z.number().nullable(),
-    index_right: z.number().nullable(),
     male__total: z.number().nullable(),
     male_total: z.number().nullable(),
-    not_hispanic__total: z.number().nullable(),
     population_total: z.number().nullable(),
   })
   .transform(({ population_total, year, ...rest }) => {
