@@ -1178,7 +1178,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
       ],
     };
   },
-  tenure__renter_fraction(neighborhood, data) {
+  tenure__renter_fraction(neighborhood, data, url) {
     const plotConfig = plotConfigs.tenure__renter_fraction(
       neighborhood,
       // @ts-expect-error while the data object has different keys, all of the keys
@@ -1187,7 +1187,8 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
         tenure__owner: housing__owner_occupied,
         tenure__renter: housing__renter_occupied,
         year,
-      }))
+      })),
+      url
     );
     plotConfig.subtitle = `${neighborhood} (decennial census)`;
     if (plotConfig.x) plotConfig.x.label = 'Year';
