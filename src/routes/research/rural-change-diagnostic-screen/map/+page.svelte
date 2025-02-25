@@ -2,10 +2,15 @@
   import WebMap from '$lib/arcgis/WebMap.svelte';
   import { sageDSTOptionsStore } from '$stores/sageDstOptionsStore';
   import { isEsriFeatureLayer } from '$utils/isEsriFeatureLayer';
+  import GeoJSONLayer from '@arcgis/core/layers/GeoJSONLayer';
   import FeatureFilter from '@arcgis/core/layers/support/FeatureFilter.js';
   import CustomContent from '@arcgis/core/popup/content/CustomContent.js';
+  import SimpleRenderer from '@arcgis/core/renderers/SimpleRenderer';
   import UniqueValueRenderer from '@arcgis/core/renderers/UniqueValueRenderer.js';
+  import SimpleMarkerSymbol from '@arcgis/core/symbols/SimpleMarkerSymbol';
+  import SimpleFillSymbol from '@arcgis/core/symbols/SimpleFillSymbol';
   import ComparePanel from './ComparePanel.svelte';
+  import orangeburgCityLimitsGeoJSON from './orangeburg_sc_city_limits.geo.json';
   import PopupZCTAs from './PopupZCTAs.svelte';
 
   export let data;
@@ -375,9 +380,92 @@
     tractTimeSeriesLayer.popupTemplate.content = [customContentWidget];
   }
 
+  async function addOrangeburgDataForSLI(
+    evt: CustomEvent<{ map: __esri.WebMap; view: __esri.MapView }>
+  ) {
+    const gunterFarmsGeoJSON = {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [-80.69658173835441, 33.23476303873089],
+      },
+      properties: {
+        name: 'Gunter Farms',
+      },
+    };
+
+    const gunterFarmsLayer = (() => {
+      const blob = new Blob([JSON.stringify(gunterFarmsGeoJSON)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const layer = new GeoJSONLayer({
+        url,
+        title: 'Gunter Farms',
+        labelingInfo: [
+          {
+            labelExpressionInfo: { expression: '$feature.name' },
+            symbol: {
+              type: 'text',
+              color: 'black',
+              haloSize: 1,
+              haloColor: 'white',
+            },
+          },
+        ],
+        renderer: new SimpleRenderer({
+          symbol: new SimpleMarkerSymbol({
+            size: 6,
+            color: [0, 255, 255],
+            outline: {
+              color: [0, 0, 0],
+              width: 1,
+            },
+          }),
+        }),
+      });
+      return layer;
+    })();
+
+    const orangeburgCityLimitsLayer = (() => {
+      const blob = new Blob([JSON.stringify(orangeburgCityLimitsGeoJSON)], {
+        type: 'application/json',
+      });
+      const url = URL.createObjectURL(blob);
+      const layer = new GeoJSONLayer({
+        url,
+        title: 'Orangeburg City Limits',
+        labelingInfo: [
+          {
+            labelExpressionInfo: { expression: '$feature.name' },
+            symbol: {
+              type: 'text',
+              color: 'black',
+              haloSize: 1,
+              haloColor: 'white',
+            },
+          },
+        ],
+        renderer: new SimpleRenderer({
+          symbol: new SimpleFillSymbol({
+            color: null,
+            outline: {
+              color: [0, 0, 0],
+              width: 3,
+            },
+          })
+        }),
+  
+      });
+      return layer;
+    })();
+
+    evt.detail.map.add(gunterFarmsLayer);
+    evt.detail.map.add(orangeburgCityLimitsLayer)
+  }
+
   async function onMapReady(evt: CustomEvent<{ map: __esri.WebMap; view: __esri.MapView }>) {
     await handleMapReadyForZCTAs(evt);
     await handleMapReadyForTracts(evt);
+    await addOrangeburgDataForSLI(evt);
 
     const groupLayers = evt.detail.map.layers.filter((layer) => layer.type === 'group');
     zctaGroup = groupLayers.find((layer) => layer.title.endsWith(' (ZCTAs)')) as
