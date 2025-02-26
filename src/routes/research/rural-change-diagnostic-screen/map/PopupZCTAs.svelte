@@ -52,8 +52,8 @@
     ...series.flatMap(({ year_two_converted, median_house_value, avg_hh_inc }) => {
       const year = new Date(year_two_converted).getUTCFullYear();
       return [
-        adjustForInflation(median_house_value, year, 2020),
-        adjustForInflation(avg_hh_inc, year, 2020),
+        adjustForInflation(median_house_value, year, 2020) || 0,
+        adjustForInflation(avg_hh_inc, year, 2020) || 0,
       ];
     })
   );

@@ -29,10 +29,18 @@ const cpiData = CPI as unknown as Record<
  * @returns - The inflation-adjusted amount.
  * @throws - Error if CPI data is not available for the given years.
  */
-export function adjustForInflation(amount: number, baseYear: number, targetYear: number): number {
+export function adjustForInflation(
+  amount: number | undefined | null,
+  baseYear: number,
+  targetYear: number
+): number | null {
   // Ensure both base year and target year CPI data are available
   if (!(baseYear in cpiData) || !(targetYear in cpiData)) {
     throw new Error('CPI data not available for the given years.');
+  }
+
+  if (amount === null || amount === undefined) {
+    return null;
   }
 
   const baseYearCPI = cpiData[baseYear]['Annual'];
