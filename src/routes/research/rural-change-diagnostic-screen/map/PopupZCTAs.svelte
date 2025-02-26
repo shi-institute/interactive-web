@@ -86,6 +86,9 @@
       service_worker_fraction ?? 0,
     ])
   );
+
+  $: migrationAndServiceWorkerDataHasCurrentTractOrZCTA =
+    Array.from(new Set(migrationAndServiceWorkerData.map(({ id }) => id))).length === 2;
 </script>
 
 <h3>Year {year}</h3>
@@ -224,179 +227,181 @@
   </PlotContainer>
 </div>
 
-<h3>Migration from a different county in South Carolina</h3>
+{#if migrationAndServiceWorkerDataHasCurrentTractOrZCTA}
+  <h3>Migration from a different county in South Carolina</h3>
 
-<p>
-  <a href="guide/migration-service">Read about geographic mobility data</a>
-</p>
+  <p>
+    <a href="guide/migration-service">Read about geographic mobility data</a>
+  </p>
 
-<div class="plot-container">
-  <PlotContainer
-    fullWidth
-    enablePopup
-    plot="{{
-      marginLeft: 45,
-      marginTop: 45,
-      marginBottom: 40,
-      color: { legend: true, range: [colors.vibrant.maroon, '#999'], reverse: true },
-      y: {
-        label: 'Percent of population',
-        tickFormat: '.2p',
-        domain: [0, Math.min(1, migrationDataMaxPercent + migrationDataMaxPercent * 0.25)],
-      },
-      fx: { label: '' },
-      x: { label: '', reverse: true },
-      width: 300,
-      caption: 'Data: US Census ACS',
-      marks: [
-        Plot.frame({ strokeOpacity: 0.1 }),
-        Plot.barY(migrationAndServiceWorkerData, {
-          fx: 'year',
-          x: 'id',
-          y: 'migration__different_county_fraction',
-          fill: 'id',
-          tip: true,
-        }),
-        Plot.text(migrationAndServiceWorkerData, {
-          fx: 'year',
-          x: 'id',
-          y: 'migration__different_county_fraction',
-          text: (d) => d3.format('.2p')(d.migration__different_county_fraction),
-          dy: 10,
-          fill: 'white',
-          stroke: 'black',
-          strokeOpacity: 0.14,
-        }),
-        Plot.ruleY([0]),
-      ],
-    }}"
-  >
-    <svelte:fragment slot="popup-before">
-      <h2 style="margin: 0;">Migration from a different county in South Carolina</h2>
-      {#if $$props.geoid_y}
-        <div>Tract {$$props.geoid_y}</div>
-      {:else}
-        <div>ZCTA {$$props.zcta5}</div>
-      {/if}
-    </svelte:fragment>
-  </PlotContainer>
-</div>
+  <div class="plot-container">
+    <PlotContainer
+      fullWidth
+      enablePopup
+      plot="{{
+        marginLeft: 45,
+        marginTop: 45,
+        marginBottom: 40,
+        color: { legend: true, range: [colors.vibrant.maroon, '#999'], reverse: true },
+        y: {
+          label: 'Percent of population',
+          tickFormat: '.2p',
+          domain: [0, Math.min(1, migrationDataMaxPercent + migrationDataMaxPercent * 0.25)],
+        },
+        fx: { label: '' },
+        x: { label: '', reverse: true },
+        width: 300,
+        caption: 'Data: US Census ACS',
+        marks: [
+          Plot.frame({ strokeOpacity: 0.1 }),
+          Plot.barY(migrationAndServiceWorkerData, {
+            fx: 'year',
+            x: 'id',
+            y: 'migration__different_county_fraction',
+            fill: 'id',
+            tip: true,
+          }),
+          Plot.text(migrationAndServiceWorkerData, {
+            fx: 'year',
+            x: 'id',
+            y: 'migration__different_county_fraction',
+            text: (d) => d3.format('.2p')(d.migration__different_county_fraction),
+            dy: 10,
+            fill: 'white',
+            stroke: 'black',
+            strokeOpacity: 0.14,
+          }),
+          Plot.ruleY([0]),
+        ],
+      }}"
+    >
+      <svelte:fragment slot="popup-before">
+        <h2 style="margin: 0;">Migration from a different county in South Carolina</h2>
+        {#if $$props.geoid_y}
+          <div>Tract {$$props.geoid_y}</div>
+        {:else}
+          <div>ZCTA {$$props.zcta5}</div>
+        {/if}
+      </svelte:fragment>
+    </PlotContainer>
+  </div>
 
-<h3>Migration from outside South Carolina</h3>
+  <h3>Migration from outside South Carolina</h3>
 
-<p>
-  <a href="guide/migration-service">Read about geographic mobility data</a>
-</p>
+  <p>
+    <a href="guide/migration-service">Read about geographic mobility data</a>
+  </p>
 
-<div class="plot-container">
-  <PlotContainer
-    fullWidth
-    enablePopup
-    plot="{{
-      marginLeft: 45,
-      marginTop: 45,
-      marginBottom: 40,
-      color: { legend: true, range: [colors.vibrant.magenta, '#999'], reverse: true },
-      y: {
-        label: 'Percent of population',
-        tickFormat: '.2p',
-        domain: [0, Math.min(1, migrationDataMaxPercent + migrationDataMaxPercent * 0.25)],
-      },
-      fx: { label: '' },
-      x: { label: '', reverse: true },
-      width: 300,
-      caption: 'Data: US Census ACS',
-      marks: [
-        Plot.frame({ strokeOpacity: 0.1 }),
-        Plot.barY(migrationAndServiceWorkerData, {
-          fx: 'year',
-          x: 'id',
-          y: 'migration__different_state_fraction',
-          fill: 'id',
-          tip: true,
-        }),
-        Plot.text(migrationAndServiceWorkerData, {
-          fx: 'year',
-          x: 'id',
-          y: 'migration__different_state_fraction',
-          text: (d) => d3.format('.2p')(d.migration__different_state_fraction),
-          dy: 10,
-          fill: 'white',
-          stroke: 'black',
-          strokeOpacity: 0.14,
-        }),
-        Plot.ruleY([0]),
-      ],
-    }}"
-  >
-    <svelte:fragment slot="popup-before">
-      <h2 style="margin: 0;">Migration from outside South Carolina</h2>
-      {#if $$props.geoid_y}
-        <div>Tract {$$props.geoid_y}</div>
-      {:else}
-        <div>ZCTA {$$props.zcta5}</div>
-      {/if}
-    </svelte:fragment>
-  </PlotContainer>
-</div>
+  <div class="plot-container">
+    <PlotContainer
+      fullWidth
+      enablePopup
+      plot="{{
+        marginLeft: 45,
+        marginTop: 45,
+        marginBottom: 40,
+        color: { legend: true, range: [colors.vibrant.magenta, '#999'], reverse: true },
+        y: {
+          label: 'Percent of population',
+          tickFormat: '.2p',
+          domain: [0, Math.min(1, migrationDataMaxPercent + migrationDataMaxPercent * 0.25)],
+        },
+        fx: { label: '' },
+        x: { label: '', reverse: true },
+        width: 300,
+        caption: 'Data: US Census ACS',
+        marks: [
+          Plot.frame({ strokeOpacity: 0.1 }),
+          Plot.barY(migrationAndServiceWorkerData, {
+            fx: 'year',
+            x: 'id',
+            y: 'migration__different_state_fraction',
+            fill: 'id',
+            tip: true,
+          }),
+          Plot.text(migrationAndServiceWorkerData, {
+            fx: 'year',
+            x: 'id',
+            y: 'migration__different_state_fraction',
+            text: (d) => d3.format('.2p')(d.migration__different_state_fraction),
+            dy: 10,
+            fill: 'white',
+            stroke: 'black',
+            strokeOpacity: 0.14,
+          }),
+          Plot.ruleY([0]),
+        ],
+      }}"
+    >
+      <svelte:fragment slot="popup-before">
+        <h2 style="margin: 0;">Migration from outside South Carolina</h2>
+        {#if $$props.geoid_y}
+          <div>Tract {$$props.geoid_y}</div>
+        {:else}
+          <div>ZCTA {$$props.zcta5}</div>
+        {/if}
+      </svelte:fragment>
+    </PlotContainer>
+  </div>
 
-<h3>Percent of workers who are in the service industry</h3>
+  <h3>Percent of workers who are in the service industry</h3>
 
-<p>
-  <a href="guide/migration-service">Read about service worker data</a>
-</p>
+  <p>
+    <a href="guide/migration-service">Read about service worker data</a>
+  </p>
 
-<div class="plot-container">
-  <PlotContainer
-    fullWidth
-    enablePopup
-    plot="{{
-      marginLeft: 45,
-      marginTop: 45,
-      marginBottom: 40,
-      color: { legend: true, range: [colors.vibrant.teal, '#999'], reverse: true },
-      y: {
-        label: 'Percent of working population',
-        tickFormat: '.2p',
-        domain: [0, Math.min(1, serviceMaxPercent + serviceMaxPercent * 0.25)],
-      },
-      fx: { label: '' },
-      x: { label: '', reverse: true },
-      width: 300,
-      caption: 'Data: US Census ACS',
-      marks: [
-        Plot.frame({ strokeOpacity: 0.1 }),
-        Plot.barY(migrationAndServiceWorkerData, {
-          fx: 'year',
-          x: 'id',
-          y: 'service_worker_fraction',
-          fill: 'id',
-          tip: true,
-        }),
-        Plot.text(migrationAndServiceWorkerData, {
-          fx: 'year',
-          x: 'id',
-          y: 'service_worker_fraction',
-          text: (d) => d3.format('.2p')(d.service_worker_fraction),
-          dy: 10,
-          fill: 'white',
-          stroke: 'black',
-          strokeOpacity: 0.14,
-        }),
-        Plot.ruleY([0]),
-      ],
-    }}"
-  >
-    <svelte:fragment slot="popup-before">
-      <h2 style="margin: 0;">Percent of workers who are in the service industry</h2>
-      {#if $$props.geoid_y}
-        <div>Tract {$$props.geoid_y}</div>
-      {:else}
-        <div>ZCTA {$$props.zcta5}</div>
-      {/if}
-    </svelte:fragment>
-  </PlotContainer>
-</div>
+  <div class="plot-container">
+    <PlotContainer
+      fullWidth
+      enablePopup
+      plot="{{
+        marginLeft: 45,
+        marginTop: 45,
+        marginBottom: 40,
+        color: { legend: true, range: [colors.vibrant.teal, '#999'], reverse: true },
+        y: {
+          label: 'Percent of working population',
+          tickFormat: '.2p',
+          domain: [0, Math.min(1, serviceMaxPercent + serviceMaxPercent * 0.25)],
+        },
+        fx: { label: '' },
+        x: { label: '', reverse: true },
+        width: 300,
+        caption: 'Data: US Census ACS',
+        marks: [
+          Plot.frame({ strokeOpacity: 0.1 }),
+          Plot.barY(migrationAndServiceWorkerData, {
+            fx: 'year',
+            x: 'id',
+            y: 'service_worker_fraction',
+            fill: 'id',
+            tip: true,
+          }),
+          Plot.text(migrationAndServiceWorkerData, {
+            fx: 'year',
+            x: 'id',
+            y: 'service_worker_fraction',
+            text: (d) => d3.format('.2p')(d.service_worker_fraction),
+            dy: 10,
+            fill: 'white',
+            stroke: 'black',
+            strokeOpacity: 0.14,
+          }),
+          Plot.ruleY([0]),
+        ],
+      }}"
+    >
+      <svelte:fragment slot="popup-before">
+        <h2 style="margin: 0;">Percent of workers who are in the service industry</h2>
+        {#if $$props.geoid_y}
+          <div>Tract {$$props.geoid_y}</div>
+        {:else}
+          <div>ZCTA {$$props.zcta5}</div>
+        {/if}
+      </svelte:fragment>
+    </PlotContainer>
+  </div>
+{/if}
 
 <h3>All data ({year})</h3>
 
