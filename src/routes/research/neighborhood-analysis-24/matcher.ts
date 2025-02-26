@@ -1,5 +1,3 @@
-import type { ParamMatcher } from '@sveltejs/kit';
-
 const validNeighborhoods = ['northside', 'sterling'];
 const validTracts = [
   45045000500, // sterling
@@ -9,6 +7,12 @@ const validTracts = [
   45083020301, // northside
 ];
 
-export const match = ((param: string): param is 'northside' | 'sterling' => {
+export function validatePublic(
+  param: unknown
+): param is keyof typeof validNeighborhoods | keyof typeof validTracts {
+  if (typeof param !== 'string') return false;
+
   return validNeighborhoods.includes(param) || validTracts.includes(parseInt(param));
-}) satisfies ParamMatcher;
+}
+
+export const validTractOrNeighborhood = [...validNeighborhoods, ...validTracts];

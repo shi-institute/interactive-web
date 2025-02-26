@@ -101,7 +101,16 @@ interface EnsureAuthenticationProps {
 }
 
 export function _ensureAuthentication({ session, url, scope, appName }: EnsureAuthenticationProps) {
-  if (session.authScopes[scope] !== true) {
+  if (_checkAuthentication({ session, scope }) !== true) {
     gotoAuthPage(url, scope, appName);
   }
+}
+
+interface CheckAuthenticationProps {
+  session: App.Locals['session']['data'];
+  scope: keyof typeof scopePasswords;
+}
+
+export function _checkAuthentication({ session, scope }: CheckAuthenticationProps) {
+  return session.authScopes[scope] === true;
 }

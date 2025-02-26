@@ -1,4 +1,5 @@
 import {
+  NEIGHBORHOOD_ANALYSIS_24_RESTRICTED_ROUTES_PASSWORD,
   PROTECTED_PAGE_PASSWORD,
   RURAL_CHANGE_DIAGNOSTIC_SCREEN_PAGE_PASSWORD,
 } from '$env/static/private';
@@ -6,4 +7,5 @@ import {
 export const scopePasswords = {
   application__rural_change_diagnostic_screen: RURAL_CHANGE_DIAGNOSTIC_SCREEN_PAGE_PASSWORD,
   sus_survey_2024: PROTECTED_PAGE_PASSWORD,
+  application__neighborhood_analysis_24: NEIGHBORHOOD_ANALYSIS_24_RESTRICTED_ROUTES_PASSWORD,
 };
