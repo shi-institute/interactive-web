@@ -273,12 +273,14 @@
         style="height: {(typeof plot === 'function' ? plot(clientWidth || 640) : plot).height ||
           300}px;"
       >
-        {#if $page.data.isEmbedded}
-          <div class="wait">
-            <ProgressRing style="--fds-accent-default: currentColor;" />
-            Please wait
-          </div>
-        {/if}
+        <div
+          class="wait"
+          class:nobackground="{!$page.data.isEmbedded}"
+          class:contained="{!$page.data.isEmbedded}"
+        >
+          <ProgressRing style="--fds-accent-default: currentColor;" />
+          Please wait
+        </div>
       </div>
     </div>
   </div>
@@ -329,5 +331,13 @@
   .wait.nobackground {
     backdrop-filter: none;
     background-color: transparent;
+  }
+  .wait.contained {
+    position: relative;
+    inset: unset;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: 1px dotted #80808040;
   }
 </style>
