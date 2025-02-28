@@ -52,7 +52,11 @@ export const load = (async ({ params }) => {
   )
     .then((res) => res.json() as Promise<Record<string, unknown>[]>)
     .then((json) => json.filter((d) => d.population__total !== null))
-    .then((json) => z.array(neighborhoodDataSchema).parse(json));
+    .then((json) => z.array(neighborhoodDataSchema).parse(json))
+    .catch((err) => {
+      console.error(JSON.stringify(err, null, 2), '<- Error fetching neighborhoods data');
+      return [] as z.infer<typeof neighborhoodDataSchema>[];
+    });
 
   const validGentrificationData = fetch(
     'https://api.github.com/repos/shi-institute/interactive-web-private-data/contents/northside-24/inc_hv_annual_q_tract.json',
@@ -101,7 +105,11 @@ export const load = (async ({ params }) => {
   )
     .then((res) => res.json() as Promise<Record<string, unknown>[]>)
     .then((json) => json.filter((d) => d.population__total !== null))
-    .then((json) => z.array(tractDataSchema).parse(json));
+    .then((json) => z.array(tractDataSchema).parse(json))
+    .catch((err) => {
+      console.error(JSON.stringify(err, null, 2), '<- Error fetching tracts data');
+      return [] as z.infer<typeof tractDataSchema>[];
+    });
 
   const validNeighborhoodBlocksData = fetch(
     'https://api.github.com/repos/shi-institute/interactive-web-private-data/contents/northside-24/blocks_data_series.json',
@@ -114,7 +122,11 @@ export const load = (async ({ params }) => {
     }
   )
     .then((res) => res.json() as Promise<Record<string, unknown>[]>)
-    .then((json) => z.array(neighborhoodBlocksDataSchema).parse(json));
+    .then((json) => z.array(neighborhoodBlocksDataSchema).parse(json))
+    .catch((err) => {
+      console.error(JSON.stringify(err, null, 2), '<- Error fetching neighborhood blocks data');
+      return [];
+    });
 
   const frozenData = await Promise.all([
     validNeighborhoodsData,
@@ -172,8 +184,20 @@ const neighborhoodDataSchema = z
     age__65_over_fraction: z.number(),
     age__under_5: z.number(),
     age__under_5_fraction: z.number(),
+    'disability__18-34__female': z.number(),
+    'disability__18-34__male': z.number(),
+    'disability__35-64__female': z.number(),
+    'disability__35-64__male': z.number(),
+    'disability__5-17__female': z.number(),
+    'disability__5-17__male': z.number(),
+    'disability__65-74__female': z.number(),
+    'disability__65-74__male': z.number(),
+    disability__75_over__female: z.number(),
+    disability__75_over__male: z.number(),
     disability__total: z.number(),
     disability__total_fraction: z.number(),
+    disability__under_5__female: z.number(),
+    disability__under_5__male: z.number(),
     edu_enrollment__black__college_undergraduate: z.number(),
     edu_enrollment__black__graduate_professional: z.number(),
     edu_enrollment__black__k12: z.number(),
@@ -301,6 +325,18 @@ const neighborhoodDataSchema = z
     tenure__white__renter: z.number(),
     veteran__18_to_64_years: z.number(),
     veteran__65_years_and_over: z.number(),
+    vision_difficulty__under_5__male: z.number(),
+    'vision_difficulty__5-17__male': z.number(),
+    'vision_difficulty__18-34__male': z.number(),
+    'vision_difficulty__35-64__male': z.number(),
+    'vision_difficulty__65-74__male': z.number(),
+    vision_difficulty__75_over__male: z.number(),
+    vision_difficulty__under_5__female: z.number(),
+    'vision_difficulty__5-17__female': z.number(),
+    'vision_difficulty__18-34__female': z.number(),
+    'vision_difficulty__35-64__female': z.number(),
+    'vision_difficulty__65-74__female': z.number(),
+    vision_difficulty__75_over__female: z.number(),
   })
   .transform((d) => {
     return {
@@ -353,8 +389,20 @@ const tractDataSchema = z
     age__65_over_fraction: z.number(),
     age__under_5: z.number(),
     age__under_5_fraction: z.number(),
+    'disability__18-34__female': z.number(),
+    'disability__18-34__male': z.number(),
+    'disability__35-64__female': z.number(),
+    'disability__35-64__male': z.number(),
+    'disability__5-17__female': z.number(),
+    'disability__5-17__male': z.number(),
+    'disability__65-74__female': z.number(),
+    'disability__65-74__male': z.number(),
+    disability__75_over__female: z.number(),
+    disability__75_over__male: z.number(),
     disability__total: z.number(),
     disability__total_fraction: z.number(),
+    disability__under_5__female: z.number(),
+    disability__under_5__male: z.number(),
     edu_enrollment__black__college_undergraduate: z.number(),
     edu_enrollment__black__graduate_professional: z.number(),
     edu_enrollment__black__k12: z.number(),
@@ -482,6 +530,18 @@ const tractDataSchema = z
     tenure__white__renter: z.number(),
     veteran__18_to_64_years: z.number(),
     veteran__65_years_and_over: z.number(),
+    vision_difficulty__under_5__male: z.number(),
+    'vision_difficulty__5-17__male': z.number(),
+    'vision_difficulty__18-34__male': z.number(),
+    'vision_difficulty__35-64__male': z.number(),
+    'vision_difficulty__65-74__male': z.number(),
+    vision_difficulty__75_over__male: z.number(),
+    vision_difficulty__under_5__female: z.number(),
+    'vision_difficulty__5-17__female': z.number(),
+    'vision_difficulty__18-34__female': z.number(),
+    'vision_difficulty__35-64__female': z.number(),
+    'vision_difficulty__65-74__female': z.number(),
+    vision_difficulty__75_over__female: z.number(),
 
     // margins of error
     Mage__65_over: z.number(),
@@ -617,6 +677,18 @@ const tractDataSchema = z
     Mtenure__white__renter: z.number(),
     Mveteran__18_to_64_years: z.number(),
     Mveteran__65_years_and_over: z.number(),
+    Mvision_difficulty__under_5__male: z.number(),
+    'Mvision_difficulty__5-17__male': z.number(),
+    'Mvision_difficulty__18-34__male': z.number(),
+    'Mvision_difficulty__35-64__male': z.number(),
+    'Mvision_difficulty__65-74__male': z.number(),
+    Mvision_difficulty__75_over__male: z.number(),
+    Mvision_difficulty__under_5__female: z.number(),
+    'Mvision_difficulty__5-17__female': z.number(),
+    'Mvision_difficulty__18-34__female': z.number(),
+    'Mvision_difficulty__35-64__female': z.number(),
+    'Mvision_difficulty__65-74__female': z.number(),
+    Mvision_difficulty__75_over__female: z.number(),
   })
   .transform(({ GEOID, NAMELSAD, STATEFP, COUNTYFP, ...rest }) => {
     const [, fipsData] = fipsToCountyName(STATEFP, COUNTYFP);

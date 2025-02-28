@@ -1,13 +1,10 @@
-import { browser } from '$app/environment';
-import { page } from '$app/stores';
 import { colors } from '$lib/colors';
 import { barWithLabelY } from '$lib/plot/marks';
 import { hasKey } from '$utils';
 import { notEmpty } from '$utils/notEmpty';
 import * as Plot from '@observablehq/plot';
 import * as d3 from 'd3';
-import { get } from 'svelte/store';
-import type { PageData } from './[neighborhood=gvlspnbg_neighborhood_24]/plots/[plot]/$types';
+import type { PageData } from './[neighborhood]/plots/[plot]/$types';
 import { calcProportionMOE } from './calcProportionMOE';
 
 export const plotConfigs: Record<string, PlotConfigFunction> = {
@@ -1093,6 +1090,141 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         legend: true,
         domain: facetOrder,
         range: legendColors,
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 50,
+      marks: [
+        barWithLabelY(tidyData, {
+          x: 'group',
+          fx: 'year',
+          y: 'amount',
+          yErrorMargin: 'moe',
+          labelFormat: '.0f',
+          fill: 'group',
+        }),
+        Plot.ruleY([0]),
+      ],
+    };
+  },
+  disability__AGE_BREAKDOWN(neighborhood, data) {
+    const tidyData = data.flatMap(({ year, ...data }) => {
+      return [
+        {
+          year,
+          group: '<5',
+          amount: data.disability__under_5__male + data.disability__under_5__female,
+          moe: Math.sqrt(
+            ['disability__under_5__male', 'disability__under_5__female']
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+        {
+          year,
+          group: '5-17',
+          amount: data['disability__5-17__male'] + data['disability__5-17__female'],
+          moe: Math.sqrt(
+            ['disability__5-17__male', 'disability__5-17__female']
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+        {
+          year,
+          group: '18-34',
+          amount: data['disability__18-34__male'] + data['disability__18-34__female'],
+          moe: Math.sqrt(
+            ['disability__18-34__male', 'disability__18-34__female']
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+        {
+          year,
+          group: '35-64',
+          amount: data['disability__35-64__male'] + data['disability__35-64__female'],
+          moe: Math.sqrt(
+            ['disability__35-64__male', 'disability__35-64__female']
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+        {
+          year,
+          group: '65-74',
+          amount: data['disability__65-74__male'] + data['disability__65-74__female'],
+          moe: Math.sqrt(
+            ['disability__65-74__male', 'disability__65-74__female']
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+        {
+          year,
+          group: '≥75',
+          amount: data.disability__75_over__male + data.disability__75_over__female,
+          moe: Math.sqrt(
+            ['disability__75_over__male', 'disability__75_over__female']
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+      ];
+    });
+
+    const facetNames = Array.from(new Set(tidyData.filter((d) => !!d.amount).map((d) => d.group)));
+
+    const facetColors = new Map([
+      ['<5', colors.vibrant.gray],
+      ['5-17', colors.vibrant.gray],
+      ['18-34', colors.vibrant.gray],
+      ['35-64', colors.vibrant.gray],
+      ['65-74', colors.vibrant.gray],
+      ['≥75', colors.vibrant.gray],
+    ]);
+
+    for (const [facetName] of facetColors) {
+      if (!facetNames.includes(facetName)) {
+        facetColors.delete(facetName);
+      }
+    }
+
+    const facetOrder = Array.from(facetColors.keys());
+    const legendColors = Array.from(facetColors.values());
+
+    return {
+      title: 'Disability by age',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      fx: { label: 'Survey period' },
+      x: { axis: null, domain: facetOrder },
+      y: {
+        label: 'Population',
+      },
+      color: {
+        legend: true,
+        domain: facetOrder,
+        // range: legendColors,
       },
       marginTop: 30,
       marginRight: 0,
