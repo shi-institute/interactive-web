@@ -1243,6 +1243,141 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       ],
     };
   },
+  vision_difficulty__AGE_BREAKDOWN(neighborhood, data) {
+    const tidyData = data.flatMap(({ year, ...data }) => {
+      return [
+        {
+          year,
+          group: '<5',
+          amount: data.vision_difficulty__under_5__male + data.vision_difficulty__under_5__female,
+          moe: Math.sqrt(
+            ['vision_difficulty__under_5__male', 'vision_difficulty__under_5__female']
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+        {
+          year,
+          group: '5-17',
+          amount: data['vision_difficulty__5-17__male'] + data['vision_difficulty__5-17__female'],
+          moe: Math.sqrt(
+            ['vision_difficulty__5-17__male', 'vision_difficulty__5-17__female']
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+        {
+          year,
+          group: '18-34',
+          amount: data['vision_difficulty__18-34__male'] + data['vision_difficulty__18-34__female'],
+          moe: Math.sqrt(
+            ['vision_difficulty__18-34__male', 'vision_difficulty__18-34__female']
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+        {
+          year,
+          group: '35-64',
+          amount: data['vision_difficulty__35-64__male'] + data['vision_difficulty__35-64__female'],
+          moe: Math.sqrt(
+            ['vision_difficulty__35-64__male', 'vision_difficulty__35-64__female']
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+        {
+          year,
+          group: '65-74',
+          amount: data['vision_difficulty__65-74__male'] + data['vision_difficulty__65-74__female'],
+          moe: Math.sqrt(
+            ['vision_difficulty__65-74__male', 'vision_difficulty__65-74__female']
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+        {
+          year,
+          group: '≥75',
+          amount: data.vision_difficulty__75_over__male + data.vision_difficulty__75_over__female,
+          moe: Math.sqrt(
+            ['vision_difficulty__75_over__male', 'vision_difficulty__75_over__female']
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+      ];
+    });
+
+    const facetNames = Array.from(new Set(tidyData.filter((d) => !!d.amount).map((d) => d.group)));
+
+    const facetColors = new Map([
+      ['<5', colors.vibrant.gray],
+      ['5-17', colors.vibrant.gray],
+      ['18-34', colors.vibrant.gray],
+      ['35-64', colors.vibrant.gray],
+      ['65-74', colors.vibrant.gray],
+      ['≥75', colors.vibrant.gray],
+    ]);
+
+    for (const [facetName] of facetColors) {
+      if (!facetNames.includes(facetName)) {
+        facetColors.delete(facetName);
+      }
+    }
+
+    const facetOrder = Array.from(facetColors.keys());
+    const legendColors = Array.from(facetColors.values());
+
+    return {
+      title: 'Vision difficulty by age',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      fx: { label: 'Survey period' },
+      x: { axis: null, domain: facetOrder },
+      y: {
+        label: 'Population',
+      },
+      color: {
+        legend: true,
+        domain: facetOrder,
+        // range: legendColors,
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 50,
+      marks: [
+        barWithLabelY(tidyData, {
+          x: 'group',
+          fx: 'year',
+          y: 'amount',
+          yErrorMargin: 'moe',
+          labelFormat: '.0f',
+          fill: 'group',
+        }),
+        Plot.ruleY([0]),
+      ],
+    };
+  },
 };
 
 export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
