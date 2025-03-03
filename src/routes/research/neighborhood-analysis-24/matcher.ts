@@ -7,12 +7,25 @@ const validTracts = [
   45083020301, // northside
 ];
 
+const overrides: Record<string, string[]> = {
+  'decennial‾‾population__RACE_ETHNICITY_BREAKDOWN': ['west end', 'gandy-allmon'],
+};
+
 export function validatePublic(
-  param: unknown
+  param: unknown,
+  plotId?: string
 ): param is keyof typeof validNeighborhoods | keyof typeof validTracts {
   if (typeof param !== 'string') return false;
 
-  return validNeighborhoods.includes(param) || validTracts.includes(parseInt(param));
+  const isValidNeighborhood = validNeighborhoods.includes(param);
+  if (isValidNeighborhood) return true;
+
+  const isValidTract = validTracts.includes(parseInt(param));
+  if (isValidTract) return true;
+
+  if (!plotId) return false;
+  const isForcedPublic = (plotId && overrides[plotId]?.includes(param)) || false;
+  return isForcedPublic;
 }
 
 export const validTractOrNeighborhood = [...validNeighborhoods, ...validTracts];
