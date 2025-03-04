@@ -1,11 +1,12 @@
 <script lang="ts">
   import { browser } from '$app/environment';
+  import { goto } from '$app/navigation';
   import { page } from '$app/stores';
   import PageTitle from '$lib/PageTitle.svelte';
   import PlotContainer from '$lib/PlotContainer.svelte';
   import { notEmpty } from '$utils/notEmpty';
   import { type Plot } from '@observablehq/plot';
-  import { Button, ContentDialog } from 'fluent-svelte';
+  import { Button, ContentDialog, InfoBar } from 'fluent-svelte';
   import { html } from 'htl';
   import { queryParameters } from 'sveltekit-search-params';
   import { validatePublic } from '../matcher';
@@ -20,10 +21,20 @@
   const params = queryParameters(getParams($page.url), queryParamsOptions);
   $: orderedPlotIds = $params.plots.map((option) => option._id);
 
+  let needsAuthentication = false;
+  function clearNeedsAuthentication() {
+    needsAuthentication = false;
+  }
+  $: if ($params) {
+    clearNeedsAuthentication();
+  }
+
   function withoutPrivate(key: string) {
     return (neighborhood: string) => {
       const isPublic = validatePublic(neighborhood.toLocaleLowerCase(), key);
-      return isPublic || data.authenticated;
+      const allowed = isPublic || data.authenticated;
+      if (!allowed) needsAuthentication = true;
+      return allowed;
     };
   }
 
@@ -161,6 +172,32 @@
     {$params.subtitle}
   </svelte:fragment>
 </PageTitle>
+
+{#if needsAuthentication}
+  <InfoBar
+    title="Access restricted"
+    closable="{false}"
+    severity="caution"
+    style="margin: 16px 16px 0;"
+  >
+    Some plots will be hidden until you authenticate
+    <Button
+      slot="action"
+      style="margin-right: 10px;"
+      on:click="{() => {
+        const scope = 'application__neighborhood_analysis_24';
+        const appName = 'Neighborhood Analysis 24';
+        goto(
+          `/research/authenticate?scope=${scope}${
+            appName ? `&appName=${appName}` : ''
+          }&from=${encodeURIComponent($page.url.href)}`
+        );
+      }}"
+    >
+      Sign in
+    </Button>
+  </InfoBar>
+{/if}
 
 {#if $params.plots.length === 0}
   <section>
