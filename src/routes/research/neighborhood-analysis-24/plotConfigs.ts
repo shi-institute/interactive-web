@@ -1055,8 +1055,46 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'group',
           fx: 'year',
           y: 'fraction',
-          yErrorMargin: 'moe',
+          yErrorMargin: 'fraction_moe',
           labelFormat: '.1%',
+          labelFill: (d) => (d.group === 'Overall' ? '#666' : facetColors.get(d.group)),
+          fill: 'group',
+        }),
+        Plot.ruleY([0]),
+      ],
+    };
+  },
+  tenure__RACE_BREAKDOWN__renter(neighborhood, data) {
+    const tidyData = getTidyRenterData(data).filter((d) => d.group !== 'Overall');
+    const facetNames = tidyData.filter((d) => !!d.fraction).map((d) => d.group);
+    const { facetOrder, legendColors, facetColors } = getRaceBreakdownColors(facetNames);
+
+    return {
+      title: 'Renter households',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `The Census categorizes households into renter-occupied and owner-occupied status. This figure shows the number of households that rent instead of own. <br /> <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      fx: { label: 'Survey period' },
+      x: { axis: null, domain: facetOrder },
+      y: {
+        label: 'Hhouseholds who rent',
+        tickFormat: '.0f',
+      },
+      color: {
+        legend: true,
+        domain: facetOrder,
+        range: legendColors,
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 40,
+      marks: [
+        barWithLabelY(tidyData, {
+          x: 'group',
+          fx: 'year',
+          y: 'value',
+          yErrorMargin: 'moe',
+          labelFormat: '.0f',
           labelFill: (d) => (d.group === 'Overall' ? '#666' : facetColors.get(d.group)),
           fill: 'group',
         }),
@@ -2157,8 +2195,10 @@ function getTidyRenterData(data: PlotData) {
       if (!numerator || typeof numerator !== 'number') return null;
 
       return {
+        value: d[renterKey],
+        moe: d[`M${renterKey}`],
         fraction: numerator / denominator,
-        moe: calcProportionMOE(
+        fraction_moe: calcProportionMOE(
           d,
           renterKey.toString(),
           [renterKey, ownerKey].map((key) => key.toString())
@@ -2219,7 +2259,7 @@ function getRenterPlotConfig(neighborhood: string, data: PlotData, variant: Race
         {
           x: 'year',
           y: 'fraction',
-          yErrorMargin: 'moe',
+          yErrorMargin: 'fraction_moe',
           labelFormat: '.1%',
           fill: colors.vibrant.teal,
           labelFill: 'black',
