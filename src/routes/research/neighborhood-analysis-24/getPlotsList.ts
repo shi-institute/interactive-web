@@ -3,7 +3,12 @@ import { blockPlotConfigs, plotConfigs } from './plotConfigs';
 export function getPlotsList(url: URL) {
   const tractPlots = Object.entries(plotConfigs)
     .map(([key, config]) => [config('', [], url).title || key, key] as const)
-    .map(([title, key]) => [`${title}`, key] as const);
+    .map(([title, key]) => {
+      if (key.endsWith('_fraction')) {
+        title += ' (%)';
+      }
+      return [`${title}`, key] as const;
+    });
 
   const blockPlots = Object.entries(blockPlotConfigs)
     .map(([key, config]) => [config('', [], url).title || key, key] as const)
