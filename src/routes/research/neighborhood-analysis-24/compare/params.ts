@@ -30,6 +30,7 @@ export function getParams(url: URL) {
     plotWidth: ssp.number(600),
     plotHeight: ssp.number(400),
     normalizeYAxisScale: ssp.boolean(false),
+    wizard: ssp.boolean(false),
   };
 
   return params;

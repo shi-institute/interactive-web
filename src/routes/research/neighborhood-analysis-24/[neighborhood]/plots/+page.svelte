@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import PageTitle from '$lib/PageTitle.svelte';
+  import { capitalize } from '$utils/capitalize';
   import { Button } from 'fluent-svelte';
   import { getPlotsList } from '../../getPlotsList';
 
@@ -32,9 +33,28 @@
   {/each}
 </ul>
 
-<Button
-  style="margin: 0 20px;"
-  href="/research/neighborhood-analysis-24/{$page.params.neighborhood}/plots/all"
->
-  View all plots
-</Button>
+<div class="button-row">
+  <Button href="/research/neighborhood-analysis-24/{$page.params.neighborhood}/plots/all">
+    View all plots
+  </Button>
+
+  <Button
+    href="/research/neighborhood-analysis-24/compare?neighborhoods={encodeURIComponent(
+      capitalize($page.params.neighborhood)
+    )}&title={encodeURIComponent('Custom collection')}&subtitle={encodeURIComponent(
+      `${capitalize($page.params.neighborhood)} neighborhood`
+    )}&wizard=true"
+  >
+    Build a collection
+  </Button>
+</div>
+
+<style>
+  .button-row {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    margin: 0 20px;
+    padding-bottom: 20px;
+  }
+</style>

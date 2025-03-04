@@ -5,7 +5,7 @@
   import PlotContainer from '$lib/PlotContainer.svelte';
   import { notEmpty } from '$utils/notEmpty';
   import { type Plot } from '@observablehq/plot';
-  import { Button } from 'fluent-svelte';
+  import { Button, ContentDialog } from 'fluent-svelte';
   import { html } from 'htl';
   import { queryParameters } from 'sveltekit-search-params';
   import { validatePublic } from '../matcher';
@@ -13,6 +13,7 @@
   import FloatingSidebar from './FloatingSidebar.svelte';
   import { isPanelWrapperOpen } from './isPanelWrapperOpen';
   import { getParams, queryParamsOptions } from './params';
+  import Sidebar from './Sidebar.svelte';
 
   export let data;
 
@@ -133,6 +134,25 @@
   }
 </script>
 
+<ContentDialog
+  bind:open="{$params.wizard}"
+  title="Create a collection"
+  class="ns-plots-24-wizard"
+  size="max"
+>
+  <Sidebar pageTitleElemVisibleHeight="{2}" inline />
+  <svelte:fragment slot="footer">
+    <Button
+      on:click="{() => {
+        $params.wizard = false;
+      }}"
+      variant="accent"
+    >
+      Create
+    </Button>
+  </svelte:fragment>
+</ContentDialog>
+
 <FloatingSidebar isEmbedded="{data.isEmbedded}" />
 
 <PageTitle>
@@ -212,5 +232,32 @@
   .grid.wrap .grid-item {
     grid-column: auto !important;
     grid-row: auto !important;
+  }
+
+  :global(.ns-plots-24-wizard .content-dialog-body) {
+    max-height: calc(100vh - 80px - 80px);
+    box-sizing: border-box;
+    overflow: auto;
+  }
+  :global(.ns-plots-24-wizard h4) {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  :global(.ns-plots-24-wizard h4::before) {
+    content: '';
+    background-color: var(--fds-solid-background-base);
+    position: absolute;
+    inset: -24px 0 -12px 0;
+    z-index: -1;
+  }
+
+  :global(.ns-plots-24-wizard h4::after) {
+    content: '';
+    background-color: var(--fds-layer-background-default);
+    position: absolute;
+    inset: -24px 0 -12px 0;
+    z-index: -1;
   }
 </style>
