@@ -3,7 +3,7 @@
   import { FieldWrapper } from '$lib/common/FieldWrapper';
   import { SelectMany } from '$lib/common/Select';
   import { notEmpty } from '$utils/notEmpty';
-  import { Button, ProgressRing, TextBlock, TextBox } from 'fluent-svelte';
+  import { Button, ProgressRing, TextBlock, TextBox, ToggleSwitch } from 'fluent-svelte';
   import { queryParameters } from 'sveltekit-search-params';
   import { getPlotsList } from '../getPlotsList';
   import { getParams, queryParamsOptions } from './params';
@@ -108,6 +108,14 @@
               $params.neighborhoods = evt.detail.map(({ label }) => label).filter(notEmpty);
             }}"
           />
+        </FieldWrapper>
+
+        <FieldWrapper
+          label="Normalize y-axis scale"
+          forId="normalizeYAxisScale"
+          description="{'Use the same scale for the y-axis when comparing figures across neighborhoods and tracts.'}"
+        >
+          <ToggleSwitch id="normalizeYAxisScale" bind:checked="{$params.normalizeYAxisScale}" />
         </FieldWrapper>
 
         <FieldWrapper

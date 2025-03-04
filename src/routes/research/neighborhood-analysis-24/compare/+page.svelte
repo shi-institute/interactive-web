@@ -4,6 +4,7 @@
   import PageTitle from '$lib/PageTitle.svelte';
   import PlotContainer from '$lib/PlotContainer.svelte';
   import { notEmpty } from '$utils/notEmpty';
+  import { type Plot } from '@observablehq/plot';
   import { Button } from 'fluent-svelte';
   import { html } from 'htl';
   import { queryParameters } from 'sveltekit-search-params';
@@ -87,6 +88,49 @@
     .filter(notEmpty);
 
   $: plotsToShow = [...tractPlots, ...blockPlots];
+
+  let plotNodes: Record<string, ((HTMLElement | SVGSVGElement) & Plot) | undefined> = {};
+
+  // make sure all y-axes have the same domain when normalizeYAxisScale is true
+  function matchYDomains() {
+    const maximums = Object.entries(plotNodes)
+      .map(([_key, node]) => {
+        const [neighborhood, key] = _key.split('.');
+
+        const domain = node?.scale('y')?.domain;
+        if (!domain) return;
+
+        const [min, max] = Array.from(domain) as [number, number];
+
+        return [neighborhood, max] as const;
+      })
+      .filter(notEmpty)
+      .reduce((acc, [neighborhood, max]) => {
+        if (acc[neighborhood] === undefined || acc[neighborhood] < max) {
+          acc[neighborhood] = max;
+        }
+        return acc;
+      }, {} as Record<string, number>);
+
+    plotsToShow = plotsToShow.map(([key, neighborhood, plot]) => {
+      const max = maximums[key];
+      if (!max) return [key, neighborhood, plot];
+
+      const yDomain = [0, max];
+
+      if (!plot.y) {
+        plot.y = { domain: yDomain };
+        return [key, neighborhood, plot];
+      }
+
+      plot.y.domain = yDomain;
+      return [key, neighborhood, plot];
+    });
+  }
+  $: plotNodesLength = Object.keys(plotNodes).length;
+  $: if (plotNodesLength && $params.normalizeYAxisScale) {
+    matchYDomains();
+  }
 </script>
 
 <FloatingSidebar isEmbedded="{data.isEmbedded}" />
@@ -132,6 +176,7 @@
           }}"
           enablePopup
           fullWidth
+          bind:plotNode="{plotNodes[`${key}.${neighborhood}`]}"
         />
       </div>
     </div>
