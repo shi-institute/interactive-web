@@ -1025,6 +1025,122 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       ],
     };
   },
+  tenure__owner__AGE_BREAKDOWN(neighborhood, data) {
+    const tidyData = data.flatMap(({ year, ...data }) => {
+      return [
+        {
+          year,
+          group: '15-34',
+          amount: data['tenure__owner_15-24'] + data['tenure__owner_25-34'],
+          moe: Math.sqrt(
+            ['tenure__owner_15-24', 'tenure__owner_25-34']
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+        {
+          year,
+          group: '35-64',
+          amount:
+            data['tenure__owner_35-44'] +
+            data['tenure__owner_45-54'] +
+            data['tenure__owner_55-59'] +
+            data['tenure__owner_60-64'],
+          moe: Math.sqrt(
+            [
+              'tenure__owner_35-44',
+              'tenure__owner_45-54',
+              'tenure__owner_55-59',
+              'tenure__owner_60-64',
+            ]
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+        {
+          year,
+          group: '65-74',
+          amount: data['tenure__owner_65-74'],
+          moe: Math.sqrt(
+            ['tenure__owner_65-74']
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+        {
+          year,
+          group: '75-84',
+          amount: data['tenure__owner_75-84'],
+          moe: Math.sqrt(
+            ['tenure__owner_75-84']
+              // @ts-expect-error
+              .map((field) => hasKey(data, 'M' + field) && data['M' + field])
+              .filter((val) => typeof val === 'number')
+              .map((num) => num ** 2)
+              .reduce((a, b) => a + b, 0)
+          ),
+        },
+      ];
+    });
+
+    const facetNames = Array.from(new Set(tidyData.filter((d) => !!d.amount).map((d) => d.group)));
+
+    const facetColors = new Map([
+      ['15-34', d3.schemeObservable10[2]],
+      ['35-64', d3.schemeObservable10[3]],
+      ['65-74', d3.schemeObservable10[4]],
+      ['75-84', d3.schemeObservable10[5]],
+    ]);
+
+    for (const [facetName] of facetColors) {
+      if (!facetNames.includes(facetName)) {
+        facetColors.delete(facetName);
+      }
+    }
+
+    const facetOrder = Array.from(facetColors.keys());
+    const legendColors = Array.from(facetColors.values());
+
+    return {
+      title: 'Owner householders by age',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      fx: { label: 'Survey period' },
+      x: { axis: null, domain: facetOrder },
+      y: {
+        label: 'Population',
+      },
+      color: {
+        legend: true,
+        domain: facetOrder,
+        range: legendColors,
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 50,
+      marks: [
+        barWithLabelY(tidyData, {
+          x: 'group',
+          fx: 'year',
+          y: 'amount',
+          yErrorMargin: 'moe',
+          labelFormat: '.0f',
+          fill: 'group',
+        }),
+        Plot.ruleY([0]),
+      ],
+    };
+  },
   tenure__RACE_BREAKDOWN__renter_fraction(neighborhood, data) {
     const tidyData = getTidyRenterData(data);
     const facetNames = tidyData.filter((d) => !!d.fraction).map((d) => d.group);
