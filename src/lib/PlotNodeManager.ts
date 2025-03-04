@@ -41,7 +41,14 @@ class PlotNodeManager {
       throw new Error('plot options are not set');
     }
 
-    const plotNode = Plot.plot(this.options);
+    let plotNode: PlotNode;
+    try {
+      plotNode = Plot.plot(this.options);
+    } catch (error) {
+      console.error('Error creating plot:', error);
+      const errorNode = Plot.plot();
+      return errorNode;
+    }
 
     const svgNodes = plotNode.querySelectorAll('svg');
     for (const svgNode of svgNodes) {
