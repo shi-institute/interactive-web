@@ -5,9 +5,10 @@
   import selectedThemeMode from '$stores/selectedThemeMode';
   import { measureWidth } from '$utils/use';
   import * as Plot from '@observablehq/plot';
-  import { ProgressRing } from 'fluent-svelte';
+  import { ContextMenu, MenuFlyoutItem, ProgressRing } from 'fluent-svelte';
   import Popout from 'svelte-popout';
   import { get } from 'svelte/store';
+  import { ExportWindow } from './common/ExportWindow';
   import { type PlotNode, PlotNodeManager } from './PlotNodeManager';
 
   export let plot: Plot.PlotOptions | ((width: number) => Plot.PlotOptions);
@@ -26,6 +27,7 @@
   let div: HTMLDivElement;
   $: plotOptions = typeof plot === 'function' ? plot(clientWidth || 640) : plot;
   $: {
+    counter;
     if (browser && div) {
       const plotHeight =
         boxSizing === 'border-box'
@@ -42,10 +44,38 @@
     }
   }
 
+  let exportWidth = 800;
+  let exportHeight = 500;
+  let exportPadding = 20;
+  let exportDiv: HTMLDivElement;
+  $: {
+    counter;
+    if (browser && exportDiv) {
+      const plotHeight = calculatePlotHeightInBorderBoxMode(
+        slotBeforeHeight,
+        slotAfterHeight,
+        {
+          ...plotOptions,
+          height: exportHeight - 2 * exportPadding,
+        },
+        exportDiv
+      );
+
+      plotNode = new PlotNodeManager()
+        .setOptions({
+          ...plotOptions,
+          width: exportWidth - 2 * exportPadding,
+          height: plotHeight,
+        })
+        .render(exportDiv).node;
+    }
+  }
+
   function calculatePlotHeightInBorderBoxMode(
     slotBeforeHeight: number,
     slotAfterHeight: number,
-    plotOptions: Plot.PlotOptions
+    plotOptions: Plot.PlotOptions,
+    node = div
   ) {
     if (!plotOptions.height) {
       return undefined;
@@ -62,7 +92,7 @@
         width: 0,
         height: 0,
       })
-      .render(div);
+      .render(node);
     tempPlotManager.node.style.visibility = 'hidden';
     const metaHeight = tempPlotManager.node.clientHeight;
 
@@ -194,11 +224,23 @@
     }
   }
 
+  let exportWindowOpen = false;
+  function exportWindowInitialized(_exportWindow: Window | null) {}
+
   export function openInPopupWindow() {
     popupOpen = true;
   }
   function handlePopupClose() {
     popupOpen = false;
+  }
+
+  function openExportWindow() {
+    exportWindowOpen = true;
+  }
+
+  let counter = 0;
+  function refresh() {
+    counter = counter + 1;
   }
 </script>
 
@@ -227,7 +269,7 @@
       <div
         bind:clientWidth="{popupClientWidth}"
         bind:clientHeight="{popupClientHeight}"
-        class="plot-container {randomClass}"
+        class="plot-container"
       >
         <div bind:this="{popopPlotDestinationNode}" role="img" class="{plotClass}">
           <div class="wait">
@@ -236,9 +278,6 @@
           </div>
         </div>
       </div>
-      {#await customPlotCss then css}
-        {@html `<` + `style>${css}</style>`}
-      {/await}
       <slot name="after" />
       <slot name="popup-after" />
     {:else}
@@ -250,37 +289,111 @@
   </Popout>
 {/if}
 
-<div class="plot-container">
-  <div class="slots" bind:clientHeight="{slotBeforeHeight}">
-    <slot name="main-before" />
-    <slot name="before" />
+<ExportWindow
+  bind:open="{exportWindowOpen}"
+  fileName="{plotOptions.title?.toString()}"
+  bind:exportWidth="{exportWidth}"
+  bind:exportHeight="{exportHeight}"
+  bind:exportPadding="{exportPadding}"
+>
+  <div bind:this="{exportDiv}" role="img" class="{plotClass}">
+    <div class="wait">
+      <ProgressRing style="--fds-accent-default: currentColor;" />
+      Please wait
+    </div>
   </div>
-  <div
-    bind:clientWidth="{clientWidth}"
-    use:measureWidth="{{ callback: (width) => (clientWidth = width) }}"
-  >
-    <div bind:this="{div}" role="img" class="{plotClass}">
-      <div
-        style="height: {(typeof plot === 'function' ? plot(clientWidth || 640) : plot).height ||
-          300}px;"
-      >
-        {#if $page.data.isEmbedded}
-          <div class="wait">
+</ExportWindow>
+
+<ContextMenu>
+  <div class="plot-container">
+    <div class="slots" bind:clientHeight="{slotBeforeHeight}">
+      <slot name="main-before" />
+      <slot name="before" />
+    </div>
+    <div
+      bind:clientWidth="{clientWidth}"
+      use:measureWidth="{{ callback: (width) => (clientWidth = width) }}"
+    >
+      <div bind:this="{div}" role="img" class="{plotClass}">
+        <div
+          style="height: {(typeof plot === 'function' ? plot(clientWidth || 640) : plot).height ||
+            300}px;"
+        >
+          <div
+            class="wait"
+            class:nobackground="{!$page.data.isEmbedded}"
+            class:contained="{!$page.data.isEmbedded}"
+          >
             <ProgressRing style="--fds-accent-default: currentColor;" />
             Please wait
           </div>
-        {/if}
+        </div>
       </div>
     </div>
+    <div class="slots" bind:clientHeight="{slotAfterHeight}">
+      {#if enablePopup && div && div.childElementCount > 0}
+        <button class="popup-button" on:click="{openInPopupWindow}">Open in popup</button>
+      {/if}
+      <slot name="after" />
+      <slot name="main-after" />
+    </div>
   </div>
-  <div class="slots" bind:clientHeight="{slotAfterHeight}">
-    {#if enablePopup && div && div.childElementCount > 0}
-      <button class="popup-button" on:click="{openInPopupWindow}">Open in popup</button>
-    {/if}
-    <slot name="after" />
-    <slot name="main-after" />
-  </div>
-</div>
+
+  <svelte:fragment slot="flyout">
+    <MenuFlyoutItem on:click="{refresh}">
+      Refresh
+      <svg
+        slot="icon"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M16.052 5.029a1 1 0 0 0 .189 1.401 7.002 7.002 0 0 1-3.157 12.487l.709-.71a1 1 0 0 0-1.414-1.414l-2.5 2.5a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 1.414-1.414l-.843-.842A9.001 9.001 0 0 0 17.453 4.84a1 1 0 0 0-1.401.189Zm-1.93-1.736-2.5-2.5a1 1 0 0 0-1.498 1.32l.083.094.843.843a9.001 9.001 0 0 0-4.778 15.892A1 1 0 0 0 7.545 17.4a7.002 7.002 0 0 1 3.37-12.316l-.708.709a1 1 0 0 0 1.32 1.497l.094-.083 2.5-2.5a1 1 0 0 0 .083-1.32l-.083-.094Z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    </MenuFlyoutItem>
+    <MenuFlyoutItem on:click="{openExportWindow}" disabled="{exportWindowOpen}">
+      Export
+      <svg
+        slot="icon"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2.752 4.5a.75.75 0 0 1 .744.648l.006.102L3.5 18.254a.75.75 0 0 1-1.493.102L2 18.254 2.002 5.25a.75.75 0 0 1 .75-.75Zm12.895 1.804.073-.084a.75.75 0 0 1 .976-.073l.084.073 4.997 4.997a.75.75 0 0 1 .073.976l-.073.085-4.996 5.003a.75.75 0 0 1-1.134-.976l.072-.084 3.711-3.717H5.753a.75.75 0 0 1-.743-.647l-.007-.102a.75.75 0 0 1 .648-.743l.102-.007 13.69-.001L15.72 7.28a.75.75 0 0 1-.073-.976l.073-.084-.073.084Z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    </MenuFlyoutItem>
+    <MenuFlyoutItem on:click="{openInPopupWindow}">
+      Open in popup window
+      <svg
+        slot="icon"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11.272 7.25a.75.75 0 0 1 .75-.75h4.728a.75.75 0 0 1 .75.75v4.729a.75.75 0 0 1-1.5 0V9.06l-5.22 5.22a.75.75 0 1 1-1.06-1.061L14.94 8h-2.918a.75.75 0 0 1-.75-.75Z"
+          fill="currentColor"
+        ></path>
+        <path
+          d="M6.157 5.25A3.251 3.251 0 0 1 9.25 3h8.5A3.25 3.25 0 0 1 21 6.25v8.588a3.251 3.251 0 0 1-2 3.001v.136c0 1.05-.53 1.845-1.309 2.344-.75.48-1.717.686-2.693.68h-.002l-4.077-.004H7c-1.157 0-2.164-.362-2.89-1.045-.727-.686-1.11-1.64-1.11-2.7V8.5c0-.865.216-1.683.734-2.296.534-.633 1.31-.954 2.222-.954h.2ZM6 6.75h-.044c-.544 0-.871.179-1.076.421-.22.262-.38.694-.38 1.329v8.75c0 .69.242 1.234.64 1.608.4.377 1.017.637 1.86.637h3.92L15 19.5h.004c.788.004 1.445-.166 1.878-.444.372-.238.582-.55.614-.968H9.25A3.25 3.25 0 0 1 6 14.838V6.75ZM9.25 4.5A1.75 1.75 0 0 0 7.5 6.25v8.588c0 .967.784 1.75 1.75 1.75h8.5a1.75 1.75 0 0 0 1.75-1.75V6.25a1.75 1.75 0 0 0-1.75-1.75h-8.5Z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    </MenuFlyoutItem>
+  </svelte:fragment>
+</ContextMenu>
 
 <style>
   .popup-button {
