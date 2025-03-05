@@ -1,4 +1,5 @@
 export { camelToDashCase } from './camelToDashCase';
+export { debounce } from './debounce';
 export { deepFreeze } from './deepFreeze';
 export { hasKey } from './hasKey';
 export { listOxford } from './listOxford';

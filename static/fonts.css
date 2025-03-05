@@ -3,8 +3,8 @@
 @font-face {
   font-family: 'Abril Fatface';
   src: local('Abril Fatface Italic'), local('AbrilFatface-Italic'),
-    url('fonts/Abril/AbrilFatface-Italic.woff2') format('woff2'),
-    url('fonts/Abril/AbrilFatface-Italic.woff') format('woff');
+    url('/fonts/Abril/AbrilFatface-Italic.woff2') format('woff2'),
+    url('/fonts/Abril/AbrilFatface-Italic.woff') format('woff');
   font-weight: normal;
   font-style: italic;
   font-display: swap;
@@ -13,8 +13,8 @@
 @font-face {
   font-family: 'Abril Text';
   src: local('Abril Text Bold'), local('AbrilText-Bold'),
-    url('fonts/Abril/AbrilText-Bold.woff2') format('woff2'),
-    url('fonts/Abril/AbrilText-Bold.woff') format('woff');
+    url('/fonts/Abril/AbrilText-Bold.woff2') format('woff2'),
+    url('/fonts/Abril/AbrilText-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -23,8 +23,8 @@
 @font-face {
   font-family: 'Abril Fatface';
   src: local('Abril Fatface Regular'), local('AbrilFatface-Regular'),
-    url('fonts/Abril/AbrilFatface-Regular.woff2') format('woff2'),
-    url('fonts/Abril/AbrilFatface-Regular.woff') format('woff');
+    url('/fonts/Abril/AbrilFatface-Regular.woff2') format('woff2'),
+    url('/fonts/Abril/AbrilFatface-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -33,8 +33,8 @@
 @font-face {
   font-family: 'Abril Text';
   src: local('Abril Text SemiBold Italic'), local('AbrilText-SemiBoldItalic'),
-    url('fonts/Abril/AbrilText-SemiBoldItalic.woff2') format('woff2'),
-    url('fonts/Abril/AbrilText-SemiBoldItalic.woff') format('woff');
+    url('/fonts/Abril/AbrilText-SemiBoldItalic.woff2') format('woff2'),
+    url('/fonts/Abril/AbrilText-SemiBoldItalic.woff') format('woff');
   font-weight: 600;
   font-style: italic;
   font-display: swap;
@@ -43,8 +43,8 @@
 @font-face {
   font-family: 'Abril Text';
   src: local('Abril Text SemiBold'), local('AbrilText-SemiBold'),
-    url('fonts/Abril/AbrilText-SemiBold.woff2') format('woff2'),
-    url('fonts/Abril/AbrilText-SemiBold.woff') format('woff');
+    url('/fonts/Abril/AbrilText-SemiBold.woff2') format('woff2'),
+    url('/fonts/Abril/AbrilText-SemiBold.woff') format('woff');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -53,8 +53,8 @@
 @font-face {
   font-family: 'Abril Text';
   src: local('Abril Text Regular'), local('AbrilText-Regular'),
-    url('fonts/Abril/AbrilText-Regular.woff2') format('woff2'),
-    url('fonts/Abril/AbrilText-Regular.woff') format('woff');
+    url('/fonts/Abril/AbrilText-Regular.woff2') format('woff2'),
+    url('/fonts/Abril/AbrilText-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -63,8 +63,8 @@
 @font-face {
   font-family: 'Abril Text';
   src: local('Abril Text Bold Italic'), local('AbrilText-BoldItalic'),
-    url('fonts/Abril/AbrilText-BoldItalic.woff2') format('woff2'),
-    url('fonts/Abril/AbrilText-BoldItalic.woff') format('woff');
+    url('/fonts/Abril/AbrilText-BoldItalic.woff2') format('woff2'),
+    url('/fonts/Abril/AbrilText-BoldItalic.woff') format('woff');
   font-weight: bold;
   font-style: italic;
   font-display: swap;
@@ -73,8 +73,8 @@
 @font-face {
   font-family: 'Abril Text';
   src: local('Abril Text Lt Italic'), local('AbrilTextLt-Italic'),
-    url('fonts/Abril/AbrilTextLt-Italic.woff2') format('woff2'),
-    url('fonts/Abril/AbrilTextLt-Italic.woff') format('woff');
+    url('/fonts/Abril/AbrilTextLt-Italic.woff2') format('woff2'),
+    url('/fonts/Abril/AbrilTextLt-Italic.woff') format('woff');
   font-weight: 300;
   font-style: italic;
   font-display: swap;
@@ -83,8 +83,8 @@
 @font-face {
   font-family: 'Abril Text';
   src: local('Abril Text Italic'), local('AbrilText-Italic'),
-    url('fonts/Abril/AbrilText-Italic.woff2') format('woff2'),
-    url('fonts/Abril/AbrilText-Italic.woff') format('woff');
+    url('/fonts/Abril/AbrilText-Italic.woff2') format('woff2'),
+    url('/fonts/Abril/AbrilText-Italic.woff') format('woff');
   font-weight: normal;
   font-style: italic;
   font-display: swap;
@@ -93,8 +93,8 @@
 @font-face {
   font-family: 'Abril Text';
   src: local('Abril Text Lt'), local('AbrilTextLt'),
-    url('fonts/Abril/AbrilTextLt.woff2') format('woff2'),
-    url('fonts/Abril/AbrilTextLt.woff') format('woff');
+    url('/fonts/Abril/AbrilTextLt.woff2') format('woff2'),
+    url('/fonts/Abril/AbrilTextLt.woff') format('woff');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -103,8 +103,8 @@
 @font-face {
   font-family: 'JetBrains Mono';
   src: local('JetBrains Mono Regular'), local('JetBrainsMono-Regular'),
-    url('fonts/JetBrains Mono/JetBrainsMono-Regular.woff2') format('woff2'),
-    url('fonts/JetBrains Mono/JetBrainsMono-Regular.woff') format('woff');
+    url('/fonts/JetBrains Mono/JetBrainsMono-Regular.woff2') format('woff2'),
+    url('/fonts/JetBrains Mono/JetBrainsMono-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -113,8 +113,8 @@
 @font-face {
   font-family: 'JetBrains Mono';
   src: local('JetBrains Mono Medium'), local('JetBrainsMono-Medium'),
-    url('fonts/JetBrains Mono/JetBrainsMono-Medium.woff2') format('woff2'),
-    url('fonts/JetBrains Mono/JetBrainsMono-Medium.woff') format('woff');
+    url('/fonts/JetBrains Mono/JetBrainsMono-Medium.woff2') format('woff2'),
+    url('/fonts/JetBrains Mono/JetBrainsMono-Medium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
