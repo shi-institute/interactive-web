@@ -1963,11 +1963,14 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
   },
   population_pyramid(neighborhood, data, url) {
     const year = url.searchParams.get('year') || '2020';
+    const mode = url.searchParams.get('mode') === 'fraction' ? 'fraction' : 'population';
+    const forcedMaxX = url.searchParams.get('maxX');
 
     const tidyData = data
       .flatMap((d) => {
-        const M = { year: d.year, sex: 'M' };
-        const F = { year: d.year, sex: 'F' };
+        const totalPopulation = d.population__total || 0;
+        const M = { year: d.year, sex: 'M', totalPopulation };
+        const F = { year: d.year, sex: 'F', totalPopulation };
 
         return [
           { ...M, age_start: 0, age_end: 5, population: d.age__under_5__male },
@@ -2055,12 +2058,15 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
           { ...F, age_start: 90, age_end: null, population: null },
         ];
       })
+      .map(({ totalPopulation, ...d }) => {
+        return { ...d, fraction: (d.population || 0) / totalPopulation };
+      })
       .filter((d) => d.year === year);
 
     const gap = 20;
     const labelOffset = 26;
-    const maxPopulation = d3.max(tidyData, (d) => d.population) || 0;
-    const ticks = d3.ticks(0, maxPopulation, 4);
+    const maxX = forcedMaxX ? parseFloat(forcedMaxX) : d3.max(tidyData, (d) => d[mode]) || 0;
+    const ticks = d3.ticks(0, maxX, 4);
 
     const yAxis = [
       Plot.text(d3.range(0, 95, 10), { y: (d) => d }),
@@ -2068,27 +2074,30 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
       Plot.text(['more'], { y: 90, dy: 20, fontWeight: 400, opacity: 0.7 }),
       Plot.text(['Years'], { y: 80, dy: 10, fontWeight: 400 }),
       Plot.ruleY(d3.range(5, 95, 5), {
-        x1: (d) => (d % 10 == 0 ? 0 : 0.5),
-        x2: 2,
+        x1: (d) => (d % 10 == 0 ? 0 : mode === 'fraction' ? 0.0000005 : 0.5),
+        x2: mode === 'fraction' ? 0.002 : 2,
         dx: gap / 2,
         strokeWidth: 0.7,
       }),
       Plot.ruleY(d3.range(5, 95, 5), {
-        x1: (d) => (d % 10 == 0 ? 0 : -0.5),
-        x2: -2,
+        x1: (d) => (d % 10 == 0 ? 0 : mode === 'fraction' ? -0.0000005 : -0.5),
+        x2: mode === 'fraction' ? -0.002 : -2,
         dx: -gap / 2,
         strokeWidth: 0.7,
       }),
     ];
 
-    const xAxis = [
-      Plot.ruleY([0], { x1: 0, x2: maxPopulation, dx: gap, strokeWidth: 0.5 }),
-      Plot.ruleX(ticks, { x: (d) => d, y: 0, insetBottom: -5, dx: gap }),
-      Plot.text(ticks, { x: (d) => d, y: 0, dx: gap, dy: 12 }),
+    const format = d3.format(mode === 'fraction' ? '.1%' : '.0f');
+    const formatA = d3.format(mode === 'fraction' ? '.0%' : '.0f');
 
-      Plot.ruleY([0], { x1: 0, x2: -maxPopulation, dx: -gap, strokeWidth: 0.5 }),
+    const xAxis = [
+      Plot.ruleY([0], { x1: 0, x2: maxX, dx: gap, strokeWidth: 0.5 }),
+      Plot.ruleX(ticks, { x: (d) => d, y: 0, insetBottom: -5, dx: gap }),
+      Plot.text(ticks, { x: (d) => d, y: 0, dx: gap, dy: 12, text: (d) => formatA(d) }),
+
+      Plot.ruleY([0], { x1: 0, x2: -maxX, dx: -gap, strokeWidth: 0.5 }),
       Plot.ruleX(ticks, { x: (d) => -d, y: 0, insetBottom: -5, dx: -gap }),
-      Plot.text(ticks, { x: (d) => -d, y: 0, dx: -gap, dy: 12 }),
+      Plot.text(ticks, { x: (d) => -d, y: 0, dx: -gap, dy: 12, text: (d) => formatA(d) }),
 
       Plot.text(['← Male'], {
         x: 0,
@@ -2115,19 +2124,19 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
         ticks: 5,
         label: 'Population',
         axis: null,
-        domain: [-maxPopulation - 0, maxPopulation + 0],
+        domain: [-maxX - 0, maxX + 0],
       },
       y: { axis: null, domain: [0, 90] },
       marginTop: 10,
-      marginRight: gap + labelOffset,
+      marginRight: gap + labelOffset + (mode === 'fraction' ? 10 : 0),
       marginBottom: 36,
-      marginLeft: gap + labelOffset,
+      marginLeft: gap + labelOffset + (mode === 'fraction' ? 10 : 0),
       marks: [
         yAxis,
         xAxis,
         Plot.areaX(tidyData, {
           y: 'age_start',
-          x: (d) => -d.population,
+          x: (d) => -d[mode],
           dx: -gap,
           fill: colors.vibrant.blue,
           filter: (d) => d.sex === 'M',
@@ -2136,7 +2145,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
         }),
         Plot.areaX(tidyData, {
           y: 'age_start',
-          x: 'population',
+          x: mode,
           dx: gap,
           fill: colors.vibrant.magenta,
           filter: (d) => d.sex === 'F',
@@ -2144,22 +2153,22 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
         }),
         Plot.textX(tidyData, {
           y: (d) => d.age_start + 2.5,
-          x: (d) => -d.population,
+          x: (d) => -d[mode],
           lineAnchor: 'middle',
           textAnchor: 'end',
           dx: -labelOffset,
           filter: (d) => d.sex === 'M',
-          text: 'population',
+          text: (d) => format(d[mode]),
           opacity: 0.5,
         }),
         Plot.textX(tidyData, {
           y: (d) => d.age_start + 2.5,
-          x: (d) => d.population,
+          x: (d) => d[mode],
           lineAnchor: 'middle',
           textAnchor: 'start',
           dx: labelOffset,
           filter: (d) => d.sex === 'F',
-          text: 'population',
+          text: (d) => format(d[mode]),
           opacity: 0.5,
         }),
       ],
