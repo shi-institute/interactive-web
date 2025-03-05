@@ -37,7 +37,7 @@
     });
   }
 
-  $: isDeployedPreview = true || (!dev && $page.url.origin !== 'https://shi.institute');
+  $: isDeployedPreview = !dev && $page.url.origin !== 'https://shi.institute';
 </script>
 
 {#if !data.isEmbedded}
