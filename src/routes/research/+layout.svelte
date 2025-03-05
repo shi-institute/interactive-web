@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { dev } from '$app/environment';
+  import { browser, dev } from '$app/environment';
+  import { page } from '$app/stores';
   import ThemeSwitchButton from '$lib/ThemeSwitchButton.svelte';
   import 'fluent-svelte/theme.css';
   import 'leaflet/dist/leaflet.css';
@@ -35,6 +36,8 @@
       headerVisibleHeight = entry.intersectionRect.height;
     });
   }
+
+  $: isDeployedPreview = true || (!dev && $page.url.origin !== 'https://shi.institute');
 </script>
 
 {#if !data.isEmbedded}
@@ -42,6 +45,9 @@
     <div class="left">
       <nav>
         <ul>
+          {#if isDeployedPreview}
+            <span class="preview">Deployment Preview</span>
+          {/if}
           <a href="https://www.furman.edu/shi-institute/sustainability-research/">
             Shi Applied Research
           </a>
@@ -67,6 +73,27 @@
 
 <main style="--headerVisibleHeight: {headerVisibleHeight}px;">
   <slot />
+  <style>
+    /* purple accent color */
+    :root {
+      --fds-accent-dark-1: 253, 54%, 47%;
+      --fds-accent-dark-2: 253, 54%, 47%;
+
+      --fds-accent-light-2: 253, 49%, 80%;
+      --fds-accent-light-3: 253, 49%, 80%;
+    }
+  </style>
+  {#if isDeployedPreview}
+    <style>
+      :root {
+        --fds-accent-dark-1: 31, 80%, 50%;
+        --fds-accent-dark-2: 31, 80%, 50%;
+
+        --fds-accent-light-2: 38, 81%, 55%;
+        --fds-accent-light-3: 38, 81%, 55%;
+      }
+    </style>
+  {/if}
 </main>
 
 <style>
@@ -111,6 +138,17 @@
 
   main {
     flex-grow: 1;
+  }
+
+  .preview {
+    background-color: var(--fds-accent-default);
+    color: var(--fds-text-on-accent-primary);
+    padding: 1px 10px;
+    font-weight: 500;
+    font-size: 14px;
+    font-family: var(--fds-font-family-text);
+    border-radius: 12px;
+    margin: 0 4px 0 8px;
   }
 
   /* combobo box dropdown */
