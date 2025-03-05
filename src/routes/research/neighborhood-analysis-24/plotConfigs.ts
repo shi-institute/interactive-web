@@ -1656,6 +1656,9 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
     // needed for this plot are the same
     const plotConfig = plotConfigs.population__total(neighborhood, data);
     plotConfig.subtitle = `${neighborhood} (decennial census)`;
+    plotConfig.caption = plotConfig.caption
+      ?.toString()
+      .replace(' American Community Survey (5-year estimates)', '');
     if (plotConfig.x) plotConfig.x.label = 'Year';
     return plotConfig;
   },
@@ -1664,6 +1667,9 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
     // needed for this plot are the same
     const plotConfig = plotConfigs.population__RACE_ETHNICITY_BREAKDOWN(neighborhood, data);
     plotConfig.subtitle = `${neighborhood} (decennial census)`;
+    plotConfig.caption = plotConfig.caption
+      ?.toString()
+      .replace(' American Community Survey (5-year estimates)', '');
     if (plotConfig.fx) plotConfig.fx.label = 'Year';
     return plotConfig;
   },
@@ -1686,7 +1692,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
     return {
       title: 'Housing units',
       subtitle: `${neighborhood} (decennial census)`,
-      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `<i>Data: US Census Bureau</i>`,
       fx: { label: 'Year' },
       x: { axis: null, domain: ['Occupied', 'Vacant'] },
       y: {
@@ -1728,6 +1734,9 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
       url
     );
     plotConfig.subtitle = `${neighborhood} (decennial census)`;
+    plotConfig.caption = plotConfig.caption
+      ?.toString()
+      .replace(' American Community Survey (5-year estimates)', '');
     if (plotConfig.x) plotConfig.x.label = 'Year';
     return plotConfig;
   },
@@ -1769,7 +1778,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
     return {
       title: 'Population under and over 18',
       subtitle: `${neighborhood} (decennial census)`,
-      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `<i>Data: US Census Bureau</i>`,
       fx: { label: 'Year' },
       x: { axis: null, domain: ['Under 18', 'Over 18'] },
       y: {
@@ -1812,7 +1821,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
     return {
       title: 'Children under age 5',
       subtitle: `${neighborhood} (decennial census)`,
-      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `<i>Data: US Census Bureau</i>`,
       x: { label: 'Survey period', type: 'band' },
       y: {
         label: 'Total Population',
@@ -1859,7 +1868,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
     return {
       title: 'Senior population (65 and over)',
       subtitle: `${neighborhood} (decennial census)`,
-      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `<i>Data: US Census Bureau</i>`,
       x: { label: 'Survey period', type: 'band' },
       y: {
         label: 'Total Population',
@@ -1893,7 +1902,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
     return {
       title: 'Seniors (age 65 and over) living alone',
       subtitle: `${neighborhood} (decennial census)`,
-      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `<i>Data: US Census Bureau</i>`,
       x: { label: 'Survey period', type: 'band' },
       y: {
         label: 'Total Population',
@@ -1930,7 +1939,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
     return {
       title: 'Seniors (age 65 and over) living alone',
       subtitle: `${neighborhood} (decennial census)`,
-      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `<i>Data: US Census Bureau</i>`,
       x: { label: 'Survey period', type: 'band' },
       y: {
         label: 'Total Population',
@@ -2099,8 +2108,8 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
 
     return {
       title: 'Population pyramid',
-      subtitle: `${neighborhood}, ${year} (decinnial census)`,
-      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      subtitle: `${neighborhood}, ${year} (decennial census)`,
+      caption: `<i>Data: US Census Bureau</i>`,
       x: {
         tickFormat: Math.abs,
         ticks: 5,
