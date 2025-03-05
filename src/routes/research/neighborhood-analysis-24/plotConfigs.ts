@@ -2158,7 +2158,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
           textAnchor: 'end',
           dx: -labelOffset,
           filter: (d) => d.sex === 'M',
-          text: (d) => format(d[mode]),
+          text: (d) => (d.age_start < 90 ? format(d[mode]) : ''),
           opacity: 0.5,
         }),
         Plot.textX(tidyData, {
@@ -2168,7 +2168,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
           textAnchor: 'start',
           dx: labelOffset,
           filter: (d) => d.sex === 'F',
-          text: (d) => format(d[mode]),
+          text: (d) => (d.age_start < 90 ? format(d[mode]) : ''),
           opacity: 0.5,
         }),
       ],
