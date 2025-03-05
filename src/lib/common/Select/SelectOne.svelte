@@ -91,21 +91,24 @@
   {@const filteredItems = options
     .filter((opt) => (hideSelected ? opt._id !== selectedOption?._id : true))
     .map(toComboboxOption)}
-  {#key filteredItems}
-    <ComboBox
-      class="combobox-cristata"
-      items="{filteredItems}"
-      placeholder="{showCurrentSelectionOnDropdown && selectedOption
-        ? selectedOption.label
-        : 'Select...'}"
-      disabled="{disabled}"
-      on:select="{(evt) => {
-        if (!evt.detail) return;
+  {#if showCurrentSelectionOnDropdown}
+    {#key filteredItems}
+      <ComboBox
+        class="combobox-cristata"
+        items="{filteredItems}"
+        placeholder="{showCurrentSelectionOnDropdown && selectedOption
+          ? selectedOption.label
+          : 'Select...'}"
+        disabled="{disabled}"
+        on:select="{(evt) => {
+          if (!evt.detail) return;
 
-        const { name, value, ...rest } = evt.detail;
-        handleUpdateOption({ label: name, _id: value, ...rest });
-      }}"
-    />
+          const { name, value, ...rest } = evt.detail;
+          handleUpdateOption({ label: name, _id: value, ...rest });
+        }}"
+      />
+    {/key}
+  {:else}
     <div
       bind:this="{comboBoxWrapperElement}"
       on:focusin="{() => {
@@ -151,7 +154,7 @@
         }}"
       />
     </div>
-  {/key}
+  {/if}
 {/if}
 
 <style>
