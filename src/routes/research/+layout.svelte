@@ -36,8 +36,6 @@
       headerVisibleHeight = entry.intersectionRect.height;
     });
   }
-
-  $: isDeployedPreview = !dev && $page.url.origin !== 'https://shi.institute';
 </script>
 
 {#if !data.isEmbedded}
@@ -45,8 +43,10 @@
     <div class="left">
       <nav>
         <ul>
-          {#if isDeployedPreview}
+          {#if data.isDeployedPreview}
             <span class="preview">Deployment Preview</span>
+          {:else if dev}
+            <span class="preview">Dev</span>
           {/if}
           <a href="https://www.furman.edu/shi-institute/sustainability-research/">
             Shi Applied Research
@@ -81,7 +81,7 @@
       --fds-accent-light-p: 253, 49%, 68%; /* used by plots */
     }
   </style>
-  {#if isDeployedPreview}
+  {#if data.isDeployedPreview}
     <style>
       :root {
         --fds-accent-dark-1: 15, 99%, 39%;
@@ -149,5 +149,6 @@
     font-family: var(--fds-font-family-text);
     border-radius: 12px;
     margin: 0 4px 0 8px;
+    user-select: none;
   }
 </style>

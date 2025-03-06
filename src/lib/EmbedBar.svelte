@@ -1,8 +1,8 @@
 <script lang="ts">
+  import { dev } from '$app/environment';
   import { page } from '$app/stores';
-  import selectedThemeMode from '$stores/selectedThemeMode';
   import { hasKey } from '$utils';
-  import { Button, IconButton } from 'fluent-svelte';
+  import { Button } from 'fluent-svelte';
   import ThemeSwitchButton from './ThemeSwitchButton.svelte';
 
   export let actions: (
@@ -10,18 +10,17 @@
     | { onClick: () => void; label: string }
   )[] = [];
   export let actionStyle = 'padding: 2px 10px; font-size: 12px; color: var(--fds-text-secondary);';
-
-  function toggleTheme() {
-    selectedThemeMode.update((mode) => {
-      if (mode === 'light') return 'dark';
-      if (mode === 'dark') return 'auto';
-      return 'light';
-    });
-  }
 </script>
 
 <div class="embed-bar">
-  <div>Shi Applied Research</div>
+  <div>
+    {#if $page.data.isDeployedPreview}
+      <span class="preview">Deployment Preview</span>
+    {:else if dev}
+      <span class="preview">Dev</span>
+    {/if}
+    <span>Shi Applied Research</span>
+  </div>
   <div style="display: flex; flex-direction: row;">
     <ThemeSwitchButton style="{actionStyle} min-block-size: 20px;" />
     <Button variant="hyperlink" style="{actionStyle}" href="{$page.url.pathname}" target="_blank">
@@ -60,5 +59,17 @@
     align-items: center;
     font-size: 12px;
     color: var(--fds-text-tertiary);
+  }
+
+  .preview {
+    background-color: var(--fds-accent-default);
+    color: var(--fds-text-on-accent-primary);
+    padding: 1px 10px;
+    font-weight: 500;
+    font-size: 12px;
+    font-family: var(--fds-font-family-text);
+    border-radius: 12px;
+    margin: 0 10px 0 -10px;
+    user-select: none;
   }
 </style>
