@@ -2064,6 +2064,136 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
       ],
     };
   },
+  population___AGE_BREAKDOWN(neighborhood, data, url) {
+    const collasped = url.searchParams.get('collapseBrackets') === '1';
+
+    const brackets: [number, number][] = collasped
+      ? [
+          [0, 20],
+          [20, 65],
+          [65, -1],
+        ]
+      : [
+          [0, 15],
+          [15, 25],
+          [25, 35],
+          [35, 45],
+          [45, 55],
+          [55, 65],
+          [65, -1],
+        ];
+
+    const facetColors = collasped
+      ? new Map([
+          ['<20', d3.schemeObservable10[8]],
+          ['20-64', d3.schemeObservable10[9]],
+          ['≥65', d3.schemeObservable10[5]],
+        ])
+      : new Map([
+          ['<15', d3.schemeObservable10[0]],
+          ['15-24', d3.schemeObservable10[1]],
+          ['25-34', d3.schemeObservable10[2]],
+          ['35-44', d3.schemeObservable10[3]],
+          ['45-54', d3.schemeObservable10[7]],
+          ['55-64', d3.schemeObservable10[4]],
+          ['≥65', d3.schemeObservable10[5]],
+        ]);
+
+    const tidyData = getTidyAgeBySexData(data)
+      .reduce((acc, d) => {
+        const mappedAgeStart =
+          d.age_start < brackets[0][1]
+            ? brackets[0][0]
+            : d.age_start >= brackets[brackets.length - 1][0]
+            ? brackets[brackets.length - 1][0]
+            : brackets.find(
+                ([start, end]) => d.age_start >= start && (end === -1 || d.age_start < end)
+              )?.[0] ?? 0;
+        const mappedAgeEnd = d.age_end
+          ? d.age_start < brackets[0][1]
+            ? brackets[0][1]
+            : d.age_start >= brackets[brackets.length - 1][0]
+            ? null
+            : brackets.find(
+                ([start, end]) => d.age_start >= start && (end === -1 || d.age_start < end)
+              )?.[1] ?? null
+          : null;
+
+        // find an existing entry in the accumulator that has a matching age and year
+        const existing = acc.find((a) => a.age_start === mappedAgeStart && a.year === d.year);
+
+        if (!existing) {
+          // add a new entry to the accumulator
+          return [...acc, { ...d, age_start: mappedAgeStart, age_end: mappedAgeEnd }];
+        }
+
+        // if there is a match, add the population to the existing entry
+        if (d.population) {
+          if (existing.population === null) {
+            existing.population = 0;
+          }
+          existing.population += d.population || 0;
+        }
+        return acc;
+      }, [] as ReturnType<typeof getTidyAgeBySexData>)
+      .map(({ totalPopulation, ...d }) => {
+        return { ...d, fraction: (d.population || 0) / totalPopulation };
+      })
+      .map(({ sex, ...d }) => {
+        return {
+          ...d,
+          group:
+            d.age_start === 65
+              ? '≥65'
+              : d.age_start === 0
+              ? `<${d.age_end}`
+              : `${d.age_start}-${(d.age_end || 0) - 1}`,
+        };
+      });
+
+    const facetNames = Array.from(
+      new Set(tidyData.filter((d) => !!d.population).map((d) => d.group))
+    );
+
+    for (const [facetName] of facetColors) {
+      if (!facetNames.includes(facetName)) {
+        facetColors.delete(facetName);
+      }
+    }
+
+    const facetOrder = Array.from(facetColors.keys());
+    const legendColors = Array.from(facetColors.values());
+
+    return {
+      title: 'Population by age',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      fx: { label: 'Survey period' },
+      x: { axis: null, domain: facetOrder },
+      y: {
+        label: 'Population',
+      },
+      color: {
+        legend: true,
+        domain: facetOrder,
+        range: legendColors,
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 50,
+      marks: [
+        barWithLabelY(tidyData, {
+          x: 'group',
+          fx: 'year',
+          y: 'population',
+          labelFormat: '.0f',
+          fill: 'group',
+        }),
+        Plot.ruleY([0]),
+      ],
+    };
+  },
 };
 
 type PlotData = PageData['neighborhoodsData'] | PageData['tractsData'];

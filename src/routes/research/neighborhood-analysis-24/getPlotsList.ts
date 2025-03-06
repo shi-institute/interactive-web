@@ -19,6 +19,11 @@ export function getPlotsList(url: URL) {
           [`${title} (2010)`, `${key}?year=2010`],
           [`${title} (2000)`, `${key}?year=2000`],
         ] as const;
+      } else if (key === 'population___AGE_BREAKDOWN') {
+        return [
+          [`${title}`, `${key}`],
+          [`${title} (condensed brackets)`, `${key}?collapseBrackets=1`],
+        ] as const;
       } else {
         return [[title, key] as const];
       }
