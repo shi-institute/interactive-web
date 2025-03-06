@@ -1907,7 +1907,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
       y: {
         label: 'Total Population',
         tickFormat: '.0%',
-        domain: [0, 0.2],
+        domain: [0, 0.25],
       },
       marginTop: 30,
       marginRight: 0,
