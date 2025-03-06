@@ -1947,102 +1947,11 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
     const mode = url.searchParams.get('mode') === 'fraction' ? 'fraction' : 'population';
     const forcedMaxX = url.searchParams.get('maxX');
 
-    const tidyData = data
-      .flatMap((d) => {
-        const totalPopulation = d.population__total || 0;
-        const M = { year: d.year, sex: 'M', totalPopulation };
-        const F = { year: d.year, sex: 'F', totalPopulation };
-
-        return [
-          { ...M, age_start: 0, age_end: 5, population: d.age__under_5__male },
-          { ...M, age_start: 5, age_end: 10, population: d['age__5-9__male'] },
-          { ...M, age_start: 10, age_end: 15, population: d['age__10-14__male'] },
-          {
-            ...M,
-            age_start: 15,
-            age_end: 20,
-            population: (d['age__15-17__male'] || 0) + (d['age__18-19__male'] || 0),
-          },
-          {
-            ...M,
-            age_start: 20,
-            age_end: 25,
-            population:
-              (d['age__20__male'] || 0) + (d['age__21__male'] || 0) + (d['age__22-24__male'] || 0),
-          },
-          { ...M, age_start: 25, age_end: 30, population: d['age__25-29__male'] },
-          { ...M, age_start: 30, age_end: 35, population: d['age__30-34__male'] },
-          { ...M, age_start: 35, age_end: 40, population: d['age__35-39__male'] },
-          { ...M, age_start: 40, age_end: 45, population: d['age__40-44__male'] },
-          { ...M, age_start: 45, age_end: 50, population: d['age__45-49__male'] },
-          { ...M, age_start: 50, age_end: 55, population: d['age__50-54__male'] },
-          { ...M, age_start: 55, age_end: 60, population: d['age__55-59__male'] },
-          {
-            ...M,
-            age_start: 60,
-            age_end: 65,
-            population: (d['age__60-61__male'] || 0) + (d['age__62-64__male'] || 0),
-          },
-          {
-            ...M,
-            age_start: 65,
-            age_end: 70,
-            population: (d['age__65-66__male'] || 0) + (d['age__67-69__male'] || 0),
-          },
-          { ...M, age_start: 70, age_end: 75, population: d['age__70-74__male'] },
-          { ...M, age_start: 75, age_end: 80, population: d['age__75-79__male'] },
-          { ...M, age_start: 80, age_end: 85, population: d['age__80-84__male'] },
-          { ...M, age_start: 85, age_end: null, population: d['age__85_over__male'] },
-          { ...M, age_start: 90, age_end: null, population: null },
-
-          { ...F, age_start: 0, age_end: 5, population: d.age__under_5__female },
-          { ...F, age_start: 5, age_end: 10, population: d['age__5-9__female'] },
-          { ...F, age_start: 10, age_end: 15, population: d['age__10-14__female'] },
-          {
-            ...F,
-            age_start: 15,
-            age_end: 20,
-            population: (d['age__15-17__female'] || 0) + (d['age__18-19__female'] || 0),
-          },
-          {
-            ...F,
-            age_start: 20,
-            age_end: 25,
-            population:
-              (d['age__20__female'] || 0) +
-              (d['age__21__female'] || 0) +
-              (d['age__22-24__female'] || 0),
-          },
-          { ...F, age_start: 25, age_end: 30, population: d['age__25-29__female'] },
-          { ...F, age_start: 30, age_end: 35, population: d['age__30-34__female'] },
-          { ...F, age_start: 35, age_end: 40, population: d['age__35-39__female'] },
-          { ...F, age_start: 40, age_end: 45, population: d['age__40-44__female'] },
-          { ...F, age_start: 45, age_end: 50, population: d['age__45-49__female'] },
-          { ...F, age_start: 50, age_end: 55, population: d['age__50-54__female'] },
-          { ...F, age_start: 55, age_end: 60, population: d['age__55-59__female'] },
-          {
-            ...F,
-            age_start: 60,
-            age_end: 65,
-            population: (d['age__60-61__female'] || 0) + (d['age__62-64__female'] || 0),
-          },
-          {
-            ...F,
-            age_start: 65,
-            age_end: 70,
-            population: (d['age__65-66__female'] || 0) + (d['age__67-69__female'] || 0),
-          },
-          { ...F, age_start: 70, age_end: 75, population: d['age__70-74__female'] },
-          { ...F, age_start: 75, age_end: 80, population: d['age__75-79__female'] },
-          { ...F, age_start: 80, age_end: 85, population: d['age__80-84__female'] },
-          { ...F, age_start: 85, age_end: null, population: d['age__85_over__female'] },
-          { ...F, age_start: 90, age_end: null, population: null },
-        ];
-      })
+    const tidyData = getTidyAgeBySexData(data)
+      .filter((d) => d.year === year)
       .map(({ totalPopulation, ...d }) => {
         return { ...d, fraction: (d.population || 0) / totalPopulation };
-      })
-      .filter((d) => d.year === year);
+      });
 
     const gap = 20;
     const labelOffset = 26;
@@ -2466,4 +2375,106 @@ function getUnemploymentFractionPlotConfig(
       ),
     ],
   };
+}
+
+function getTidyAgeBySexData(data: BlockPlotData) {
+  return data.flatMap((d) => {
+    const totalPopulation = d.population__total || 0;
+    const M = { year: d.year, sex: 'M', totalPopulation };
+    const F = { year: d.year, sex: 'F', totalPopulation };
+
+    const sum = (vals: (number | null)[]) => {
+      const nonNullValues = vals.filter((v) => v !== null) as number[];
+      return nonNullValues.length > 0 ? nonNullValues.reduce((a, b) => a + b, 0) : null;
+    };
+
+    return [
+      { ...M, age_start: 0, age_end: 5, population: d.age__under_5__male },
+      { ...M, age_start: 5, age_end: 10, population: d['age__5-9__male'] },
+      { ...M, age_start: 10, age_end: 15, population: d['age__10-14__male'] },
+      {
+        ...M,
+        age_start: 15,
+        age_end: 20,
+        population: sum([d['age__15-17__male'], d['age__18-19__male']]),
+      },
+      {
+        ...M,
+        age_start: 20,
+        age_end: 25,
+        population: sum([d['age__20__male'], d['age__21__male'], d['age__22-24__male']]),
+      },
+      { ...M, age_start: 25, age_end: 30, population: d['age__25-29__male'] },
+      { ...M, age_start: 30, age_end: 35, population: d['age__30-34__male'] },
+      { ...M, age_start: 35, age_end: 40, population: d['age__35-39__male'] },
+      { ...M, age_start: 40, age_end: 45, population: d['age__40-44__male'] },
+      { ...M, age_start: 45, age_end: 50, population: d['age__45-49__male'] },
+      { ...M, age_start: 50, age_end: 55, population: d['age__50-54__male'] },
+      { ...M, age_start: 55, age_end: 60, population: d['age__55-59__male'] },
+      {
+        ...M,
+        age_start: 60,
+        age_end: 65,
+        population: sum([d['age__60-61__male'], d['age__62-64__male']]),
+      },
+      {
+        ...M,
+        age_start: 65,
+        age_end: 70,
+        population: sum([d['age__65-66__male'], d['age__67-69__male']]),
+      },
+      { ...M, age_start: 70, age_end: 75, population: d['age__70-74__male'] },
+      { ...M, age_start: 75, age_end: 80, population: d['age__75-79__male'] },
+      { ...M, age_start: 80, age_end: 85, population: d['age__80-84__male'] },
+      { ...M, age_start: 85, age_end: null, population: d['age__85_over__male'] },
+      { ...M, age_start: 90, age_end: null, population: null },
+
+      { ...F, age_start: 0, age_end: 5, population: d.age__under_5__female },
+      { ...F, age_start: 5, age_end: 10, population: d['age__5-9__female'] },
+      { ...F, age_start: 10, age_end: 15, population: d['age__10-14__female'] },
+      {
+        ...F,
+        age_start: 15,
+        age_end: 20,
+        population: sum([d['age__15-17__female'], d['age__18-19__female']]),
+      },
+      {
+        ...F,
+        age_start: 20,
+        age_end: 25,
+        population: sum([d['age__20__female'], d['age__21__female'], d['age__22-24__female']]),
+      },
+      { ...F, age_start: 25, age_end: 30, population: d['age__25-29__female'] },
+      { ...F, age_start: 30, age_end: 35, population: d['age__30-34__female'] },
+      { ...F, age_start: 35, age_end: 40, population: d['age__35-39__female'] },
+      { ...F, age_start: 40, age_end: 45, population: d['age__40-44__female'] },
+      { ...F, age_start: 45, age_end: 50, population: d['age__45-49__female'] },
+      { ...F, age_start: 50, age_end: 55, population: d['age__50-54__female'] },
+      { ...F, age_start: 55, age_end: 60, population: d['age__55-59__female'] },
+      {
+        ...F,
+        age_start: 60,
+        age_end: 65,
+        population: sum([d['age__60-61__female'], d['age__62-64__female']]),
+      },
+      {
+        ...F,
+        age_start: 65,
+        age_end: 70,
+        population: sum([d['age__65-66__female'], d['age__67-69__female']]),
+      },
+      { ...F, age_start: 70, age_end: 75, population: d['age__70-74__female'] },
+      { ...F, age_start: 75, age_end: 80, population: d['age__75-79__female'] },
+      { ...F, age_start: 80, age_end: 85, population: d['age__80-84__female'] },
+      { ...F, age_start: 85, age_end: null, population: d['age__85_over__female'] },
+      { ...F, age_start: 90, age_end: null, population: null },
+    ] as {
+      age_start: number;
+      age_end: number | null;
+      population: number | null;
+      year: string;
+      sex: string;
+      totalPopulation: number;
+    }[];
+  });
 }
