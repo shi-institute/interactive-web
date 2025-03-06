@@ -855,4 +855,15 @@ const neighborhoodBlocksDataSchema = z
       year: year.toString(),
       population__total: population_total,
     };
+  })
+  .transform((data) => {
+    const year = parseInt(data.year);
+    if (year >= 2000) return data;
+
+    const ageKeys = Object.keys(data).filter((key) => key.startsWith('age__'));
+    ageKeys.forEach((key) => {
+      // @ts-expect-error Age keys only include keys that are nullable numbers
+      data[key] = null;
+    });
+    return data;
   });

@@ -1654,7 +1654,10 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
   population__RACE_ETHNICITY_BREAKDOWN(neighborhood, data) {
     // @ts-expect-error while the data object has different keys, all of the keys
     // needed for this plot are the same
-    const plotConfig = plotConfigs.population__RACE_ETHNICITY_BREAKDOWN(neighborhood, data);
+    const plotConfig = plotConfigs.population__RACE_ETHNICITY_BREAKDOWN(
+      neighborhood,
+      data.filter((d) => parseInt(d.year) >= 2000)
+    );
     plotConfig.subtitle = `${neighborhood} (decennial census)`;
     plotConfig.caption = plotConfig.caption
       ?.toString()
@@ -1730,37 +1733,39 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
     return plotConfig;
   },
   population__18_over_under(neighborhood, data) {
-    const tidyData = data.flatMap((d) => {
-      return [
-        {
-          year: d.year,
-          group: 'Under 18',
-          amount:
-            (d['age__under_5__male'] ?? 0) +
-            (d['age__5-9__male'] ?? 0) +
-            (d['age__10-14__male'] ?? 0) +
-            (d['age__15-17__male'] ?? 0) +
-            (d['age__under_5__female'] ?? 0) +
-            (d['age__5-9__female'] ?? 0) +
-            (d['age__10-14__female'] ?? 0) +
-            (d['age__15-17__female'] ?? 0),
-        },
-        {
-          year: d.year,
-          group: 'Over 18',
-          amount:
-            (d.population__total ?? 0) -
-            ((d['age__under_5__male'] ?? 0) +
+    const tidyData = data
+      .filter((d) => parseInt(d.year) >= 2000)
+      .flatMap((d) => {
+        return [
+          {
+            year: d.year,
+            group: 'Under 18',
+            amount:
+              (d['age__under_5__male'] ?? 0) +
               (d['age__5-9__male'] ?? 0) +
               (d['age__10-14__male'] ?? 0) +
               (d['age__15-17__male'] ?? 0) +
               (d['age__under_5__female'] ?? 0) +
               (d['age__5-9__female'] ?? 0) +
               (d['age__10-14__female'] ?? 0) +
-              (d['age__15-17__female'] ?? 0)),
-        },
-      ];
-    });
+              (d['age__15-17__female'] ?? 0),
+          },
+          {
+            year: d.year,
+            group: 'Over 18',
+            amount:
+              (d.population__total ?? 0) -
+              ((d['age__under_5__male'] ?? 0) +
+                (d['age__5-9__male'] ?? 0) +
+                (d['age__10-14__male'] ?? 0) +
+                (d['age__15-17__male'] ?? 0) +
+                (d['age__under_5__female'] ?? 0) +
+                (d['age__5-9__female'] ?? 0) +
+                (d['age__10-14__female'] ?? 0) +
+                (d['age__15-17__female'] ?? 0)),
+          },
+        ];
+      });
 
     const maxDigits = Math.max(...tidyData.map((d) => d.amount?.toString?.()?.length || 0));
 
@@ -1797,13 +1802,15 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
     };
   },
   age__under_5(neighborhood, data) {
-    const tidyData = data.map((d) => {
-      return {
-        year: d.year,
-        age__under_5: (d.age__under_5__male || 0) + (d.age__under_5__female || 0),
-        // Mage__under_5: (d.Mage__under_5__male || 0) + (d.Mage__under_5__female || 0),
-      };
-    });
+    const tidyData = data
+      .filter((d) => parseInt(d.year) >= 2000)
+      .map((d) => {
+        return {
+          year: d.year,
+          age__under_5: (d.age__under_5__male || 0) + (d.age__under_5__female || 0),
+          // Mage__under_5: (d.Mage__under_5__male || 0) + (d.Mage__under_5__female || 0),
+        };
+      });
 
     const maxDigits = Math.max(...tidyData.map((d) => d.age__under_5?.toString?.()?.length || 0));
 
@@ -1831,24 +1838,26 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
     };
   },
   age__65_over(neighborhood, data) {
-    const tidyData = data.map((d) => {
-      return {
-        year: d.year,
-        age__65_over:
-          (d['age__65-66__male'] || 0) +
-          (d['age__67-69__male'] || 0) +
-          (d['age__70-74__male'] || 0) +
-          (d['age__75-79__male'] || 0) +
-          (d['age__80-84__male'] || 0) +
-          (d['age__85_over__male'] || 0) +
-          (d['age__65-66__female'] || 0) +
-          (d['age__67-69__female'] || 0) +
-          (d['age__70-74__female'] || 0) +
-          (d['age__75-79__female'] || 0) +
-          (d['age__80-84__female'] || 0) +
-          (d['age__85_over__female'] || 0),
-      };
-    });
+    const tidyData = data
+      .filter((d) => parseInt(d.year) >= 2000)
+      .map((d) => {
+        return {
+          year: d.year,
+          age__65_over:
+            (d['age__65-66__male'] || 0) +
+            (d['age__67-69__male'] || 0) +
+            (d['age__70-74__male'] || 0) +
+            (d['age__75-79__male'] || 0) +
+            (d['age__80-84__male'] || 0) +
+            (d['age__85_over__male'] || 0) +
+            (d['age__65-66__female'] || 0) +
+            (d['age__67-69__female'] || 0) +
+            (d['age__70-74__female'] || 0) +
+            (d['age__75-79__female'] || 0) +
+            (d['age__80-84__female'] || 0) +
+            (d['age__85_over__female'] || 0),
+        };
+      });
 
     const maxDigits = Math.max(...tidyData.map((d) => d.age__65_over?.toString?.()?.length || 0));
 
@@ -2100,6 +2109,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
         ]);
 
     const tidyData = getTidyAgeBySexData(data)
+      .filter((d) => parseInt(d.year) >= 2000)
       .reduce((acc, d) => {
         const mappedAgeStart =
           d.age_start < brackets[0][1]
