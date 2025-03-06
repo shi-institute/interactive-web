@@ -101,3 +101,20 @@ figure > svg {
     fill: #282828;
   }
 }
+
+/* use stanadrd accent color for marks when none is specified */
+figure {
+  --fds-accent-plot: hsla(var(--fds-accent-dark-p, var(--fds-accent-dark-2)));
+}
+@media (prefers-color-scheme: dark) {
+  figure {
+    --fds-accent-plot: hsla(var(--fds-accent-light-p, var(--fds-accent-light-2)));
+  }
+}
+figure
+  > svg
+  > g:not([aria-label*='axis']):not([aria-label*='tick']):not([aria-label*='label']):not(
+    [aria-label*='text']
+  ):not([aria-label*='grid']):not([aria-label*='tip']):not([aria-label*='rule']) {
+  color: var(--fds-accent-plot);
+}
