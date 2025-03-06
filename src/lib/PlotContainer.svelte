@@ -280,7 +280,7 @@
       <div
         bind:clientWidth="{popupClientWidth}"
         bind:clientHeight="{popupClientHeight}"
-        class="plot-container"
+        class="plot-container {randomClass}"
       >
         <div bind:this="{popopPlotDestinationNode}" role="img" class="{plotClass}">
           <div class="wait">
@@ -318,9 +318,6 @@
         Please wait
       </div>
     </div>
-    {#await customPlotCss then css}
-      {@html `<` + `style>${css}</style>`}
-    {/await}
     <div class="slots" bind:clientHeight="{slotAfterExportHeight}">
       <slot name="after" />
       <slot name="print-after" />

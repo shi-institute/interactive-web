@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { browser, dev } from '$app/environment';
+  import { dev } from '$app/environment';
   import { page } from '$app/stores';
   import ThemeSwitchButton from '$lib/ThemeSwitchButton.svelte';
   import 'fluent-svelte/theme.css';
@@ -37,7 +37,7 @@
     });
   }
 
-  $: isDeployedPreview = true || (!dev && $page.url.origin !== 'https://shi.institute');
+  $: isDeployedPreview = !dev && $page.url.origin !== 'https://shi.institute';
 </script>
 
 {#if !data.isEmbedded}
