@@ -20,6 +20,15 @@
   export let plotNode: PlotNode | undefined = undefined;
   export let boxSizing: 'border-box' | 'content-box' = 'content-box';
 
+  $: randomClass = 'c' + Math.random().toString(36).substring(7);
+  $: customPlotCss = (async () => {
+    return `
+      .${randomClass} figure {
+        ${(typeof plot === 'function' ? plot(0) : plot).style}
+      }
+    `;
+  })();
+
   let slotBeforeHeight = 0;
   let slotAfterHeight = 0;
 
@@ -47,13 +56,15 @@
   let exportWidth = 800;
   let exportHeight = 500;
   let exportPadding = 20;
+  let slotBeforeExportHeight = 0;
+  let slotAfterExportHeight = 0;
   let exportDiv: HTMLDivElement;
   $: {
     counter;
     if (browser && exportDiv) {
       const plotHeight = calculatePlotHeightInBorderBoxMode(
-        slotBeforeHeight,
-        slotAfterHeight,
+        slotBeforeExportHeight,
+        slotAfterExportHeight,
         {
           ...plotOptions,
           height: exportHeight - 2 * exportPadding,
@@ -269,7 +280,7 @@
       <div
         bind:clientWidth="{popupClientWidth}"
         bind:clientHeight="{popupClientHeight}"
-        class="plot-container"
+        class="plot-container {randomClass}"
       >
         <div bind:this="{popopPlotDestinationNode}" role="img" class="{plotClass}">
           <div class="wait">
@@ -296,16 +307,27 @@
   bind:exportHeight="{exportHeight}"
   bind:exportPadding="{exportPadding}"
 >
-  <div bind:this="{exportDiv}" role="img" class="{plotClass}">
-    <div class="wait">
-      <ProgressRing style="--fds-accent-default: currentColor;" />
-      Please wait
+  <div class="plot-container {randomClass}">
+    <div class="slots" bind:clientHeight="{slotBeforeExportHeight}">
+      <slot name="print-before" />
+      <slot name="before" />
+    </div>
+    <div bind:this="{exportDiv}" role="img" class="{plotClass}">
+      <div class="wait">
+        <ProgressRing style="--fds-accent-default: currentColor;" />
+        Please wait
+      </div>
+    </div>
+
+    <div class="slots" bind:clientHeight="{slotAfterExportHeight}">
+      <slot name="after" />
+      <slot name="print-after" />
     </div>
   </div>
 </ExportWindow>
 
 <ContextMenu>
-  <div class="plot-container">
+  <div class="plot-container {randomClass}">
     <div class="slots" bind:clientHeight="{slotBeforeHeight}">
       <slot name="main-before" />
       <slot name="before" />
@@ -330,6 +352,9 @@
         </div>
       </div>
     </div>
+    {#await customPlotCss then css}
+      {@html `<` + `style>${css}</style>`}
+    {/await}
     <div class="slots" bind:clientHeight="{slotAfterHeight}">
       {#if enablePopup && div && div.childElementCount > 0}
         <button class="popup-button" on:click="{openInPopupWindow}">Open in popup</button>
