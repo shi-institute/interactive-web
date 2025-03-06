@@ -70,21 +70,27 @@
   <style>
     /* purple accent color */
     :root {
+      /* light mode */
       --fds-accent-dark-1: 253, 54%, 47%;
       --fds-accent-dark-2: 253, 54%, 47%;
+      --fds-accent-dark-p: 253, 54%, 47%; /* used by plots */
 
+      /* dark mode */
       --fds-accent-light-2: 253, 49%, 80%;
       --fds-accent-light-3: 253, 49%, 80%;
+      --fds-accent-light-p: 253, 49%, 68%; /* used by plots */
     }
   </style>
   {#if isDeployedPreview}
     <style>
       :root {
-        --fds-accent-dark-1: 31, 80%, 50%;
-        --fds-accent-dark-2: 31, 80%, 50%;
+        --fds-accent-dark-1: 15, 99%, 39%;
+        --fds-accent-dark-2: 15, 99%, 39%;
+        --fds-accent-dark-p: 15, 99%, 39%;
 
-        --fds-accent-light-2: 38, 81%, 55%;
-        --fds-accent-light-3: 38, 81%, 55%;
+        --fds-accent-light-2: 22, 99%, 60%;
+        --fds-accent-light-3: 22, 99%, 60%;
+        --fds-accent-light-p: 22, 99%, 58%;
       }
     </style>
   {/if}
