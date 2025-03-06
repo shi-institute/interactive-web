@@ -56,13 +56,15 @@
   let exportWidth = 800;
   let exportHeight = 500;
   let exportPadding = 20;
+  let slotBeforeExportHeight = 0;
+  let slotAfterExportHeight = 0;
   let exportDiv: HTMLDivElement;
   $: {
     counter;
     if (browser && exportDiv) {
       const plotHeight = calculatePlotHeightInBorderBoxMode(
-        slotBeforeHeight,
-        slotAfterHeight,
+        slotBeforeExportHeight,
+        slotAfterExportHeight,
         {
           ...plotOptions,
           height: exportHeight - 2 * exportPadding,
@@ -305,10 +307,23 @@
   bind:exportHeight="{exportHeight}"
   bind:exportPadding="{exportPadding}"
 >
-  <div bind:this="{exportDiv}" role="img" class="{plotClass}">
-    <div class="wait">
-      <ProgressRing style="--fds-accent-default: currentColor;" />
-      Please wait
+  <div class="plot-container {randomClass}">
+    <div class="slots" bind:clientHeight="{slotBeforeExportHeight}">
+      <slot name="print-before" />
+      <slot name="before" />
+    </div>
+    <div bind:this="{exportDiv}" role="img" class="{plotClass}">
+      <div class="wait">
+        <ProgressRing style="--fds-accent-default: currentColor;" />
+        Please wait
+      </div>
+    </div>
+    {#await customPlotCss then css}
+      {@html `<` + `style>${css}</style>`}
+    {/await}
+    <div class="slots" bind:clientHeight="{slotAfterExportHeight}">
+      <slot name="after" />
+      <slot name="print-after" />
     </div>
   </div>
 </ExportWindow>
