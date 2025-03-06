@@ -775,16 +775,15 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       `,
     };
   },
-  grandparent__responsible_for_grandchild_under_18_fraction(neighborhood, data) {
+  grandparent__responsible_for_grandchild_under_18(neighborhood, data) {
     return {
       title: 'Grandparents who are caregivers',
       subtitle: `${neighborhood}, 2009-2023`,
       caption: `Grandparents are considered caregivers when they are the primarily householder and have grandchildren living in their house. <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
-        label: 'Percentage of grandparents',
-        tickFormat: '.0%',
-        domain: [0, 0.2],
+        label: 'Grandparents',
+        tickFormat: '.0f',
       },
       marginTop: 30,
       marginRight: 0,
@@ -793,21 +792,11 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marks: [
         barWithLabelY(data, {
           x: 'year',
-          y: 'grandparent__responsible_for_grandchild_under_18_fraction',
-          yErrorMargin: 'Mgrandparent__responsible_for_grandchild_under_18_fraction',
-          labelFormat: '.1%',
+          y: 'grandparent__responsible_for_grandchild_under_18',
+          yErrorMargin: 'Mgrandparent__responsible_for_grandchild_under_18',
+          labelFormat: '.0f',
         }),
       ],
-      style: `
-        g[aria-label='y-axis tick label'] {
-          text:last-child {
-            fill: hsl(0, 100.00%, 50%);
-            @media (prefers-color-scheme: dark) {
-              fill:hsl(0, 100.00%, 75%);
-            }
-          }
-        }
-      `,
     };
   },
   household_vehicles__none_fraction(neighborhood, data) {
