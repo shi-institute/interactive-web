@@ -179,12 +179,12 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     const maxDigits = Math.max(...data.map((d) => d.population__total?.toString?.()?.length || 0));
 
     return {
-      title: 'Total Population',
+      title: 'Total population',
       subtitle: `${neighborhood}, 2009-2023`,
       caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period', type: 'band' },
       y: {
-        label: 'Total Population',
+        label: 'Population',
         tickFormat: (d) => d.toLocaleString(),
       },
       marginTop: 30,
@@ -406,7 +406,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
-        label: 'Percent households',
+        label: 'Percentage of households',
         tickFormat: '.0%',
         domain: [0, 1],
       },
@@ -431,7 +431,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
-        label: 'Percent',
+        label: 'Percentage of households',
         tickFormat: '.0%',
         domain: [0, 1],
       },
@@ -506,7 +506,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
-        label: 'Percent with access to a computer',
+        label: 'Percentage with access to a computer',
         tickFormat: '.0%',
         domain: [0, 1],
       },
@@ -552,7 +552,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
-        label: 'Percent',
+        label: 'Percentage of households',
         tickFormat: '.0%',
         domain: [0, 1],
       },
@@ -627,7 +627,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       caption: `People who are employed by employers in the following industries are considered: educational services, health care, social assistance, arts, entertainment, recreation, accomodation, and food services. <br /><i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
-        label: 'Percent',
+        label: 'Percentage of population',
         tickFormat: '.0%',
         domain: [0, 1],
       },
@@ -677,7 +677,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
-        label: 'Percent',
+        label: 'Percentage of population',
         tickFormat: '.0%',
         domain: [0, 0.2],
       },
@@ -712,7 +712,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
-        label: 'Percent',
+        label: 'Percentage of population',
         tickFormat: '.0%',
         domain: [0, 0.2],
       },
@@ -817,7 +817,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
-        label: 'Percent of households',
+        label: 'Percentage of households',
         tickFormat: '.0%',
         domain: [0, 1],
       },
@@ -859,7 +859,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       fx: { label: 'Survey period' },
       x: { axis: null, domain: facetOrder },
       y: {
-        label: 'Percent with insurance coverage',
+        label: 'Percentage with insurance coverage',
         tickFormat: '.0%',
         domain: [0, 1],
       },
@@ -1136,13 +1136,13 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     const { facetOrder, legendColors, facetColors } = getRaceBreakdownColors(facetNames);
 
     return {
-      title: 'Renter households',
+      title: 'Renter households by race',
       subtitle: `${neighborhood}, 2009-2023`,
-      caption: `The Census categorizes households into renter-occupied and owner-occupied status. This figure shows the percentage of households that rent instead of own. Overall includes all households. <br /> <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `The Census categorizes households into renter-occupied and owner-occupied status. This figure shows the percentage of households that rent instead of own. Overall includes all households. Race is determined from the householder. <br /> <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       fx: { label: 'Survey period' },
       x: { axis: null, domain: facetOrder },
       y: {
-        label: 'Percent households who rent',
+        label: 'Percentage of households who rent',
         tickFormat: '.0%',
         domain: [0, 1],
       },
@@ -1175,13 +1175,13 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     const { facetOrder, legendColors, facetColors } = getRaceBreakdownColors(facetNames);
 
     return {
-      title: 'Renter households',
+      title: 'Renter households by race',
       subtitle: `${neighborhood}, 2009-2023`,
-      caption: `The Census categorizes households into renter-occupied and owner-occupied status. This figure shows the number of households that rent instead of own. <br /> <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `The Census categorizes households into renter-occupied and owner-occupied status. This figure shows the number of households that rent instead of own. Race is determined from the householder. <br /> <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       fx: { label: 'Survey period' },
       x: { axis: null, domain: facetOrder },
       y: {
-        label: 'Hhouseholds who rent',
+        label: 'Households who rent',
         tickFormat: '.0f',
       },
       color: {
@@ -1231,7 +1231,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       fx: { label: 'Survey period' },
       x: { axis: null, domain: facetOrder },
       y: {
-        label: 'Percent unemployed population',
+        label: 'Percentage of population',
         tickFormat: '.0%',
         domain: [0, 1],
       },
@@ -1820,7 +1820,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
       caption: `<i>Data: US Census Bureau</i>`,
       x: { label: 'Survey period', type: 'band' },
       y: {
-        label: 'Total Population',
+        label: 'Population',
         tickFormat: (d) => d.toLocaleString(),
       },
       marginTop: 30,
@@ -1867,7 +1867,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
       caption: `<i>Data: US Census Bureau</i>`,
       x: { label: 'Survey period', type: 'band' },
       y: {
-        label: 'Total Population',
+        label: 'Population',
         tickFormat: (d) => d.toLocaleString(),
       },
       marginTop: 30,
@@ -1899,7 +1899,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
       caption: `<i>Data: US Census Bureau</i>`,
       x: { label: 'Survey period', type: 'band' },
       y: {
-        label: 'Total Population',
+        label: 'Percentage of population',
         tickFormat: '.0%',
         domain: [0, 0.25],
       },
@@ -1934,7 +1934,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
       caption: `<i>Data: US Census Bureau</i>`,
       x: { label: 'Survey period', type: 'band' },
       y: {
-        label: 'Total Population',
+        label: 'Population',
         tickFormat: '.0f',
       },
       marginTop: 30,
@@ -2322,7 +2322,7 @@ function getHealthInsurancePlotConfig(
     caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
     x: { label: 'Survey period' },
     y: {
-      label: 'Percent with insurance coverage',
+      label: 'Percentage with insurance coverage',
       tickFormat: '.0%',
       domain: [0, 1],
     },
@@ -2407,7 +2407,7 @@ function getRenterPlotConfig(neighborhood: string, data: PlotData, variant: Race
     caption: `The Census categorizes households into renter-occupied and owner-occupied status. This figure shows the percentage of households that rent instead of own. <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
     x: { label: 'Survey period' },
     y: {
-      label: 'Percent households who rent',
+      label: 'Percentage of households who rent',
       tickFormat: '.0%',
       domain: [0, 1],
     },
@@ -2495,7 +2495,7 @@ function getUnemploymentFractionPlotConfig(
     caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
     x: { label: 'Survey period' },
     y: {
-      label: 'Percent unemployed population',
+      label: 'Percentage of population',
       tickFormat: '.0%',
       domain: [0, 1],
     },
