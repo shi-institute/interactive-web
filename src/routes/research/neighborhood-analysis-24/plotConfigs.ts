@@ -742,12 +742,12 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
   },
   population__children_living_with_grandparent_householder_fraction(neighborhood, data) {
     return {
-      title: 'Caregivers who are grandparents',
+      title: "Children living in a grandparent's house",
       subtitle: `${neighborhood}, 2009-2023`,
-      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `This figure shows the percentage of children who live with a grandparent who is the primary householder. <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
-        label: 'Percent grandparents caring for their grandchildren',
+        label: 'Percentage of children',
         tickFormat: '.0%',
         domain: [0, 0.2],
       },
