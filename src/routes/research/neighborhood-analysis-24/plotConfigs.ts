@@ -42,8 +42,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'median_household_income',
           yErrorMargin: 'Mmedian_household_income',
           labelFormat: '$,.0f',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
     };
@@ -87,8 +85,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
               y: 'median_household_income__white',
               yErrorMargin: 'Mmedian_household_income__white',
               labelFormat: '$,.0f',
-              fill: colors.vibrant.teal,
-              labelFill: 'black',
             }),
           ],
     };
@@ -132,8 +128,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
               y: 'median_household_income__black',
               yErrorMargin: 'Mmedian_household_income__black',
               labelFormat: '$,.0f',
-              fill: colors.vibrant.teal,
-              labelFill: 'black',
             }),
           ],
     };
@@ -177,8 +171,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
               y: 'median_household_income__hispanic',
               yErrorMargin: 'Mmedian_household_income__hispanic',
               labelFormat: '$,.0f',
-              fill: colors.vibrant.teal,
-              labelFill: 'black',
             }),
           ],
     };
@@ -205,8 +197,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'population__total',
           yErrorMargin: 'Mpopulation__total',
           labelFormat: '.0f',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
     };
@@ -268,8 +258,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
             y: 'education__high_school_or_higher_percent',
             yErrorMargin: 'Meducation__high_school_or_higher_percent',
             labelFormat: '.1%',
-            fill: colors.vibrant.teal,
-            labelFill: 'black',
           }
         ),
       ],
@@ -326,8 +314,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
             y: 'education__some_college_or_higher_percent',
             yErrorMargin: 'Meducation__some_college_or_higher_percent',
             labelFormat: '.1%',
-            fill: colors.vibrant.teal,
-            labelFill: 'black',
           }
         ),
       ],
@@ -383,8 +369,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
             y: 'education__college_degree_percent',
             yErrorMargin: 'Meducation__college_degree_percent',
             labelFormat: '.1%',
-            fill: colors.vibrant.teal,
-            labelFill: 'black',
           }
         ),
       ],
@@ -411,8 +395,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'poverty__below_poverty_household_fraction',
           yErrorMargin: 'Mpoverty__below_poverty_household_fraction',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
     };
@@ -438,8 +420,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'internet__broadband__total_percent',
           yErrorMargin: 'Minternet__broadband__total_percent',
           labelFormat: '.0%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
     };
@@ -465,8 +445,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'internet__broadband__white_percent',
           yErrorMargin: 'Minternet__broadband__white_percent',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
     };
@@ -492,8 +470,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'internet__broadband__black_percent',
           yErrorMargin: 'Minternet__broadband__black_percent',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
     };
@@ -519,8 +495,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'internet__broadband__hispanic_percent',
           yErrorMargin: 'Minternet__broadband__hispanic_percent',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
     };
@@ -566,8 +540,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
             y: 'has_computer__total__percent',
             yErrorMargin: 'Mhas_computer__total__percent',
             labelFormat: '.1%',
-            fill: colors.vibrant.teal,
-            labelFill: 'black',
           }
         ),
       ],
@@ -594,8 +566,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'has_computer__white_percent',
           yErrorMargin: 'Mhas_computer__white_percent',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
     };
@@ -621,8 +591,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'has_computer__black_percent',
           yErrorMargin: 'Mhas_computer__black_percent',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
     };
@@ -648,8 +616,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'has_computer__hispanic_percent',
           yErrorMargin: 'Mhas_computer__hispanic_percent',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
     };
@@ -675,8 +641,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'industry__service_fraction',
           yErrorMargin: 'Mindustry__service_fraction',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
     };
@@ -702,8 +666,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'food_stamps__received_fraction',
           yErrorMargin: 'Mfood_stamps__received_fraction',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
     };
@@ -729,8 +691,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'geographic_mobility__different_county_same_state_fraction',
           yErrorMargin: 'Mgeographic_mobility__different_county_same_state_fraction',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
       style: `
@@ -766,8 +726,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'geographic_mobility__different_state_fraction',
           yErrorMargin: 'Mgeographic_mobility__different_state_fraction',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
       style: `
@@ -803,8 +761,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'population__children_living_with_grandparent_householder_fraction',
           yErrorMargin: 'Mpopulation__children_living_with_grandparent_householder_fraction',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
       style: `
@@ -840,8 +796,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'household_vehicles__none_fraction',
           yErrorMargin: 'Mhousehold_vehicles__none_fraction',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
     };
@@ -1837,8 +1791,6 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
           y: 'age__under_5',
           yErrorMargin: 'Mage__under_5',
           labelFormat: '.0f',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
     };
@@ -1884,8 +1836,6 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
           y: 'age__65_over',
           yErrorMargin: 'Mage__65_over',
           labelFormat: '.0f',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
     };
@@ -1919,8 +1869,6 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
           y: 'households__with_seniors__1_person_percent',
           yErrorMargin: 'Mhouseholds__with_seniors__1_person_percent',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
       style: `
@@ -1955,8 +1903,6 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
           y: 'households__with_seniors__1_person',
           yErrorMargin: 'Mhouseholds__with_seniors__1_person',
           labelFormat: '.0f',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }),
       ],
     };
@@ -2308,8 +2254,6 @@ function getHealthInsurancePlotConfig(
           y: 'fraction',
           yErrorMargin: 'moe',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }
       ),
     ],
@@ -2395,8 +2339,6 @@ function getRenterPlotConfig(neighborhood: string, data: PlotData, variant: Race
           y: 'fraction',
           yErrorMargin: 'fraction_moe',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }
       ),
     ],
@@ -2485,8 +2427,6 @@ function getUnemploymentFractionPlotConfig(
           y: 'fraction',
           yErrorMargin: 'moe',
           labelFormat: '.1%',
-          fill: colors.vibrant.teal,
-          labelFill: 'black',
         }
       ),
     ],
