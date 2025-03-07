@@ -878,14 +878,26 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
   tenure__renter_fraction(neighborhood, data) {
     return getRenterPlotConfig(neighborhood, data, 'Overall');
   },
+  tenure__renter(neighborhood, data) {
+    return getRenterPlotConfig(neighborhood, data, 'Overall', 'amount');
+  },
   tenure__black__renter_fraction(neighborhood, data) {
     return getRenterPlotConfig(neighborhood, data, 'Black');
+  },
+  tenure__black__renter(neighborhood, data) {
+    return getRenterPlotConfig(neighborhood, data, 'Black', 'amount');
   },
   tenure__white__renter_fraction(neighborhood, data) {
     return getRenterPlotConfig(neighborhood, data, 'White');
   },
+  tenure__white__renter(neighborhood, data) {
+    return getRenterPlotConfig(neighborhood, data, 'White', 'amount');
+  },
   tenure__hispanic__renter_fraction(neighborhood, data) {
     return getRenterPlotConfig(neighborhood, data, 'Hispanic or Latino');
+  },
+  tenure__hispanic__renter(neighborhood, data) {
+    return getRenterPlotConfig(neighborhood, data, 'Hispanic or Latino', 'amount');
   },
   tenure__renter__AGE_BREAKDOWN(neighborhood, data) {
     const tidyData = data.flatMap(({ year, ...data }) => {
@@ -2387,18 +2399,25 @@ function getTidyRenterData(data: PlotData) {
   });
 }
 
-function getRenterPlotConfig(neighborhood: string, data: PlotData, variant: RaceBreakdownVariant) {
+function getRenterPlotConfig(
+  neighborhood: string,
+  data: PlotData,
+  variant: RaceBreakdownVariant,
+  mode: 'amount' | 'fraction' = 'fraction'
+) {
   const tidyData = getTidyRenterData(data);
 
   return {
     title: 'Renters' + (variant === 'Overall' ? ' (all households)' : ` (${variant} households)`),
     subtitle: `${neighborhood}, 2009-2023`,
-    caption: `The Census categorizes households into renter-occupied and owner-occupied status. This figure shows the percentage of households that rent instead of own. <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+    caption: `The Census categorizes households into renter-occupied and owner-occupied status. This figure shows the ${
+      mode === 'fraction' ? 'percentage' : 'number'
+    } of households that rent instead of own. <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
     x: { label: 'Survey period' },
     y: {
-      label: 'Percentage of households who rent',
-      tickFormat: '.0%',
-      domain: [0, 1],
+      label: mode === 'fraction' ? 'Percentage of households who rent' : 'Households who rent',
+      tickFormat: mode === 'fraction' ? '.0%' : '.0f',
+      domain: mode === 'fraction' ? [0, 1] : undefined,
     },
     marginTop: 30,
     marginRight: 0,
@@ -2409,9 +2428,9 @@ function getRenterPlotConfig(neighborhood: string, data: PlotData, variant: Race
         tidyData.filter(({ group }) => group === variant),
         {
           x: 'year',
-          y: 'fraction',
-          yErrorMargin: 'fraction_moe',
-          labelFormat: '.1%',
+          y: mode === 'fraction' ? 'fraction' : 'value',
+          yErrorMargin: mode === 'fraction' ? 'fraction_moe' : 'moe',
+          labelFormat: mode === 'fraction' ? '.1%' : '.0f',
         }
       ),
     ],
