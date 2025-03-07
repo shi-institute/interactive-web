@@ -1,7 +1,8 @@
 import { PRIVATE_DATA_REPO_ACCESS_TOKEN } from '$env/static/private';
-import { deepFreeze } from '$utils';
+import { deepFreeze, deserializeDeflatedString } from '$utils';
 import { fipsToCountyName } from '$utils/fipsToCountyName';
 import { isNumber } from 'is-what';
+import { inflate } from 'pako';
 import { get, writable } from 'svelte/store';
 import { z } from 'zod';
 import type { LayoutServerLoad } from './$types';
@@ -10,12 +11,15 @@ import type { LayoutServerLoad } from './$types';
 // (shared with all requests to this route)
 const cache = writable(new Map<string, unknown>());
 
-export const load = (async ({ params }) => {
+export const load = (async ({ params, route }) => {
+  const isTract = (params.neighborhood && !isNaN(parseInt(params.neighborhood))) || false;
+  const skipTractData = !isTract && route.id !== '/research/neighborhood-analysis-24/compare';
+
   const cachedData = get(cache);
   if (
     cachedData.has('neighborhoodsData') &&
     cachedData.has('gentrificationData') &&
-    cachedData.has('tractsData') &&
+    (skipTractData || cachedData.has('tractsData')) &&
     cachedData.has('neighborhoodBlocksData')
   ) {
     const expires = cachedData.get('expires');
@@ -32,7 +36,9 @@ export const load = (async ({ params }) => {
             neighborhoods: string[];
           })[]
         ),
-        tractsData: deepFreeze(cachedData.get('tractsData') as z.infer<typeof tractDataSchema>[]),
+        tractsData: skipTractData
+          ? []
+          : deepFreeze(cachedData.get('tractsData') as z.infer<typeof tractDataSchema>[]),
         neighborhoodBlocksData: deepFreeze(
           cachedData.get('neighborhoodBlocksData') as z.infer<typeof neighborhoodBlocksDataSchema>[]
         ),
@@ -41,7 +47,7 @@ export const load = (async ({ params }) => {
   }
 
   const validNeighborhoodsData = fetch(
-    'https://api.github.com/repos/shi-institute/interactive-web-private-data/contents/northside-24/neighborhoods_data_series.json',
+    'https://api.github.com/repos/shi-institute/interactive-web-private-data/contents/northside-24/neighborhoods_data_series.json.deflate',
     {
       method: 'GET',
       headers: {
@@ -50,7 +56,8 @@ export const load = (async ({ params }) => {
       },
     }
   )
-    .then((res) => res.json() as Promise<Record<string, unknown>[]>)
+    .then(deserializeDeflatedString)
+    .then((text) => JSON.parse(text) as Promise<Record<string, unknown>[]>)
     .then((json) => json.filter((d) => d.population__total !== null))
     .then((json) => z.array(neighborhoodDataSchema).parse(json))
     .catch((err) => {
@@ -59,7 +66,7 @@ export const load = (async ({ params }) => {
     });
 
   const validGentrificationData = fetch(
-    'https://api.github.com/repos/shi-institute/interactive-web-private-data/contents/northside-24/inc_hv_annual_q_tract.json',
+    'https://api.github.com/repos/shi-institute/interactive-web-private-data/contents/northside-24/inc_hv_annual_q_tract.json.deflate',
     {
       method: 'GET',
       headers: {
@@ -68,7 +75,8 @@ export const load = (async ({ params }) => {
       },
     }
   )
-    .then((res) => res.json() as Promise<Record<string, unknown>[]>)
+    .then(deserializeDeflatedString)
+    .then((text) => JSON.parse(text) as Promise<Record<string, unknown>[]>)
     .then((json) => json.filter((d) => !!d.income_quantile && !!d.hvalue_quantile))
     .then((json) => z.array(gentrificationDataSchema).parse(json))
     .then(async (data) => {
@@ -93,26 +101,31 @@ export const load = (async ({ params }) => {
       );
     });
 
-  const validTractsData = fetch(
-    'https://api.github.com/repos/shi-institute/interactive-web-private-data/contents/northside-24/tracts_data_series.json',
-    {
-      method: 'GET',
-      headers: {
-        Accept: 'application/vnd.github.v3.raw',
-        Authorization: `token ${PRIVATE_DATA_REPO_ACCESS_TOKEN}`,
-      },
-    }
-  )
-    .then((res) => res.json() as Promise<Record<string, unknown>[]>)
-    .then((json) => json.filter((d) => d.population__total !== null))
-    .then((json) => z.array(tractDataSchema).parse(json))
-    .catch((err) => {
-      console.error(JSON.stringify(err, null, 2), '<- Error fetching tracts data');
-      return [] as z.infer<typeof tractDataSchema>[];
-    });
+  const validTractsData = skipTractData
+    ? new Promise<[]>((resolve) => {
+        resolve([]);
+      })
+    : fetch(
+        'https://api.github.com/repos/shi-institute/interactive-web-private-data/contents/northside-24/tracts_data_series.json.deflate',
+        {
+          method: 'GET',
+          headers: {
+            Accept: 'application/vnd.github.v3.raw',
+            Authorization: `token ${PRIVATE_DATA_REPO_ACCESS_TOKEN}`,
+          },
+        }
+      )
+        .then(deserializeDeflatedString)
+        .then((text) => JSON.parse(text) as Promise<Record<string, unknown>[]>)
+        .then((json) => json.filter((d) => d.population__total !== null))
+        .then((json) => z.array(tractDataSchema).parse(json))
+        .catch((err) => {
+          console.error(JSON.stringify(err, null, 2), '<- Error fetching tracts data');
+          return [] as z.infer<typeof tractDataSchema>[];
+        });
 
   const validNeighborhoodBlocksData = fetch(
-    'https://api.github.com/repos/shi-institute/interactive-web-private-data/contents/northside-24/blocks_data_series.json',
+    'https://api.github.com/repos/shi-institute/interactive-web-private-data/contents/northside-24/blocks_data_series.json.deflate',
     {
       method: 'GET',
       headers: {
@@ -121,7 +134,8 @@ export const load = (async ({ params }) => {
       },
     }
   )
-    .then((res) => res.json() as Promise<Record<string, unknown>[]>)
+    .then(deserializeDeflatedString)
+    .then((text) => JSON.parse(text) as Promise<Record<string, unknown>[]>)
     .then((json) => z.array(neighborhoodBlocksDataSchema).parse(json))
     .catch((err) => {
       console.error(JSON.stringify(err, null, 2), '<- Error fetching neighborhood blocks data');
@@ -145,7 +159,7 @@ export const load = (async ({ params }) => {
   cache.update((c) => {
     c.set('neighborhoodsData', frozenData.neighborhoodsData);
     c.set('gentrificationData', frozenData.gentrificationData);
-    c.set('tractsData', frozenData.tractsData);
+    if (!skipTractData) c.set('tractsData', frozenData.tractsData);
     c.set('neighborhoodBlocksData', frozenData.neighborhoodBlocksData);
     c.set('expires', Date.now() + 1000 * 60); // 1 hour
     return c;
@@ -177,7 +191,7 @@ const neighborhoodDataSchema = z
     neighborhood_name: z.string(),
     year_range: z.string(),
     GISJOIN: z.string(),
-    geometry: z.string(),
+    geometry: z.string().optional(),
 
     // estimates
     age__65_over: z.number(),
@@ -402,7 +416,7 @@ const tractDataSchema = z
     COUNTYFP: z.number(),
     year_range: z.string(),
     GISJOIN: z.string(),
-    geometry: z.string(),
+    geometry: z.string().optional(),
 
     // estimates
     age__65_over: z.number(),
@@ -754,7 +768,7 @@ const neighborhoodBlocksDataSchema = z
     neighborhood_name: z.string(),
     year: z.number(),
     GISJOIN: z.string(),
-    geometry: z.string(),
+    geometry: z.string().optional(),
 
     'age__10-14__female': z.number().nullable(),
     'age__10-14__male': z.number().nullable(),
