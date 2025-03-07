@@ -1,9 +1,10 @@
 <script lang="ts">
   import { dev } from '$app/environment';
-  import { page } from '$app/stores';
+  import { afterNavigate, beforeNavigate } from '$app/navigation';
   import ThemeSwitchButton from '$lib/ThemeSwitchButton.svelte';
   import 'fluent-svelte/theme.css';
   import 'leaflet/dist/leaflet.css';
+  import NProgress from 'nprogress';
   import { onDestroy, onMount } from 'svelte';
 
   export let data;
@@ -36,6 +37,49 @@
       headerVisibleHeight = entry.intersectionRect.height;
     });
   }
+
+  // configure the navigation progress bar
+  NProgress.configure({
+    parent: 'body',
+    easing: 'ease',
+    speed: 500,
+    trickle: true,
+    trickleSpeed: 200,
+    showSpinner: false,
+  });
+
+  // show progress bar on page navigate
+  let navigating = false;
+  let showWorkingCursor = false;
+  let showBusyCursor = false;
+  beforeNavigate((evt) => {
+    if (!evt.willUnload) {
+      navigating = true;
+      setTimeout(() => {
+        if (navigating) {
+          showWorkingCursor = true;
+        }
+      }, 100);
+      setTimeout(() => {
+        if (navigating) {
+          showBusyCursor = true;
+        }
+      }, 1000);
+      setTimeout(() => {
+        if (navigating) {
+          NProgress.start();
+        }
+      }, 120);
+    }
+  });
+
+  // hide progress bar on navigation end
+  afterNavigate(() => {
+    navigating = false;
+    showWorkingCursor = false;
+    showBusyCursor = false;
+    NProgress.done();
+  });
 </script>
 
 {#if !data.isEmbedded}
@@ -97,6 +141,23 @@
         --fds-accent-light-2: 22, 99%, 60%;
         --fds-accent-light-3: 22, 99%, 60%;
         --fds-accent-light-p: 22, 99%, 58%;
+      }
+    </style>
+  {/if}
+  {#if showBusyCursor}
+    <style>
+      #pageArea {
+        cursor: wait;
+      }
+      #pageArea > main {
+        pointer-events: none;
+        user-select: none;
+      }
+    </style>
+  {:else if showWorkingCursor}
+    <style>
+      #pageArea {
+        cursor: progress;
       }
     </style>
   {/if}
