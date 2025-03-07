@@ -43,6 +43,27 @@ input.toggle-switch {
   flex-shrink: 0;
 }
 
+/* progress bar styles */
+#nprogress {
+  position: fixed;
+  top: 0;
+  height: 3px;
+  left: 0;
+  width: 100%;
+  z-index: 998;
+  --color-hsl: var(--fds-accent-dark-1);
+  background-color: hsla(var(--color-hsl), 0.1);
+}
+#nprogress .peg {
+  height: 2px;
+  background-color: hsla(var(--color-hsl), 1);
+}
+@media (prefers-color-scheme: dark) {
+  #nprogress {
+    --color-hsl: var(--fds-accent-light-2);
+  }
+}
+
 /* combobo box dropdown */
 .combo-box-dropdown {
   overflow: auto;
