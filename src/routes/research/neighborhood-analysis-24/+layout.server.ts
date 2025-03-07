@@ -14,13 +14,14 @@ const cache = writable(new Map<string, unknown>());
 export const load = (async ({ params, route }) => {
   const isTract = (params.neighborhood && !isNaN(parseInt(params.neighborhood))) || false;
   const skipTractData = !isTract && route.id !== '/research/neighborhood-analysis-24/compare';
+  const skipNeighborhoodData = isTract && route.id !== '/research/neighborhood-analysis-24/compare';
 
   const cachedData = get(cache);
   if (
-    cachedData.has('neighborhoodsData') &&
+    (skipNeighborhoodData || cachedData.has('neighborhoodsData')) &&
     cachedData.has('gentrificationData') &&
     (skipTractData || cachedData.has('tractsData')) &&
-    cachedData.has('neighborhoodBlocksData')
+    (skipNeighborhoodData || cachedData.has('neighborhoodBlocksData'))
   ) {
     const expires = cachedData.get('expires');
     const expired = isNumber(expires) && Date.now() > expires;
@@ -29,7 +30,9 @@ export const load = (async ({ params, route }) => {
     if (!expired) {
       return {
         neighborhoodsData: deepFreeze(
-          cachedData.get('neighborhoodsData') as z.infer<typeof neighborhoodDataSchema>[]
+          skipNeighborhoodData
+            ? []
+            : (cachedData.get('neighborhoodsData') as z.infer<typeof neighborhoodDataSchema>[])
         ),
         gentrificationData: deepFreeze(
           cachedData.get('gentrificationData') as (z.infer<typeof gentrificationDataSchema> & {
@@ -40,30 +43,38 @@ export const load = (async ({ params, route }) => {
           ? []
           : deepFreeze(cachedData.get('tractsData') as z.infer<typeof tractDataSchema>[]),
         neighborhoodBlocksData: deepFreeze(
-          cachedData.get('neighborhoodBlocksData') as z.infer<typeof neighborhoodBlocksDataSchema>[]
+          skipNeighborhoodData
+            ? []
+            : (cachedData.get('neighborhoodBlocksData') as z.infer<
+                typeof neighborhoodBlocksDataSchema
+              >[])
         ),
       };
     }
   }
 
-  const validNeighborhoodsData = fetch(
-    'https://api.github.com/repos/shi-institute/interactive-web-private-data/contents/northside-24/neighborhoods_data_series.json.deflate',
-    {
-      method: 'GET',
-      headers: {
-        Accept: 'application/vnd.github.v3.raw',
-        Authorization: `token ${PRIVATE_DATA_REPO_ACCESS_TOKEN}`,
-      },
-    }
-  )
-    .then(deserializeDeflatedString)
-    .then((text) => JSON.parse(text) as Promise<Record<string, unknown>[]>)
-    .then((json) => json.filter((d) => d.population__total !== null))
-    .then((json) => z.array(neighborhoodDataSchema).parse(json))
-    .catch((err) => {
-      console.error(JSON.stringify(err, null, 2), '<- Error fetching neighborhoods data');
-      return [] as z.infer<typeof neighborhoodDataSchema>[];
-    });
+  const validNeighborhoodsData = skipNeighborhoodData
+    ? new Promise<[]>((resolve) => {
+        resolve([]);
+      })
+    : fetch(
+        'https://api.github.com/repos/shi-institute/interactive-web-private-data/contents/northside-24/neighborhoods_data_series.json.deflate',
+        {
+          method: 'GET',
+          headers: {
+            Accept: 'application/vnd.github.v3.raw',
+            Authorization: `token ${PRIVATE_DATA_REPO_ACCESS_TOKEN}`,
+          },
+        }
+      )
+        .then(deserializeDeflatedString)
+        .then((text) => JSON.parse(text) as Promise<Record<string, unknown>[]>)
+        .then((json) => json.filter((d) => d.population__total !== null))
+        .then((json) => z.array(neighborhoodDataSchema).parse(json))
+        .catch((err) => {
+          console.error(JSON.stringify(err, null, 2), '<- Error fetching neighborhoods data');
+          return [] as z.infer<typeof neighborhoodDataSchema>[];
+        });
 
   const validGentrificationData = fetch(
     'https://api.github.com/repos/shi-institute/interactive-web-private-data/contents/northside-24/inc_hv_annual_q_tract.json.deflate',
@@ -124,23 +135,27 @@ export const load = (async ({ params, route }) => {
           return [] as z.infer<typeof tractDataSchema>[];
         });
 
-  const validNeighborhoodBlocksData = fetch(
-    'https://api.github.com/repos/shi-institute/interactive-web-private-data/contents/northside-24/blocks_data_series.json.deflate',
-    {
-      method: 'GET',
-      headers: {
-        Accept: 'application/vnd.github.v3.raw',
-        Authorization: `token ${PRIVATE_DATA_REPO_ACCESS_TOKEN}`,
-      },
-    }
-  )
-    .then(deserializeDeflatedString)
-    .then((text) => JSON.parse(text) as Promise<Record<string, unknown>[]>)
-    .then((json) => z.array(neighborhoodBlocksDataSchema).parse(json))
-    .catch((err) => {
-      console.error(JSON.stringify(err, null, 2), '<- Error fetching neighborhood blocks data');
-      return [];
-    });
+  const validNeighborhoodBlocksData = skipNeighborhoodData
+    ? new Promise<[]>((resolve) => {
+        resolve([]);
+      })
+    : fetch(
+        'https://api.github.com/repos/shi-institute/interactive-web-private-data/contents/northside-24/blocks_data_series.json.deflate',
+        {
+          method: 'GET',
+          headers: {
+            Accept: 'application/vnd.github.v3.raw',
+            Authorization: `token ${PRIVATE_DATA_REPO_ACCESS_TOKEN}`,
+          },
+        }
+      )
+        .then(deserializeDeflatedString)
+        .then((text) => JSON.parse(text) as Promise<Record<string, unknown>[]>)
+        .then((json) => z.array(neighborhoodBlocksDataSchema).parse(json))
+        .catch((err) => {
+          console.error(JSON.stringify(err, null, 2), '<- Error fetching neighborhood blocks data');
+          return [];
+        });
 
   const frozenData = await Promise.all([
     validNeighborhoodsData,
@@ -157,10 +172,10 @@ export const load = (async ({ params, route }) => {
   });
 
   cache.update((c) => {
-    c.set('neighborhoodsData', frozenData.neighborhoodsData);
+    if (!skipNeighborhoodData) c.set('neighborhoodsData', frozenData.neighborhoodsData);
     c.set('gentrificationData', frozenData.gentrificationData);
     if (!skipTractData) c.set('tractsData', frozenData.tractsData);
-    c.set('neighborhoodBlocksData', frozenData.neighborhoodBlocksData);
+    if (!skipNeighborhoodData) c.set('neighborhoodBlocksData', frozenData.neighborhoodBlocksData);
     c.set('expires', Date.now() + 1000 * 60); // 1 hour
     return c;
   });
