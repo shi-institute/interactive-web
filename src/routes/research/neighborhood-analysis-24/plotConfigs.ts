@@ -425,6 +425,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     };
   },
   internet__broadband__white_percent(neighborhood, data) {
+    const { facetColors } = getRaceBreakdownColors();
+
     return {
       title: 'White households with access to broadband internet',
       subtitle: `${neighborhood}, 2009-2023`,
@@ -445,11 +447,14 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'internet__broadband__white_percent',
           yErrorMargin: 'Minternet__broadband__white_percent',
           labelFormat: '.1%',
+          fill: facetColors.get('White'),
         }),
       ],
     };
   },
   internet__broadband__black_percent(neighborhood, data) {
+    const { facetColors } = getRaceBreakdownColors();
+
     return {
       title: 'Black households with access to broadband internet',
       subtitle: `${neighborhood}, 2009-2023`,
@@ -470,11 +475,14 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'internet__broadband__black_percent',
           yErrorMargin: 'Minternet__broadband__black_percent',
           labelFormat: '.1%',
+          fill: facetColors.get('Black'),
         }),
       ],
     };
   },
   internet__broadband__hispanic_percent(neighborhood, data) {
+    const { facetColors } = getRaceBreakdownColors();
+
     return {
       title: 'Hispanic or Latino households with access to broadband internet',
       subtitle: `${neighborhood}, 2009-2023`,
@@ -495,6 +503,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'internet__broadband__hispanic_percent',
           yErrorMargin: 'Minternet__broadband__hispanic_percent',
           labelFormat: '.1%',
+          fill: facetColors.get('Hispanic or Latino'),
         }),
       ],
     };
@@ -546,6 +555,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     };
   },
   has_computer__white_percent(neighborhood, data) {
+    const { facetColors } = getRaceBreakdownColors();
+
     return {
       title: 'White households with access to a computer or smartphone',
       subtitle: `${neighborhood}, 2009-2023`,
@@ -566,11 +577,14 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'has_computer__white_percent',
           yErrorMargin: 'Mhas_computer__white_percent',
           labelFormat: '.1%',
+          fill: facetColors.get('White'),
         }),
       ],
     };
   },
   has_computer__black_percent(neighborhood, data) {
+    const { facetColors } = getRaceBreakdownColors();
+
     return {
       title: 'Black households with access to a computer or smartphone',
       subtitle: `${neighborhood}, 2009-2023`,
@@ -591,11 +605,14 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'has_computer__black_percent',
           yErrorMargin: 'Mhas_computer__black_percent',
           labelFormat: '.1%',
+          fill: facetColors.get('Black'),
         }),
       ],
     };
   },
   has_computer__hispanic_percent(neighborhood, data) {
+    const { facetColors } = getRaceBreakdownColors();
+
     return {
       title: 'Hispanic or Latino households with access to a computer or smartphone',
       subtitle: `${neighborhood}, 2009-2023`,
@@ -616,6 +633,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           y: 'has_computer__hispanic_percent',
           yErrorMargin: 'Mhas_computer__hispanic_percent',
           labelFormat: '.1%',
+          fill: facetColors.get('Hispanic or Latino'),
         }),
       ],
     };
@@ -2306,7 +2324,7 @@ function getTidyInsuranceData(data: PlotData) {
   }[];
 }
 
-function getRaceBreakdownColors(facetNames: RaceBreakdownVariant[]) {
+function getRaceBreakdownColors(facetNames: RaceBreakdownVariant[] = []) {
   const facetColors = new Map([
     ['White', colors.vibrant.orange],
     ['Black', colors.vibrant.blue],
@@ -2314,9 +2332,11 @@ function getRaceBreakdownColors(facetNames: RaceBreakdownVariant[]) {
     ['Overall', colors.vibrant.gray],
   ] as const);
 
-  for (const [facetName] of facetColors) {
-    if (!facetNames.includes(facetName)) {
-      facetColors.delete(facetName);
+  if (Array.isArray(facetNames) && facetNames.length > 0) {
+    for (const [facetName] of facetColors) {
+      if (!facetNames.includes(facetName)) {
+        facetColors.delete(facetName);
+      }
     }
   }
 
@@ -2425,6 +2445,8 @@ function getRenterPlotConfig(
   mode: 'amount' | 'fraction' = 'fraction'
 ) {
   const tidyData = getTidyRenterData(data);
+  const facetNames = tidyData.filter((d) => !!d.fraction).map((d) => d.group);
+  const { facetColors } = getRaceBreakdownColors(facetNames);
 
   return {
     title: 'Renters' + (variant === 'Overall' ? ' (all households)' : ` (${variant} households)`),
@@ -2455,6 +2477,7 @@ function getRenterPlotConfig(
           y: mode === 'fraction' ? 'fraction' : 'value',
           yErrorMargin: mode === 'fraction' ? 'fraction_moe' : 'moe',
           labelFormat: mode === 'fraction' ? '.1%' : '.0f',
+          fill: facetColors.get(variant),
         }
       ),
     ],
@@ -2519,6 +2542,7 @@ function getUnemploymentFractionPlotConfig(
   variant: RaceBreakdownVariant
 ) {
   const tidyData = getTidyUnemploymentData(data);
+  const { facetColors } = getRaceBreakdownColors();
 
   return {
     title:
@@ -2543,6 +2567,7 @@ function getUnemploymentFractionPlotConfig(
           y: 'fraction',
           yErrorMargin: 'moe',
           labelFormat: '.1%',
+          fill: facetColors.get(variant),
         }
       ),
     ],
