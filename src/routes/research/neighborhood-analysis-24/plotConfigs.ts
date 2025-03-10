@@ -1139,7 +1139,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     return {
       title: 'Renter households by race',
       subtitle: `${neighborhood}, 2009-2023`,
-      caption: `The Census categorizes households into renter-occupied and owner-occupied status. This figure shows the percentage of households that rent instead of own. Overall includes all households. Race is determined from the householder. <br /> <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `Percentages are calculated based on race (the proportion denominator is the total for a particular race). The Census categorizes households into renter-occupied and owner-occupied status. This figure shows the percentage of households for a race that rent instead of own. Overall includes all households. Race is determined from the householder. <br /> <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       fx: { label: 'Survey period' },
       x: { axis: null, domain: facetOrder },
       y: {
@@ -2412,10 +2412,15 @@ function getRenterPlotConfig(
     subtitle: `${neighborhood}, 2009-2023`,
     caption: `The Census categorizes households into renter-occupied and owner-occupied status. This figure shows the ${
       mode === 'fraction' ? 'percentage' : 'number'
-    } of households that rent instead of own. <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+    } of ${
+      variant === 'Overall' ? '' : variant
+    } households that rent instead of own. <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
     x: { label: 'Survey period' },
     y: {
-      label: mode === 'fraction' ? 'Percentage of households who rent' : 'Households who rent',
+      label:
+        mode === 'fraction'
+          ? `Percentage of ${variant} households who rent`
+          : `Households who rent`,
       tickFormat: mode === 'fraction' ? '.0%' : '.0f',
       domain: mode === 'fraction' ? [0, 1] : undefined,
     },
