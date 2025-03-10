@@ -1714,6 +1714,25 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
       ],
     };
   },
+  tenure__renter(neighborhood, data, url) {
+    const plotConfig = plotConfigs.tenure__renter(
+      neighborhood,
+      // @ts-expect-error while the data object has different keys, all of the keys
+      // needed for this plot are the same
+      data.map(({ housing__owner_occupied, housing__renter_occupied, year }) => ({
+        tenure__owner: housing__owner_occupied,
+        tenure__renter: housing__renter_occupied,
+        year,
+      })),
+      url
+    );
+    plotConfig.subtitle = `${neighborhood} (decennial census)`;
+    plotConfig.caption = plotConfig.caption
+      ?.toString()
+      .replace(' American Community Survey (5-year estimates)', '');
+    if (plotConfig.x) plotConfig.x.label = 'Year';
+    return plotConfig;
+  },
   tenure__renter_fraction(neighborhood, data, url) {
     const plotConfig = plotConfigs.tenure__renter_fraction(
       neighborhood,
