@@ -1749,6 +1749,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
       ?.toString()
       .replace(' American Community Survey (5-year estimates)', '');
     if (plotConfig.x) plotConfig.x.label = 'Year';
+    if (plotConfig.x) plotConfig.x.type = 'band';
     return plotConfig;
   },
   tenure__renter_fraction(neighborhood, data, url) {
@@ -1768,6 +1769,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
       ?.toString()
       .replace(' American Community Survey (5-year estimates)', '');
     if (plotConfig.x) plotConfig.x.label = 'Year';
+    if (plotConfig.x) plotConfig.x.type = 'band';
     return plotConfig;
   },
   population__18_over_under(neighborhood, data) {
