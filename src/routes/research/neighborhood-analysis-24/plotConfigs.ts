@@ -205,7 +205,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     return {
       title: 'Education: High school degree',
       subtitle: `${neighborhood}, 2009-2023`,
-      caption: `Includes regular high school degrees and GED or alternative credentials. <br /><i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `This shows the percentage of the population aged 25 years or older who have attained a regular high school degree, GED, or other alternative credential with high school equivalency. <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
         label: 'Percent with high school degree',
@@ -239,12 +239,12 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
               .reduce((a, b) => a + b, 0);
 
             const education__high_school_or_higher_percent =
-              education__high_school_or_higher / d['population__total'];
+              education__high_school_or_higher / d['population__25_or_older'];
 
             const Meducation__high_school_or_higher_percent = calcProportionMOE(
               d,
               educationHighSchoolOrHigherFields,
-              'population__total'
+              'population__25_or_older'
             );
 
             return {
@@ -267,7 +267,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     return {
       title: 'Education: Some college or higher',
       subtitle: `${neighborhood}, 2009-2023`,
-      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `This shows the percentage of the population aged 25 years or older who have attained at least part of a college or proffesional school degree. <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
         label: 'Percent with some college education',
@@ -295,12 +295,12 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
               .reduce((a, b) => a + b, 0);
 
             const education__some_college_or_higher_percent =
-              education__some_college_or_higher / d['population__total'];
+              education__some_college_or_higher / d['population__25_or_older'];
 
             const Meducation__some_college_or_higher_percent = calcProportionMOE(
               d,
               educationSomeCollegeOrHigherFields,
-              'population__total'
+              'population__25_or_older'
             );
 
             return {
@@ -323,7 +323,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     return {
       title: 'Education: College graduate',
       subtitle: `${neighborhood}, 2009-2023`,
-      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `This shows the percentage of the population aged 25 years or older who have attained a college or proffesional school degree. <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
         label: 'Percent with a college degree',
@@ -350,12 +350,12 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
               .reduce((a, b) => a + b, 0);
 
             const education__college_degree_percent =
-              education__college_degree / d['population__total'];
+              education__college_degree / d['population__25_or_older'];
 
             const Meducation__college_degree_percent = calcProportionMOE(
               d,
               educationCollegeDegreeFields,
-              'population__total'
+              'population__25_or_older'
             );
 
             return {
