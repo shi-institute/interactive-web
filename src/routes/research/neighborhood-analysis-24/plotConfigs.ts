@@ -263,6 +263,58 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       ],
     };
   },
+  education__some_college(neighborhood, data) {
+    return {
+      title: 'Education: Some college',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `This shows the percentage of the population aged 25 years or older who have participated in college courses without attaining a bachelor's degree or higher. \n<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      x: { label: 'Survey period' },
+      y: {
+        label: 'Percent with only some college education',
+        tickFormat: '.0%',
+        domain: [0, 1],
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 40,
+      marks: [
+        barWithLabelY(
+          data.map((d) => {
+            const educationSomeCollegeFields = [
+              'education__some_college_no_degree',
+              'education__associates_degree',
+            ] as const satisfies string[];
+
+            const education__some_college = educationSomeCollegeFields
+              .map((field) => d[field])
+              .reduce((a, b) => a + b, 0);
+
+            const education__some_college_percent =
+              education__some_college / d['population__25_or_older'];
+
+            const Meducation__some_college_percent = calcProportionMOE(
+              d,
+              educationSomeCollegeFields,
+              'population__25_or_older'
+            );
+
+            return {
+              education__some_college_percent,
+              Meducation__some_college_percent,
+              ...d,
+            };
+          }),
+          {
+            x: 'year',
+            y: 'education__some_college_percent',
+            yErrorMargin: 'Meducation__some_college_percent',
+            labelFormat: '.1%',
+          }
+        ),
+      ],
+    };
+  },
   education__some_college_or_higher(neighborhood, data) {
     return {
       title: 'Education: Some college or higher',
@@ -323,7 +375,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     return {
       title: 'Education: College graduate',
       subtitle: `${neighborhood}, 2009-2023`,
-      caption: `This shows the percentage of the population aged 25 years or older who have attained a college or proffesional school degree. <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `This shows the percentage of the population aged 25 years or older who have attained a a 4-year college degree or higher. <i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
         label: 'Percent with a college degree',
@@ -338,7 +390,6 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
         barWithLabelY(
           data.map((d) => {
             const educationCollegeDegreeFields = [
-              'education__associates_degree',
               'education__bachelors_degree',
               'education__masters_degree',
               'education__professional_school_degree',
