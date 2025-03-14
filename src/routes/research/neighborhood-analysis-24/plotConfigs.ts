@@ -205,7 +205,16 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     const config = getEducationPlot(
       neighborhood,
       data,
-      ['education__some_college_no_degree', 'education__associates_degree'],
+      [
+        'education__regular_high_school_diploma',
+        'education__ged_or_alternative_credential',
+        'education__some_college_no_degree',
+        'education__associates_degree',
+        'education__bachelors_degree',
+        'education__masters_degree',
+        'education__professional_school_degree',
+        'education__doctorate_degree',
+      ],
       'amount'
     );
 
@@ -221,7 +230,16 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     const config = getEducationPlot(
       neighborhood,
       data,
-      ['education__some_college_no_degree', 'education__associates_degree'],
+      [
+        'education__regular_high_school_diploma',
+        'education__ged_or_alternative_credential',
+        'education__some_college_no_degree',
+        'education__associates_degree',
+        'education__bachelors_degree',
+        'education__masters_degree',
+        'education__professional_school_degree',
+        'education__doctorate_degree',
+      ],
       'fraction'
     );
 
