@@ -412,7 +412,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marginBottom: 36,
       marginLeft: 40,
       marks: [
-        barWithLabelY(data, {
+        barWithLabelY(data.filter(withoutEmptyComputerDataYears), {
           x: 'year',
           y: 'internet__broadband__total_percent',
           yErrorMargin: 'Minternet__broadband__total_percent',
@@ -439,7 +439,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marginBottom: 36,
       marginLeft: 40,
       marks: [
-        barWithLabelY(data, {
+        barWithLabelY(data.filter(withoutEmptyComputerDataYears), {
           x: 'year',
           y: 'internet__broadband__white_percent',
           yErrorMargin: 'Minternet__broadband__white_percent',
@@ -467,7 +467,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marginBottom: 36,
       marginLeft: 40,
       marks: [
-        barWithLabelY(data, {
+        barWithLabelY(data.filter(withoutEmptyComputerDataYears), {
           x: 'year',
           y: 'internet__broadband__black_percent',
           yErrorMargin: 'Minternet__broadband__black_percent',
@@ -495,7 +495,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marginBottom: 36,
       marginLeft: 40,
       marks: [
-        barWithLabelY(data, {
+        barWithLabelY(data.filter(withoutEmptyComputerDataYears), {
           x: 'year',
           y: 'internet__broadband__hispanic_percent',
           yErrorMargin: 'Minternet__broadband__hispanic_percent',
@@ -522,7 +522,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marginLeft: 40,
       marks: [
         barWithLabelY(
-          data.map((d) => {
+          data.filter(withoutEmptyComputerDataYears).map((d) => {
             const has_computer__total = d['has_computer__total'] || 0;
             const no_computer__total = d['no_computer__total'] || 0;
 
@@ -569,7 +569,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marginBottom: 36,
       marginLeft: 40,
       marks: [
-        barWithLabelY(data, {
+        barWithLabelY(data.filter(withoutEmptyComputerDataYears), {
           x: 'year',
           y: 'has_computer__white_percent',
           yErrorMargin: 'Mhas_computer__white_percent',
@@ -597,7 +597,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marginBottom: 36,
       marginLeft: 40,
       marks: [
-        barWithLabelY(data, {
+        barWithLabelY(data.filter(withoutEmptyComputerDataYears), {
           x: 'year',
           y: 'has_computer__black_percent',
           yErrorMargin: 'Mhas_computer__black_percent',
@@ -625,7 +625,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marginBottom: 36,
       marginLeft: 40,
       marks: [
-        barWithLabelY(data, {
+        barWithLabelY(data.filter(withoutEmptyComputerDataYears), {
           x: 'year',
           y: 'has_computer__hispanic_percent',
           yErrorMargin: 'Mhas_computer__hispanic_percent',
@@ -2736,4 +2736,17 @@ function getEducationPlot(
     marginLeft: 40,
     marks: [buildEducationMark(data, fields, mode)],
   };
+}
+
+/**
+ * A filter function that removes data from before 2014. Before 2014, data
+ * related to computers and internet access were not provided by the ACS 5-year
+ * estimates.
+ *
+ * Usage:
+ * `data.filter(withoutEmptyComputerDataYears)`
+ */
+function withoutEmptyComputerDataYears(element: PlotData[number], index: number) {
+  const [start] = element['year_range'].split('-').map(parseInt);
+  return start > 2013;
 }
