@@ -24,7 +24,9 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     return {
       title: 'Median household income',
       subtitle: `${neighborhood}, 2009-2023`,
-      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `${
+        isTract(neighborhood) ? '' : 'Inflation-adjusted to 2023 dollars.\n'
+      }<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
         label: 'Median household income',
@@ -65,7 +67,9 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     return {
       title: 'Median household income (White householder)',
       subtitle: `${neighborhood}, 2009-2023`,
-      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `${
+        isTract(neighborhood) ? '' : 'Inflation-adjusted to 2023 dollars.\n'
+      }<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
         label: 'Median household income',
@@ -108,7 +112,9 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     return {
       title: 'Median household income (Black householder)',
       subtitle: `${neighborhood}, 2009-2023`,
-      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `${
+        isTract(neighborhood) ? '' : 'Inflation-adjusted to 2023 dollars.\n'
+      }<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
         label: 'Median household income',
@@ -151,7 +157,9 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     return {
       title: 'Median household income (Hispanic or Latino householder)',
       subtitle: `${neighborhood}, 2009-2023`,
-      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      caption: `${
+        isTract(neighborhood) ? '' : 'Inflation-adjusted to 2023 dollars.\n'
+      }<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
         label: 'Median household income',
@@ -2904,4 +2912,8 @@ function getEducationPlot(
 function withoutEmptyComputerDataYears(element: PlotData[number], index: number) {
   const [start] = element['year_range'].split('-').map(parseInt);
   return start > 2013;
+}
+
+function isTract(str: string) {
+  return !isNaN(parseInt(str));
 }

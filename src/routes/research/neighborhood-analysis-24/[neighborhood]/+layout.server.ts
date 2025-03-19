@@ -1,4 +1,5 @@
 import { hasKey } from '$utils';
+import { adjustForInflation } from '$utils/adjustForInflation';
 import { capitalize } from '$utils/capitalize';
 import { error } from '@sveltejs/kit';
 import { isString } from 'is-what';
@@ -20,7 +21,43 @@ export const load = (async ({ params, parent, url, route }) => {
         neighborhoods.map((n) => n.toLowerCase()).includes(params.neighborhood.toLowerCase())
     );
 
-    return { neighborhood, neighborhoodGentrificationData };
+    return {
+      neighborhood,
+      neighborhoodGentrificationData,
+      neighborhoodsData: neighborhoodsData.map(
+        ({
+          median_household_income,
+          median_household_income__black,
+          median_household_income__white,
+          median_household_income__hispanic,
+          ...rest
+        }) => {
+          return {
+            ...rest,
+            median_household_income: adjustForInflation(
+              median_household_income,
+              parseInt(rest.year_range.split('-')[1]),
+              2023
+            ),
+            median_household_income__black: adjustForInflation(
+              median_household_income__black,
+              parseInt(rest.year_range.split('-')[1]),
+              2023
+            ),
+            median_household_income__white: adjustForInflation(
+              median_household_income__white,
+              parseInt(rest.year_range.split('-')[1]),
+              2023
+            ),
+            median_household_income__hispanic: adjustForInflation(
+              median_household_income__hispanic,
+              parseInt(rest.year_range.split('-')[1]),
+              2023
+            ),
+          };
+        }
+      ),
+    };
   }
 
   const tract = parseInt(params.neighborhood);
@@ -28,7 +65,7 @@ export const load = (async ({ params, parent, url, route }) => {
 
   const tractGentrificationData = gentrificationData.filter(({ Tract }) => Tract === tract);
 
-  return { tract, tract_name, tractGentrificationData };
+  return { tract, tract_name, tractGentrificationData, neighborhoodsData };
 }) satisfies LayoutServerLoad;
 
 function restrictToValidRoutes({
