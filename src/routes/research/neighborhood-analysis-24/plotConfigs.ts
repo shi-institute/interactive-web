@@ -9,6 +9,93 @@ import type { PageData } from './[neighborhood]/plots/[plot]/$types';
 import { calcProportionMOE } from './calcProportionMOE';
 
 export const plotConfigs: Record<string, PlotConfigFunction> = {
+  median_household_income__RACE_BREAKDOWN(neighborhood, data) {
+    const max = Math.max(
+      ...data.flatMap((d) =>
+        [
+          d.median_household_income,
+          d.median_household_income__black,
+          d.median_household_income__white,
+          d.median_household_income__hispanic,
+        ].filter(notEmpty)
+      )
+    );
+
+    const tidyData = data
+      .flatMap((d) => {
+        return [
+          {
+            year: d.year,
+            group: 'Overall' as const,
+            amount: d.median_household_income,
+            // @ts-expect-error only exists with tract data
+            moe: d.Mmedian_household_income,
+          },
+          {
+            year: d.year,
+            group: 'Black' as const,
+            amount: d.median_household_income__black,
+            // @ts-expect-error only exists with tract data
+            moe: d.Mmedian_household_income__black,
+          },
+          {
+            year: d.year,
+            group: 'White' as const,
+            amount: d.median_household_income__white,
+            // @ts-expect-error only exists with tract data
+            moe: d.Mmedian_household_income__white,
+          },
+          {
+            year: d.year,
+            group: 'Hispanic or Latino' as const,
+            amount: d.median_household_income__hispanic,
+            // @ts-expect-error only exists with tract data
+            moe: d.Mmedian_household_income__hispanic,
+          },
+        ];
+      })
+      .filter(({ amount }) => notEmpty(amount));
+
+    const existingGroups = Array.from(new Set(tidyData.map((d) => d.group)));
+    const { facetColors, facetOrder, legendColors } = getRaceBreakdownColors(existingGroups);
+
+    return {
+      title: 'Median household income',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `${
+        isTract(neighborhood) ? '' : 'Inflation-adjusted to 2023 dollars.\n'
+      }<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      fx: { label: 'Survey period' },
+      x: { axis: null, domain: facetOrder },
+      y: {
+        label: 'Median household income',
+        tickFormat: (d) => {
+          return `$${d / 1000}k`;
+        },
+        domain: [0, max],
+      },
+      color: {
+        legend: true,
+        domain: facetOrder,
+        range: legendColors,
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 40,
+      marks: [
+        barWithLabelY(tidyData, {
+          x: 'group',
+          fx: 'year',
+          y: 'amount',
+          yErrorMargin: 'moe',
+          labelFormat: '$,.0f',
+          labelFill: (d) => (d.group === 'Overall' ? '#666' : facetColors.get(d.group)),
+          fill: 'group',
+        }),
+      ],
+    };
+  },
   median_household_income(neighborhood, data) {
     const max = Math.max(
       ...data.flatMap((d) =>
@@ -22,7 +109,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     );
 
     return {
-      title: 'Median household income',
+      title: 'Median household income (all population)',
       subtitle: `${neighborhood}, 2009-2023`,
       caption: `${
         isTract(neighborhood) ? '' : 'Inflation-adjusted to 2023 dollars.\n'
@@ -2560,6 +2647,7 @@ function getTidyRenterData(data: PlotData) {
 
       return {
         value: d[renterKey],
+        // @ts-expect-error only exists with tract data
         moe: d[`M${renterKey}`],
         fraction: numerator / denominator,
         fraction_moe: calcProportionMOE(
