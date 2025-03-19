@@ -396,7 +396,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       ],
     };
   },
-  internet__broadband__total(neighborhood, data) {
+  internet__broadband__total_fraction(neighborhood, data) {
     return {
       title: 'Households with access to broadband internet',
       subtitle: `${neighborhood}, 2009-2023`,
@@ -421,7 +421,94 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       ],
     };
   },
-  internet__broadband__white_percent(neighborhood, data) {
+  internet__broadband__RACE_BREAKDOWN_fraction(neighborhood, data) {
+    const { facetColors, facetOrder, legendColors } = getRaceBreakdownColors();
+
+    const tidyData = data.filter(withoutEmptyComputerDataYears).flatMap((d) => {
+      return (
+        Object.entries(d)
+          .map(([key, value]) => {
+            if (key.startsWith('internet__broadband__')) {
+              const group = key.includes('total')
+                ? 'Overall'
+                : key.includes('white')
+                ? 'White'
+                : key.includes('black')
+                ? 'Black'
+                : 'Hispanic or Latino';
+              const type: 'fraction' | 'amount' = key.includes('percent') ? 'fraction' : 'amount';
+              return {
+                year: d.year,
+                group,
+                type,
+                value,
+                // @ts-expect-error
+                moe: d['M' + key],
+              };
+            }
+          })
+          .filter(notEmpty)
+          // @ts-expect-error
+          .reduce((accumulator, { group, moe, type, value, year }) => {
+            const data = {
+              year,
+              group,
+              [type]: parseFloat(`${value}`),
+              [type === 'amount' ? 'moe' : 'fraction_moe']: moe,
+            };
+
+            if (!accumulator) {
+              return [data];
+            }
+
+            const existingGroup = accumulator.find((d) => d.group === data.group);
+            if (!existingGroup) {
+              return [...accumulator, data];
+            }
+
+            existingGroup[type] = data[type];
+            existingGroup[type === 'amount' ? 'moe' : 'fraction_moe'] =
+              data[type === 'amount' ? 'moe' : 'fraction_moe'];
+
+            return accumulator;
+          }, [] as { year: number; group: string; amount?: number; fraction?: number; moe?: number; fraction_moe?: number }[])
+      );
+    });
+
+    return {
+      title: 'Households with access to broadband internet',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      fx: { label: 'Survey period' },
+      x: { axis: null, domain: facetOrder },
+      y: {
+        label: 'Percentage of households',
+        tickFormat: '.0%',
+        domain: [0, 1],
+      },
+      color: {
+        legend: true,
+        domain: facetOrder,
+        range: legendColors,
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 40,
+      marks: [
+        barWithLabelY(tidyData, {
+          x: 'group',
+          fx: 'year',
+          y: 'fraction',
+          yErrorMargin: 'fraction_moe',
+          labelFormat: '.0%',
+          labelFill: (d) => (d.group === 'Overall' ? '#666' : facetColors.get(d.group)),
+          fill: 'group',
+        }),
+      ],
+    };
+  },
+  internet__broadband__white_fraction(neighborhood, data) {
     const { facetColors } = getRaceBreakdownColors();
 
     return {
@@ -449,7 +536,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       ],
     };
   },
-  internet__broadband__black_percent(neighborhood, data) {
+  internet__broadband__black_fraction(neighborhood, data) {
     const { facetColors } = getRaceBreakdownColors();
 
     return {
@@ -477,7 +564,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       ],
     };
   },
-  internet__broadband__hispanic_percent(neighborhood, data) {
+  internet__broadband__hispanic_fraction(neighborhood, data) {
     const { facetColors } = getRaceBreakdownColors();
 
     return {
@@ -505,7 +592,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       ],
     };
   },
-  has_computer__total__percent(neighborhood, data) {
+  has_computer__total__fraction(neighborhood, data) {
     return {
       title: 'Households with access to a computer or smartphone',
       subtitle: `${neighborhood}, 2009-2023`,
@@ -551,7 +638,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       ],
     };
   },
-  has_computer__white_percent(neighborhood, data) {
+  has_computer__white_fraction(neighborhood, data) {
     const { facetColors } = getRaceBreakdownColors();
 
     return {
@@ -579,7 +666,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       ],
     };
   },
-  has_computer__black_percent(neighborhood, data) {
+  has_computer__black_fraction(neighborhood, data) {
     const { facetColors } = getRaceBreakdownColors();
 
     return {
@@ -607,7 +694,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       ],
     };
   },
-  has_computer__hispanic_percent(neighborhood, data) {
+  has_computer__hispanic_fraction(neighborhood, data) {
     const { facetColors } = getRaceBreakdownColors();
 
     return {
