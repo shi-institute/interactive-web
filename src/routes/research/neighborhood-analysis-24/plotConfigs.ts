@@ -4,6 +4,7 @@ import { hasKey } from '$utils';
 import { notEmpty } from '$utils/notEmpty';
 import * as Plot from '@observablehq/plot';
 import * as d3 from 'd3';
+import { isNumber } from 'is-what';
 import type { PageData } from './[neighborhood]/plots/[plot]/$types';
 import { calcProportionMOE } from './calcProportionMOE';
 
@@ -589,6 +590,73 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           labelFormat: '.1%',
           fill: facetColors.get('Hispanic or Latino'),
         }),
+      ],
+    };
+  },
+  has_computer__RACE_BREAKDOWN__fraction(neighborhood, data) {
+    const { facetColors, facetOrder, legendColors } = getRaceBreakdownColors();
+
+    function calc(
+      rowData: (typeof data)[number],
+      has: keyof typeof rowData,
+      no: keyof typeof rowData
+    ) {
+      const has_computer__total = isNumber(rowData[has]) ? rowData[has] || 0 : 0;
+      const no_computer__total = isNumber(rowData[no]) ? rowData[no] || 0 : 0;
+
+      const fraction = has_computer__total / (has_computer__total + no_computer__total);
+
+      //@ts-expect-error
+      const moe = rowData[`M${has}`] || 0;
+
+      const fraction_moe = calcProportionMOE(rowData, [has, no], 'population__total');
+
+      return { amount: has, fraction, moe, fraction_moe, year: rowData.year };
+    }
+
+    return {
+      title: 'Households with access to a computer or smartphone',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      fx: { label: 'Survey period' },
+      x: { axis: null, domain: facetOrder },
+      y: {
+        label: 'Percentage with access to a computer',
+        tickFormat: '.0%',
+        domain: [0, 1],
+      },
+      color: {
+        legend: true,
+        domain: facetOrder,
+        range: legendColors,
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 40,
+      marks: [
+        barWithLabelY(
+          data.filter(withoutEmptyComputerDataYears).flatMap((d) => {
+            return [
+              { group: 'Overall', ...calc(d, 'has_computer__total', 'no_computer__total') },
+              { group: 'White', ...calc(d, 'has_computer__white', 'no_computer__white') },
+              { group: 'Black', ...calc(d, 'has_computer__black', 'no_computer__black') },
+              {
+                group: 'Hispanic or Latino',
+                ...calc(d, 'has_computer__hispanic', 'no_computer__hispanic'),
+              },
+            ];
+          }),
+          {
+            x: 'group',
+            fx: 'year',
+            y: 'fraction',
+            yErrorMargin: 'fraction_moe',
+            labelFormat: '.1%',
+            labelFill: (d) => (d.group === 'Overall' ? '#666' : facetColors.get(d.group)),
+            fill: 'group',
+          }
+        ),
       ],
     };
   },
