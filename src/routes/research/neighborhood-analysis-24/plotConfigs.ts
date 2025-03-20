@@ -60,7 +60,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     const { facetColors, facetOrder, legendColors } = getRaceBreakdownColors(existingGroups);
 
     return {
-      title: 'Median household income',
+      title: 'Media`n household income',
       subtitle: `${neighborhood}, 2009-2023`,
       caption: `${
         isTract(neighborhood) ? '' : 'Inflation-adjusted to 2023 dollars.\n'
@@ -944,7 +944,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       y: {
         label: 'Percentage of population',
         tickFormat: '.0%',
-        domain: [0, 0.2],
+        domain: [0, 0.1],
       },
       marginTop: 30,
       marginRight: 0,
@@ -972,14 +972,14 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
   },
   geographic_mobility__different_state_fraction(neighborhood, data) {
     return {
-      title: 'Migration from outside South Carolina',
+      title: 'Migration from other states',
       subtitle: `${neighborhood}, 2009-2023`,
       caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
       x: { label: 'Survey period' },
       y: {
         label: 'Percentage of population',
         tickFormat: '.0%',
-        domain: [0, 0.2],
+        domain: [0, 0.1],
       },
       marginTop: 30,
       marginRight: 0,
@@ -990,6 +990,41 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           x: 'year',
           y: 'geographic_mobility__different_state_fraction',
           yErrorMargin: 'Mgeographic_mobility__different_state_fraction',
+          labelFormat: '.1%',
+        }),
+      ],
+      style: `
+        g[aria-label='y-axis tick label'] {
+          text:last-child {
+            fill: hsl(0, 100.00%, 50%);
+            @media (prefers-color-scheme: dark) {
+              fill:hsl(0, 100.00%, 75%);
+            }
+          }
+        }
+      `,
+    };
+  },
+  geographic_mobility__abroad_fraction(neighborhood, data) {
+    return {
+      title: 'Migration from abroad',
+      subtitle: `${neighborhood}, 2009-2023`,
+      caption: `<i>Data: US Census Bureau American Community Survey (5-year estimates)</i>`,
+      x: { label: 'Survey period' },
+      y: {
+        label: 'Percentage of population',
+        tickFormat: '.0%',
+        domain: [0, 0.1],
+      },
+      marginTop: 30,
+      marginRight: 0,
+      marginBottom: 36,
+      marginLeft: 40,
+      marks: [
+        barWithLabelY(data, {
+          x: 'year',
+          y: 'geographic_mobility__abroad_fraction',
+          yErrorMargin: 'Mgeographic_mobility__abroad_fraction',
           labelFormat: '.1%',
         }),
       ],
