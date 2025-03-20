@@ -318,7 +318,6 @@
         Please wait
       </div>
     </div>
-
     <div class="slots" bind:clientHeight="{slotAfterExportHeight}">
       <slot name="after" />
       <slot name="print-after" />
@@ -455,5 +454,13 @@
   .wait.nobackground {
     backdrop-filter: none;
     background-color: transparent;
+  }
+  .wait.contained {
+    position: relative;
+    inset: unset;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: 1px dotted #80808040;
   }
 </style>
