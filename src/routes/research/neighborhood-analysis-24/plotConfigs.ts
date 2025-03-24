@@ -60,7 +60,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
     const { facetColors, facetOrder, legendColors } = getRaceBreakdownColors(existingGroups);
 
     return {
-      title: 'Media`n household income',
+      title: 'Median household income',
       subtitle: `${neighborhood}, 2009-2023`,
       caption: `${
         isTract(neighborhood) ? '' : 'Inflation-adjusted to 2023 dollars.\n'
