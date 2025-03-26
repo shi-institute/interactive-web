@@ -1612,8 +1612,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
           group: 'Two or more races (not Hispanic or Latino)',
           amount: data.ethnicity__not_hispanic_or_latino__two_or_more_races,
           moe:
-            hasKey(data, 'ethnicity__not_hispanic_or_latino__two_or_more_races') &&
-            data.ethnicity__not_hispanic_or_latino__two_or_more_races,
+            hasKey(data, 'Methnicity__not_hispanic_or_latino__two_or_more_races') &&
+            data.Methnicity__not_hispanic_or_latino__two_or_more_races,
         },
       ];
     });
