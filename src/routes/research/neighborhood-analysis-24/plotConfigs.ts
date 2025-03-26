@@ -1955,10 +1955,7 @@ export const blockPlotConfigs: Record<string, BlockPlotConfigFunction> = {
   population__RACE_ETHNICITY_BREAKDOWN(neighborhood, data) {
     // @ts-expect-error while the data object has different keys, all of the keys
     // needed for this plot are the same
-    const plotConfig = plotConfigs.population__RACE_ETHNICITY_BREAKDOWN(
-      neighborhood,
-      data.filter((d) => parseInt(d.year) >= 2000)
-    );
+    const plotConfig = plotConfigs.population__RACE_ETHNICITY_BREAKDOWN(neighborhood, data);
     plotConfig.subtitle = `${neighborhood} (decennial census)`;
     plotConfig.caption = plotConfig.caption
       ?.toString()
