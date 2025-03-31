@@ -1,4 +1,12 @@
-const validNeighborhoods = ['northside', 'sterling'];
+const validNeighborhoods = [
+  'northside',
+  'sterling',
+  'converse heights',
+  'hampton heights',
+  'highland',
+  'liberty heights',
+  'south converse',
+];
 const validTracts = [
   45045000500, // sterling
   45045002105, // sterling
