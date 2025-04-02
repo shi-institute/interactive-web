@@ -210,7 +210,7 @@
 
 <div
   class="grid"
-  class:wrap="{$params.neighborhoods.length === 1}"
+  class:wrap="{$params.neighborhoods.length === 1 || $params.plots.length === 1}"
   style="--columns: {$params.neighborhoods.length}; --plotWidth: {$params.plotWidth}px"
 >
   {#each plotsToShow as [key, neighborhood, plot]}
