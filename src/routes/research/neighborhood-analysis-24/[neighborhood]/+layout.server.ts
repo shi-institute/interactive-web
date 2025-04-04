@@ -1,5 +1,4 @@
 import { hasKey } from '$utils';
-import { adjustForInflation } from '$utils/adjustForInflation';
 import { capitalize } from '$utils/capitalize';
 import { error } from '@sveltejs/kit';
 import { isString } from 'is-what';
@@ -24,39 +23,7 @@ export const load = (async ({ params, parent, url, route }) => {
     return {
       neighborhood,
       neighborhoodGentrificationData,
-      neighborhoodsData: neighborhoodsData.map(
-        ({
-          median_household_income,
-          median_household_income__black,
-          median_household_income__white,
-          median_household_income__hispanic,
-          ...rest
-        }) => {
-          return {
-            ...rest,
-            median_household_income: adjustForInflation(
-              median_household_income,
-              parseInt(rest.year_range.split('-')[1]),
-              2023
-            ),
-            median_household_income__black: adjustForInflation(
-              median_household_income__black,
-              parseInt(rest.year_range.split('-')[1]),
-              2023
-            ),
-            median_household_income__white: adjustForInflation(
-              median_household_income__white,
-              parseInt(rest.year_range.split('-')[1]),
-              2023
-            ),
-            median_household_income__hispanic: adjustForInflation(
-              median_household_income__hispanic,
-              parseInt(rest.year_range.split('-')[1]),
-              2023
-            ),
-          };
-        }
-      ),
+      neighborhoodsData,
     };
   }
 

@@ -1,8 +1,8 @@
 import { PRIVATE_DATA_REPO_ACCESS_TOKEN } from '$env/static/private';
 import { deepFreeze, deserializeDeflatedString } from '$utils';
+import { adjustForInflation } from '$utils/adjustForInflation';
 import { fipsToCountyName } from '$utils/fipsToCountyName';
 import { isNumber } from 'is-what';
-import { inflate } from 'pako';
 import { get, writable } from 'svelte/store';
 import { z } from 'zod';
 import type { LayoutServerLoad } from './$types';
@@ -394,6 +394,26 @@ const neighborhoodDataSchema = z
       neighborhood_name: toTitleCase(d.neighborhood_name),
       year: d.year_range,
       GEOID: d.GISJOIN.split(',').map(toGEOID),
+      median_household_income: adjustForInflation(
+        d.median_household_income,
+        parseInt(d.year_range.split('-')[1]),
+        2023
+      ),
+      median_household_income__black: adjustForInflation(
+        d.median_household_income__black,
+        parseInt(d.year_range.split('-')[1]),
+        2023
+      ),
+      median_household_income__white: adjustForInflation(
+        d.median_household_income__white,
+        parseInt(d.year_range.split('-')[1]),
+        2023
+      ),
+      median_household_income__hispanic: adjustForInflation(
+        d.median_household_income__hispanic,
+        parseInt(d.year_range.split('-')[1]),
+        2023
+      ),
     };
   });
 
