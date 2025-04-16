@@ -75,10 +75,14 @@
         width: (width - 80) / (width > 860 ? 2 : 1),
         caption:
           browser && width <= 860
-            ? html`
+            ? // prettier-ignore
+              html`
+                <span style="opacity: 0.7">Average income is based on the ZCTA for this tract.</span>
                 <i>Data: FHFA / IRS / US Census</i>
               `
-            : '',
+            : // prettier-ignore
+              html`
+              <span style="opacity: 0.7">Average income is based on the ZCTA for this tract.</span>`,
         color: { legend: true },
         x: { type: 'linear', label: 'Year', tickFormat: 'd' },
         y: {
