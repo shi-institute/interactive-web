@@ -13,7 +13,10 @@ const cache = writable(new Map<string, unknown>());
 
 export const load = (async ({ params, route }) => {
   const isTract = (params.neighborhood && !isNaN(parseInt(params.neighborhood))) || false;
-  const skipTractData = !isTract && route.id !== '/research/neighborhood-analysis-24/compare';
+  const skipTractData =
+    !isTract &&
+    route.id !== '/research/neighborhood-analysis-24/compare' &&
+    route.id !== '/research/neighborhood-analysis-24';
   const skipNeighborhoodData = isTract && route.id !== '/research/neighborhood-analysis-24/compare';
 
   const cachedData = get(cache);

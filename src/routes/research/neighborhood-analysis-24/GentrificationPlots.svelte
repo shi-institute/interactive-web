@@ -136,10 +136,40 @@
     </figure>
     <div class="row">
       <div class="col">
-        <PlotContainer plot="{quantilePlotConfig}" />
+        <PlotContainer plot="{quantilePlotConfig}">
+          <figure slot="popup-before">
+            <h2>Housing and income quantiles and values</h2>
+            <h3>Tract {tract}</h3>
+            <h3>
+              <i>{tractNeighborhoods.join(', ')}</i>
+            </h3>
+          </figure>
+          <figure slot="print-before">
+            <h2>Housing and income quantiles and values</h2>
+            <h3>Tract {tract}</h3>
+            <h3>
+              <i>{tractNeighborhoods.join(', ')}</i>
+            </h3>
+          </figure>
+        </PlotContainer>
       </div>
       <div class="col">
-        <PlotContainer plot="{usdPlotConfig}" />
+        <PlotContainer plot="{usdPlotConfig}">
+          <figure slot="popup-before">
+            <h2>Housing and income quantiles and values</h2>
+            <h3>Tract {tract}</h3>
+            <h3>
+              <i>{tractNeighborhoods.join(', ')}</i>
+            </h3>
+          </figure>
+          <figure slot="print-before">
+            <h2>Housing and income quantiles and values</h2>
+            <h3>Tract {tract}</h3>
+            <h3>
+              <i>{tractNeighborhoods.join(', ')}</i>
+            </h3>
+          </figure>
+        </PlotContainer>
       </div>
     </div>
   </div>
