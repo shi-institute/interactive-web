@@ -1,6 +1,7 @@
 <script lang="ts">
   import { notEmpty } from '$utils/notEmpty';
   import esriConfig from '@arcgis/core/config.js';
+  import IdentityManager from '@arcgis/core/identity/IdentityManager';
   import * as timeUtils from '@arcgis/core/support/timeUtils.js';
   import MapView from '@arcgis/core/views/MapView';
   import WebMap from '@arcgis/core/WebMap';
@@ -54,6 +55,18 @@
    * `bind:view={yourMapViewVariable}`.
    */
   export let view: MapView | undefined = undefined;
+
+  /**
+   * Whether to allow the IdentityManager to show a popup dialog for authentication.
+   *
+   * If set to `false`, the dialog will be hidden and the user will not be able to authenticate.
+   * Ensure that the web map does not require authentication or that the user is already authenticated.
+   *
+   * This is useful for scenarios where you want to skip the authentication dialog because you
+   * have provided the API key/token instead. ArcGIS will occasionally show a dialog even though
+   * the API key is provided, which can be confusing for users.
+   */
+  export let allowIdentityManagerPopup: boolean = false;
 
   export let options: Writable<WebMapOptions> = writable({
     expanded: { left: false, right: false },
@@ -124,6 +137,66 @@
     if (webMapProps.portalItem?.portal?.url) {
       esriConfig.portalUrl = webMapProps.portalItem.portal.url;
     }
+
+    const identityManager = IdentityManager;
+    identityManager.on('dialog-create', function () {
+      if (allowIdentityManagerPopup) {
+        return;
+      }
+
+      identityManager.dialog.visible = false;
+
+      function closeDialog() {
+        return new Promise<void>((resolve, reject) => {
+          setTimeout(() => {
+            try {
+              const loginDialogContainer = identityManager.dialog.container;
+              if (typeof loginDialogContainer === 'string') {
+                throw new Error('Login dialog container is not an HTML Element.');
+              }
+              const cancelButton = loginDialogContainer.querySelector(
+                'calcite-button[slot="secondary"]'
+              );
+              if (!cancelButton) {
+                throw new Error('Cancel button not found in the login dialog.');
+              }
+              (cancelButton as HTMLButtonElement).click();
+              resolve();
+            } catch (error) {
+              reject(error);
+            }
+          }, 250);
+        });
+      }
+
+      async function retryPromise(promiseFn: () => Promise<unknown>, maxRetries = 5, delay = 1000) {
+        let attempt = 0;
+
+        while (attempt < maxRetries) {
+          try {
+            // Try to execute the promise function
+            return await promiseFn(); // If it resolves, return the result
+          } catch (error) {
+            attempt++;
+            console.warn(`Attempt ${attempt} failed:`, error);
+
+            if (attempt >= maxRetries) {
+              throw new Error('Max retries reached; promise failed.');
+            }
+
+            // Wait before retrying
+            await new Promise((resolve) => setTimeout(resolve, delay));
+          }
+        }
+      }
+
+      retryPromise(closeDialog, 10, 250).catch(() => {
+        console.error(
+          'Something went wrong when skipping authentication. See console warnings for more information.'
+        );
+        identityManager.dialog.visible = true;
+      });
+    });
 
     map = new WebMap(webMapProps);
     view = new MapView({
