@@ -5,4 +5,5 @@ export { deserializeDeflatedString } from './deserializeDeflatedString';
 export { hasKey } from './hasKey';
 export { listOxford } from './listOxford';
 export { replaceLast } from './replaceLast';
+export { geojsonSchema } from './schemas/geojsonSchema';
 export { slugify } from './slugify';

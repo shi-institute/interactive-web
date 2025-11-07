@@ -26,14 +26,12 @@
       };
     },
   };
-
-  let leafletMap;
 </script>
 
 <div class="upstate-lulc-map">
-  <LeafletMap bind:this={leafletMap} options={mapOptions}>
-    <TileLayer url={tileUrl} options={tileLayerOptions} />
-    <GeoJSON data={upstateSouthCarolinaShape} options={upstateSouthCarolinaShapeOptions} />
+  <LeafletMap options="{mapOptions}">
+    <TileLayer url="{tileUrl}" options="{tileLayerOptions}" />
+    <GeoJSON data="{upstateSouthCarolinaShape}" options="{upstateSouthCarolinaShapeOptions}" />
   </LeafletMap>
 
   <Legend>

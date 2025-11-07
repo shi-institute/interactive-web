@@ -4,7 +4,6 @@
   import Map from './UpstateLULCMap.svelte';
 
   export let data;
-  $: console.log(data);
 
   // calcualte the aspect ratio of the screen
   // so we can decide where to place the map
@@ -16,7 +15,7 @@
   let sidebarWidth = 450;
 </script>
 
-<svelte:window bind:innerHeight={docHeight} bind:innerWidth={docWidth} />
+<svelte:window bind:innerHeight="{docHeight}" bind:innerWidth="{docWidth}" />
 
 <div class="wrapper">
   <PageTitle>
@@ -24,11 +23,14 @@
     <svelte:fragment slot="caption">1980-2100 🔷🔷🔷🟡🟡🟡</svelte:fragment>
   </PageTitle>
 
-  <div class="page-content" class:vertical={aspectRatio < 1}>
+  <div class="page-content" class:vertical="{aspectRatio < 1}">
     <Map />
 
-    <div class="sidebar" bind:clientWidth={sidebarWidth}>
-      <DevelopedLandScenariosLinePlot width={sidebarWidth} />
+    <div class="sidebar" bind:clientWidth="{sidebarWidth}">
+      <DevelopedLandScenariosLinePlot
+        width="{sidebarWidth}"
+        landcoverStats="{data.landcoverStats}"
+      />
     </div>
   </div>
 </div>

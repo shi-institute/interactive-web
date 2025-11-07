@@ -1,9 +1,13 @@
+import { z } from 'zod';
 import type { PageServerLoad } from './$types';
-import data from './data.json';
 
-export const load = (async () => {
+export const load = (async ({ fetch }) => {
+  const data = fetch('/filestore/household-income-bracket-race/black-households-75k.json')
+    .then((res) => res.json())
+    .then((data) => schema.parse(data));
+
   return {
-    tidy: data.map(({ municipality, race, type, count, totalHouseholds }) => ({
+    tidy: (await data).map(({ municipality, race, type, count, totalHouseholds }) => ({
       municipality,
       race,
       type,
@@ -13,3 +17,14 @@ export const load = (async () => {
     })),
   };
 }) satisfies PageServerLoad;
+
+const schema = z
+  .object({
+    municipality: z.string(),
+    race: z.string(),
+    type: z.string(),
+    count: z.number(),
+    totalHouseholds: z.number(),
+    fraction: z.number().optional(),
+  })
+  .array();

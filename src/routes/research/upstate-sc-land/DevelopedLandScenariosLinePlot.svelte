@@ -1,17 +1,13 @@
 <script lang="ts">
   import * as Plot from '@observablehq/plot';
   import { html } from 'htl';
-  import { getLandcoverStats } from './getLandcoverStats';
+  import type { PageData } from './$types';
 
   export let width = 640;
   export let height: number | undefined = undefined;
+  export let landcoverStats: PageData['landcoverStats'];
 
   let showYAxisGap = false;
-
-  let landcoverStats: Awaited<ReturnType<typeof getLandcoverStats>> = [];
-  $: getLandcoverStats().then((data) => {
-    landcoverStats = data;
-  });
 
   const colors = ['#1a7f45', '#eb2a2c', '#39539f', '#f38236'];
 
@@ -23,11 +19,14 @@
     caption: html`
       <!-- <b>Figure 1. Projected developed land use in square kilometers for Upstate South Carolina.</b> -->
       Each color represents a different IPCC scenario.
-      <b style="color: ${colors[0]}">A1B</b> is the rapid economic growth scenario.
-      <b style="color: ${colors[1]}">A2</b> is the regionally oriented (more isolationist) economic
-      development scenario. <b style="color: ${colors[2]}">B1</b> is the global environmental
-      sustainability scenario. <b style="color: ${colors[3]}">B2</b> is the local environmental
-      sustainability scenario.
+      <b style="color: ${colors[0]}">A1B</b>
+      is the rapid economic growth scenario.
+      <b style="color: ${colors[1]}">A2</b>
+      is the regionally oriented (more isolationist) economic development scenario.
+      <b style="color: ${colors[2]}">B1</b>
+      is the global environmental sustainability scenario.
+      <b style="color: ${colors[3]}">B2</b>
+      is the local environmental sustainability scenario.
     `,
     x: {
       label: 'Year',
@@ -68,7 +67,7 @@
   }
 </script>
 
-<div bind:this={div} role="img" />
+<div bind:this="{div}" role="img"></div>
 
-<input id="showYAxisGap" type="checkbox" bind:checked={showYAxisGap} />
+<input id="showYAxisGap" type="checkbox" bind:checked="{showYAxisGap}" />
 <label for="showYAxisGap">Show gap between minimum value and y=0 on the y-axis</label>
