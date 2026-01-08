@@ -510,8 +510,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marks: [
         barWithLabelY(data.filter(withoutEmptyComputerDataYears), {
           x: 'year',
-          y: 'internet__broadband__total_percent',
-          yErrorMargin: 'Minternet__broadband__total_percent',
+          y: 'internet__broadband__total_fraction',
+          yErrorMargin: 'Minternet__broadband__total_fraction',
           labelFormat: '.0%',
         }),
       ],
@@ -532,7 +532,7 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
                 : key.includes('black')
                 ? 'Black'
                 : 'Hispanic or Latino';
-              const type: 'fraction' | 'amount' = key.includes('percent') ? 'fraction' : 'amount';
+              const type: 'fraction' | 'amount' = key.includes('fraction') ? 'fraction' : 'amount';
               return {
                 year: d.year,
                 group,
@@ -624,8 +624,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marks: [
         barWithLabelY(data.filter(withoutEmptyComputerDataYears), {
           x: 'year',
-          y: 'internet__broadband__white_percent',
-          yErrorMargin: 'Minternet__broadband__white_percent',
+          y: 'internet__broadband__white_fraction',
+          yErrorMargin: 'Minternet__broadband__white_fraction',
           labelFormat: '.1%',
           fill: facetColors.get('White'),
         }),
@@ -652,8 +652,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marks: [
         barWithLabelY(data.filter(withoutEmptyComputerDataYears), {
           x: 'year',
-          y: 'internet__broadband__black_percent',
-          yErrorMargin: 'Minternet__broadband__black_percent',
+          y: 'internet__broadband__black_fraction',
+          yErrorMargin: 'Minternet__broadband__black_fraction',
           labelFormat: '.1%',
           fill: facetColors.get('Black'),
         }),
@@ -680,8 +680,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marks: [
         barWithLabelY(data.filter(withoutEmptyComputerDataYears), {
           x: 'year',
-          y: 'internet__broadband__hispanic_percent',
-          yErrorMargin: 'Minternet__broadband__hispanic_percent',
+          y: 'internet__broadband__hispanic_fraction',
+          yErrorMargin: 'Minternet__broadband__hispanic_fraction',
           labelFormat: '.1%',
           fill: facetColors.get('Hispanic or Latino'),
         }),
@@ -821,8 +821,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marks: [
         barWithLabelY(data.filter(withoutEmptyComputerDataYears), {
           x: 'year',
-          y: 'has_computer__white_percent',
-          yErrorMargin: 'Mhas_computer__white_percent',
+          y: 'has_computer__white_fraction',
+          yErrorMargin: 'Mhas_computer__white_fraction',
           labelFormat: '.1%',
           fill: facetColors.get('White'),
         }),
@@ -849,8 +849,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marks: [
         barWithLabelY(data.filter(withoutEmptyComputerDataYears), {
           x: 'year',
-          y: 'has_computer__black_percent',
-          yErrorMargin: 'Mhas_computer__black_percent',
+          y: 'has_computer__black_fraction',
+          yErrorMargin: 'Mhas_computer__black_fraction',
           labelFormat: '.1%',
           fill: facetColors.get('Black'),
         }),
@@ -877,8 +877,8 @@ export const plotConfigs: Record<string, PlotConfigFunction> = {
       marks: [
         barWithLabelY(data.filter(withoutEmptyComputerDataYears), {
           x: 'year',
-          y: 'has_computer__hispanic_percent',
-          yErrorMargin: 'Mhas_computer__hispanic_percent',
+          y: 'has_computer__hispanic_fraction',
+          yErrorMargin: 'Mhas_computer__hispanic_fraction',
           labelFormat: '.1%',
           fill: facetColors.get('Hispanic or Latino'),
         }),
