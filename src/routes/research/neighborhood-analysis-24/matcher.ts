@@ -13,6 +13,7 @@ const validTracts = [
   45045002108, // sterling
   45083020400, // northside
   45083020301, // northside
+  45083021600, // northside
 ];
 
 const overrides: Record<string, string[]> = {
