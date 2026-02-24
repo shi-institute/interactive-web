@@ -39,6 +39,16 @@
   let useAloneOrCombined = false;
   $: alone = !useAloneOrCombined;
   $: variant = alone ? 'alone' : 'aloneOrCombined';
+
+  console.log(getPlotOptionsRaceACS(
+          data.est5,
+          (exportingSingle ? 'Population by race: ' : '') + 'Five-year',
+          400,
+          undefined,
+          resetBorders || true,
+          exportingSingle || oneAndFiveYearOnly,
+          alone
+        ))
 </script>
 
 <div class="options">

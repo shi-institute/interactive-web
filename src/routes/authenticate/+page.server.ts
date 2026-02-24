@@ -1,5 +1,5 @@
 import { error, fail, redirect } from '@sveltejs/kit';
-import { scopePasswords } from '../../../passwords';
+import { scopePasswords } from '../../passwords';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ url }) => {
@@ -89,7 +89,7 @@ function gotoAuthPage(url: URL, scope: keyof typeof scopePasswords, appName?: st
     302,
     `/research/authenticate?scope=${scope}${
       appName ? `&appName=${appName}` : ''
-    }&from=${encodeURIComponent(url.href)}`
+    }&from=${encodeURIComponent(url.href.slice(url.origin.length))}`
   );
 }
 

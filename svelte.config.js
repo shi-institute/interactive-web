@@ -17,6 +17,13 @@ const config = {
       $utils: './src/utils',
       $stores: './src/stores',
     },
+    paths: {
+      base: '/research',
+    },
+    csrf: {
+      // we manually implement CSRF protection in hooks.server.ts with a few exemptions
+      checkOrigin: false,
+    }
   },
 
   extensions: ['.svelte', '.svx'],
