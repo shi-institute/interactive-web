@@ -4,6 +4,8 @@ import type { LayoutLoad } from './$types';
 
 overrideItemIdKeyNameBeforeInitialisingDndZones('_id');
 
+import 'groupby-polyfill/lib/polyfill.js';
+
 export const load = (async ({ data, url }) => {
   const isEmbedded =
     url.searchParams.get('embedded') === '1' ||
@@ -12,6 +14,7 @@ export const load = (async ({ data, url }) => {
   const isDeployedPreview =
     !dev &&
     url.origin !== 'https://shi.institute' &&
+    url.origin !== 'https://interactive-web.shi.institute' &&
     import.meta.env.VITE_IGNORE_DEPLOYED_PREVIEW !== '1';
 
   return { ...data, isEmbedded, isDeployedPreview };

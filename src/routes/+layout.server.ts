@@ -1,6 +1,6 @@
 import 'groupby-polyfill/lib/polyfill.js';
 import type { LayoutServerLoad } from './$types';
-import { _calculateAuthScopes } from './research/authenticate/+page.server';
+import { _calculateAuthScopes } from './authenticate/+page.server';
 
 export const load = (async ({ locals }) => {
   const { counter = 0 } = locals.session.data;
