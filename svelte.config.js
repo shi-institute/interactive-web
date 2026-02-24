@@ -17,6 +17,9 @@ const config = {
       $utils: './src/utils',
       $stores: './src/stores',
     },
+    paths: {
+      base: '/research',
+    }
   },
 
   extensions: ['.svelte', '.svx'],
