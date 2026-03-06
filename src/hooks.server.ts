@@ -47,4 +47,41 @@ const csrfHandler = (async ({ event, resolve }) => {
   return resolve(event);
 }) satisfies Handle;
 
-export const handle = sequence(sessionHandler, csrfHandler);
+const forwardedHeaderHandler = (async ({ event, resolve }) => {
+  const xForwardedFor = event.request.headers.get('X-Forwarded-For');
+  const xForwardedHost = event.request.headers.get('X-Forwarded-Host');
+  const xForwardedProto = event.request.headers.get('X-Forwarded-Proto');
+  const xShiForwardedHost = event.request.headers.get('X-Shi-Forwarded-Host'); // vercel overrides X-Forwarded-Host and Forwarded headers, so we use a custom header to capture Shi's reverse proxy host when deployed on Vercel
+  const xShiForwardedProto = event.request.headers.get('X-Shi-Forwarded-Proto');
+  const forwarded = event.request.headers.get('Forwarded');
+  const forwardedFor = forwarded?.match(/for=([^;]+)/)?.[1] ?? xForwardedFor;
+  const forwardedHost =
+    xShiForwardedHost ?? forwarded?.match(/host=([^;]+)/)?.[1] ?? xForwardedHost;
+  const forwardedProto =
+    (xShiForwardedHost ? xShiForwardedProto : undefined) ??
+    forwarded?.match(/proto=([^;]+)/)?.[1] ??
+    xForwardedProto;
+
+  if (forwardedFor) {
+    event.locals.forwardedFor = forwardedFor;
+  }
+  if (forwardedHost) {
+    event.locals.forwardedHost = forwardedHost;
+  }
+  if (forwardedProto) {
+    event.locals.forwardedProto = forwardedProto;
+  }
+
+  if (
+    trustedOrigins.includes(`https://${forwardedHost}`) ||
+    trustedOrigins.includes(`http://${forwardedHost}`)
+  ) {
+    event.url = new URL(
+      event.url.href.replace(event.url.origin, `${forwardedProto || 'https'}://${forwardedHost}`)
+    );
+  }
+
+  return resolve(event);
+}) satisfies Handle;
+
+export const handle = sequence(csrfHandler, forwardedHeaderHandler, sessionHandler);

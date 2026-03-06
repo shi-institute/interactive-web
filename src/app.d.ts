@@ -14,6 +14,9 @@ declare global {
     // interface Error {}
     interface Locals {
       session: Session<SessionData>;
+      forwardedFor?: string;
+      forwardedHost?: string;
+      forwardedProto?: string;
     }
     interface PageData {
       // can add any properties here, return it from your root layout
