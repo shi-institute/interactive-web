@@ -92,10 +92,10 @@
           {:else if dev}
             <span class="preview">Dev</span>
           {/if}
-          <a href="https://www.furman.edu/shi-institute/sustainability-research/">
-            Shi Applied Research
+          <a href="https://shi.institute/services/">
+            Research & Consulting Services
           </a>
-          <a href="/research">All Visualizations</a>
+          <a href="https://shi.institute/projects/">All Projects</a>
           {#if dev}
             <a href="/research/sitemap">Sitemap</a>
           {/if}
