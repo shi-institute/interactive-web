@@ -92,10 +92,10 @@
           {:else if dev}
             <span class="preview">Dev</span>
           {/if}
-          <a href="https://shi.institute/services/">
+          <a href="/services/">
             Research & Consulting Services
           </a>
-          <a href="https://shi.institute/projects/">All Projects</a>
+          <a href="/projects/">All Projects</a>
           {#if dev}
             <a href="/research/sitemap">Sitemap</a>
           {/if}
