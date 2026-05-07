@@ -9,11 +9,9 @@
     MarkerLayer,
     SymbolLayer,
   } from 'svelte-maplibre';
-  import _margins from './gvlVoteMargins.json';
-  import _states from './states.json';
 
-  const states = _states as unknown as FeatureCollection;
-  const margins = _margins as unknown as FeatureCollection;
+  export let margins: FeatureCollection;
+  export let states: FeatureCollection;
 
   export let map: maplibregl.Map | undefined = undefined;
 
