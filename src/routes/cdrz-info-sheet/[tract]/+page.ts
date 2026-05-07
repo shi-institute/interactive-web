@@ -1,3 +1,5 @@
+export const ssr = false;
+
 import { notEmpty } from '$utils/notEmpty';
 import { error } from '@sveltejs/kit';
 import type { CDRZ } from '../CDRZ';
