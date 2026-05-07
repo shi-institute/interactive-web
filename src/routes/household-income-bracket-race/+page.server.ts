@@ -1,9 +1,10 @@
+import { base } from '$app/paths';
 import { z } from 'zod';
 import type { PageServerLoad } from './$types';
 
 export const load = (async ({ fetch }) => {
   const tidyDataAllYears = await fetch(
-    '/data/household-income-bracket-race/tidy_median_income_by_race__allYears.json'
+    `${base}/data/household-income-bracket-race/tidy_median_income_by_race__allYears.json`
   )
     .then((response) => response.json())
     .then((data) => z.array(medianIncomeByRaceObjectSchema).parse(data));

@@ -1,6 +1,10 @@
+<script lang="ts">
+  import { base } from '$app/paths';
+</script>
+
 <iframe
   title="research brief"
-  src="/filestore/Kolb - Measuring and Mapping Rural Gentrification - Research Brief.pdf"
+  src="{base}/filestore/Kolb - Measuring and Mapping Rural Gentrification - Research Brief.pdf"
   style="width: 100%; height: 100%;"
   frameborder="0"
   scrolling="no"

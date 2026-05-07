@@ -1,3 +1,4 @@
+import { base } from '$app/paths';
 import type { PageServerLoad } from './$types';
 
 export const ssr = false;
@@ -8,7 +9,7 @@ type MigrationAndServiceWorkerData =
 
 export const load = (async ({ fetch }) => {
   const migrationAndServiceWorkerData = (await fetch(
-    '/data/rural-change-diagnostic-screen/migration_and_service_data.json'
+    `${base}/data/rural-change-diagnostic-screen/migration_and_service_data.json`
   ).then((response) => response.json())) as MigrationAndServiceWorkerData;
 
   return {
