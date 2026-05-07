@@ -1,12 +1,17 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { expoOut } from 'svelte/easing';
   import { fly } from 'svelte/transition';
-  import Map from './GvlVote2022Map.svelte';
   import { geolocate, getLocationFeatures } from './helpers';
 
+  let MapComponent: typeof import('./GvlVote2022Map.svelte').default | undefined;
   let map: maplibregl.Map | undefined = undefined;
   let location: GeolocationCoordinates | undefined = undefined;
   $: locationFeatures = map && location ? getLocationFeatures(map, location) : undefined;
+
+  onMount(async () => {
+    MapComponent = (await import('./GvlVote2022Map.svelte')).default;
+  });
 
   function getLocation() {
     if (map) {
@@ -26,7 +31,9 @@
 </script>
 
 <div class="map-wrapper">
-  <Map bind:map />
+  {#if MapComponent}
+    <svelte:component this={MapComponent} bind:map />
+  {/if}
 </div>
 
 <section id="startStep" class:show={!location}>

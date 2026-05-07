@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
   import { appSettings } from '$stores/appSettings';
@@ -7,7 +8,11 @@
   import { IconButton, TextBlock } from 'fluent-svelte';
   import type { PageData } from './$types';
   import BoldNumber from './BoldNumber.svelte';
-  import CdrzMap from './CdrzMap.svelte';
+
+  let CdrzMap: typeof import('./CdrzMap.svelte').default | undefined;
+  onMount(async () => {
+    CdrzMap = (await import('./CdrzMap.svelte')).default;
+  });
   import ElectionsTurnoutBarChart from './ElectionsTurnoutBarChart.svelte';
   import EthnicityBarChart from './EthnicityBarChart.svelte';
   import GiniTable from './GiniTable.svelte';
@@ -75,9 +80,11 @@
 
   <div class="top-grid">
     <section id="mapSection" style="min-height: 250px;">
-      {#key $appSettings.basemap}
-        <CdrzMap tract="{cdrz.tract}" />
-      {/key}
+      {#if CdrzMap}
+        {#key $appSettings.basemap}
+          <svelte:component this={CdrzMap} tract="{cdrz.tract}" />
+        {/key}
+      {/if}
     </section>
     <section>
       <SectionHeading noTopMargin>Places within this tract</SectionHeading>

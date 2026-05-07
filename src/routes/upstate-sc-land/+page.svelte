@@ -1,7 +1,12 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import PageTitle from '$lib/PageTitle.svelte';
   import DevelopedLandScenariosLinePlot from './DevelopedLandScenariosLinePlot.svelte';
-  import Map from './UpstateLULCMap.svelte';
+
+  let Map: typeof import('./UpstateLULCMap.svelte').default | undefined;
+  onMount(async () => {
+    Map = (await import('./UpstateLULCMap.svelte')).default;
+  });
 
   export let data;
   $: console.log(data);
@@ -25,7 +30,7 @@
   </PageTitle>
 
   <div class="page-content" class:vertical={aspectRatio < 1}>
-    <Map />
+    {#if Map}<svelte:component this={Map} />{/if}
 
     <div class="sidebar" bind:clientWidth={sidebarWidth}>
       <DevelopedLandScenariosLinePlot width={sidebarWidth} />

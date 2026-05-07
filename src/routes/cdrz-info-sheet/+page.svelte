@@ -1,12 +1,17 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import PageTitle from '$lib/PageTitle.svelte';
   import { appSettings } from '$stores/appSettings';
-  import LandingPageMap from './LandingPageMap.svelte';
 
   export let data;
 
+  let LandingPageMap: typeof import('./LandingPageMap.svelte').default | undefined;
   let pageTitleVisibleHeight = 78;
   let listHeight = 210;
+
+  onMount(async () => {
+    LandingPageMap = (await import('./LandingPageMap.svelte')).default;
+  });
 </script>
 
 <svelte:head>
@@ -34,9 +39,11 @@
   class="map"
   style="--pageTitleVisibleHeight: {pageTitleVisibleHeight}px; --listHeight: {listHeight}px;"
 >
-  {#key $appSettings.basemap}
-    <LandingPageMap />
-  {/key}
+  {#if LandingPageMap}
+    {#key $appSettings.basemap}
+      <svelte:component this={LandingPageMap} />
+    {/key}
+  {/if}
 </div>
 
 <style>
