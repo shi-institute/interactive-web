@@ -1,13 +1,42 @@
 diff --git a/node_modules/@sveltejs/adapter-cloudflare/index.js b/node_modules/@sveltejs/adapter-cloudflare/index.js
-index a9e3f98..3b32a74 100644
+index a9e3f98..1b2e1f1 100644
 --- a/node_modules/@sveltejs/adapter-cloudflare/index.js
 +++ b/node_modules/@sveltejs/adapter-cloudflare/index.js
-@@ -100,7 +100,7 @@ function get_routes_json(builder, assets, { include = ['/*'], exclude = ['<all>'
- 								file === '_redirects'
+@@ -1,7 +1,7 @@
++import * as esbuild from 'esbuild';
+ import { writeFileSync } from 'node:fs';
+ import * as path from 'node:path';
+ import { fileURLToPath } from 'node:url';
+-import * as esbuild from 'esbuild';
+ 
+ /** @type {import('./index.js').default} */
+ export default function (options = {}) {
+@@ -91,16 +91,25 @@ function get_routes_json(builder, assets, { include = ['/*'], exclude = ['<all>'
+ 			}
+ 
+ 			if (rule === '<files>') {
+-				return assets
++				const files = assets
+ 					.filter(
+ 						(file) =>
+ 							!(
+ 								file.startsWith(`${builder.config.kit.appDir}/`) ||
+ 								file === '_headers' ||
+-								file === '_redirects'
++								file === '_redirects' ||
++								// Since files in the filestore or data folder might be longer than the
++								// 100-character limit, we just inject a wildcard exclusion later.
++								file.startsWith('filestore/') ||
++								file.startsWith('data/')
  							)
  					)
 -					.map((file) => `/${file}`);
-+					.map((file) => `${builder.config.kit.paths.base}/${file}`);
++					.map((file) => `${builder.config.kit.paths.base}/${encodeURI(file)}`);
++				return [
++					...files,
++					`${builder.config.kit.paths.base}/filestore/*`,
++					`${builder.config.kit.paths.base}/data/*`
++				];
  			}
  
  			if (rule === '<prerendered>') {
