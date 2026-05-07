@@ -1,0 +1,13 @@
+diff --git a/node_modules/@sveltejs/adapter-cloudflare/index.js b/node_modules/@sveltejs/adapter-cloudflare/index.js
+index a9e3f98..3b32a74 100644
+--- a/node_modules/@sveltejs/adapter-cloudflare/index.js
++++ b/node_modules/@sveltejs/adapter-cloudflare/index.js
+@@ -100,7 +100,7 @@ function get_routes_json(builder, assets, { include = ['/*'], exclude = ['<all>'
+ 								file === '_redirects'
+ 							)
+ 					)
+-					.map((file) => `/${file}`);
++					.map((file) => `${builder.config.kit.paths.base}/${file}`);
+ 			}
+ 
+ 			if (rule === '<prerendered>') {
