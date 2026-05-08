@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-vercel';
+import adapter from '@sveltejs/adapter-cloudflare';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 import { mdsvex } from 'mdsvex';
 
@@ -23,7 +23,7 @@ const config = {
     csrf: {
       // we manually implement CSRF protection in hooks.server.ts with a few exemptions
       checkOrigin: false,
-    }
+    },
   },
 
   extensions: ['.svelte', '.svx'],

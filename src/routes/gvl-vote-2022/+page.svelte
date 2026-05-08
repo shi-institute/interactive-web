@@ -1,12 +1,19 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { expoOut } from 'svelte/easing';
   import { fly } from 'svelte/transition';
-  import Map from './GvlVote2022Map.svelte';
   import { geolocate, getLocationFeatures } from './helpers';
 
+  export let data;
+
+  let MapComponent: typeof import('./GvlVote2022Map.svelte').default | undefined;
   let map: maplibregl.Map | undefined = undefined;
   let location: GeolocationCoordinates | undefined = undefined;
   $: locationFeatures = map && location ? getLocationFeatures(map, location) : undefined;
+
+  onMount(async () => {
+    MapComponent = (await import('./GvlVote2022Map.svelte')).default;
+  });
 
   function getLocation() {
     if (map) {
@@ -26,22 +33,29 @@
 </script>
 
 <div class="map-wrapper">
-  <Map bind:map />
+  {#if MapComponent}
+    <svelte:component
+      this="{MapComponent}"
+      bind:map="{map}"
+      margins="{data.gvlVoteMargins2022}"
+      states="{data.states}"
+    />
+  {/if}
 </div>
 
-<section id="startStep" class:show={!location}>
-  <div in:fly={{ y: 40, duration: 270, easing: expoOut }}>
+<section id="startStep" class:show="{!location}">
+  <div in:fly="{{ y: 40, duration: 270, easing: expoOut }}">
     <h1>How did your precinct vote in 2022?</h1>
     <p>
       See the generalized voting behavior for your voting precinct and how it compares to nearby
       precincts.
     </p>
     <p>To begin, grant access to your location.</p>
-    <button on:click={getLocation}>Go to location</button>
+    <button on:click="{getLocation}">Go to location</button>
   </div>
 </section>
 
-<section id="yourPreinct" />
+<section id="yourPreinct"></section>
 
 {location}
 
