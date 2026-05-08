@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="%sveltekit.assets%/global.css" />
     <link rel="stylesheet" href="%sveltekit.assets%/fonts.css" />
     <link rel="stylesheet" href="%sveltekit.assets%/figure.css" />
+    <link
+      rel="stylesheet"
+      href="/custom-elements.css"
+      onerror="this.onerror=null;this.href='https://shi.institute/custom-elements.css'"
+    />
     <script src="%sveltekit.assets%/force-color-scheme.js"></script>
     <meta name="viewport" content="width=device-width" />
     %sveltekit.head%
@@ -57,4 +62,9 @@
 
                       www.furman.edu/shi-institute                       `);
   </script>
+  <script
+    type="module"
+    src="/custom-elements.js"
+    onerror="var s=document.createElement('script');s.type='module';s.src='https://shi.institute/custom-elements.js';document.body.appendChild(s)"
+  ></script>
 </html>

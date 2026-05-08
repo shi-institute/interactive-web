@@ -80,6 +80,34 @@
     showBusyCursor = false;
     NProgress.done();
   });
+
+  // populate menu items
+  let menuElem: HTMLElement & { items: unknown[] };
+  onMount(async () => {
+    const possibleEndpoints = [
+      '/.api/navigation-json',
+      'https://shi.institute/.api/navigation-json',
+    ];
+
+    async function tryGetMenu() {
+      return fetch(possibleEndpoints[0])
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return res.json();
+        })
+        .catch(async () => {
+          const res = await fetch(possibleEndpoints[1]);
+          return await res.json();
+        });
+    }
+
+    const menus = await tryGetMenu();
+    if (menuElem) {
+      menuElem.items = menus.menu;
+    }
+  });
 </script>
 
 {#if !data.isEmbedded}
@@ -92,9 +120,7 @@
           {:else if dev}
             <span class="preview">Dev</span>
           {/if}
-          <a href="/services/">
-            Research & Consulting Services
-          </a>
+          <a href="/services/">Research & Consulting Services</a>
           <a href="/projects/">All Projects</a>
           {#if dev}
             <a href="/research/sitemap">Sitemap</a>
@@ -105,6 +131,12 @@
     </div>
     <div class="meta">
       <ThemeSwitchButton />
+      <shi-navigation-bar-menu
+        bind:this="{menuElem}"
+        popoverid="ext-primary-menu"
+        horizontal-menu-button
+        force-dark-mode-menu-button
+      ></shi-navigation-bar-menu>
     </div>
   </header>
 {:else}
@@ -173,10 +205,18 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0 10px 0 0;
     font-size: 13px;
     flex-grow: 0;
     flex-shrink: 0;
+  }
+
+  header .meta {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+  }
+  header shi-navigation-bar-menu {
+    padding-left: 4px;
   }
 
   ul {
