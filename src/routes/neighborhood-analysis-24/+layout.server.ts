@@ -66,6 +66,7 @@ export const load = (async ({ params, route }) => {
           method: 'GET',
           headers: {
             Accept: 'application/vnd.github.v3.raw',
+            'User-Agent': 'Furman University/Shi Applied Research/Interactive-Web',
             Authorization: `token ${PRIVATE_DATA_REPO_ACCESS_TOKEN}`,
           },
         }
@@ -85,6 +86,7 @@ export const load = (async ({ params, route }) => {
       method: 'GET',
       headers: {
         Accept: 'application/vnd.github.v3.raw',
+        'User-Agent': 'Furman University/Shi Applied Research/Interactive-Web',
         Authorization: `token ${PRIVATE_DATA_REPO_ACCESS_TOKEN}`,
       },
     }
@@ -125,6 +127,7 @@ export const load = (async ({ params, route }) => {
           method: 'GET',
           headers: {
             Accept: 'application/vnd.github.v3.raw',
+            'User-Agent': 'Furman University/Shi Applied Research/Interactive-Web',
             Authorization: `token ${PRIVATE_DATA_REPO_ACCESS_TOKEN}`,
           },
         }
@@ -148,6 +151,7 @@ export const load = (async ({ params, route }) => {
           method: 'GET',
           headers: {
             Accept: 'application/vnd.github.v3.raw',
+            'User-Agent': 'Furman University/Shi Applied Research/Interactive-Web',
             Authorization: `token ${PRIVATE_DATA_REPO_ACCESS_TOKEN}`,
           },
         }
