@@ -172,10 +172,18 @@
     if (popupWindow) {
       // copy all stylesheets from the parent window to the popup window
       const parentStylesheets = document.styleSheets;
-      const cssRules = Array.from(parentStylesheets).flatMap((stylesheet) =>
-        Array.from(stylesheet.cssRules)
-      );
-      const parentWindowRules = cssRules.reduce((acc, rule) => acc + rule.cssText, '');
+      let parentWindowRules = '';
+      for (const stylesheet of parentStylesheets) {
+        try {
+          const rules = Array.from((stylesheet as CSSStyleSheet).cssRules || []).map(
+            (rule) => rule.cssText
+          );
+          parentWindowRules += rules.join('\n');
+        } catch {
+          // stylesheet is likely cross-origin; skip it
+          continue;
+        }
+      }
       const parentWindowStyleElem = popupWindow.document.createElement('style');
       parentWindowStyleElem.textContent = parentWindowRules;
       parentWindowStyleElem.onload = updateLoadedCount;
