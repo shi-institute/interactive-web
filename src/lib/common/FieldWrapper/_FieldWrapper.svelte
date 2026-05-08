@@ -1,6 +1,6 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
   import { TextBlock } from 'fluent-svelte';
-  import DOMPurify from 'isomorphic-dompurify';
 
   export let label: string;
   export let forId: string;
@@ -16,6 +16,13 @@
   export let style = '';
 
   $: hasCaption = !!$$slots.caption || !!description;
+
+  let sanitizedDescription = '';
+  $: if (browser && description) {
+    import('isomorphic-dompurify').then(({ default: DOMPurify }) => {
+      sanitizedDescription = String(DOMPurify.sanitize(description));
+    });
+  }
 </script>
 
 <div
@@ -40,8 +47,10 @@
         <TextBlock variant="caption" tag="span">
           {#if $$slots.caption}
             <slot name="caption" />
-          {:else}
-            {@html DOMPurify.sanitize(description)}
+          {:else if sanitizedDescription}
+            {@html sanitizedDescription}
+          {:else if description}
+            {description}
           {/if}
         </TextBlock>
       </label>
