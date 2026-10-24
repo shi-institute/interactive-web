@@ -1,0 +1,137 @@
+[
+  {
+    "year": 1892,
+    "openWaterAcres": 130.0,
+    "watershedPopulation": 23400
+  },
+  {
+    "year": 1897,
+    "openWaterAcres": 126.0,
+    "watershedPopulation": 27300
+  },
+  {
+    "year": 1902,
+    "openWaterAcres": 121.7,
+    "watershedPopulation": 32000
+  },
+  {
+    "year": 1907,
+    "openWaterAcres": 117.8,
+    "watershedPopulation": 38000
+  },
+  {
+    "year": 1912,
+    "openWaterAcres": 114.8,
+    "watershedPopulation": 44900
+  },
+  {
+    "year": 1918,
+    "openWaterAcres": 112.1,
+    "watershedPopulation": 54600
+  },
+  {
+    "year": 1923,
+    "openWaterAcres": 109.7,
+    "watershedPopulation": 63400
+  },
+  {
+    "year": 1928,
+    "openWaterAcres": 107.3,
+    "watershedPopulation": 72700
+  },
+  {
+    "year": 1933,
+    "openWaterAcres": 105.5,
+    "watershedPopulation": 79900
+  },
+  {
+    "year": 1938,
+    "openWaterAcres": 103.2,
+    "watershedPopulation": 86200
+  },
+  {
+    "year": 1943,
+    "openWaterAcres": 96.4,
+    "watershedPopulation": 103300
+  },
+  {
+    "year": 1948,
+    "openWaterAcres": 89.3,
+    "watershedPopulation": 136200
+  },
+  {
+    "year": 1954,
+    "openWaterAcres": 86.7,
+    "watershedPopulation": 154000
+  },
+  {
+    "year": 1959,
+    "openWaterAcres": 85.0,
+    "watershedPopulation": 162800
+  },
+  {
+    "year": 1964,
+    "openWaterAcres": 81.0,
+    "watershedPopulation": 176400
+  },
+  {
+    "year": 1969,
+    "openWaterAcres": 59.5,
+    "watershedPopulation": 192200
+  },
+  {
+    "year": 1974,
+    "openWaterAcres": 36.1,
+    "watershedPopulation": 204900
+  },
+  {
+    "year": 1979,
+    "openWaterAcres": 25.6,
+    "watershedPopulation": 217200
+  },
+  {
+    "year": 1984,
+    "openWaterAcres": 21.9,
+    "watershedPopulation": 233700
+  },
+  {
+    "year": 1989,
+    "openWaterAcres": 14.6,
+    "watershedPopulation": 251900
+  },
+  {
+    "year": 1994,
+    "openWaterAcres": 14.4,
+    "watershedPopulation": 265400
+  },
+  {
+    "year": 1999,
+    "openWaterAcres": 14.0,
+    "watershedPopulation": 277400
+  },
+  {
+    "year": 2004,
+    "openWaterAcres": 13.7,
+    "watershedPopulation": 291600
+  },
+  {
+    "year": 2010,
+    "openWaterAcres": 13.3,
+    "watershedPopulation": 310000
+  },
+  {
+    "year": 2015,
+    "openWaterAcres": 12.7,
+    "watershedPopulation": 325000
+  },
+  {
+    "year": 2020,
+    "openWaterAcres": 12.4,
+    "watershedPopulation": 340000
+  },
+  {
+    "year": 2026,
+    "openWaterAcres": 12.0,
+    "watershedPopulation": 358000
+  }
+]

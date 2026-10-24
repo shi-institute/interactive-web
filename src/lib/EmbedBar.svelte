@@ -10,9 +10,10 @@
     | { onClick: () => void; label: string }
   )[] = [];
   export let actionStyle = 'padding: 2px 10px; font-size: 12px; color: var(--fds-text-secondary);';
+  export let clientHeight = 0;
 </script>
 
-<div class="embed-bar">
+<div class="embed-bar" bind:clientHeight="{clientHeight}">
   <div>
     {#if $page.data.isDeployedPreview}
       <span class="preview">Deployment Preview</span>
