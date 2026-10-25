@@ -46,6 +46,10 @@
   }
 </script>
 
+<svelte:head>
+  <link rel="stylesheet" href="https://use.typekit.net/izw5ghp.css" />
+</svelte:head>
+
 <svelte:window bind:innerHeight="{innerHeight}" />
 
 <div
@@ -178,7 +182,16 @@
   .plot.embedded {
     min-height: unset;
   }
-  .plot.exporting :global(h2) {
+  .plot :global(figure > h2),
+  .plot :global(figure > h3),
+  .plot :global(figure > span > h3),
+  .plot :global(figcaption) {
+    font-family: greycliff-cf, sans-serif;
+  }
+  .plot :global(figure > h2) {
+    margin-bottom: 4px !important;
+  }
+  .plot.exporting :global(figure > h2) {
     font-size: 23px !important;
   }
 </style>
