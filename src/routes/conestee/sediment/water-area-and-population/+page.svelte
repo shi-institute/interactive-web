@@ -25,8 +25,52 @@
     ((y - populationDomain[0]) / (populationDomain[1] - populationDomain[0])) *
       (acresDomain[1] - acresDomain[0]);
 
-  const populationTicks = Array.from({ length: 9 }, (_, i) => i * 50_000);
-  const acresTicks = [12, 20, 40, 60, 80, 100, 120, 130];
+  const marginTop = 30;
+  const marginBottom = 40;
+
+  // the height of the plot frame (where the data are drawn), read from the rendered plot;
+  // it is used to thin out the axis ticks when there is not much vertical space
+  let plotNode: ReturnType<typeof Plot.plot> | undefined;
+  $: plotSvgHeight = Number(
+    plotNode?.querySelector(':scope > svg:not([class*="-ramp"])')?.getAttribute('height') ??
+      Infinity
+  );
+  $: frameHeight = plotSvgHeight - marginTop - marginBottom;
+
+  // the minimum vertical space (px) between axis tick labels
+  const minTickSpacing = 18;
+  $: pxPer = (value: number, domain: number[]) => (value / (domain[1] - domain[0])) * frameHeight;
+
+  // use 50k increments, but switch to larger increments when the labels would overlap
+  $: populationStep =
+    [50_000, 100_000, 200_000].find((step) => pxPer(step, populationDomain) >= minTickSpacing) ??
+    400_000;
+  $: populationTicks = Array.from(
+    { length: Math.floor(populationDomain[1] / populationStep) + 1 },
+    (_, i) => i * populationStep
+  );
+
+  // always label the domain ends (12 and 130) and use 20-acre increments in between,
+  // switching to 40-acre increments and dropping ticks that would collide with the ends
+  // when there is not enough space
+  $: acresStep = [20, 40].find((step) => pxPer(step, acresDomain) >= minTickSpacing);
+  $: acresTicks = [
+    acresDomain[0],
+    ...(acresStep
+      ? Array.from(
+          { length: Math.floor(acresDomain[1] / acresStep) },
+          (_, i) => (i + 1) * acresStep
+        )
+      : []
+    ).filter(
+      (acres) =>
+        acres > acresDomain[0] &&
+        acres < acresDomain[1] &&
+        pxPer(acres - acresDomain[0], acresDomain) >= minTickSpacing &&
+        pxPer(acresDomain[1] - acres, acresDomain) >= minTickSpacing
+    ),
+    acresDomain[1],
+  ];
 
   let exportElem: HTMLElement;
   let exporting = false;
@@ -37,6 +81,9 @@
   let innerHeight = 0;
   let embedBarHeight = 0;
   $: embeddedHeight = Math.max(240, innerHeight - 40 - embedBarHeight);
+
+  // use a smaller title and subtitle when there is not much vertical space
+  $: compact = data.isEmbedded && embeddedHeight < 400;
 
   function download() {
     exporting = true;
@@ -57,18 +104,20 @@
   bind:this="{exportElem}"
   class:exporting="{exporting}"
   class:embedded="{data.isEmbedded}"
+  class:compact="{compact}"
   bind:clientWidth="{plotClientWidth}"
 >
   {#if browser}
     <PlotContainer
       fullWidth
+      bind:plotNode="{plotNode}"
       boxSizing="{data.isEmbedded ? 'border-box' : 'content-box'}"
       plot="{(width) => ({
         title: 'Open water area and watershed population',
         subtitle: 'Lake Conestee, 1892–2026',
-        marginTop: 30,
+        marginTop,
         marginRight: 32,
-        marginBottom: 40,
+        marginBottom,
         marginLeft: 59,
         x: { label: 'Year', tickFormat: 'd' },
         y: { domain: populationDomain, axis: null },
@@ -190,6 +239,13 @@
   }
   .plot :global(figure > h2) {
     margin-bottom: 4px !important;
+  }
+  .plot.compact :global(figure > h2) {
+    font-size: 18px;
+  }
+  .plot.compact :global(figure > h3),
+  .plot.compact :global(figure > span > h3) {
+    font-size: 14px;
   }
   .plot.exporting :global(figure > h2) {
     font-size: 23px !important;
